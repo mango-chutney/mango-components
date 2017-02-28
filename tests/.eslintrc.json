@@ -1,0 +1,9 @@
+{
+  "env": {
+    "jest": true,
+    "browser": true
+  },
+  "rules": {
+    "import/no-extraneous-dependencies": 0
+  }
+}

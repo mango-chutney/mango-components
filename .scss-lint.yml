@@ -1,0 +1,58 @@
+severity: error
+
+linters:
+
+  BorderZero:
+    enabled: true
+    convention: zero
+
+  BemDepth:
+    enabled: true
+
+  DeclarationOrder:
+    enabled: false
+
+  ExtendDirective:
+    enabled: true
+
+  Indentation:
+    enabled: true
+
+  IdSelector:
+    enabled: false
+
+  ImportantRule:
+    enabled: false
+
+  LeadingZero:
+    enabled: false
+
+  NameFormat:
+    enabled: true
+
+  NestingDepth:
+    enabled: false
+
+  PrivateNamingConvention:
+    enabled: true
+    prefix: _
+
+  PropertySortOrder:
+    enabled: false
+
+  QualifyingElement:
+    enabled: false
+
+  SelectorDepth:
+    enabled: false
+
+  SelectorFormat:
+    enabled: false
+
+  SingleLinePerProperty:
+    enabled: true
+    allow_single_line_rule_sets: false
+
+  StringQuotes:
+    enabled: true
+    style: double_quotes

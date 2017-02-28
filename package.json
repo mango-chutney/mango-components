@@ -1,0 +1,57 @@
+{
+  "name": "mango-components",
+  "version": "1.0.0",
+  "main": "src/js/index.js",
+  "repository": "https://github.com/mango-chutney/mango-components",
+  "author": "Mango Chutney",
+  "license": "UNLICENCED",
+  "private": true,
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-portal": "git+ssh://git@github.com/mango-chutney/react-portal.git#master"
+  },
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-eslint": "^7.1.1",
+    "babel-jest": "^19.0.0",
+    "babel-loader": "^6.3.2",
+    "babel-preset-env": "^1.1.10",
+    "babel-preset-latest": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-react-optimize": "^1.0.1",
+    "babel-preset-stage-2": "^6.22.0",
+    "babel-register": "^6.23.0",
+    "enzyme": "^2.7.1",
+    "eslint": "^3.16.1",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.0",
+    "foundation-sites": "^6.3.0",
+    "grunt": "^1.0.1",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-eslint": "^19.0.0",
+    "grunt-run": "^0.6.0",
+    "grunt-sass": "^2.0.0",
+    "grunt-scss-lint": "^0.5.0",
+    "grunt-webpack": "^2.0.1",
+    "html-webpack-plugin": "^2.28.0",
+    "jest": "^19.0.2",
+    "jit-grunt": "^0.10.0",
+    "load-grunt-config": "^0.19.2",
+    "react-addons-test-utils": "^15.4.2",
+    "time-grunt": "^1.4.0",
+    "webpack": "^2.2.1"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!react-portal)"
+    ]
+  }
+}

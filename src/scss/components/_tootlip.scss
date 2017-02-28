@@ -1,0 +1,216 @@
+// A ripoff of react-tooltip's styles!
+
+$tootlip-light: #fff !default;
+$tootlip-dark: #222 !default;
+$tootlip-min-width: 180px !default;
+$global-radius: 5px !default;
+$global-transition-duration: 300ms !default;
+$global-transition-timing-function: ease-in !default;
+
+@mixin tootlip-type($background-color) {
+  background-color: $background-color;
+
+  &.tootlip--place-top {
+    &::after {
+      border-top: 6px solid $background-color;
+    }
+  }
+
+  &.tootlip--place-bottom {
+    &::after {
+      border-bottom: 6px solid $background-color;
+    }
+  }
+
+  &.tootlip--place-left {
+    &::after {
+      border-left: 6px solid $background-color;
+    }
+  }
+
+  &.tootlip--place-right {
+    &::after {
+      border-right: 6px solid $background-color;
+    }
+  }
+}
+
+@mixin tootlip-border($border-color) {
+  border: 1px solid $border-color;
+
+  &.tootlip--place-top {
+    &::before {
+      border-top: 8px solid $border-color;
+    }
+  }
+
+  &.tootlip--place-bottom {
+    &::before {
+      border-bottom: 8px solid $border-color;
+    }
+  }
+
+  &.tootlip--place-left {
+    &::before {
+      border-left: 8px solid $border-color;
+    }
+  }
+
+  &.tootlip--place-right {
+    &::before {
+      border-right: 8px solid $border-color;
+    }
+  }
+}
+
+.tootlip {
+  border-radius: $global-radius;
+  cursor: help;
+  display: inline-block;
+  font-size: 13px;
+  min-width: $tootlip-min-width;
+  opacity: 0;
+  padding: 8px 21px;
+  pointer-events: none;
+  position: absolute;
+  text-align: center;
+  transition: opacity $global-transition-duration
+                      $global-transition-timing-function;
+  z-index: 999;
+
+  &.tootlip--clickable {
+    pointer-events: auto;
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    height: 0;
+    position: absolute;
+    width: 0;
+  }
+
+  &.tootlip--visible {
+    opacity: .9;
+  }
+
+  &.tootlip--type-dark {
+    @include tootlip-type($tootlip-dark);
+    color: $tootlip-light;
+
+    &.border {
+      @include tootlip-border($tootlip-light);
+    }
+  }
+
+  &.tootlip--type-light {
+    @include tootlip-type($tootlip-light);
+    color: $tootlip-dark;
+
+    &.border {
+      @include tootlip-border($tootlip-dark);
+    }
+  }
+
+  &.tootlip--place-top {
+    &.tootlip--place-top--left::before {
+      left: 2rem;
+    }
+
+    &.tootlip--place-top--left::after {
+      left: 2rem;
+    }
+
+    &.tootlip--place-top--center::before {
+      left: 50%;
+    }
+
+    &.tootlip--place-top--center::after {
+      left: 50%;
+    }
+
+    &.tootlip--place-top--right::before {
+      left: calc(100% - 2rem);
+    }
+
+    &.tootlip--place-top--right::after {
+      left: calc(100% - 2rem);
+    }
+
+    &::before {
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      bottom: -8px;
+      margin-left: -10px;
+    }
+
+    &::after {
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      bottom: -6px;
+      margin-left: -8px;
+    }
+  }
+
+  &.tootlip--place-bottom {
+    &.tootlip--place-bottom--left::before {
+      left: 2rem;
+    }
+
+    &.tootlip--place-bottom--left::after {
+      left: 2rem;
+    }
+
+    &.tootlip--place-bottom--center::before {
+      left: 50%;
+    }
+
+    &.tootlip--place-bottom--center::after {
+      left: 50%;
+    }
+
+    &.tootlip--place-bottom--right::before {
+      left: calc(100% - 2rem);
+    }
+
+    &.tootlip--place-bottom--right::after {
+      left: calc(100% - 2rem);
+    }
+
+    &::before {
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      margin-left: -10px;
+      top: -8px;
+    }
+
+    &::after {
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      margin-left: -8px;
+      top: -6px;
+    }
+  }
+
+  &.tootlip--place-left,
+  &.tootlip--place-right {
+    &::after {
+      border-bottom: 5px solid transparent;
+      border-top: 5px solid transparent;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  &.tootlip--place-left::after {
+    right: -6px;
+  }
+
+  &.tootlip--place-right::after {
+    left: -6px;
+  }
+
+  &.tootlip--nowrap {
+    white-space: nowrap;
+  }
+}
