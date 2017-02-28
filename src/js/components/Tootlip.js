@@ -305,16 +305,11 @@ export default class Tootlip extends Component {
 
   render() {
     const {
-      allowedPositions, // eslint-disable-line no-unused-vars
       appElement,
       children,
       className,
       type,
       visible,
-      position, // eslint-disable-line no-unused-vars
-      xOffset, // eslint-disable-line no-unused-vars
-      yOffset, // eslint-disable-line no-unused-vars
-      ...rest
     } = this.props;
 
     const {
@@ -344,9 +339,7 @@ export default class Tootlip extends Component {
           style={{ ...computedStyles }}
           ref={(node) => { this.portal = node; }}
         >
-          <span {...rest}>
-            {children}
-          </span>
+          {children}
         </Portal>
       </span>
     );
