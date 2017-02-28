@@ -339,7 +339,9 @@ export default class Tootlip extends Component {
           style={{ ...computedStyles }}
           ref={(node) => { this.portal = node; }}
         >
-          {children}
+          <div>
+            {children}
+          </div>
         </Portal>
       </span>
     );
