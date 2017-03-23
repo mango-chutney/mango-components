@@ -235,6 +235,7 @@ export default class Tootlip extends Component {
     this.anchorChild = null;
     this.didFinishRepositioning = false;
     this.portal = null;
+    this.timeout = null;
   }
 
   componentWillMount() {
@@ -247,6 +248,7 @@ export default class Tootlip extends Component {
   }
 
   componentWillUnmount() {
+    clearTimeout(this.timeout);
     window.removeEventListener('orientationchange', this.updatePosition);
     window.removeEventListener('resize', this.updatePosition);
   }
@@ -289,15 +291,17 @@ export default class Tootlip extends Component {
       return desiredPosition;
     })();
 
-    setTimeout(() => {
-      this.setState({ position: { ...this.getPosition(position) } });
-      if (this.portal.node) {
-        if (Tootlip.isTouching({ element: this.portal.node })
-            && (_remainingPositions.length > 0)) {
-          this.updatePosition(_remainingPositions);
-        } else {
-          this.didFinishRepositioning = true;
-          this.forceUpdate();
+    this.timeout = setTimeout(() => {
+      if (this.timeout !== null) {
+        this.setState({ position: { ...this.getPosition(position) } });
+        if (this.portal.node) {
+          if (Tootlip.isTouching({ element: this.portal.node })
+              && (_remainingPositions.length > 0)) {
+            this.updatePosition(_remainingPositions);
+          } else {
+            this.didFinishRepositioning = true;
+            this.forceUpdate();
+          }
         }
       }
     }, 0);
