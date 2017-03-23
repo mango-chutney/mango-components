@@ -191,14 +191,14 @@ export default class Tootlip extends Component {
 
   /**
    * @param {HTMLElement} element
-   * @param {HTMLElement|undefined} [boundingElement=document.body]
+   * @param {HTMLElement|undefined} [boundingElement]
    * @return {boolean}
    */
   static isTouching({
     element,
     boundingElement = new FakeDocumentBody({
       width: window.innerWidth,
-      height: window.innerHeight,
+      height: document.body.clientHeight,
       top: 0,
       left: 0,
     }),
