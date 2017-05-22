@@ -2,42 +2,46 @@
  * grunt/webpack.js
  */
 
+// eslint-disable-next-line import/no-extraneous-dependencies
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 const development = {
   entry: '<%= src %>/js/examples/index.js',
   output: {
-    path: '<%= dest %>/js',
+    path: path.resolve('<%= dest %>/js'),
     filename: 'main.js',
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: [/node_modules/],
-        loader: 'babel-loader',
-        options: {
-          compact: false,
-          presets: [
-            ['latest', {
-              es2015: {
+        use: {
+          loader: 'babel-loader',
+          options: {
+            compact: false,
+            presets: [
+              ['latest', {
+                es2015: {
+                  loose: true,
+                  modules: false,
+                },
+              }],
+              ['env', {
+                targets: {
+                  browsers: ['last 2 versions'],
+                },
+                debug: false,
                 loose: true,
                 modules: false,
-              },
-            }],
-            ['env', {
-              targets: {
-                browsers: ['last 2 versions'],
-              },
-              debug: false,
-              loose: true,
-              modules: false,
-              useBuiltIns: true,
-            }],
-            'react',
-            'react-optimize',
-            'stage-2',
-          ],
+                useBuiltIns: true,
+              }],
+              'react',
+              'react-optimize',
+              'stage-2',
+            ],
+          },
         },
       },
     ],
@@ -53,6 +57,7 @@ const development = {
     modules: false,
     reasons: true,
   },
+  cache: true,
   watch: true,
   keepalive: false,
 };

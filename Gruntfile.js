@@ -1,8 +1,8 @@
 module.exports = (grunt) => {
-  // time how long tasks take
+  // eslint-disable-next-line import/no-extraneous-dependencies
   require('time-grunt')(grunt); // eslint-disable-line global-require
 
-  // grunt config
+  // eslint-disable-next-line import/no-extraneous-dependencies
   require('load-grunt-config')(grunt, {  // eslint-disable-line global-require
     jitGrunt: {
       staticMappings: {
