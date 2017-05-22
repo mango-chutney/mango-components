@@ -38,7 +38,6 @@ export default class Tootlip extends Component {
     children: PropTypes.node,
     className: PropTypes.string,
     position: PropTypes.string,
-    style: PropTypes.object,  // eslint-disable-line react/forbid-prop-types
     type: PropTypes.string,
     visible: PropTypes.bool.isRequired,
     xOffset: PropTypes.number.isRequired, // pixels
@@ -56,7 +55,6 @@ export default class Tootlip extends Component {
     children: undefined,
     className: undefined,
     position: 'TOP_CENTER',
-    style: {},
     type: 'dark',
     visible: false,
     xOffset: 16,
