@@ -76,7 +76,6 @@ $global-transition-timing-function: ease-in !default;
   text-align: center;
   transition: opacity $global-transition-duration
                       $global-transition-timing-function;
-  z-index: 9999;
 
   &.tootlip--clickable {
     pointer-events: auto;
