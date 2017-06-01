@@ -76,6 +76,8 @@ $global-transition-timing-function: ease-in !default;
   text-align: center;
   transition: opacity $global-transition-duration
                       $global-transition-timing-function;
+  // don't let the tooltip be wider than the window, ever
+  max-width: calc(100vw - #{$global-margin * 2});
 
   &.tootlip--clickable {
     pointer-events: auto;
