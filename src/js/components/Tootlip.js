@@ -290,7 +290,7 @@ export default class Tootlip extends Component {
     })();
 
     this.timeout = setTimeout(() => {
-      if (this.timeout !== null) {
+      try {
         this.setState({ position: { ...this.getPosition(position) } });
         if (this.portal.node) {
           if (Tootlip.isTouching({ element: this.portal.node })
@@ -301,6 +301,8 @@ export default class Tootlip extends Component {
             this.forceUpdate();
           }
         }
+      } catch (error) {
+        // fail silently if node was unmounted
       }
     }, 0);
   }
