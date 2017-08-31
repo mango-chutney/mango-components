@@ -97,6 +97,7 @@ $global-transition-timing-function: ease-in !default;
 
   &.tootlip--type-dark {
     @include tootlip-type($tootlip-dark);
+
     color: $tootlip-light;
 
     &.border {
@@ -106,6 +107,7 @@ $global-transition-timing-function: ease-in !default;
 
   &.tootlip--type-light {
     @include tootlip-type($tootlip-light);
+
     color: $tootlip-dark;
 
     &.border {
