@@ -1,17 +1,13 @@
 // @flow
 
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import type { FieldProps } from 'redux-form';
 import { transparentize } from 'polished';
 import { palette, fontStack } from './constants';
 
-export default (
-  { styles: { input: inputStyles } }: { styles: { input: string } } = {
-    styles: { input: '' },
-  },
-) => {
-  const StyledInput = styled.input`
+export default ({ styles }: { styles: { input: string } }) => {
+  let StyledInput = styled.input`
     appearance: none;
     background-color: #fafbfc;
     border-color: ${palette.lightGray};
@@ -30,7 +26,11 @@ export default (
     ::placeholder {
       color: ${transparentize(0.2, palette.darkGray)};
     }
-  `.extend(inputStyles);
+  `;
+
+  if (styles && styles.input) {
+    StyledInput = StyledInput.extend([styles.input]);
+  }
 
   return function Input({ input, meta, placeholder, ...rest }: FieldProps) {
     return (
