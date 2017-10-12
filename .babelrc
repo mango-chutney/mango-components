@@ -1,7 +1,19 @@
 {
   "presets": [
-    "latest",
-    "stage-2",
-    "react"
-  ]
+    [
+      "env",
+      {
+        "targets": {
+          "node": "6.11.1"
+        },
+        "useBuiltIns": "usage"
+      }
+    ],
+    "react",
+    "flow",
+    "stage-2"
+  ],
+  "plugins": [
+    ["styled-components", { "ssr": true, "displayName": false }],
+  ],
 }
