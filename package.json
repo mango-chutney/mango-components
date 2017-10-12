@@ -16,7 +16,7 @@
     "lint": "npm-run-all prettier eslint check",
     "prettier": "./scripts/prettier.sh",
     "start": "webpack -d --progress --config webpack.config.js",
-    "transpile": "babel ./components ./index.js --out-dir ./lib"
+    "transpile": "./scripts/build.sh"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
