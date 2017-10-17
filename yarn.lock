@@ -4407,9 +4407,9 @@ react-dom@^15.5.4:
     object-assign "^4.1.0"
     prop-types "~15.5.7"
 
-"react-portal@git+ssh://git@github.com/mango-chutney/react-portal.git#66291fa":
+"react-portal@git+ssh://git@github.com/mango-chutney/react-portal.git#5d29af6":
   version "3.0.0"
-  resolved "git+ssh://git@github.com/mango-chutney/react-portal.git#66291fa"
+  resolved "git+ssh://git@github.com/mango-chutney/react-portal.git#5d29af6"
   dependencies:
     prop-types "^15.5.8"
 
