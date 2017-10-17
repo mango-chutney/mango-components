@@ -2,6 +2,8 @@ import { rem } from 'polished';
 
 export const palette = {
   primary: '#2ea1f8',
+  secondary: '#1bb934',
+  tertiary: '#222c3c',
   lightGray: '#fafbfc',
   mediumGray: '#cacaca',
   darkGray: '#7f8fa4',

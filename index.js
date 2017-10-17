@@ -2,9 +2,19 @@
  * index.js
  */
 
+import AnchorButton from './components/AnchorButton';
+import Button from './components/Button';
 import Input from './components/Input';
 import MadeWithMangoChutney from './components/MadeWithMangoChutney';
 import Panel, { PanelHeading } from './components/Panel';
 import Tootlip from './components/Tootlip';
 
-export { Input, MadeWithMangoChutney, Panel, PanelHeading, Tootlip };
+export {
+  AnchorButton,
+  Button,
+  Input,
+  MadeWithMangoChutney,
+  Panel,
+  PanelHeading,
+  Tootlip,
+};
