@@ -10,8 +10,7 @@
     "build": "npm-run-all --sequential clean transpile",
     "check": "flow check",
     "clean": "rm -rf lib build",
-    "eslint":
-      "eslint ./components/**/*.js ./examples/**/*.js ./index.js ./webpack.config.js --fix",
+    "eslint": "eslint ./components/**/*.js ./examples/**/*.js ./index.js ./webpack.config.js --fix",
     "jest": "jest",
     "lint": "npm-run-all prettier eslint check",
     "prettier": "./scripts/prettier.sh",
@@ -56,11 +55,16 @@
     "webpack": "^3.6.0"
   },
   "jest": {
-    "testPathIgnorePatterns": ["<rootDir>/build/", "<rootDir>/lib/"]
+    "testPathIgnorePatterns": [
+      "<rootDir>/build/",
+      "<rootDir>/lib/"
+    ]
   },
   "prettier": {
     "trailingComma": "all",
     "singleQuote": true
   },
-  "browserslist": ["last 4 versions"]
+  "browserslist": [
+    "last 4 versions"
+  ]
 }
