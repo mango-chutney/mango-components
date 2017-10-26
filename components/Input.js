@@ -12,7 +12,11 @@ export type InputProps = {
   placeholder: string,
 };
 
-export default ({ styles }: { styles: { input: string, label: string } }) => {
+export default (
+  { styles }: { styles: { input: string, label: string } } = {
+    styles: { input: '', label: '' },
+  },
+) => {
   let StyledInput = styled.input`
     appearance: none;
     background-color: ${palette.lightGray};
