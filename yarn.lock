@@ -1592,7 +1592,7 @@ debug@^2.2.0, debug@^2.6.3, debug@^2.6.8:
   dependencies:
     ms "2.0.0"
 
-debug@^3.0.1:
+debug@^3.0.1, debug@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
   dependencies:
@@ -4138,6 +4138,10 @@ polished@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/polished/-/polished-1.8.0.tgz#21d5389c23ebb47e872f991b0b07503c618d5feb"
 
+popper.js@^1.12.5, popper.js@^1.12.6:
+  version "1.12.6"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.12.6.tgz#91e12a97b07815258b76915d64044e8ac053d426"
+
 postcss-value-parser@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-3.3.0.tgz#87f38f9f18f774a4ab4c8a232f5c5ce8872a9d15"
@@ -4308,6 +4312,13 @@ react-dom@^16.0.0:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.0"
+
+react-popper@^0.7.4:
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-0.7.4.tgz#8649d539837e7c6f47bc9b24c9cf57a404e199a1"
+  dependencies:
+    popper.js "^1.12.5"
+    prop-types "^15.5.10"
 
 react-portal@4.0.0-beta.2:
   version "4.0.0-beta.2"

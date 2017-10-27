@@ -1,524 +1,203 @@
 // @flow
 
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
-import styled from 'styled-components';
 import { Portal } from 'react-portal';
+import { Arrow, Popper } from 'react-popper';
+import styled from 'styled-components';
+import type { ReactComponentStyled } from 'styled-components';
+import PopperJS from 'popper.js';
 import canUseDOM from './lib/canUseDOM';
+import ParentNodePopperManager from './ParentNodePopperManager';
+import type { $ComponentFactory, $StyledSubComponentsFactory } from './types';
+import createDebug from './lib/createDebug';
 
-class FakeDocumentBody {
-  constructor({ height, left, top, width }) {
-    this.height = height || 0;
-    this.left = left || 0;
-    this.top = top || 0;
-    this.width = width || 0;
-  }
+const debug = createDebug('Tootlip');
 
-  height: number = 0;
-  left: number = 0;
-  top: number = 0;
-  width: number = 0;
+export const placements = PopperJS.placements
+  .map(placement => ({
+    [placement]: placement,
+  }))
+  .reduce((prev, next) => ({ ...prev, ...next }), {});
 
-  getBoundingClientRect() {
-    return {
-      height: this.height,
-      left: this.left,
-      top: this.top,
-      width: this.width,
-    };
-  }
-}
-
-const positions = {
-  TOP_LEFT: 'TOP_LEFT',
-  TOP_CENTER: 'TOP_CENTER',
-  TOP_RIGHT: 'TOP_RIGHT',
-  LEFT: 'LEFT',
-  RIGHT: 'RIGHT',
-  BOTTOM_LEFT: 'BOTTOM_LEFT',
-  BOTTOM_CENTER: 'BOTTOM_CENTER',
-  BOTTOM_RIGHT: 'BOTTOM_RIGHT',
+export type StyledProps = {
+  children: React.Node,
+  clickable?: boolean,
+  placement?: $Keys<typeof placements>,
+  visible: boolean,
 };
-
-type AllowedPosition = $Keys<typeof positions>;
 
 export type Props = {
-  allowedPositions: Array<AllowedPosition>,
-  appElement?: Document | HTMLElement,
-  children: React.Node,
-  position?: AllowedPosition,
-  visible: boolean,
-  xOffset: number,
-  yOffset: number,
-  styles: { wrapper: string },
+  ArrowComponent: React.ComponentType<*>,
+  PopperComponent: React.ComponentType<*>,
+} & StyledProps;
+
+export function UnmanagedTootlip(props: Props) {
+  const {
+    ArrowComponent,
+    PopperComponent,
+    children,
+    clickable,
+    visible,
+    placement,
+    ...rest
+  } = props;
+
+  return (
+    <Portal>
+      <PopperComponent {...{ clickable, visible }}>
+        {children}
+        <ArrowComponent {...{ visible }} />
+      </PopperComponent>
+    </Portal>
+  );
+}
+
+UnmanagedTootlip.defaultProps = {
+  clickable: false,
+  placement: placements.auto,
 };
 
-export type State = {
-  position: {
-    left: number,
-    top: number,
-    positionalStyles: string,
-  },
+export function ManagedTootlip(props: Props) {
+  return (
+    <ParentNodePopperManager tag="span">
+      <UnmanagedTootlip {...props} />
+    </ParentNodePopperManager>
+  );
+}
+
+export const defaultStyleProps: {|
+  backgroundColor: string,
+  color: string,
+  fontSize: string,
+  maxWidth: string,
+  minWidth: string,
+  padding: string,
+  radius: string,
+  transition: string,
+|} = {
+  backgroundColor: '#222',
+  color: '#fff',
+  fontSize: '13px',
+  maxWidth: '300px',
+  minWidth: '150px',
+  padding: '8px 21px',
+  radius: '5px',
+  transition: 'opacity 300ms ease-in',
 };
 
-const topStyles = `
-  ::before {
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    bottom: -8px;
-    margin-left: -10px;
-  }
-
-  ::after {
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    bottom: -6px;
-    margin-left: -8px;
-  }
-`;
-
-const bottomStyles = `
-  &::before {
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    margin-left: -10px;
-    top: -8px;
-  }
-
-  &::after {
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    margin-left: -8px;
-    top: -6px;
-  }
-`;
-
-const horizontalStyles = `
-  ::after {
-    border-bottom: 5px solid transparent;
-    border-top: 5px solid transparent;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-`;
-
-/**
- * Simple tooltip, made because existing tooltip components didn't do what I
- * wanted (show/hide based on the value of some property).  Should be the child
- * of an element which is relatively positioned.
- *
- * <a data-tip='hover on me will keep the tootlip'>(･ω´･ )́)</a>`
- */
-
-export default (
-  { styles: { wrapper: wrapperStyles } }: { styles: { wrapper: string } } = {
-    styles: { wrapper: '' },
+export const createStyledComponents: $StyledSubComponentsFactory<
+  {
+    PopperComponent: ReactComponentStyled,
+    ArrowComponent: ReactComponentStyled,
   },
-) =>
-  class Tootlip extends React.Component<Props, State> {
-    static defaultProps = {
-      allowedPositions: ['TOP_CENTER', 'LEFT', 'RIGHT', 'BOTTOM_CENTER'],
-      appElement: canUseDOM() ? document.body : undefined,
-      children: undefined,
-      position: 'TOP_CENTER',
-      visible: false,
-      xOffset: 16,
-      yOffset: 16,
-    };
+  typeof defaultStyleProps,
+> = styleProps => {
+  const PopperComponent = styled(({ visible, clickable, ...rest }) => (
+    <Popper {...rest} />
+  ))`
+    color: ${styleProps.color};
+    background-color: ${styleProps.backgroundColor};
+    border-radius: ${styleProps.radius};
+    cursor: help;
+    display: inline-block;
+    font-size: ${styleProps.fontSize};
+    min-width: ${styleProps.minWidth};
+    padding: ${styleProps.padding};
+    pointer-events: ${props => (props.clickable ? 'auto' : 'none')};
+    position: absolute;
+    text-align: center;
+    transition: ${styleProps.transition};
+    opacity: ${props => (props.visible ? 0.9 : 0)};
+    max-width: ${styleProps.maxWidth};
 
-    static getComputedDimensions(node) {
-      const fallback = { height: 0, width: 0 };
-
-      if (!canUseDOM()) {
-        return fallback;
-      }
-
-      const { height, width } = window.getComputedStyle(node);
-
-      if (height.includes('px') && width.includes('px')) {
-        // remove 'px' from these so we can do arithmetic
-        return {
-          height: parseInt(height.slice(0, -2), 10),
-          width: parseInt(width.slice(0, -2), 10),
-        };
-      }
-
-      return fallback;
+    &[data-placement^='top'] {
+      margin-bottom: ${styleProps.radius};
     }
 
-    static getDimensions(element) {
-      if (!element || !canUseDOM()) {
-        return {
-          width: 0,
-          height: 0,
-          xOffset: 0,
-          yOffset: 0,
-        };
-      }
-
-      // $FlowFixMe
-      const boundingClientRect = (element: | Element
-        | FakeDocumentBody).getBoundingClientRect();
-      const xOffset = window.pageXOffset;
-      const yOffset = window.pageYOffset;
-
-      const addPageOffsetToBoundingClientRect = ({ top, left }) => ({
-        xOffset: left + xOffset,
-        yOffset: top + yOffset,
-      });
-
-      return {
-        width: boundingClientRect.width,
-        height: boundingClientRect.height,
-        ...addPageOffsetToBoundingClientRect(boundingClientRect),
-      };
+    &[data-placement^='bottom'] {
+      margin-top: ${styleProps.radius};
     }
 
-    static positions = { ...positions };
-
-    static getPosition({
-      element,
-      anchor,
-      position,
-      xOffset = 0,
-      yOffset = 0,
-    }) {
-      const ownDimensions = Tootlip.getDimensions(element);
-      const anchorDimensions = Tootlip.getDimensions(anchor);
-
-      switch (position) {
-        case Tootlip.positions.LEFT: {
-          return {
-            left: anchorDimensions.xOffset - (ownDimensions.width + xOffset),
-            top:
-              anchorDimensions.yOffset +
-              (anchorDimensions.height / 2 - ownDimensions.height / 2),
-            positionalStyles: `
-            ::after {
-              right: -6px;
-            }
-          `,
-          };
-        }
-
-        case Tootlip.positions.RIGHT: {
-          return {
-            left: anchorDimensions.xOffset + anchorDimensions.width + xOffset,
-            top:
-              anchorDimensions.yOffset +
-              (anchorDimensions.height / 2 - ownDimensions.height / 2),
-            positionalStyles: `
-            ${horizontalStyles}
-
-            ::after {
-              left: -6px;
-            }
-          `,
-          };
-        }
-
-        case Tootlip.positions.BOTTOM_LEFT: {
-          return {
-            left: anchorDimensions.xOffset,
-            top: anchorDimensions.yOffset + anchorDimensions.height + yOffset,
-            positionalStyles: `
-            ${bottomStyles}
-
-            ::before {
-              left: 2rem;
-            }
-
-            ::after {
-              left: 2rem;
-            }
-          `,
-          };
-        }
-
-        case Tootlip.positions.BOTTOM_CENTER: {
-          return {
-            left:
-              anchorDimensions.xOffset +
-              (anchorDimensions.width / 2 - ownDimensions.width / 2),
-            top: anchorDimensions.yOffset + anchorDimensions.height + yOffset,
-            positionalStyles: `
-            ${topStyles}
-
-            ::before {
-              left: 50%;
-            }
-
-            ::after {
-              left: 50%;
-            }
-          `,
-          };
-        }
-
-        case Tootlip.positions.BOTTOM_RIGHT: {
-          return {
-            left:
-              anchorDimensions.xOffset +
-              (anchorDimensions.width - ownDimensions.width),
-            top: anchorDimensions.yOffset + anchorDimensions.height + yOffset,
-            positionalStyles: `
-            ${bottomStyles}
-
-            ::before {
-              left: calc(100% - 2rem);
-            }
-
-            ::after {
-              left: calc(100% - 2rem);
-            }
-          `,
-          };
-        }
-
-        case Tootlip.positions.TOP_LEFT: {
-          return {
-            left: anchorDimensions.xOffset,
-            top: anchorDimensions.yOffset - (ownDimensions.height + yOffset),
-            positionalStyles: `
-            ${topStyles}
-
-            ::before {
-              left: 2rem;
-            }
-
-            ::after {
-              left: 2rem;
-            }
-          `,
-          };
-        }
-
-        case Tootlip.positions.TOP_CENTER:
-        default: {
-          return {
-            left:
-              anchorDimensions.xOffset +
-              (anchorDimensions.width / 2 - ownDimensions.width / 2),
-            top: anchorDimensions.yOffset - (ownDimensions.height + yOffset),
-            positionalStyles: `
-            ${topStyles}
-
-            ::before {
-              left: 50%;
-            }
-
-            ::after {
-              left: 50%;
-            }
-          `,
-          };
-        }
-
-        case Tootlip.positions.TOP_RIGHT: {
-          return {
-            left:
-              anchorDimensions.xOffset +
-              (anchorDimensions.width - ownDimensions.width),
-            top: anchorDimensions.yOffset - (ownDimensions.height + yOffset),
-            positionalStyles: `
-            ${topStyles}
-
-            ::before {
-              left: calc(100% - 2rem);
-            }
-
-            ::after {
-              left: calc(100% - 2rem);
-            }
-          `,
-          };
-        }
-      }
+    &[data-placement^='right'] {
+      margin-left: ${styleProps.radius};
     }
 
-    /**
-     * @param {HTMLElement} element
-     * @param {HTMLElement|undefined} [boundingElement]
-     * @return {boolean}
-     */
-    static isTouching(
-      element,
-      boundingElement = new FakeDocumentBody({
-        width: canUseDOM() ? window.innerWidth : 0,
-        height: canUseDOM() && document.body ? document.body.clientHeight : 0,
-        top: 0,
-        left: 0,
-      }),
-    ) {
-      const ownDimensions = Tootlip.getDimensions(element);
-      const boundingElementDimensions = Tootlip.getDimensions(boundingElement);
-      const top = ownDimensions.yOffset >= boundingElementDimensions.yOffset;
-      const left = ownDimensions.xOffset >= boundingElementDimensions.xOffset;
-      const bottom =
-        ownDimensions.height + ownDimensions.yOffset <=
-        boundingElementDimensions.height + boundingElementDimensions.yOffset;
-      const right =
-        ownDimensions.width + ownDimensions.xOffset <=
-        boundingElementDimensions.width + boundingElementDimensions.xOffset;
+    &[data-placement^='left'] {
+      margin-right: ${styleProps.radius};
+    }
+  `;
 
-      return ![top, left, bottom, right].every(
-        thingIsTrue => /* every */ thingIsTrue,
-      );
+  // prettier insists on adding a space between
+  // `${PopperComponent}[data-placement^='left']` like `${PopperComponent}
+  // [data-placement^='left']`, which causes flow to complain
+  // prettier-ignore
+  const ArrowComponent = styled(({ visible, ...rest }) => <Arrow {...rest} />)`
+    ${PopperComponent} & {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      position: absolute;
+      margin: ${styleProps.radius};
     }
 
-    state: State = {
-      position: {
-        left: 0,
-        top: 0,
-        positionalStyles: '',
-      },
-    };
-
-    componentWillMount() {
-      window.addEventListener('orientationchange', this.updatePosition);
-      window.addEventListener('resize', this.updatePosition);
+    ${PopperComponent}[data-placement^='top'] & {
+      border-width: ${styleProps.radius} ${styleProps.radius} 0
+        ${styleProps.radius};
+      border-color: ${styleProps.backgroundColor} transparent transparent
+        transparent;
+      bottom: -${styleProps.radius};
+      left: calc(50% - ${styleProps.radius});
+      margin-top: 0;
+      margin-bottom: 0;
     }
 
-    componentWillReceiveProps() {
-      this.updatePosition();
+    ${PopperComponent}[data-placement^='bottom'] & {
+      border-width: 0 ${styleProps.radius} ${styleProps.radius}
+        ${styleProps.radius};
+      border-color: transparent transparent ${styleProps.backgroundColor}
+        transparent;
+      top: -${styleProps.radius};
+      left: calc(50% - ${styleProps.radius});
+      margin-top: 0;
+      margin-bottom: 0;
     }
 
-    componentWillUnmount() {
-      window.removeEventListener('orientationchange', this.updatePosition);
-      window.removeEventListener('resize', this.updatePosition);
+    ${PopperComponent}[data-placement^='right'] & {
+      border-width: ${styleProps.radius} ${styleProps.radius}
+        ${styleProps.radius} 0;
+      border-color: transparent ${styleProps.backgroundColor} transparent
+        transparent;
+      left: -${styleProps.radius};
+      top: calc(50% - ${styleProps.radius});
+      margin-left: 0;
+      margin-right: 0;
     }
 
-    getPosition(position: ?AllowedPosition) {
-      const fallback = { top: 0, left: 0 };
-
-      if (!canUseDOM() || !this.portal) {
-        return fallback;
-      }
-
-      // eslint-disable-next-line react/no-find-dom-node
-      const element = findDOMNode(this.portal);
-
-      if (!element) {
-        return { top: 0, left: 0 };
-      }
-
-      if (!this.anchorChild) {
-        return { top: 0, left: 0 };
-      }
-
-      const anchor = this.anchorChild.parentNode;
-
-      const { xOffset, yOffset } = this.props;
-
-      return Tootlip.getPosition({
-        element,
-        anchor,
-        position,
-        xOffset,
-        yOffset,
-      });
+    ${PopperComponent}[data-placement^='left'] & {
+      border-width: ${styleProps.radius} 0 ${styleProps.radius}
+        ${styleProps.radius};
+      border-color: transparent transparent transparent
+        ${styleProps.backgroundColor};
+      right: -${styleProps.radius};
+      top: calc(50% - ${styleProps.radius});
+      margin-left: 0;
+      margin-right: 0;
     }
+  `;
 
-    didFinishRepositioning: boolean = false;
-    anchorChild: ?Element;
-    portal: ?Element;
-
-    updatePosition = (remainingPositions: ?Array<AllowedPosition>) => {
-      this.didFinishRepositioning = false;
-
-      const { position: desiredPosition, allowedPositions } = this.props;
-
-      // eslint-disable-next-line no-underscore-dangle
-      const _remainingPositions =
-        remainingPositions === undefined
-          ? [...allowedPositions]
-          : remainingPositions;
-
-      const position = ((): ?AllowedPosition => {
-        if (remainingPositions === undefined) {
-          return desiredPosition;
-        }
-        if (_remainingPositions && _remainingPositions.length > 0) {
-          return _remainingPositions.pop();
-        }
-        return desiredPosition;
-      })();
-
-      try {
-        this.setState({ position: { ...this.getPosition(position) } });
-        // eslint-disable-next-line react/no-find-dom-node
-        const element = findDOMNode(this.portal);
-        if (element) {
-          if (
-            Tootlip.isTouching(element) &&
-            _remainingPositions &&
-            _remainingPositions.length > 0
-          ) {
-            this.updatePosition(_remainingPositions);
-          } else {
-            this.didFinishRepositioning = true;
-            this.forceUpdate();
-          }
-        }
-      } catch (error) {
-        // fail silently if node was unmounted
-      }
-    };
-
-    render() {
-      const { appElement, children, visible } = this.props;
-
-      const { position: { top, left, positionalStyles } } = this.state;
-
-      const Wrapper = styled.div`
-        color: #fff;
-        background-color: #222;
-        border-radius: 5px;
-        cursor: help;
-        display: inline-block;
-        font-size: 13px;
-        min-width: 180px;
-        padding: 8px 21px;
-        pointer-events: ${props => (props.clickable ? 'auto' : 'none')};
-        position: absolute;
-        text-align: center;
-        transition: opacity 300ms ease-in;
-        max-width: calc(100vw - (1rem * 2));
-
-        ::before,
-        ::after {
-          content: '';
-          height: 0;
-          position: absolute;
-          width: 0;
-        }
-
-        ${positionalStyles};
-      `.extend(wrapperStyles);
-
-      return (
-        <span
-          ref={node => {
-            this.anchorChild = node;
-          }}
-        >
-          <Portal
-            node={appElement}
-            ref={node => {
-              this.portal = node;
-            }}
-          >
-            <Wrapper
-              style={{
-                top,
-                left,
-                opacity: visible && this.didFinishRepositioning ? 0.9 : 0,
-              }}
-            >
-              {children}
-            </Wrapper>
-          </Portal>
-        </span>
-      );
-    }
+  return {
+    PopperComponent,
+    ArrowComponent,
   };
+};
+
+export const createComponent: $ComponentFactory<StyledProps> = () => {
+  const defaultStyledComponents = createStyledComponents(defaultStyleProps);
+  return (props: StyledProps) => (
+    <ManagedTootlip {...{ ...props, ...defaultStyledComponents }} />
+  );
+};
+
+export default createComponent;

@@ -1,28 +1,43 @@
-import React, { Component } from 'react';
-import { Tootlip } from '../';
+// @flow
 
-export default class TootlipExample extends Component {
-  constructor(props) {
-    super(props);
+import * as React from 'react';
+// Explicitly import from index.js, not from the "main" property of package.json
+// in the directory.
+import MC from '../index';
 
-    this.state = {
-      bottomLeftSideButtonIsActive: false,
-      buttonIsActive: false,
-      isHovering: false,
-      leftSideButtonIsActive: false,
-      rightSideButtonIsActive: false,
-      topRightSideButtonIsActive: false,
-    };
-  }
+const { placements, createComponent: createTootlipComponent } = MC.Tootlip;
+
+const Tootlip = createTootlipComponent();
+
+type Props = {};
+
+type State = {
+  exampleBottomPlacementButtonIsActive: boolean,
+  exampleButtonIsActive: boolean,
+  exampleLeftPlacementButtonIsActive: boolean,
+  exampleRightPlacementButtonIsActive: boolean,
+  exampleTopPlacementButtonIsActive: boolean,
+  isHovering: boolean,
+};
+
+export default class TootlipExample extends React.Component<Props, State> {
+  state = {
+    exampleBottomPlacementButtonIsActive: false,
+    exampleButtonIsActive: false,
+    exampleLeftPlacementButtonIsActive: false,
+    exampleRightPlacementButtonIsActive: false,
+    exampleTopPlacementButtonIsActive: false,
+    isHovering: false,
+  };
 
   render() {
     const {
-      bottomLeftSideButtonIsActive,
-      buttonIsActive,
+      exampleBottomPlacementButtonIsActive,
+      exampleButtonIsActive,
+      exampleLeftPlacementButtonIsActive,
+      exampleRightPlacementButtonIsActive,
+      exampleTopPlacementButtonIsActive,
       isHovering,
-      leftSideButtonIsActive,
-      rightSideButtonIsActive,
-      topRightSideButtonIsActive,
     } = this.state;
 
     return (
@@ -30,15 +45,24 @@ export default class TootlipExample extends Component {
         <h2>Tootlip</h2>
         <p>
           <span
-            onMouseOver={() => this.setState({ isHovering: true })}
-            onFocus={() => this.setState({ isHovering: true })}
-            onMouseOut={() => this.setState({ isHovering: false })}
-            onBlur={() => this.setState({ isHovering: false })}
+            onMouseOver={() => {
+              this.setState({ isHovering: true });
+            }}
+            onFocus={() => {
+              this.setState({ isHovering: true });
+            }}
+            onMouseOut={() => {
+              this.setState({ isHovering: false });
+            }}
+            onBlur={() => {
+              this.setState({ isHovering: false });
+            }}
           >
             Hover on me
             <Tootlip
               visible={isHovering}
               appElement={document.getElementById('app')}
+              placement={placements.auto}
             >
               Hey
             </Tootlip>
@@ -49,14 +73,17 @@ export default class TootlipExample extends Component {
         <div>
           <button
             type="button"
-            className="button primary"
-            onClick={() =>
+            onClick={() => {
               this.setState({
-                buttonIsActive: !buttonIsActive,
-              })}
+                exampleButtonIsActive: !exampleButtonIsActive,
+              });
+            }}
           >
             {'Press (･ω´･ )́)'}
-            <Tootlip visible={buttonIsActive}>
+            <Tootlip
+              visible={exampleButtonIsActive}
+              placement={placements.auto}
+            >
               Thanks for following the instructions.
             </Tootlip>
           </button>
@@ -69,64 +96,62 @@ export default class TootlipExample extends Component {
         <div>
           <button
             type="button"
-            className="button primary"
-            onClick={() =>
+            onClick={() => {
               this.setState({
-                rightSideButtonIsActive: !rightSideButtonIsActive,
-              })}
+                exampleRightPlacementButtonIsActive: !exampleRightPlacementButtonIsActive,
+              });
+            }}
           >
             {'Right (･ω´･ )́)'}
             <Tootlip
-              visible={rightSideButtonIsActive}
-              position={Tootlip.positions.RIGHT}
+              visible={exampleRightPlacementButtonIsActive}
+              placement={placements.right}
             >
               Mango Chutney
             </Tootlip>
           </button>
           <button
             type="button"
-            className="button primary"
             onClick={() =>
               this.setState({
-                leftSideButtonIsActive: !leftSideButtonIsActive,
+                exampleLeftPlacementButtonIsActive: !exampleLeftPlacementButtonIsActive,
               })}
           >
             {'Left (･ω´･ )́)'}
             <Tootlip
-              visible={leftSideButtonIsActive}
-              position={Tootlip.positions.LEFT}
+              visible={exampleLeftPlacementButtonIsActive}
+              placement={placements.left}
             >
               Among Chutney
             </Tootlip>
           </button>
           <button
             type="button"
-            className="button primary"
-            onClick={() =>
+            onClick={() => {
               this.setState({
-                topRightSideButtonIsActive: !topRightSideButtonIsActive,
-              })}
+                exampleTopPlacementButtonIsActive: !exampleTopPlacementButtonIsActive,
+              });
+            }}
           >
-            {'Top right (･ω´･ )́)'}
+            {'Top (･ω´･ )́)'}
             <Tootlip
-              visible={topRightSideButtonIsActive}
-              position={Tootlip.positions.TOP_RIGHT}
+              visible={exampleTopPlacementButtonIsActive}
+              placement={placements.top}
             >
               Ace Gunny Moth
             </Tootlip>
           </button>
           <button
             type="button"
-            className="button primary"
             onClick={() =>
               this.setState({
-                bottomLeftSideButtonIsActive: !bottomLeftSideButtonIsActive,
+                exampleBottomPlacementButtonIsActive: !exampleBottomPlacementButtonIsActive,
               })}
           >
-            {'Bottom left (･ω´･ )́)'}
+            {'Bottom (･ω´･ )́)'}
             <Tootlip
-              visible={bottomLeftSideButtonIsActive}
-              position={Tootlip.positions.BOTTOM_LEFT}
+              visible={exampleBottomPlacementButtonIsActive}
+              placement={placements.bottom}
             >
               Cage Ohm Tunny
             </Tootlip>
