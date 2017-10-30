@@ -5,34 +5,42 @@ import styled, { css } from 'styled-components';
 import { rem, darken } from 'polished';
 import { palette, globalBorder, globalRadius, fontWeights } from './constants';
 
-const href = 'http://mangochutney.com.au/';
-
 export type Props = {
   children: React.Node,
 };
 
-export default ({ styles }: { styles: { div: string } }) => {
-  let StyledDiv = styled.div`
-    background: ${palette.white};
-    margin: 0 0 1rem;
-    padding: 2rem;
-    border: ${globalBorder};
-    border-radius: ${globalRadius};
-    overflow: hidden;
-  `;
+// this has to be outside so other ocmponents can access
+let StyledPanelSection = styled.div`
+  margin: 0 -2rem;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid ${palette.border};
 
+  :last-child {
+    border-bottom: 0;
+  }
+`;
+
+export const PanelSection = (
+  { styles }: { styles: { div: string } } = {
+    styles: { div: '' },
+  },
+) => {
   if (styles && styles.div) {
-    StyledDiv = StyledDiv.extend([styles.div]);
+    StyledPanelSection = StyledPanelSection.extend([styles.div]);
   }
 
-  return function Panel(props: Props) {
+  return function PanelSection(props: Props) {
     const { children, ...rest } = props;
 
-    return <StyledDiv {...rest}>{children}</StyledDiv>;
+    return <StyledPanelSection {...rest}>{children}</StyledPanelSection>;
   };
 };
 
-export const PanelHeading = ({ styles }: { styles: { div: string } }) => {
+export const PanelHeading = (
+  { styles }: { styles: { div: string } } = {
+    styles: { div: '' },
+  },
+) => {
   let StyledDiv = styled.div`
     background: linear-gradient(
       ${palette.lightGray} 0%,
@@ -48,6 +56,10 @@ export const PanelHeading = ({ styles }: { styles: { div: string } }) => {
     overflow-x: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+
+    + ${StyledPanelSection} {
+      margin-top: -2rem;
+    }
   `;
 
   if (styles && styles.div) {
@@ -55,6 +67,37 @@ export const PanelHeading = ({ styles }: { styles: { div: string } }) => {
   }
 
   return function PanelHeading(props: Props) {
+    const { children, ...rest } = props;
+
+    return <StyledDiv {...rest}>{children}</StyledDiv>;
+  };
+};
+
+export default (
+  { styles }: { styles: { div: string } } = {
+    styles: { div: '' },
+  },
+) => {
+  let StyledDiv = styled.div`
+    background: ${palette.white};
+    margin: 0 0 1rem;
+    padding: 2rem;
+    border: ${globalBorder};
+    border-radius: ${globalRadius};
+    overflow: hidden;
+
+    > ${StyledPanelSection} {
+      :last-child {
+        margin-bottom: -2rem;
+      }
+    }
+  `;
+
+  if (styles && styles.div) {
+    StyledDiv = StyledDiv.extend([styles.div]);
+  }
+
+  return function Panel(props: Props) {
     const { children, ...rest } = props;
 
     return <StyledDiv {...rest}>{children}</StyledDiv>;
