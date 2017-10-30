@@ -21,7 +21,7 @@ export const StyledButton = styled.button`
   font-family: inherit;
   font-weight: ${fontWeights.semibold};
   margin-bottom: 1rem;
-  padding: 0.5rem 1.25rem;
+  padding: 0.65rem 1.25rem;
   text-align: center;
   text-decoration: none;
 `;
