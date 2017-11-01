@@ -10,24 +10,10 @@ const AnchorButton = MC.AnchorButton.createComponent();
 
 type Props = {};
 
-type State = {
-  exampleBottomPlacementButtonIsActive: boolean,
-  exampleButtonIsActive: boolean,
-  exampleLeftPlacementButtonIsActive: boolean,
-  exampleRightPlacementButtonIsActive: boolean,
-  exampleTopPlacementButtonIsActive: boolean,
-  isHovering: boolean,
-};
+type State = {};
 
-export default class TootlipExample extends React.Component<Props, State> {
-  state = {
-    exampleBottomPlacementButtonIsActive: false,
-    exampleButtonIsActive: false,
-    exampleLeftPlacementButtonIsActive: false,
-    exampleRightPlacementButtonIsActive: false,
-    exampleTopPlacementButtonIsActive: false,
-    isHovering: false,
-  };
+export default class ButtonExample extends React.Component<Props, State> {
+  state = {};
 
   render() {
     return (
