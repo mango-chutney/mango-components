@@ -3,7 +3,7 @@
 import * as React from 'react';
 // Explicitly import from index.js, not from the "main" property of package.json
 // in the directory.
-import MC from '../index';
+import MC from 'mango-components';
 
 const Button = MC.Button.createComponent();
 const AnchorButton = MC.AnchorButton.createComponent();
@@ -12,7 +12,7 @@ type Props = {};
 
 type State = {};
 
-export default class ButtonExample extends React.Component<Props, State> {
+export class ButtonExample extends React.Component<Props, State> {
   state = {};
 
   render() {
@@ -26,3 +26,7 @@ export default class ButtonExample extends React.Component<Props, State> {
     );
   }
 }
+
+export const component = ButtonExample;
+
+export default component;

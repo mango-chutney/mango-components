@@ -1,32 +1,66 @@
 // @flow
 
 import * as React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+import type { ReactComponentStyled } from 'styled-components';
 import type { FieldProps } from 'redux-form';
 import { rem, transparentize } from 'polished';
 import { palette, fontWeights, fontStack } from './constants';
+import type {
+  $ComponentFactory,
+  $MangoComponent,
+  $StyledSubComponentsFactory,
+} from './types';
 
-export type InputProps = {
+export type $StyledProps = {
   ...FieldProps,
   label: string,
   placeholder: string,
 };
 
-export default (
-  { styles }: { styles: { input: string, label: string } } = {
-    styles: { input: '', label: '' },
+export type $Props = {
+  ...$StyledProps,
+  InputComponent: React.ComponentType<*>,
+  SpanComponent: React.ComponentType<*>,
+};
+
+export const defaultStyleProps: {|
+  backgroundColor: string,
+  borderColor: string,
+  color: string,
+  fontFamily: string,
+  placeholderColor: string,
+  activeBorderColor: string,
+  fontSize: string,
+  fontWeight: string | number,
+|} = {
+  backgroundColor: palette.lightGray,
+  borderColor: palette.border,
+  color: palette.black,
+  fontFamily: fontStack,
+  placeholderColor: String(transparentize(0.2, palette.darkGray)),
+  activeBorderColor: palette.black,
+  fontSize: rem(14),
+  fontWeight: fontWeights.semibold,
+};
+
+export const createStyledComponents: $StyledSubComponentsFactory<
+  {
+    InputComponent: ReactComponentStyled<*>,
+    SpanComponent: ReactComponentStyled<*>,
   },
-) => {
-  let StyledInput = styled.input`
+  typeof defaultStyleProps,
+> = styleProps => {
+  const InputComponent = styled.input`
     appearance: none;
-    background-color: ${palette.lightGray};
-    border-color: ${palette.border};
+    background-color: ${styleProps.backgroundColor};
+    border-color: ${styleProps.borderColor};
     border-radius: 0.25rem;
     border-style: solid;
     border-width: 0.05rem;
-    color: ${palette.black};
+    color: ${styleProps.color};
     display: block;
-    font-family: ${fontStack};
+    font-family: ${styleProps.fontFamily};
     height: 2.6rem;
     margin-bottom: 1rem;
     outline: 0;
@@ -35,46 +69,55 @@ export default (
     width: 100%;
 
     ::placeholder {
-      color: ${transparentize(0.2, palette.darkGray)};
+      color: ${styleProps.placeholderColor};
     }
 
     :active,
     :focus {
-      border-color: ${palette.black};
+      border-color: ${styleProps.activeBorderColor};
     }
   `;
 
-  let StyledLabel = styled.span`
-    font-size: ${rem(14)};
-    font-weight: ${fontWeights.semibold};
+  const SpanComponent = styled.span`
+    font-size: ${styleProps.fontSize};
+    font-weight: ${styleProps.fontWeight};
   `;
 
-  if (styles && styles.input) {
-    StyledInput = StyledInput.extend([styles.input]);
-  }
-
-  if (styles && styles.label) {
-    StyledLabel = StyledLabel.extend([styles.label]);
-  }
-
-  return function Input({
-    input,
-    meta,
-    label,
-    placeholder,
-    ...rest
-  }: InputProps) {
-    return (
-      <label htmlFor={rest.id || (input && input.name)}>
-        {label && <StyledLabel>{label}</StyledLabel>}
-        <span>
-          <StyledInput
-            {...input}
-            id={rest.id || (input && input.name)}
-            placeholder={placeholder}
-          />
-        </span>
-      </label>
-    );
-  };
+  return { InputComponent, SpanComponent };
 };
+
+export function Input({
+  InputComponent,
+  SpanComponent,
+  input,
+  meta,
+  label,
+  placeholder,
+  ...rest
+}: $Props) {
+  return (
+    <label htmlFor={rest.id || (input && input.name)}>
+      {label && <SpanComponent>{label}</SpanComponent>}
+      <span>
+        <InputComponent
+          {...input}
+          id={rest.id || (input && input.name)}
+          placeholder={placeholder}
+        />
+      </span>
+    </label>
+  );
+}
+
+export const createComponent: $ComponentFactory<$StyledProps> = () => {
+  const defaultStyledComponents = createStyledComponents(defaultStyleProps);
+  return (props: $StyledProps) => (
+    <Input {...{ ...props, ...defaultStyledComponents }} />
+  );
+};
+
+export default ({
+  defaultStyleProps,
+  createStyledComponents,
+  createComponent,
+}: $MangoComponent<typeof defaultStyleProps, $StyledProps>);

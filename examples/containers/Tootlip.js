@@ -3,7 +3,7 @@
 import * as React from 'react';
 // Explicitly import from index.js, not from the "main" property of package.json
 // in the directory.
-import MC from '../index';
+import MC from 'mango-components';
 
 const { placements, createComponent: createTootlipComponent } = MC.Tootlip;
 
@@ -20,7 +20,7 @@ type State = {
   isHovering: boolean,
 };
 
-export default class TootlipExample extends React.Component<Props, State> {
+export class TootlipExample extends React.Component<Props, State> {
   state = {
     exampleBottomPlacementButtonIsActive: false,
     exampleButtonIsActive: false,
@@ -161,3 +161,7 @@ export default class TootlipExample extends React.Component<Props, State> {
     );
   }
 }
+
+export const component = TootlipExample;
+
+export default component;

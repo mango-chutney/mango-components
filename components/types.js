@@ -7,21 +7,21 @@ export type $ComponentFactory<
   $StyledComponentsFactoryProps,
 > = () => React.ComponentType<$StyledComponentsFactoryProps>;
 
-export type $StyledComponents = { [string]: ReactComponentStyled };
+export type $StyledComponents = { [string]: ReactComponentStyled<*> };
 
 export type $StyledSubComponentsFactory<
   $StyledComponents,
   $StyledComponentsFactoryProps,
 > = (styleProps: $StyledComponentsFactoryProps) => $StyledComponents;
 
-export type $MangoComponent<
+export interface $MangoComponent<
   $StyledComponentsFactoryProps,
   $StyledComponentProps,
-> = {
-  defaultStyleProps: $StyledComponentsFactoryProps,
+> {
+  defaultStyleProps: $StyledComponentsFactoryProps;
   createStyledComponents: $StyledSubComponentsFactory<
     $StyledComponents,
     $StyledComponentsFactoryProps,
-  >,
-  createComponent: $ComponentFactory<$StyledComponentProps>,
-};
+  >;
+  createComponent: $ComponentFactory<$StyledComponentProps>;
+}

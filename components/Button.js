@@ -18,8 +18,9 @@ export type $StyledProps = {
 };
 
 export type $Props = {
+  ...$StyledProps,
   ButtonComponent: React.ComponentType<*>,
-} & $StyledProps;
+};
 
 export const defaultStyleProps: {|
   color: string,
@@ -31,7 +32,7 @@ export const defaultStyleProps: {|
 
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
-    ButtonComponent: ReactComponentStyled,
+    ButtonComponent: ReactComponentStyled<*>,
   },
   typeof defaultStyleProps,
 > = styleProps => {

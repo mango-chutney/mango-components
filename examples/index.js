@@ -1,17 +1,12 @@
-import React from 'react';
+import * as React from 'react';
 import { render } from 'react-dom';
-import TootlipExample from './Tootlip';
-import ButtonExample from './Button';
+import configureStore from './store/configureStore';
+import App from './containers/App';
 
-const kitchenSink = (
-  <div className="row column">
-    <h1>Mango Components</h1>
-    <TootlipExample />
-    <ButtonExample />
-  </div>
-);
-
-const appElement = document.createElement('div');
-appElement.id = 'app';
-document.body.appendChild(appElement);
-render(kitchenSink, document.getElementById('app'));
+window.addEventListener('load', () => {
+  const appElement = document.createElement('div');
+  appElement.id = 'app';
+  document.body.appendChild(appElement);
+  const store = configureStore();
+  render(<App {...{ store }} />, document.getElementById('app'));
+});

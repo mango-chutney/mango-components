@@ -10,13 +10,12 @@ class ParentNodeManager extends Manager {
     this.anchorChild = node;
   };
 
-  _getTargetNode = () => {
-    return this.anchorChild.parentNode;
-  };
+  _getTargetNode = () => this.anchorChild.parentNode;
 
   componentDidMount() {
     // Hack to get this node to mount BEFORE the nodes rendered by
     // super.render() (otherwise this.anchorChild.parentNode will be null).
+    // eslint-disable-next-line react/no-did-mount-set-state
     this.setState({ shouldRender: true });
   }
 
@@ -28,6 +27,7 @@ class ParentNodeManager extends Manager {
     const { shouldRender } = this.state;
 
     return (
+      // eslint-disable-next-line no-underscore-dangle
       <span ref={this._setTargetNode}>{shouldRender && super.render()}</span>
     );
   }

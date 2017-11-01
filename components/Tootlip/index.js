@@ -1,23 +1,17 @@
 // @flow
 
 import * as React from 'react';
-import PropTypes from 'prop-types';
-import { findDOMNode } from 'react-dom';
 import { Portal } from 'react-portal';
 import { Arrow, Popper } from 'react-popper';
 import styled from 'styled-components';
 import type { ReactComponentStyled } from 'styled-components';
 import PopperJS from 'popper.js';
-import canUseDOM from './lib/canUseDOM';
 import ParentNodePopperManager from './ParentNodePopperManager';
 import type {
   $ComponentFactory,
   $MangoComponent,
   $StyledSubComponentsFactory,
-} from './types';
-import createDebug from './lib/createDebug';
-
-const debug = createDebug('Tootlip');
+} from '../types';
 
 export const placements = PopperJS.placements
   .map(placement => ({
@@ -33,9 +27,10 @@ export type $StyledProps = {
 };
 
 export type $Props = {
+  ...$StyledProps,
   ArrowComponent: React.ComponentType<*>,
   PopperComponent: React.ComponentType<*>,
-} & $StyledProps;
+};
 
 export function UnmanagedTootlip(props: $Props) {
   const {
@@ -44,13 +39,12 @@ export function UnmanagedTootlip(props: $Props) {
     children,
     clickable,
     visible,
-    placement,
     ...rest
   } = props;
 
   return (
     <Portal>
-      <PopperComponent {...{ clickable, visible }}>
+      <PopperComponent {...{ clickable, visible, ...rest }}>
         {children}
         <ArrowComponent {...{ visible }} />
       </PopperComponent>
@@ -93,8 +87,8 @@ export const defaultStyleProps: {|
 
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
-    PopperComponent: ReactComponentStyled,
-    ArrowComponent: ReactComponentStyled,
+    PopperComponent: ReactComponentStyled<*>,
+    ArrowComponent: ReactComponentStyled<*>,
   },
   typeof defaultStyleProps,
 > = styleProps => {
@@ -204,11 +198,14 @@ export const createComponent: $ComponentFactory<$StyledProps> = () => {
   );
 };
 
+export type $ExtendedMangoComponent = {
+  ...$MangoComponent<typeof defaultStyleProps, $StyledProps>,
+  placements: typeof placements,
+};
+
 export default ({
   defaultStyleProps,
   createStyledComponents,
   createComponent,
   placements,
-}: $MangoComponent<typeof defaultStyleProps, $StyledProps> & {
-  placements: typeof placements,
-});
+}: $ExtendedMangoComponent);

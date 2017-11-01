@@ -1,0 +1,70 @@
+// @flow
+
+import type { Match, Route } from 'react-router';
+import { withNavigation } from './components/Navigation';
+import { withFooter } from './components/Footer';
+import * as Home from './containers/Home';
+import * as Tootlip from './containers/Tootlip';
+import * as Button from './containers/Button';
+import * as Forms from './containers/Forms';
+import * as NoMatch from './containers/NoMatch';
+
+// Please generate a key for each route using `uuidgen` because these will be
+// spread into react components.
+
+export type ExtendedRoute = {
+  ...Route,
+  key: string,
+  name: string,
+  path: string,
+  shouldShowInNavigationComponent: boolean,
+};
+
+const routes: Array<ExtendedRoute> = [
+  {
+    component: Home.component,
+    exact: true,
+    key: '7cc8550d-0aa8-4d21-ad15-5ffedca3e93c',
+    name: 'Home',
+    path: '/',
+    shouldShowInNavigationComponent: true,
+  },
+  {
+    component: Tootlip.component,
+    exact: true,
+    key: 'd67e7b73-5198-4d62-b38b-ebabe3eb8cd1',
+    name: 'Tootlip',
+    path: '/components/tootlip',
+    shouldShowInNavigationComponent: true,
+  },
+  {
+    component: Button.component,
+    exact: true,
+    key: 'ffdcdf44-06de-4dca-8f06-78bb7fe4b2d0',
+    name: 'Buttons',
+    path: '/components/buttons',
+    shouldShowInNavigationComponent: true,
+  },
+  {
+    component: Forms.component,
+    exact: true,
+    key: '82b1acb5-c982-4c3c-b1a8-c7e47792a37c',
+    name: 'Forms',
+    path: '/components/forms',
+    shouldShowInNavigationComponent: true,
+  },
+  {
+    component: NoMatch.component,
+    key: 'dde32c6d-e6ce-45a9-a360-2683fe91590e',
+    name: '404',
+    shouldShowInNavigationComponent: false,
+  },
+].map(
+  (route: *): ExtendedRoute =>
+    ({
+      ...route,
+      component: withFooter(withNavigation(route.component)),
+    }: Object),
+);
+
+export default routes;

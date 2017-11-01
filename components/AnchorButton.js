@@ -17,12 +17,14 @@ import {
 import type { $StyledProps as $StyledButtonProps } from './Button';
 
 export type $StyledProps = {
+  ...$StyledButtonProps,
   href: string,
-} & $StyledButtonProps;
+};
 
 export type $Props = {
+  ...$StyledProps,
   AnchorButtonComponent: React.ComponentType<*>,
-} & $StyledProps;
+};
 
 export function AnchorButton(props: $Props) {
   const { children, href, AnchorButtonComponent, ...rest } = props;
@@ -38,7 +40,7 @@ export { defaultStyleProps };
 
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
-    AnchorButtonComponent: ReactComponentStyled,
+    AnchorButtonComponent: ReactComponentStyled<*>,
   },
   typeof defaultStyleProps,
 > = styleProps => {

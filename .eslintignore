@@ -2,3 +2,4 @@ node_modules
 flow-typed
 build
 ./lib
+./examples/node_modules
