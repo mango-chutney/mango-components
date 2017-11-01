@@ -2,30 +2,50 @@
 
 import * as React from 'react';
 import styled, { css } from 'styled-components';
+import type { ReactComponentStyled } from 'styled-components';
 import { rem, darken } from 'polished';
+import type { $ComponentFactory, $StyledSubComponentsFactory } from './types';
 import { fontWeights } from './constants';
-import { StyledButton } from './Button';
+import {
+  createStyledComponents as _createStyledComponents,
+  defaultStyleProps,
+} from './Button';
+import type {StyledProps as _StyledProps} from './Button';
+
+
+export type StyledProps = {
+  href: string,
+} & _StyledProps;
 
 export type Props = {
-  children: React.Node,
-  href: string,
+  AnchorButtonComponent: React.ComponentType<*>,
+} & StyledProps;
+
+export function AnchorButton(props: Props) {
+  const { children, href, AnchorButtonComponent, ...rest } = props;
+
+  return (
+    <AnchorButtonComponent href={props.href} {...rest}>
+      {children}
+    </AnchorButtonComponent>
+  );
+}
+
+export const createStyledComponents: $StyledSubComponentsFactory<{
+    AnchorButtonComponent: ReactComponentStyled,
+  },
+  typeof defaultStyleProps,> = styleProps => {
+  const AnchorButtonComponent = _createStyledComponents(
+    defaultStyleProps,
+  ).ButtonComponent.withComponent('a');
+
+  return { AnchorButtonComponent };
 };
 
-export default ({ styles }: { styles?: { a: string } }) => {
-  // grab custom palette if needed
-  let StyledAnchorButton = StyledButton.withComponent('a');
 
-  if (styles && styles.a) {
-    StyledAnchorButton = StyledAnchorButton.extend([styles.a]);
-  }
-
-  return function AnchorButton(props: Props) {
-    const { children, href, ...rest } = props;
-
-    return (
-      <StyledAnchorButton href={props.href} {...rest}>
-        {children}
-      </StyledAnchorButton>
-    );
-  };
+export const createComponent: $ComponentFactory<StyledProps> = () => {
+  const defaultStyledComponents = createStyledComponents(defaultStyleProps);
+  return (props: StyledProps) => (
+    <AnchorButton {...{ ...props, ...defaultStyledComponents }} />
+  );
 };

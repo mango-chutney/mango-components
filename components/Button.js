@@ -2,44 +2,64 @@
 
 import * as React from 'react';
 import styled, { css } from 'styled-components';
+import type { ReactComponentStyled } from 'styled-components';
 import { rem, darken } from 'polished';
+import type { $ComponentFactory, $StyledSubComponentsFactory } from './types';
 import { palette, fontWeights } from './constants';
 
-export type Props = {
+export type StyledProps = {
   children: React.Node,
   onClick: Function,
+  expanded: boolean,
 };
 
-// export for AnchorButton
-export const StyledButton = styled.button`
-  background-color: #f0f3f8;
-  border-radius: 0.25rem;
-  border: 0;
-  color: ${palette.darkGray};
-  cursor: pointer;
-  display: ${props => (props.expanded ? 'block' : 'inline-block')};
-  font-family: inherit;
-  font-weight: ${fontWeights.semibold};
-  margin-bottom: 1rem;
-  padding: 0.65rem 1.25rem;
-  text-align: center;
-  text-decoration: none;
-`;
+export type Props = {
+  ButtonComponent: React.ComponentType<*>,
+} & StyledProps;
 
-export default ({ styles }: { styles?: { button: string } }) => {
-  let ExtendedStyledButton = StyledButton;
+export const defaultStyleProps: {|
+  color: string,
+  fontWeight: string | number,
+|} = {
+  color: palette.darkGray,
+  fontWeight: fontWeights.semibold,
+};
 
-  if (styles && styles.button) {
-    ExtendedStyledButton = ExtendedStyledButton.extend([styles.button]);
-  }
+export const createStyledComponents: $StyledSubComponentsFactory<{
+    ButtonComponent: ReactComponentStyled,
+  },
+  typeof defaultStyleProps,> = styleProps => {
+  const ButtonComponent = styled.button`
+    background-color: #f0f3f8;
+    border-radius: 0.25rem;
+    border: 0;
+    color: ${styleProps.color};
+    cursor: pointer;
+    display: ${props => (props.expanded ? 'block' : 'inline-block')};
+    font-family: inherit;
+    font-weight: ${styleProps.fontWeight};
+    margin-bottom: 1rem;
+    padding: 0.65rem 1.25rem;
+    text-align: center;
+    text-decoration: none;
+  `;
 
-  return function Button(props: Props) {
-    const { children, onClick, ...rest } = props;
+  return { ButtonComponent };
+};
 
-    return (
-      <ExtendedStyledButton onClick={onClick} {...rest}>
-        {children}
-      </ExtendedStyledButton>
-    );
-  };
+export function Button(props: Props) {
+  const { children, onClick, ButtonComponent, ...rest } = props;
+
+  return (
+    <ButtonComponent onClick={onClick} {...rest}>
+      {children}
+    </ButtonComponent>
+  );
+}
+
+export const createComponent: $ComponentFactory<StyledProps> = () => {
+  const defaultStyledComponents = createStyledComponents(defaultStyleProps);
+  return (props: StyledProps) => (
+    <Button {...{ ...props, ...defaultStyledComponents }} />
+  );
 };
