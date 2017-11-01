@@ -199,5 +199,3 @@ export const createComponent: $ComponentFactory<StyledProps> = () => {
     <ManagedTootlip {...{ ...props, ...defaultStyledComponents }} />
   );
 };
-
-export default createComponent;

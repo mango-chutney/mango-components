@@ -14,11 +14,14 @@ export type $StyledSubComponentsFactory<
   StyledComponentsFactoryProps,
 > = (styleProps: StyledComponentsFactoryProps) => $StyledComponents;
 
-export type $MangoComponent<StyledComponentsFactoryProps> = {
+export type $MangoComponent<
+  StyledComponentsFactoryProps,
+  StyledComponentProps,
+> = {
   defaultStyleProps: StyledComponentsFactoryProps,
   createStyledComponents: $StyledSubComponentsFactory<
     $StyledComponents,
     StyledComponentsFactoryProps,
   >,
-  createComponent: $ComponentFactory<StyledComponentsFactoryProps>,
+  createComponent: $ComponentFactory<StyledComponentProps>,
 };

@@ -9,7 +9,7 @@ import Tootlip from './components/Tootlip';
 import * as Tootlip from './components/Tootlip';
 import type { $MangoComponent } from './components/types';
 
-const components: { [string]: $MangoComponent<*> } = {
+const components: { [string]: $MangoComponent<*, *> } = {
   AnchorButton,
   Button,
   Input,
