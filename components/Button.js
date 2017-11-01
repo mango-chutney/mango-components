@@ -4,18 +4,22 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import type { ReactComponentStyled } from 'styled-components';
 import { rem, darken } from 'polished';
-import type { $ComponentFactory, $StyledSubComponentsFactory } from './types';
+import type {
+  $ComponentFactory,
+  $MangoComponent,
+  $StyledSubComponentsFactory,
+} from './types';
 import { palette, fontWeights } from './constants';
 
-export type StyledProps = {
+export type $StyledProps = {
   children: React.Node,
-  onClick: Function,
-  expanded: boolean,
+  onClick?: Function,
+  expanded?: boolean,
 };
 
-export type Props = {
+export type $Props = {
   ButtonComponent: React.ComponentType<*>,
-} & StyledProps;
+} & $StyledProps;
 
 export const defaultStyleProps: {|
   color: string,
@@ -25,10 +29,12 @@ export const defaultStyleProps: {|
   fontWeight: fontWeights.semibold,
 };
 
-export const createStyledComponents: $StyledSubComponentsFactory<{
+export const createStyledComponents: $StyledSubComponentsFactory<
+  {
     ButtonComponent: ReactComponentStyled,
   },
-  typeof defaultStyleProps,> = styleProps => {
+  typeof defaultStyleProps,
+> = styleProps => {
   const ButtonComponent = styled.button`
     background-color: #f0f3f8;
     border-radius: 0.25rem;
@@ -47,7 +53,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<{
   return { ButtonComponent };
 };
 
-export function Button(props: Props) {
+export function Button(props: $Props) {
   const { children, onClick, ButtonComponent, ...rest } = props;
 
   return (
@@ -57,9 +63,19 @@ export function Button(props: Props) {
   );
 }
 
-export const createComponent: $ComponentFactory<StyledProps> = () => {
+Button.defaultProps = {
+  expanded: false,
+};
+
+export const createComponent: $ComponentFactory<$StyledProps> = () => {
   const defaultStyledComponents = createStyledComponents(defaultStyleProps);
-  return (props: StyledProps) => (
+  return (props: $StyledProps) => (
     <Button {...{ ...props, ...defaultStyledComponents }} />
   );
 };
+
+export default ({
+  defaultStyleProps,
+  createStyledComponents,
+  createComponent,
+}: $MangoComponent<typeof defaultStyleProps, $StyledProps>);

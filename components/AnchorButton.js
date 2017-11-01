@@ -4,24 +4,27 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import type { ReactComponentStyled } from 'styled-components';
 import { rem, darken } from 'polished';
-import type { $ComponentFactory, $StyledSubComponentsFactory } from './types';
+import type {
+  $ComponentFactory,
+  $MangoComponent,
+  $StyledSubComponentsFactory,
+} from './types';
 import { fontWeights } from './constants';
 import {
-  createStyledComponents as _createStyledComponents,
+  createStyledComponents as createStyledButtonComponents,
   defaultStyleProps,
 } from './Button';
-import type {StyledProps as _StyledProps} from './Button';
+import type { $StyledProps as $StyledButtonProps } from './Button';
 
-
-export type StyledProps = {
+export type $StyledProps = {
   href: string,
-} & _StyledProps;
+} & $StyledButtonProps;
 
-export type Props = {
+export type $Props = {
   AnchorButtonComponent: React.ComponentType<*>,
-} & StyledProps;
+} & $StyledProps;
 
-export function AnchorButton(props: Props) {
+export function AnchorButton(props: $Props) {
   const { children, href, AnchorButtonComponent, ...rest } = props;
 
   return (
@@ -31,21 +34,30 @@ export function AnchorButton(props: Props) {
   );
 }
 
-export const createStyledComponents: $StyledSubComponentsFactory<{
+export { defaultStyleProps };
+
+export const createStyledComponents: $StyledSubComponentsFactory<
+  {
     AnchorButtonComponent: ReactComponentStyled,
   },
-  typeof defaultStyleProps,> = styleProps => {
-  const AnchorButtonComponent = _createStyledComponents(
+  typeof defaultStyleProps,
+> = styleProps => {
+  const AnchorButtonComponent = createStyledButtonComponents(
     defaultStyleProps,
   ).ButtonComponent.withComponent('a');
 
   return { AnchorButtonComponent };
 };
 
-
-export const createComponent: $ComponentFactory<StyledProps> = () => {
+export const createComponent: $ComponentFactory<$StyledProps> = () => {
   const defaultStyledComponents = createStyledComponents(defaultStyleProps);
-  return (props: StyledProps) => (
+  return (props: $StyledProps) => (
     <AnchorButton {...{ ...props, ...defaultStyledComponents }} />
   );
 };
+
+export default ({
+  defaultStyleProps,
+  createStyledComponents,
+  createComponent,
+}: $MangoComponent<typeof defaultStyleProps, $StyledProps>);

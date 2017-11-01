@@ -10,7 +10,11 @@ import type { ReactComponentStyled } from 'styled-components';
 import PopperJS from 'popper.js';
 import canUseDOM from './lib/canUseDOM';
 import ParentNodePopperManager from './ParentNodePopperManager';
-import type { $ComponentFactory, $StyledSubComponentsFactory } from './types';
+import type {
+  $ComponentFactory,
+  $MangoComponent,
+  $StyledSubComponentsFactory,
+} from './types';
 import createDebug from './lib/createDebug';
 
 const debug = createDebug('Tootlip');
@@ -21,19 +25,19 @@ export const placements = PopperJS.placements
   }))
   .reduce((prev, next) => ({ ...prev, ...next }), {});
 
-export type StyledProps = {
+export type $StyledProps = {
   children: React.Node,
   clickable?: boolean,
   placement?: $Keys<typeof placements>,
   visible: boolean,
 };
 
-export type Props = {
+export type $Props = {
   ArrowComponent: React.ComponentType<*>,
   PopperComponent: React.ComponentType<*>,
-} & StyledProps;
+} & $StyledProps;
 
-export function UnmanagedTootlip(props: Props) {
+export function UnmanagedTootlip(props: $Props) {
   const {
     ArrowComponent,
     PopperComponent,
@@ -59,7 +63,7 @@ UnmanagedTootlip.defaultProps = {
   placement: placements.auto,
 };
 
-export function ManagedTootlip(props: Props) {
+export function ManagedTootlip(props: $Props) {
   return (
     <ParentNodePopperManager tag="span">
       <UnmanagedTootlip {...props} />
@@ -193,9 +197,18 @@ export const createStyledComponents: $StyledSubComponentsFactory<
   };
 };
 
-export const createComponent: $ComponentFactory<StyledProps> = () => {
+export const createComponent: $ComponentFactory<$StyledProps> = () => {
   const defaultStyledComponents = createStyledComponents(defaultStyleProps);
-  return (props: StyledProps) => (
+  return (props: $StyledProps) => (
     <ManagedTootlip {...{ ...props, ...defaultStyledComponents }} />
   );
 };
+
+export default ({
+  defaultStyleProps,
+  createStyledComponents,
+  createComponent,
+  placements,
+}: $MangoComponent<typeof defaultStyleProps, $StyledProps> & {
+  placements: typeof placements,
+});
