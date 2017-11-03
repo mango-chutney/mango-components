@@ -7,6 +7,8 @@ import * as Home from './containers/Home';
 import * as Tootlip from './containers/Tootlip';
 import * as Button from './containers/Button';
 import * as Forms from './containers/Forms';
+import * as Avatar from './containers/Avatar';
+import * as Panel from './containers/Panel';
 import * as NoMatch from './containers/NoMatch';
 
 // Please generate a key for each route using `uuidgen` because these will be
@@ -51,6 +53,22 @@ const routes: Array<ExtendedRoute> = [
     key: '82b1acb5-c982-4c3c-b1a8-c7e47792a37c',
     name: 'Forms',
     path: '/components/forms',
+    shouldShowInNavigationComponent: true,
+  },
+  {
+    component: Avatar.component,
+    exact: true,
+    key: 'b7778752-e599-4e60-9618-7f3f65df34bc',
+    name: 'Avatar',
+    path: '/components/avatar',
+    shouldShowInNavigationComponent: true,
+  },
+  {
+    component: Panel.component,
+    exact: true,
+    key: 'bbf6ca33-8a3e-4f88-bd11-e091b159e5d8',
+    name: 'Panel',
+    path: '/components/panel',
     shouldShowInNavigationComponent: true,
   },
   {

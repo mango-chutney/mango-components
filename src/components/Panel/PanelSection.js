@@ -38,6 +38,10 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     padding: 1.5rem 2rem;
     border-bottom: 1px solid ${styleProps.borderBottomColor};
 
+    :first-child {
+      margin-top: -2rem;
+    }
+
     :last-child {
       border-bottom: 0;
     }
