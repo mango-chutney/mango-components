@@ -25,7 +25,7 @@ module.exports = (env, { p: production }) => ({
             path.resolve(__dirname, './store'),
             path.resolve(__dirname, './reducers'),
             path.resolve(__dirname, './index.js'),
-            path.resolve(__dirname, './../components'),
+            path.resolve(__dirname, './../src'),
           ],
           use: [
             {
@@ -71,7 +71,7 @@ module.exports = (env, { p: production }) => ({
     ],
     resolve: {
       alias: {
-        'mango-components': path.resolve(__dirname, './../index.js'),
+        'mango-components': path.resolve(__dirname, './../src/index.js'),
         react: path.resolve(__dirname, './node_modules/react'),
         'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
       },
