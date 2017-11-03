@@ -6,12 +6,12 @@ const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 const banner = require('./banner');
+const { stripIndent } = require('common-tags');
 
 module.exports = (env, { p: production }) => ({
   ...{
     entry: path.resolve(__dirname, './index.js'),
     output: {
-      path: path.resolve(__dirname, './'),
       filename: 'bundle.js',
     },
     module: {
@@ -87,6 +87,24 @@ module.exports = (env, { p: production }) => ({
   devServer: {
     hot: true,
     open: true,
+    before: (_, devServer) => {
+      devServer.serveMagicHtml = (req, res, next) => {
+        res.end(
+          stripIndent`
+           <!doctype html>
+           <html>
+             <head>
+               <meta charset="utf-8"/>
+               <script type="text/javascript" charset="utf-8" src="http://localhost:8097"></script>
+             </head>
+             <body>
+               <script type="text/javascript" charset="utf-8" src="${req.path}.js${req
+            ._parsedUrl.search || ''}"></script>
+             </body>
+           </html>`,
+        );
+      };
+    },
     openPage: 'webpack-dev-server/bundle',
     overlay: {
       warnings: true,
