@@ -7,6 +7,7 @@ import Input from './components/Input';
 import MadeWithMangoChutney from './components/MadeWithMangoChutney';
 import { Panel, PanelHeading, PanelSection } from './components/Panel';
 import Tootlip from './components/Tootlip';
+import Tristicon from './components/Tristicon';
 
 export {
   AnchorButton,
@@ -30,4 +31,5 @@ export default {
   PanelHeading,
   PanelSection,
   Tootlip,
+  Tristicon,
 };
