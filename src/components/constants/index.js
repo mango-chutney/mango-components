@@ -13,6 +13,9 @@ export const palette = {
   heading: '#354052',
   subheading: '#7f8fa4',
   border: '#e2e7ee',
+  success: '#00D161',
+  alert: '#F85359',
+  inactive: '#C5D0DE',
 };
 
 export const fontWeights = {

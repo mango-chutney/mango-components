@@ -10,6 +10,7 @@ import * as Forms from './containers/Forms';
 import * as Avatar from './containers/Avatar';
 import * as Panel from './containers/Panel';
 import * as Tristicon from './containers/Tristicon';
+import * as Toast from './containers/Toast';
 import * as NoMatch from './containers/NoMatch';
 
 // Please generate a key for each route using `uuidgen` because these will be
@@ -78,6 +79,14 @@ const routes: Array<ExtendedRoute> = [
     key: '66213b91-8c59-4be0-b8b1-7b942ae9250e',
     name: 'Tristicon',
     path: '/components/tristicon',
+    shouldShowInNavigationComponent: true,
+  },
+  {
+    component: Toast.component,
+    exact: true,
+    key: 'a4e1d92b-0da3-48cc-9ff6-cc7ee44816a9',
+    name: 'Toast',
+    path: '/components/toast',
     shouldShowInNavigationComponent: true,
   },
   {
