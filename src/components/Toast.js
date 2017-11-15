@@ -87,6 +87,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     ToastComponent: ReactComponentStyled<*>,
   },
   typeof defaultStyleProps,
+  // eslint-disable-next-line no-unused-vars
 > = styleProps => {
   const ToastComponent = styled.a`
     animation: ${toastAnimation} 0.15s ease-out normal forwards;

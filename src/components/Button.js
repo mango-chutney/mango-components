@@ -1,9 +1,8 @@
 // @flow
 
 import * as React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import type { ReactComponentStyled } from 'styled-components';
-import { rem, darken } from 'polished';
 import type {
   $ComponentFactory,
   $MangoComponent,

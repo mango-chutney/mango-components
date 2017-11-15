@@ -36,6 +36,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     TristiconComponent: ReactComponentStyled<*>,
   },
   typeof defaultStyleProps,
+  // eslint-disable-next-line no-unused-vars
 > = styleProps => {
   const TristiconComponent = styled.i`
     &::before {
