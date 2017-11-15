@@ -49,19 +49,19 @@ const CloseButton = styled.span`
 `;
 
 const toastAnimation = keyframes`
-	0% {
-		transform: translateY(-100%);
+  0% {
+    transform: translateY(-100%);
     opacity: 0;
-	}
+  }
 
-	85% {
+  85% {
     opacity: 0.5;
-	}
+  }
 
-	100% {
+  100% {
     opacity: 1;
     transform: translateY(0%);
-	}
+  }
 `;
 
 const fadeOutAnimation = keyframes`
@@ -74,12 +74,12 @@ const fadeOutAnimation = keyframes`
     opacity: 0;
   }
 
-	100% {
-		padding: 0 1rem;
+  100% {
+    padding: 0 1rem;
     height: 0;
     margin: 0;
     opacity: 0;
-	}
+  }
 `;
 
 export const createStyledComponents: $StyledSubComponentsFactory<
