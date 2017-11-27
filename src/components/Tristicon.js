@@ -44,7 +44,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
         props.icon ? getTristiconContent(props.icon) : ''}";
       display: inline-block;
       font: normal normal normal ${rem(14)} tristicons;
-      font-size: inherit;
+      font-size: ${props => props.fontSize || 'inherit'};
       text-rendering: auto;
       vertical-align: inherit;
     }
