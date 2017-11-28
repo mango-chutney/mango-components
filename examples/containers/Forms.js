@@ -10,6 +10,7 @@ import MC from 'mango-components';
 const Tootlip = MC.Tootlip.createComponent();
 const Button = MC.Button.createComponent();
 const Input = MC.Input.createComponent();
+const Checkbox = MC.Checkbox.createComponent();
 
 type Props = {} & FormProps;
 
@@ -51,6 +52,22 @@ export class Form extends React.Component<Props, State> {
             placeholder="Password"
             component={Input}
           />
+          <div>
+            <Field
+              name="checken"
+              label="checken"
+              placeholder="checken"
+              component={Checkbox}
+            />
+          </div>
+          <div>
+            <Field
+              name="checken2"
+              label="checken2"
+              placeholder="checken2"
+              component={Checkbox}
+            />
+          </div>
           <Button onClick={handleSubmit(this.submit)}>
             Go
             <Tootlip visible={submitting}>OK, please wait a moment…</Tootlip>
@@ -66,7 +83,6 @@ export class Form extends React.Component<Props, State> {
     );
   }
 }
-
 const validate = values => {
   const errors = {};
 
@@ -77,7 +93,6 @@ const validate = values => {
   } else {
     errors.password = 'Please enter a password!';
   }
-
   if (values.email) {
     if (values.email.length === 0) {
       errors.email = 'Please enter your email address!';
@@ -85,7 +100,6 @@ const validate = values => {
   } else {
     errors.email = 'Please enter your email address!';
   }
-
   return errors;
 };
 
