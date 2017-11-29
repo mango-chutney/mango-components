@@ -16,6 +16,7 @@ export type $StyledProps = {
   ...FieldProps,
   children: React.Node,
   label: string,
+  checkboxColor: string,
 };
 
 export type $Props = {
@@ -27,8 +28,10 @@ export type $Props = {
 
 export const defaultStyleProps: {|
   checkboxSize: number,
+  checkboxColor: string,
 |} = {
   checkboxSize: 20,
+  checkboxColor: palette.primary,
 };
 
 export const createStyledComponents: $StyledSubComponentsFactory<
@@ -100,15 +103,23 @@ export const createStyledComponents: $StyledSubComponentsFactory<
 
     :checked + label > div {
       &::before {
-        background: ${palette.primary};
-        border-color: ${darken(0.05, palette.primary)};
+        background: ${props =>
+          props.checkboxColor ? props.checkboxColor : styleProps.checkboxColor};
+        border-color: ${props =>
+          props.checkboxColor
+            ? darken(0.05, props.checkboxColor)
+            : darken(0.05, styleProps.checkboxColor)};
         transition: background-color 0.3s;
       }
 
       &::after {
-        content: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSd4TWlkWU1pZCcgd2lkdGg9JzE2LjUnIGhlaWdodD0nMTUnIHZpZXdCb3g9JzAgMCAxNi41IDE1Jz48cGF0aCBmaWxsPScjZmZmJyBmaWxsLXJ1bGU9J2V2ZW5vZGQnIGQ9J00xNi41MTUsMS4wNzEgQzE2LjM5OSwwLjgyNyAxNS45MTQsLTAuMDMwIDE1LjUxNSwwLjAwMSBDMTQuMjg5LDAuNzY1IDEyLjY5MywyLjM1NCAxMS42MzgsMy4zNjIgQzkuNTI4LDUuMzc4IDcuNTAzLDcuNDg2IDUuNTA4LDkuNjI0IEwxLjUxNiw1Ljg5NyBMMC4wMDUsNy40ODYgQzIuMjAwLDkuODM3IDQuNTY3LDEyLjM3MyA2LjUwNSwxNS4wMDAgQzguOTg2LDEwLjYzMiAxMy4wMzUsNC4zNzAgMTYuNTE1LDEuMDcxIEwxNi41MTUsMS4wNzEgWicvPjwvc3ZnPg==');
+        content: '';
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSd4TWlkWU1pZCcgd2lkdGg9JzE2LjUnIGhlaWdodD0nMTUnIHZpZXdCb3g9JzAgMCAxNi41IDE1Jz48cGF0aCBmaWxsPScjZmZmJyBmaWxsLXJ1bGU9J2V2ZW5vZGQnIGQ9J00xNi41MTUsMS4wNzEgQzE2LjM5OSwwLjgyNyAxNS45MTQsLTAuMDMwIDE1LjUxNSwwLjAwMSBDMTQuMjg5LDAuNzY1IDEyLjY5MywyLjM1NCAxMS42MzgsMy4zNjIgQzkuNTI4LDUuMzc4IDcuNTAzLDcuNDg2IDUuNTA4LDkuNjI0IEwxLjUxNiw1Ljg5NyBMMC4wMDUsNy40ODYgQzIuMjAwLDkuODM3IDQuNTY3LDEyLjM3MyA2LjUwNSwxNS4wMDAgQzguOTg2LDEwLjYzMiAxMy4wMzUsNC4zNzAgMTYuNTE1LDEuMDcxIEwxNi41MTUsMS4wNzEgWicvPjwvc3ZnPg==');
+        background-position: 50% 40%;
+        background-repeat: no-repeat;
+        background-size: 70%;
         transition: all 0.25s;
-        transform: scale(0.75);
+        transform: scale(1);
       }
     }
   `;
@@ -121,6 +132,7 @@ export function Checkbox({
   LabelComponent,
   WrapperComponent,
   children,
+  checkboxColor,
   input,
   meta,
   label,
@@ -132,9 +144,13 @@ export function Checkbox({
         {...input}
         id={rest.id || (input && input.name)}
         type="checkbox"
+        checkboxColor={checkboxColor}
         {...rest}
       />
-      <LabelComponent htmlFor={rest.id || (input && input.name)}>
+      <LabelComponent
+        htmlFor={rest.id || (input && input.name)}
+        checkboxColor={checkboxColor}
+      >
         <div>{children || label || ''}</div>
       </LabelComponent>
     </WrapperComponent>

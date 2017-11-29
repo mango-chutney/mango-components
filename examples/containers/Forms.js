@@ -11,6 +11,7 @@ const Tootlip = MC.Tootlip.createComponent();
 const Button = MC.Button.createComponent();
 const Input = MC.Input.createComponent();
 const Checkbox = MC.Checkbox.createComponent();
+const PaddedCheckbox = MC.PaddedCheckbox.createComponent();
 
 type Props = {} & FormProps;
 
@@ -66,6 +67,14 @@ export class Form extends React.Component<Props, State> {
               label="checken2"
               placeholder="checken2"
               component={Checkbox}
+            />
+          </div>
+          <div>
+            <Field
+              name="paddedchecken"
+              label="paddedchecken"
+              placeholder="paddedchecken"
+              component={PaddedCheckbox}
             />
           </div>
           <Button onClick={handleSubmit(this.submit)}>

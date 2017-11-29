@@ -6,6 +6,7 @@ import Button from './components/Button';
 import Checkbox from './components/Checkbox';
 import Input from './components/Input';
 import MadeWithMangoChutney from './components/MadeWithMangoChutney';
+import PaddedCheckbox from './components/PaddedCheckbox';
 import { Panel, PanelHeading, PanelSection } from './components/Panel';
 import Tootlip from './components/Tootlip';
 import Tristicon from './components/Tristicon';
@@ -18,6 +19,7 @@ export {
   Checkbox,
   Input,
   MadeWithMangoChutney,
+  PaddedCheckbox,
   Panel,
   PanelHeading,
   PanelSection,
@@ -32,6 +34,7 @@ export default {
   Checkbox,
   Input,
   MadeWithMangoChutney,
+  PaddedCheckbox,
   Panel,
   PanelHeading,
   PanelSection,
