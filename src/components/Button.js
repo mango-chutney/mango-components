@@ -70,7 +70,7 @@ Button.defaultProps = {
 export const createComponent: $ComponentFactory<$StyledProps> = () => {
   const defaultStyledComponents = createStyledComponents(defaultStyleProps);
   return (props: $StyledProps) => (
-    <Button {...{ ...props, ...defaultStyledComponents }} />
+    <Button {...{ ...defaultStyledComponents, ...props }} />
   );
 };
 

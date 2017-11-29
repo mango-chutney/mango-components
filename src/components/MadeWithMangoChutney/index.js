@@ -73,7 +73,7 @@ MadeWithMangoChutney.defaultProps = {
 export const createComponent: $ComponentFactory<$StyledProps> = () => {
   const defaultStyledComponents = createStyledComponents(defaultStyleProps);
   return (props: $StyledProps) => (
-    <MadeWithMangoChutney {...{ ...props, ...defaultStyledComponents }} />
+    <MadeWithMangoChutney {...{ ...defaultStyledComponents, ...props }} />
   );
 };
 

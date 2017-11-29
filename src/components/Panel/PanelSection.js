@@ -66,7 +66,7 @@ export function Panel(props: $Props) {
 export const createComponent: $ComponentFactory<$StyledProps> = () => {
   const defaultStyledComponents = createStyledComponents(defaultStyleProps);
   return (props: $StyledProps) => (
-    <Panel {...{ ...props, ...defaultStyledComponents }} />
+    <Panel {...{ ...defaultStyledComponents, ...props }} />
   );
 };
 

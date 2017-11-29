@@ -112,7 +112,7 @@ export function Input({
 export const createComponent: $ComponentFactory<$StyledProps> = () => {
   const defaultStyledComponents = createStyledComponents(defaultStyleProps);
   return (props: $StyledProps) => (
-    <Input {...{ ...props, ...defaultStyledComponents }} />
+    <Input {...{ ...defaultStyledComponents, ...props }} />
   );
 };
 

@@ -230,7 +230,7 @@ class Toast extends React.Component<$Props, $State> {
 export const createComponent: $ComponentFactory<$StyledProps> = () => {
   const defaultStyledComponents = createStyledComponents(defaultStyleProps);
   return (props: $StyledProps) => (
-    <Toast {...{ ...props, ...defaultStyledComponents }} />
+    <Toast {...{ ...defaultStyledComponents, ...props }} />
   );
 };
 

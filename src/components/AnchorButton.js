@@ -52,7 +52,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
 export const createComponent: $ComponentFactory<$StyledProps> = () => {
   const defaultStyledComponents = createStyledComponents(defaultStyleProps);
   return (props: $StyledProps) => (
-    <AnchorButton {...{ ...props, ...defaultStyledComponents }} />
+    <AnchorButton {...{ ...defaultStyledComponents, ...props }} />
   );
 };
 

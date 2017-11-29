@@ -66,7 +66,7 @@ export function Tristicon(props: $Props) {
 export const createComponent: $ComponentFactory<$StyledProps> = () => {
   const defaultStyledComponents = createStyledComponents(defaultStyleProps);
   return (props: $StyledProps) => (
-    <Tristicon {...{ ...props, ...defaultStyledComponents }} />
+    <Tristicon {...{ ...defaultStyledComponents, ...props }} />
   );
 };
 

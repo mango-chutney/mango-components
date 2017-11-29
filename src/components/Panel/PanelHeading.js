@@ -75,7 +75,7 @@ export function PanelHeading(props: $Props) {
 export const createComponent: $ComponentFactory<$StyledProps> = () => {
   const defaultStyledComponents = createStyledComponents(defaultStyleProps);
   return (props: $StyledProps) => (
-    <PanelHeading {...{ ...props, ...defaultStyledComponents }} />
+    <PanelHeading {...{ ...defaultStyledComponents, ...props }} />
   );
 };
 

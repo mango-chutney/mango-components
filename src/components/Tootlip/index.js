@@ -194,7 +194,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
 export const createComponent: $ComponentFactory<$StyledProps> = () => {
   const defaultStyledComponents = createStyledComponents(defaultStyleProps);
   return (props: $StyledProps) => (
-    <ManagedTootlip {...{ ...props, ...defaultStyledComponents }} />
+    <ManagedTootlip {...{ ...defaultStyledComponents, ...props }} />
   );
 };
 
