@@ -14,14 +14,15 @@ import type {
 
 export type $StyledProps = {
   ...FieldProps,
+  children: React.Node,
   label: string,
 };
 
 export type $Props = {
   ...$StyledProps,
   LabelComponent: React.ComponentType<*>,
-  CheckboxComponent: React.ComponentType<*>,
-  DivComponent: React.ComponentType<*>,
+  InputComponent: React.ComponentType<*>,
+  WrapperComponent: React.ComponentType<*>,
 };
 
 export const defaultStyleProps: {|
@@ -33,57 +34,62 @@ export const defaultStyleProps: {|
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
     LabelComponent: ReactComponentStyled<*>,
-    CheckboxComponent: ReactComponentStyled<*>,
-    DivComponent: ReactComponentStyled<*>,
+    InputComponent: ReactComponentStyled<*>,
+    WrapperComponent: ReactComponentStyled<*>,
   },
   typeof defaultStyleProps,
 > = styleProps => {
-  const DivComponent = styled.div`
+  const WrapperComponent = styled.div`
     position: relative;
     margin-bottom: 1rem;
     text-align: left;
     display: inline-block;
   `;
 
-  // most label stuff in checkboxto get :checked property
+  // some label stuff in checkbox to get :checked property
   const LabelComponent = styled.label`
     cursor: pointer;
-    border: 1px solid transparent;
-    display: block;
-    font-size: 1rem;
     font-weight: ${fontWeights.semibold};
-    height: ${rem(styleProps.checkboxSize)};
-    line-height: ${rem(styleProps.checkboxSize)};
-    padding: 0rem 2rem;
+    display: inline-block;
+    font-size: 1rem;
 
-    &::before,
-    &::after {
-      position: absolute;
-      width: ${rem(styleProps.checkboxSize)};
-      height: ${rem(styleProps.checkboxSize)};
-      cursor: pointer;
-      content: '';
-      display: inline-block;
-      border-radius: 4px;
-      top: 0;
-      left: 0;
-    }
-
-    &::before {
-      border: 1px solid ${palette.border};
-      background: ${palette.lightGray};
-    }
-
-    &::after {
-      border: 1px solid transparent;
+    > div {
+      min-height: ${rem(styleProps.checkboxSize)};
       line-height: ${rem(styleProps.checkboxSize)};
-      margin-top: ${rem(styleProps.checkboxSize * 0.1)};
-      text-align: center;
-      transform: scale(0);
+      position: relative;
+      border: 1px solid transparent;
+      display: block;
+
+      &::before,
+      &::after {
+        width: ${rem(styleProps.checkboxSize)};
+        height: ${rem(styleProps.checkboxSize)};
+        cursor: pointer;
+        content: '';
+        display: inline-block;
+        border-radius: 4px;
+        vertical-align: middle;
+      }
+
+      &::before {
+        border: 1px solid ${palette.border};
+        background: ${palette.lightGray};
+        margin-right: 1rem;
+      }
+
+      &::after {
+        position: absolute;
+        left: 0;
+        border: 1px solid transparent;
+        line-height: ${rem(styleProps.checkboxSize)};
+        margin-top: ${rem(styleProps.checkboxSize * 0.1)};
+        text-align: center;
+        transform: scale(0);
+      }
     }
   `;
 
-  const CheckboxComponent = styled.input`
+  const InputComponent = styled.input`
     opacity: 0;
     width: 0;
     position: absolute;
@@ -92,7 +98,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
       cursor: pointer;
     }
 
-    :checked + label {
+    :checked + label > div {
       &::before {
         background: ${palette.primary};
         border-color: ${darken(0.05, palette.primary)};
@@ -107,37 +113,38 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     }
   `;
 
-  return { LabelComponent, CheckboxComponent, DivComponent };
+  return { LabelComponent, InputComponent, WrapperComponent };
 };
 
 export function Checkbox({
-  CheckboxComponent,
+  InputComponent,
   LabelComponent,
-  DivComponent,
+  WrapperComponent,
+  children,
   input,
   meta,
   label,
   ...rest
 }: $Props) {
   return (
-    <DivComponent>
-      <CheckboxComponent
+    <WrapperComponent>
+      <InputComponent
         {...input}
         id={rest.id || (input && input.name)}
         type="checkbox"
         {...rest}
       />
       <LabelComponent htmlFor={rest.id || (input && input.name)}>
-        {label && <span>{label}</span>}
+        <div>{children || label || ''}</div>
       </LabelComponent>
-    </DivComponent>
+    </WrapperComponent>
   );
 }
 
 export const createComponent: $ComponentFactory<$StyledProps> = () => {
   const defaultStyledComponents = createStyledComponents(defaultStyleProps);
   return (props: $StyledProps) => (
-    <Checkbox {...{ ...props, ...defaultStyledComponents }} />
+    <Checkbox {...{ ...defaultStyledComponents, ...props }} />
   );
 };
 
