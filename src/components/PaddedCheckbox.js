@@ -1,6 +1,7 @@
 // @flow
 
 import * as React from 'react';
+import styled from 'styled-components';
 import type { ReactComponentStyled } from 'styled-components';
 import { rem, transparentize } from 'polished';
 import type {
@@ -45,7 +46,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     ...styleProps,
   });
 
-  const StyledLabelComponent = baseComponents.LabelComponent.extend`
+  const StyledLabelComponent = styled(baseComponents.LabelComponent)`
     padding: 2rem;
     display: inline-block;
     font-size: ${rem(24)};
@@ -53,7 +54,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     border-radius: ${rem(4)};
   `;
 
-  const StyledInputComponent = baseComponents.InputComponent.extend`
+  const StyledInputComponent = styled(baseComponents.InputComponent)`
     :checked + label {
       transition: all 300ms ease;
       background: ${props =>
