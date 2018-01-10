@@ -30,8 +30,7 @@
     "redux": "^3.7.2",
     "redux-form": "^7.1.1",
     "styled-components": "^2.2.1",
-    "tristicons":
-      "git+ssh://git@github.com/mango-chutney/tristicons.git#78787db"
+    "tristicons": "git+ssh://git@github.com/mango-chutney/tristicons.git#7d9de8c"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -58,11 +57,16 @@
     "prettier": "^1.7.4"
   },
   "jest": {
-    "testPathIgnorePatterns": ["<rootDir>/lib/", "<rootDir>/examples/"]
+    "testPathIgnorePatterns": [
+      "<rootDir>/lib/",
+      "<rootDir>/examples/"
+    ]
   },
   "prettier": {
     "trailingComma": "all",
     "singleQuote": true
   },
-  "browserslist": ["last 4 versions"]
+  "browserslist": [
+    "last 4 versions"
+  ]
 }

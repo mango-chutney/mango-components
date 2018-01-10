@@ -4208,6 +4208,13 @@ trim-right@^1.0.1:
     npm-run-all "^4.1.1"
     prettier "^1.7.4"
 
+"tristicons@git+ssh://git@github.com/mango-chutney/tristicons.git#7d9de8c":
+  version "1.0.0"
+  resolved "git+ssh://git@github.com/mango-chutney/tristicons.git#7d9de8cec2cf715da4ee55b252ac15d4799c0999"
+  dependencies:
+    npm-run-all "^4.1.1"
+    prettier "^1.7.4"
+
 tryit@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/tryit/-/tryit-1.0.3.tgz#393be730a9446fd1ead6da59a014308f36c289cb"
