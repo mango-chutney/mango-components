@@ -4,14 +4,15 @@ import type { Match, Route } from 'react-router';
 import { withNavigation } from './components/Navigation';
 import { withFooter } from './components/Footer';
 import * as Home from './containers/Home';
-import * as Tootlip from './containers/Tootlip';
+import * as Avatar from './containers/Avatar';
 import * as Button from './containers/Button';
 import * as Forms from './containers/Forms';
-import * as Avatar from './containers/Avatar';
-import * as Panel from './containers/Panel';
-import * as Tristicon from './containers/Tristicon';
-import * as Toast from './containers/Toast';
 import * as NoMatch from './containers/NoMatch';
+import * as Panel from './containers/Panel';
+import * as RadialProgressBar from './containers/RadialProgressBar';
+import * as Toast from './containers/Toast';
+import * as Tootlip from './containers/Tootlip';
+import * as Tristicon from './containers/Tristicon';
 
 // Please generate a key for each route using `uuidgen` because these will be
 // spread into react components.
@@ -71,6 +72,14 @@ const routes: Array<ExtendedRoute> = [
     key: 'bbf6ca33-8a3e-4f88-bd11-e091b159e5d8',
     name: 'Panel',
     path: '/components/panel',
+    shouldShowInNavigationComponent: true,
+  },
+  {
+    component: RadialProgressBar.component,
+    exact: true,
+    key: '0362ae40-9137-4660-9731-040bba0cbaa5',
+    name: 'RadialProgressBar',
+    path: '/RadialProgressBar/panel',
     shouldShowInNavigationComponent: true,
   },
   {

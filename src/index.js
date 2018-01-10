@@ -8,6 +8,10 @@ import Input from './components/Input';
 import MadeWithMangoChutney from './components/MadeWithMangoChutney';
 import PaddedCheckbox from './components/PaddedCheckbox';
 import { Panel, PanelHeading, PanelSection } from './components/Panel';
+import {
+  RadialProgressBar,
+  NestedRadialProgressBars,
+} from './components/RadialProgressBar';
 import Tootlip from './components/Tootlip';
 import Tristicon from './components/Tristicon';
 import Toast from './components/Toast';
@@ -19,12 +23,14 @@ export {
   Checkbox,
   Input,
   MadeWithMangoChutney,
+  NestedRadialProgressBars,
   PaddedCheckbox,
   Panel,
   PanelHeading,
   PanelSection,
-  Tootlip,
+  RadialProgressBar,
   Toast,
+  Tootlip,
 };
 
 export default {
@@ -34,11 +40,13 @@ export default {
   Checkbox,
   Input,
   MadeWithMangoChutney,
+  NestedRadialProgressBars,
   PaddedCheckbox,
   Panel,
   PanelHeading,
   PanelSection,
+  RadialProgressBar,
+  Toast,
   Tootlip,
   Tristicon,
-  Toast,
 };
