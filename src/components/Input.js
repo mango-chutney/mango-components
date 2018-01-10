@@ -92,7 +92,6 @@ export function Input({
   input,
   meta,
   label,
-  placeholder,
   ...rest
 }: $Props) {
   return (
@@ -101,8 +100,8 @@ export function Input({
       <span>
         <InputComponent
           {...input}
+          {...rest}
           id={rest.id || (input && input.name)}
-          placeholder={placeholder}
         />
       </span>
     </label>
