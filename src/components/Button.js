@@ -48,6 +48,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     padding: 0.65rem 1.25rem;
     text-align: center;
     text-decoration: none;
+    width: ${props => (props.expanded ? '100%' : 'auto')};
   `;
 
   return { ButtonComponent };
