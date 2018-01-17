@@ -1,0 +1,19 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            # https://github.com/p-l-e-b
+            - "85:1c:6b:27:39:0e:31:48:df:91:e5:87:86:c3:97:f3"
+      - restore_cache:
+          key: dependency-cache-yarn-{{ checksum "package.json" }}
+      - run: yarn install
+      - save_cache:
+          key: dependency-cache-yarn-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run: yarn run build
