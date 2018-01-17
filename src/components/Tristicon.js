@@ -12,7 +12,7 @@ import type {
 } from './types';
 
 export type $StyledProps = {
-  children: React.Node,
+  children?: React.Node,
   icon: string,
 };
 

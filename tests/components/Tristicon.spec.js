@@ -13,6 +13,6 @@ function TristiconComponent() {
 }
 
 it('Tristicon component renders correctly', () => {
-  const tree = renderer.create(<Tristicon />).toJSON();
+  const tree = renderer.create(<TristiconComponent />).toJSON();
   expect(tree).toMatchSnapshot();
 });

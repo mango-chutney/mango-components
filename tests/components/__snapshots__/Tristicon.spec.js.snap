@@ -2,7 +2,7 @@
 
 exports[`Tristicon component renders correctly 1`] = `
 .c0::before {
-  content: "";
+  content: "\\f126";
   display: inline-block;
   font: normal normal normal 0.875rem tristicons;
   font-size: inherit;
@@ -12,6 +12,6 @@ exports[`Tristicon component renders correctly 1`] = `
 
 <i
   className="c0"
-  icon={undefined}
+  icon="star"
 />
 `;
