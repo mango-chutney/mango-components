@@ -11,8 +11,8 @@ import type {
 import MangoChutneyLogo from './MangoChutneyLogo';
 
 export type $StyledProps = {
-  children: React.Node,
-  href: string,
+  children?: React.Node,
+  href?: string,
 };
 
 export type $Props = {
