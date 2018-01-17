@@ -12,6 +12,7 @@ const Button = MC.Button.createComponent();
 const Input = MC.Input.createComponent();
 const Checkbox = MC.Checkbox.createComponent();
 const PaddedCheckbox = MC.PaddedCheckbox.createComponent();
+const TextArea = MC.TextArea.createComponent();
 
 type Props = {} & FormProps;
 
@@ -45,13 +46,22 @@ export class Form extends React.Component<Props, State> {
             type="email"
             name="email"
             placeholder="Email"
+            label="email"
             component={Input}
           />
           <Field
             type="password"
             name="password"
             placeholder="Password"
+            label="password"
             component={Input}
+          />
+          <Field
+            type="textarea"
+            name="textarea"
+            label="textarea"
+            placeholder="textarea"
+            component={TextArea}
           />
           <div>
             <Field

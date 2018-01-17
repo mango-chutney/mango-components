@@ -20,7 +20,7 @@ export type $StyledProps = {
 
 export type $Props = {
   ...$StyledProps,
-  InputComponent: React.ComponentType<*>,
+  TextAreaComponent: React.ComponentType<*>,
   LabelComponent: React.ComponentType<*>,
 };
 
@@ -46,12 +46,12 @@ export const defaultStyleProps: {|
 
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
-    InputComponent: ReactComponentStyled<*>,
+    TextAreaComponent: ReactComponentStyled<*>,
     LabelComponent: ReactComponentStyled<*>,
   },
   typeof defaultStyleProps,
 > = styleProps => {
-  const InputComponent = styled.input`
+  const TextAreaComponent = styled.textarea`
     appearance: none;
     background-color: ${styleProps.backgroundColor};
     border-color: ${styleProps.borderColor};
@@ -61,10 +61,9 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     color: ${styleProps.color};
     display: block;
     font-family: ${styleProps.fontFamily};
-    height: 2.6rem;
     margin-bottom: 1rem;
     outline: 0;
-    padding: 0.5rem 1rem;
+    padding: 1.25rem 1rem
     transition: border-color 300ms ease;
     width: 100%;
 
@@ -84,11 +83,11 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     display: block;
   `;
 
-  return { InputComponent, LabelComponent };
+  return { TextAreaComponent, LabelComponent };
 };
 
 export function Input({
-  InputComponent,
+  TextAreaComponent,
   LabelComponent,
   input,
   meta,
@@ -99,7 +98,7 @@ export function Input({
     <label htmlFor={rest.id || (input && input.name)}>
       {label && <LabelComponent>{label}</LabelComponent>}
       <span>
-        <InputComponent
+        <TextAreaComponent
           {...input}
           {...rest}
           id={rest.id || (input && input.name)}

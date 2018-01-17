@@ -14,6 +14,7 @@ import {
 } from './components/RadialProgressBar';
 import Tootlip from './components/Tootlip';
 import Tristicon from './components/Tristicon';
+import TextArea from './components/TextArea';
 import Toast from './components/Toast';
 
 export {
@@ -29,6 +30,7 @@ export {
   PanelHeading,
   PanelSection,
   RadialProgressBar,
+  TextArea,
   Toast,
   Tootlip,
 };
@@ -46,6 +48,7 @@ export default {
   PanelHeading,
   PanelSection,
   RadialProgressBar,
+  TextArea,
   Toast,
   Tootlip,
   Tristicon,
