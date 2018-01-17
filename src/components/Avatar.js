@@ -12,7 +12,7 @@ import type {
 import { palette, fontWeights } from './constants';
 
 export type $StyledProps = {
-  children: React.Node,
+  children?: React.Node,
   name?: string,
   backgroundColor?: string,
   backgroundImage?: string,
