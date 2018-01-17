@@ -115,7 +115,8 @@ export class TootlipExample extends React.Component<Props, State> {
             onClick={() =>
               this.setState({
                 exampleLeftPlacementButtonIsActive: !exampleLeftPlacementButtonIsActive,
-              })}
+              })
+            }
           >
             {'Left (･ω´･ )́)'}
             <Tootlip
@@ -146,7 +147,8 @@ export class TootlipExample extends React.Component<Props, State> {
             onClick={() =>
               this.setState({
                 exampleBottomPlacementButtonIsActive: !exampleBottomPlacementButtonIsActive,
-              })}
+              })
+            }
           >
             {'Bottom (･ω´･ )́)'}
             <Tootlip

@@ -1,25 +1,17 @@
 {
-  "parser": "babel-eslint",
-  "root": true,
-  "extends": [
-    "airbnb",
-    "prettier",
-    "prettier/flowtype",
-    "prettier/react",
-    "plugin:flowtype/recommended"
-  ],
-  "plugins": ["flowtype", "react"],
-  "env": {
-    "browser": true,
-    "node": true
-  },
+  "extends": "mango",
   "rules": {
-    "flowtype/generic-spacing": 0,
     "import/no-named-as-default": 0,
     "import/no-named-as-default-member": 0,
     "react/default-props-match-prop-types": 0,
-    "react/jsx-filename-extension": 0,
     "react/prop-types": 0,
     "react/require-default-props": 0
+  },
+  "settings": {
+    "import/core-modules": [
+      "mango-components",
+      "react-router-dom",
+      "react-router-config"
+    ]
   }
 }

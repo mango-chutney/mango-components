@@ -11,4 +11,5 @@ eval "${NODE}" "${EXTRA_NODE_ARGS[@]}" "${PRETTIER}" \
      "./components/**/*.{js,json}" \
      "./examples/**/*.{js,json}" \
      ".eslintrc.json" \
-     ".package.json"
+     ".package.json" \
+     "README.md"
