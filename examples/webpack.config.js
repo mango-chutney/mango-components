@@ -98,8 +98,9 @@ module.exports = (env, { p: production }) => ({
                <script type="text/javascript" charset="utf-8" src="http://localhost:8097"></script>
              </head>
              <body>
-               <script type="text/javascript" charset="utf-8" src="${req.path}.js${req
-            ._parsedUrl.search || ''}"></script>
+               <script type="text/javascript" charset="utf-8" src="${
+                 req.path
+               }.js${req._parsedUrl.search || ''}"></script>
              </body>
            </html>`,
         );

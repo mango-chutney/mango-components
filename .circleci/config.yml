@@ -16,4 +16,6 @@ jobs:
           key: dependency-cache-yarn-{{ checksum "package.json" }}
           paths:
             - ./node_modules
+      - run: yarn run lint
+      - run: yarn run jest
       - run: yarn run build
