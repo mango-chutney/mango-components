@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Input renders correctly 1`] = `
+exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders correctly 1`] = `
 .c1 {
   -webkit-appearance: none;
   -moz-appearance: none;

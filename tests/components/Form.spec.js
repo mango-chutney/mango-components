@@ -1,3 +1,5 @@
+// @flow
+
 import 'raf/polyfill';
 import 'jest-styled-components';
 import React from 'react';
@@ -14,7 +16,7 @@ const PaddedCheckbox = MC.PaddedCheckbox.createComponent();
 
 const store = createStore(combineReducers({ form: formReducer }));
 
-function Form() {
+function FormComponents() {
   return (
     <form>
       <Field
@@ -46,15 +48,15 @@ function Form() {
   );
 }
 
-const Component = reduxForm({
-  form: 'Form',
-})(Form);
+const Form = reduxForm({
+  form: 'FormComponents',
+})(FormComponents);
 
-it('Input renders correctly', () => {
+it('Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders correctly', () => {
   const tree = renderer
     .create(
       <Provider store={store}>
-        <Component />
+        <Form />
       </Provider>,
     )
     .toJSON();
