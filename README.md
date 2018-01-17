@@ -142,8 +142,8 @@ Name | Type | Default | Description
 `name` | `string` | - | -
 `backgroundColor` | `string` | - | -
 `backgroundImage` | `string` | - | -
-`size` | `string | number` | `rem(46)` | -
-`fontSize` | `string | number` | `rem(18)` | -
+`size` | `string \| number` | `rem(46)` | -
+`fontSize` | `string \| number` | `rem(18)` | -
 
 
 ## RadialProgressBar
@@ -155,7 +155,7 @@ Name | Type | Default | Description
 `ProgressCircleComponent` | `React.ComponentType<*>` | - | -
 `BackgroundCircleComponent` | `React.ComponentType<*>` | - | -
 `children` | `React.Node` | - | -
-`width` | `number` | `50` | the height and width of the circle - doesn't change stroke-width
+`width` | `number` | `50` | the height and width of the circle (note: doesn't change stroke-width)
 `backgroundColor` | `string` | `#2ea1f8` | -
 `percentage` | `number` | 0 | -
 `strokeLinecap` | `number` | - | The linecap type eg `square`\|`round`\|`butt`
@@ -177,8 +177,22 @@ Name | Type | Default | Description
 `DivComponent` | `React.ComponentType<*>` | - | -
 
 
+## Tootlip
+#### Properties
+Name | Type | Default | Description
+--- | --- | --- | ---
+`ArrowComponent` | `React.ComponentType<*>` | - | -
+`PopperComponent` | `React.ComponentType<*>` | - | -
+`children` | `React.Node` | - | -
+`clickable` | `string` | - | -
+`placement` | `$Keys<typeof placements>` | - | -
+`visible` | `boolean` | - | -
+
+
 ## Tristicon
 #### Properties
 Name | Type | Default | Description
 --- | --- | --- | ---
 `TristiconComponent` | `React.ComponentType<*>` | - | -
+`children` | `React.Node` | - | -
+`icon` | `string` | - | -
