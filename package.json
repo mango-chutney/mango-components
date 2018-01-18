@@ -10,7 +10,7 @@
     "build": "npm-run-all --sequential clean transpile",
     "check": "flow check",
     "clean": "rm -rf lib build",
-    "eslint": "eslint ./components/**/*.js ./examples/**/*.js ./index.js",
+    "eslint": "eslint ./src/components/**/*.js ./examples/**/*.js ./index.js",
     "jest": "jest",
     "lint": "npm-run-all prettier eslint check",
     "prettier": "./scripts/prettier.sh",
@@ -30,7 +30,8 @@
     "redux": "^3.7.2",
     "redux-form": "^7.1.1",
     "styled-components": "^2.2.1",
-    "tristicons": "git+ssh://git@github.com/mango-chutney/tristicons.git#7d9de8c"
+    "tristicons":
+      "git+ssh://git@github.com/mango-chutney/tristicons.git#7d9de8c"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -55,16 +56,11 @@
     "react-test-renderer": "^16.2.0"
   },
   "jest": {
-    "testPathIgnorePatterns": [
-      "<rootDir>/lib/",
-      "<rootDir>/examples/"
-    ]
+    "testPathIgnorePatterns": ["<rootDir>/lib/", "<rootDir>/examples/"]
   },
   "prettier": {
     "trailingComma": "all",
     "singleQuote": true
   },
-  "browserslist": [
-    "last 4 versions"
-  ]
+  "browserslist": ["last 4 versions"]
 }
