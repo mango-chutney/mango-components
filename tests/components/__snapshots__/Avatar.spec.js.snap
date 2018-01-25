@@ -53,59 +53,59 @@ exports[`Avatar component renders correctly 1`] = `
   <div
     className="c0"
     fontSize="1.125rem"
-    size="2.875rem"
     style={
       Object {
         "backgroundColor": undefined,
         "backgroundImage": undefined,
       }
     }
+    width="2.875rem"
   />
   <div
     className="c0"
     fontSize="1.125rem"
-    size="2.875rem"
     style={
       Object {
         "backgroundColor": "#8151f3",
         "backgroundImage": undefined,
       }
     }
+    width="2.875rem"
   >
     t
   </div>
   <div
     className="c0"
     fontSize="1.125rem"
-    size="2.875rem"
     style={
       Object {
         "backgroundColor": undefined,
         "backgroundImage": "url(https://placeholdit.imgix.net/~text?txtsize=33&txt=&w=50&h=50)",
       }
     }
+    width="2.875rem"
   />
   <div
     className="c1"
     fontSize="1.125rem"
-    size="200px"
     style={
       Object {
         "backgroundColor": undefined,
         "backgroundImage": undefined,
       }
     }
+    width="200px"
   />
   <div
     className="c2"
     fontSize="40px"
-    size="2.875rem"
     style={
       Object {
         "backgroundColor": undefined,
         "backgroundImage": undefined,
       }
     }
+    width="2.875rem"
   />
 </div>
 `;

@@ -16,7 +16,7 @@ export type $StyledProps = {
   name?: string,
   backgroundColor?: string,
   backgroundImage?: string,
-  size?: string | number,
+  width?: string | number,
   fontSize?: string | number,
 };
 
@@ -67,9 +67,9 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 50%;
-    height: ${props => props.size};
-    width: ${props => props.size};
-    line-height: ${props => props.size};
+    height: ${props => props.width};
+    width: ${props => props.width};
+    line-height: ${props => props.width};
     text-align: center;
     color: ${palette.white};
     font-weight: ${fontWeights.semibold};
@@ -105,7 +105,7 @@ export function Avatar(props: $Props) {
 }
 
 Avatar.defaultProps = {
-  size: rem(46),
+  width: rem(46),
   fontSize: rem(18),
 };
 

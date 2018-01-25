@@ -14,7 +14,7 @@ function AvatarComponent() {
       <Avatar />
       <Avatar name="test" />
       <Avatar backgroundImage="https://placeholdit.imgix.net/~text?txtsize=33&txt=&w=50&h=50" />
-      <Avatar size="200px" />
+      <Avatar width="200px" />
       <Avatar fontSize="40px" />
     </div>
   );

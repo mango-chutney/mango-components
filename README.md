@@ -157,7 +157,7 @@ export default StyledInput;
 | `name`            | `string`                 | -         | -           |
 | `backgroundColor` | `string`                 | -         | -           |
 | `backgroundImage` | `string`                 | -         | -           |
-| `size`            | `string \| number`       | `rem(46)` | -           |
+| `width`           | `string \| number`       | `rem(46)` | -           |
 | `fontSize`        | `string \| number`       | `rem(18)` | -           |
 
 ## RadialProgressBar

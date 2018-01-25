@@ -80,14 +80,14 @@ export class AvatarExample extends React.Component<Props, State> {
             <code>
               {
                 // prettier-ignore
-                '<Avatar size="250px" fontSize="97px"/>'
+                '<Avatar width="250px" fontSize="97px"/>'
               }
             </code>
           </p>
-          <Avatar name="Cat" size="250px" fontSize="97px" />
+          <Avatar name="Cat" width="250px" fontSize="97px" />
           <Avatar
             backgroundImage="https://placeimg.com/250/250/animals?v=2"
-            size="250px"
+            width="250px"
           />
         </div>
       </div>
