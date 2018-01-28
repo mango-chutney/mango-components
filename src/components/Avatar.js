@@ -87,6 +87,7 @@ export function Avatar(props: $Props) {
     backgroundColor,
     backgroundImage,
     AvatarComponent,
+    width,
     ...rest
   } = props;
 
@@ -97,6 +98,7 @@ export function Avatar(props: $Props) {
         backgroundColor: name && selectColor(name),
         backgroundImage: backgroundImage && `url(${backgroundImage})`,
       }}
+      width={width}
       {...rest}
     >
       {(!backgroundImage && name && name.charAt(0)) || children}
