@@ -7,14 +7,14 @@ exports[`Avatar component renders correctly 1`] = `
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 50%;
+  color: #fefefe;
+  font-size: 1.125rem;
+  font-weight: 600;
   height: 2.875rem;
-  width: 2.875rem;
   line-height: 2.875rem;
   text-align: center;
-  color: #fefefe;
-  font-weight: 600;
   text-transform: uppercase;
-  font-size: 1.125rem;
+  width: 2.875rem;
 }
 
 .c1 {
@@ -23,14 +23,14 @@ exports[`Avatar component renders correctly 1`] = `
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 50%;
+  color: #fefefe;
+  font-size: 1.125rem;
+  font-weight: 600;
   height: 200px;
-  width: 200px;
   line-height: 200px;
   text-align: center;
-  color: #fefefe;
-  font-weight: 600;
   text-transform: uppercase;
-  font-size: 1.125rem;
+  width: 200px;
 }
 
 .c2 {
@@ -39,14 +39,14 @@ exports[`Avatar component renders correctly 1`] = `
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 50%;
+  color: #fefefe;
+  font-size: 40px;
+  font-weight: 600;
   height: 2.875rem;
-  width: 2.875rem;
   line-height: 2.875rem;
   text-align: center;
-  color: #fefefe;
-  font-weight: 600;
   text-transform: uppercase;
-  font-size: 40px;
+  width: 2.875rem;
 }
 
 <div>

@@ -12,12 +12,13 @@ import type {
 import { palette, fontWeights } from './constants';
 
 export type $StyledProps = {
-  children?: React.Node,
-  name?: string,
   backgroundColor?: string,
   backgroundImage?: string,
-  width?: string | number,
+  children?: React.Node,
   fontSize?: string | number,
+  name?: string,
+  style?: {},
+  width?: string | number,
 };
 
 export type $Props = {
@@ -67,14 +68,14 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 50%;
+    color: ${palette.white};
+    font-size: ${props => props.fontSize};
+    font-weight: ${fontWeights.semibold};
     height: ${props => props.width};
-    width: ${props => props.width};
     line-height: ${props => props.width};
     text-align: center;
-    color: ${palette.white};
-    font-weight: ${fontWeights.semibold};
     text-transform: uppercase;
-    font-size: ${props => props.fontSize};
+    width: ${props => props.width};
   `;
 
   return { AvatarComponent };
@@ -82,11 +83,12 @@ export const createStyledComponents: $StyledSubComponentsFactory<
 
 export function Avatar(props: $Props) {
   const {
-    children,
-    name,
+    AvatarComponent,
     backgroundColor,
     backgroundImage,
-    AvatarComponent,
+    children,
+    name,
+    style,
     width,
     ...rest
   } = props;
@@ -97,6 +99,7 @@ export function Avatar(props: $Props) {
       style={{
         backgroundColor: name && selectColor(name),
         backgroundImage: backgroundImage && `url(${backgroundImage})`,
+        ...style,
       }}
       width={width}
       {...rest}
