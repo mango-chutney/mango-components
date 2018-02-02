@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import type { ReactComponentStyled } from 'styled-components';
 import type { FieldProps } from 'redux-form';
 import { rem, transparentize } from 'polished';
+import tristicons from 'tristicons';
 import { palette, fontWeights, fontStack } from './constants';
 import type {
   $ComponentFactory,
@@ -14,13 +15,15 @@ import type {
 
 export type $StyledProps = {
   ...FieldProps,
+  children: React.Node,
   label: string,
   placeholder: string,
 };
 
 export type $Props = {
   ...$StyledProps,
-  TextAreaComponent: React.ComponentType<*>,
+  SelectComponent: React.ComponentType<*>,
+  SelectContainerComponent: React.ComponentType<*>,
   LabelComponent: React.ComponentType<*>,
 };
 
@@ -46,14 +49,19 @@ export const defaultStyleProps: {|
 
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
-    TextAreaComponent: ReactComponentStyled<*>,
+    SelectComponent: ReactComponentStyled<*>,
+    SelectContainerComponent: ReactComponentStyled<*>,
     LabelComponent: ReactComponentStyled<*>,
   },
   typeof defaultStyleProps,
 > = styleProps => {
-  const TextAreaComponent = styled.textarea`
+  const SelectComponent = styled.select`
     appearance: none;
     background-color: ${styleProps.backgroundColor};
+    background-image: linear-gradient(
+      ${palette.white},
+      ${styleProps.backgroundColor}
+    );
     border-color: ${styleProps.borderColor};
     border-radius: 0.25rem;
     border-style: solid;
@@ -61,19 +69,24 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     color: ${styleProps.color};
     display: block;
     font-family: ${styleProps.fontFamily};
+    height: 2.6rem;
     margin-bottom: 1rem;
     outline: 0;
-    padding: 1.25rem 1rem;
+    padding: 0.5rem 1rem;
     transition: border-color 300ms ease;
     width: 100%;
 
-    ::placeholder {
-      color: ${styleProps.placeholderColor};
+    ::-ms-expand {
+      display: none;
     }
 
     :active,
     :focus {
       border-color: ${styleProps.activeBorderColor};
+    }
+
+    option {
+      width: 100%;
     }
   `;
 
@@ -83,27 +96,45 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     display: block;
   `;
 
-  return { TextAreaComponent, LabelComponent };
+  const SelectContainerComponent = styled.div`
+    position: relative;
+
+    &::after {
+      content: ${`"${tristicons['chevron-down']}"`};
+      color: ${styleProps.placeholderColor};
+      font: normal normal normal ${rem(14)} tristicons;
+      line-height: 1rem;
+      position: absolute;
+      right: 1rem;
+      top: 0.75rem;
+    }
+  `;
+
+  return { SelectComponent, SelectContainerComponent, LabelComponent };
 };
 
-export function Input({
-  TextAreaComponent,
+export function Select({
+  SelectComponent,
+  SelectContainerComponent,
   LabelComponent,
+  children,
   input,
-  meta,
   label,
+  meta,
   ...rest
 }: $Props) {
   return (
     <label htmlFor={rest.id || (input && input.name)}>
       {label && <LabelComponent>{label}</LabelComponent>}
-      <span>
-        <TextAreaComponent
+      <SelectContainerComponent>
+        <SelectComponent
           {...input}
           {...rest}
           id={rest.id || (input && input.name)}
-        />
-      </span>
+        >
+          {children}
+        </SelectComponent>
+      </SelectContainerComponent>
     </label>
   );
 }
@@ -111,7 +142,7 @@ export function Input({
 export const createComponent: $ComponentFactory<$StyledProps> = () => {
   const defaultStyledComponents = createStyledComponents(defaultStyleProps);
   return (props: $StyledProps) => (
-    <Input {...{ ...defaultStyledComponents, ...props }} />
+    <Select {...{ ...defaultStyledComponents, ...props }} />
   );
 };
 

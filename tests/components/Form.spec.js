@@ -9,10 +9,11 @@ import { Field, reduxForm, reducer as formReducer } from 'redux-form';
 import renderer from 'react-test-renderer';
 import MC from '../../src';
 
-const Input = MC.Input.createComponent();
-const TextArea = MC.TextArea.createComponent();
 const Checkbox = MC.Checkbox.createComponent();
+const Input = MC.Input.createComponent();
 const PaddedCheckbox = MC.PaddedCheckbox.createComponent();
+const Select = MC.Select.createComponent();
+const TextArea = MC.TextArea.createComponent();
 
 const store = createStore(combineReducers({ form: formReducer }));
 
@@ -44,6 +45,15 @@ function FormComponents() {
         placeholder="PaddedCheckbox"
         component={PaddedCheckbox}
       />
+      <Field
+        name="select"
+        label="select"
+        placeholder="select"
+        component={Select}
+      >
+        <option value="option-1">Option 1</option>
+        <option value="option-2">Option 2</option>
+      </Field>
     </form>
   );
 }

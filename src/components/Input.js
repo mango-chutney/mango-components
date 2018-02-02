@@ -55,9 +55,9 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     appearance: none;
     background-color: ${styleProps.backgroundColor};
     border-color: ${styleProps.borderColor};
-    border-radius: 0.25rem;
+    border-radius: 4px;
     border-style: solid;
-    border-width: 0.05rem;
+    border-width: 1px;
     color: ${styleProps.color};
     display: block;
     font-family: ${styleProps.fontFamily};

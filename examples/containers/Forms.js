@@ -13,6 +13,7 @@ const Input = MC.Input.createComponent();
 const Checkbox = MC.Checkbox.createComponent();
 const PaddedCheckbox = MC.PaddedCheckbox.createComponent();
 const TextArea = MC.TextArea.createComponent();
+const Select = MC.Select.createComponent();
 
 type Props = {} & FormProps;
 
@@ -86,6 +87,17 @@ export class Form extends React.Component<Props, State> {
               placeholder="paddedchecken"
               component={PaddedCheckbox}
             />
+          </div>
+          <div>
+            <Field
+              name="select"
+              label="select"
+              placeholder="select"
+              component={Select}
+            >
+              <option value="option-1">Option 1</option>
+              <option value="option-2">Option 2</option>
+            </Field>
           </div>
           <Button onClick={handleSubmit(this.submit)}>
             Go

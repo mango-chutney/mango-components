@@ -1,99 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders correctly 1`] = `
-.c1 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background-color: #fafbfc;
-  border-color: #e2e7ee;
-  border-radius: 0.25rem;
-  border-style: solid;
-  border-width: 0.05rem;
-  color: #354052;
-  display: block;
-  font-family: proxima-nova,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,sans-serif;
-  height: 2.6rem;
-  margin-bottom: 1rem;
-  outline: 0;
-  padding: 0.5rem 1rem;
-  -webkit-transition: border-color 300ms ease;
-  transition: border-color 300ms ease;
-  width: 100%;
-}
-
-.c1::-webkit-input-placeholder {
-  color: rgba(127,143,164,0.8);
-}
-
-.c1::-moz-placeholder {
-  color: rgba(127,143,164,0.8);
-}
-
-.c1:-ms-input-placeholder {
-  color: rgba(127,143,164,0.8);
-}
-
-.c1::placeholder {
-  color: rgba(127,143,164,0.8);
-}
-
-.c1:active,
-.c1:focus {
-  border-color: #354052;
-}
-
-.c0 {
-  font-size: 0.875rem;
-  font-weight: 600;
-  display: block;
-}
-
-.c3 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background-color: #fafbfc;
-  border-color: #e2e7ee;
-  border-radius: 0.25rem;
-  border-style: solid;
-  border-width: 0.05rem;
-  color: #354052;
-  display: block;
-  font-family: proxima-nova,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,sans-serif;
-  margin-bottom: 1rem;
-  outline: 0;
-  padding: 1.25rem 1rem transition:border-color 300ms ease;
-  width: 100%;
-}
-
-.c3::-webkit-input-placeholder {
-  color: rgba(127,143,164,0.8);
-}
-
-.c3::-moz-placeholder {
-  color: rgba(127,143,164,0.8);
-}
-
-.c3:-ms-input-placeholder {
-  color: rgba(127,143,164,0.8);
-}
-
-.c3::placeholder {
-  color: rgba(127,143,164,0.8);
-}
-
-.c3:active,
-.c3:focus {
-  border-color: #354052;
-}
-
-.c2 {
-  font-size: 0.875rem;
-  font-weight: 600;
-  display: block;
-}
-
 .c4 {
   position: relative;
   margin-bottom: 1rem;
@@ -219,6 +126,54 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   transform: scale(1);
 }
 
+.c1 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #fafbfc;
+  border-color: #e2e7ee;
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  color: #354052;
+  display: block;
+  font-family: proxima-nova,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,sans-serif;
+  height: 2.6rem;
+  margin-bottom: 1rem;
+  outline: 0;
+  padding: 0.5rem 1rem;
+  -webkit-transition: border-color 300ms ease;
+  transition: border-color 300ms ease;
+  width: 100%;
+}
+
+.c1::-webkit-input-placeholder {
+  color: rgba(127,143,164,0.8);
+}
+
+.c1::-moz-placeholder {
+  color: rgba(127,143,164,0.8);
+}
+
+.c1:-ms-input-placeholder {
+  color: rgba(127,143,164,0.8);
+}
+
+.c1::placeholder {
+  color: rgba(127,143,164,0.8);
+}
+
+.c1:active,
+.c1:focus {
+  border-color: #354052;
+}
+
+.c0 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  display: block;
+}
+
 .c8 {
   padding: 2rem;
   display: inline-block;
@@ -231,6 +186,108 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   -webkit-transition: all 300ms ease;
   transition: all 300ms ease;
   background: rgba(46,161,248,0.2);
+}
+
+.c12 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #fafbfc;
+  background-image: linear-gradient( #fefefe,#fafbfc );
+  border-color: #e2e7ee;
+  border-radius: 0.25rem;
+  border-style: solid;
+  border-width: 0.05rem;
+  color: #354052;
+  display: block;
+  font-family: proxima-nova,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,sans-serif;
+  height: 2.6rem;
+  margin-bottom: 1rem;
+  outline: 0;
+  padding: 0.5rem 1rem;
+  -webkit-transition: border-color 300ms ease;
+  transition: border-color 300ms ease;
+  width: 100%;
+}
+
+.c12::-ms-expand {
+  display: none;
+}
+
+.c12:active,
+.c12:focus {
+  border-color: #354052;
+}
+
+.c12 option {
+  width: 100%;
+}
+
+.c10 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  display: block;
+}
+
+.c11 {
+  position: relative;
+}
+
+.c11::after {
+  content: "\\f102";
+  color: rgba(127,143,164,0.8);
+  font: normal normal normal 0.875rem tristicons;
+  line-height: 1rem;
+  position: absolute;
+  right: 1rem;
+  top: 0.75rem;
+}
+
+.c3 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #fafbfc;
+  border-color: #e2e7ee;
+  border-radius: 0.25rem;
+  border-style: solid;
+  border-width: 0.05rem;
+  color: #354052;
+  display: block;
+  font-family: proxima-nova,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,sans-serif;
+  margin-bottom: 1rem;
+  outline: 0;
+  padding: 1.25rem 1rem;
+  -webkit-transition: border-color 300ms ease;
+  transition: border-color 300ms ease;
+  width: 100%;
+}
+
+.c3::-webkit-input-placeholder {
+  color: rgba(127,143,164,0.8);
+}
+
+.c3::-moz-placeholder {
+  color: rgba(127,143,164,0.8);
+}
+
+.c3:-ms-input-placeholder {
+  color: rgba(127,143,164,0.8);
+}
+
+.c3::placeholder {
+  color: rgba(127,143,164,0.8);
+}
+
+.c3:active,
+.c3:focus {
+  border-color: #354052;
+}
+
+.c2 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  display: block;
 }
 
 <form>
@@ -331,5 +388,41 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
       </div>
     </label>
   </div>
+  <label
+    htmlFor="select"
+  >
+    <span
+      className="c10"
+    >
+      select
+    </span>
+    <div
+      className="c11"
+    >
+      <select
+        className="c12"
+        id="select"
+        name="select"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onDragStart={[Function]}
+        onDrop={[Function]}
+        onFocus={[Function]}
+        placeholder="select"
+        value=""
+      >
+        <option
+          value="option-1"
+        >
+          Option 1
+        </option>
+        <option
+          value="option-2"
+        >
+          Option 2
+        </option>
+      </select>
+    </div>
+  </label>
 </form>
 `;
