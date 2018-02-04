@@ -65,7 +65,7 @@
     "singleQuote": true
   },
   "browserslist": [
-    "last 4 versions"
+    "> 1% in au"
   ],
   "peerDependencies": {
     "styled-components": "^3.1.6"
