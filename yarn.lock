@@ -3500,9 +3500,9 @@ pluralize@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-7.0.0.tgz#298b89df8b93b0221dbf421ad2b1b1ea23fc6777"
 
-polished@^1.8.0:
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/polished/-/polished-1.9.1.tgz#4b06b1dc3e89c5ca5e2740c6c6b4de074b392ca8"
+polished@1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/polished/-/polished-1.8.0.tgz#21d5389c23ebb47e872f991b0b07503c618d5feb"
 
 popper.js@^1.12.5, popper.js@^1.12.6:
   version "1.12.9"

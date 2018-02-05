@@ -20,7 +20,7 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.5",
-    "polished": "^1.8.0",
+    "polished": "1.8.0",
     "popper.js": "^1.12.6",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
