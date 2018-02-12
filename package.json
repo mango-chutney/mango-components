@@ -29,7 +29,7 @@
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-form": "^7.1.1",
-    "tristicons": "git+ssh://git@github.com/mango-chutney/tristicons.git#a8bfdd8"
+    "tristicons": "https://github.com/mango-chutney/tristicons.git#a8bfdd8"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
