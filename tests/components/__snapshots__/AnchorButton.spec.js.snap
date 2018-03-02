@@ -13,6 +13,7 @@ exports[`AnchorButton component renders correctly 1`] = `
   margin-bottom: 1rem;
   padding: 0.65rem 1.25rem;
   text-align: center;
+  -webkit-text-decoration: none;
   text-decoration: none;
   width: auto;
 }
@@ -29,6 +30,7 @@ exports[`AnchorButton component renders correctly 1`] = `
   margin-bottom: 1rem;
   padding: 0.65rem 1.25rem;
   text-align: center;
+  -webkit-text-decoration: none;
   text-decoration: none;
   width: 100%;
 }
