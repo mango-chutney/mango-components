@@ -52,21 +52,17 @@
     "redux": "^3.7.2",
     "redux-form": "^7.2.3",
     "styled-components": "^3.1.6",
-    "tristicons": "https://github.com/mango-chutney/tristicons/archive/a8bfdd8.tar.gz"
+    "tristicons":
+      "https://github.com/mango-chutney/tristicons/archive/042b278.tar.gz"
   },
   "jest": {
-    "testPathIgnorePatterns": [
-      "<rootDir>/lib/",
-      "<rootDir>/examples/"
-    ]
+    "testPathIgnorePatterns": ["<rootDir>/lib/", "<rootDir>/examples/"]
   },
   "prettier": {
     "trailingComma": "all",
     "singleQuote": true
   },
-  "browserslist": [
-    "> 1% in au"
-  ],
+  "browserslist": ["> 1% in au"],
   "peerDependencies": {
     "@babel/polyfill": "7.0.0-beta.40",
     "polished": "^1.9.2",
@@ -77,6 +73,7 @@
     "redux": "^3.7.2",
     "redux-form": "^7.2.3",
     "styled-components": "^3.1.6",
-    "tristicons": "https://github.com/mango-chutney/tristicons/archive/a8bfdd8.tar.gz"
+    "tristicons":
+      "https://github.com/mango-chutney/tristicons/archive/042b278.tar.gz"
   }
 }
