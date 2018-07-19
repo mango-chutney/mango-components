@@ -3,16 +3,5 @@
   "env": {
     "browser": true,
     "node": false
-  },
-  "settings": {
-    "import/core-modules": [
-      "common-tags",
-      "mango-components",
-      "react-router",
-      "react-router-config",
-      "react-router-dom",
-      "uglifyjs-webpack-plugin",
-      "webpack"
-    ]
   }
 }
