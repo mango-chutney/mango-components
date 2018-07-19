@@ -10,7 +10,7 @@
     "build": "npm-run-all --sequential clean transpile",
     "check": "flow check",
     "clean": "rm -rf lib build",
-    "eslint": "eslint ./src/components/**/*.js ./examples/**/*.js ./index.js",
+    "eslint": "./scripts/eslint.sh",
     "jest": "jest",
     "lint": "npm-run-all prettier eslint check",
     "prettier": "./scripts/prettier.sh",
