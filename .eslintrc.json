@@ -7,12 +7,5 @@
     "react/prop-types": 0,
     "react/require-default-props": 0,
     "flowtype/generic-spacing": 0
-  },
-  "settings": {
-    "import/core-modules": [
-      "mango-components",
-      "react-router-dom",
-      "react-router-config"
-    ]
   }
 }

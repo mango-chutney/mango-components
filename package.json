@@ -10,10 +10,10 @@
     "build": "npm-run-all --sequential clean transpile",
     "check": "flow check",
     "clean": "rm -rf lib build",
-    "eslint": "./scripts/eslint.sh",
     "jest": "jest",
-    "lint": "npm-run-all prettier eslint check",
-    "prettier": "./scripts/prettier.sh",
+    "lint": "npm-run-all run-prettier run-eslint check",
+    "run-eslint": "./scripts/eslint.sh",
+    "run-prettier": "./scripts/prettier.sh",
     "start": "webpack -d --progress --config webpack.config.js",
     "transpile": "./scripts/build.sh"
   },

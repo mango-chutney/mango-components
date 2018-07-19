@@ -37,26 +37,6 @@ export const defaultStyleProps: {|
 class Wrapper extends React.Component<any, { focused: boolean }> {
   state = { focused: false };
 
-  ref = null;
-
-  findInputChildRef = () => {
-    if (this.ref !== null) {
-      return Array.from(this.ref.children).find(
-        element => element.nodeName === 'INPUT',
-      );
-    }
-
-    return null;
-  };
-
-  handleInputChildFocus = () => {
-    this.setState({ focused: true });
-  };
-
-  handleInputChildBlur = () => {
-    this.setState({ focused: false });
-  };
-
   componentDidMount = () => {
     const inputChildRef = this.findInputChildRef();
 
@@ -75,12 +55,32 @@ class Wrapper extends React.Component<any, { focused: boolean }> {
     }
   };
 
-  handleClick = () => {
+  ref = null;
+
+  findInputChildRef = () => {
+    if (this.ref !== null) {
+      return Array.from(this.ref.children).find(
+        element => element.nodeName === 'INPUT',
+      );
+    }
+
+    return null;
+  };
+
+  handleClickOrKeyPress = () => {
     const inputChildRef = this.findInputChildRef();
 
     if (inputChildRef !== null) {
       inputChildRef.click();
     }
+  };
+
+  handleInputChildBlur = () => {
+    this.setState({ focused: false });
+  };
+
+  handleInputChildFocus = () => {
+    this.setState({ focused: true });
   };
 
   render() {
@@ -89,11 +89,12 @@ class Wrapper extends React.Component<any, { focused: boolean }> {
     return (
       <div
         {...rest}
+        role="presentation"
         ref={ref => {
           this.ref = ref;
         }}
         data-focused={focused}
-        onClick={this.handleClick}
+        onClick={this.handleClickOrKeyPress}
       >
         {children}
       </div>

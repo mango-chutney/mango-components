@@ -10,7 +10,7 @@ export type $ComponentFactory<
 export type $StyledComponents = { [string]: ReactComponentStyled<*> };
 
 export type $StyledSubComponentsFactory<
-  $StyledComponents,
+  $StyledComponents, // eslint-disable-line no-shadow
   $StyledComponentsFactoryProps,
 > = (styleProps: $StyledComponentsFactoryProps) => $StyledComponents;
 

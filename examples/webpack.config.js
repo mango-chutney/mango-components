@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 /**
  * webpack.config.js
  */
@@ -88,7 +90,10 @@ module.exports = (env, { p: production }) => ({
     hot: true,
     open: true,
     before: (_, devServer) => {
-      devServer.serveMagicHtml = (req, res, next) => {
+      // eslint-disable-next-line no-param-reassign
+      devServer.serveMagicHtml = (req, res) => {
+        // eslint-disable-next-line no-underscore-dangle
+        const searchParams = req._parsedUrl.search || '';
         res.end(
           stripIndent`
            <!doctype html>
@@ -100,7 +105,7 @@ module.exports = (env, { p: production }) => ({
              <body>
                <script type="text/javascript" charset="utf-8" src="${
                  req.path
-               }.js${req._parsedUrl.search || ''}"></script>
+               }.js${searchParams}"></script>
              </body>
            </html>`,
         );

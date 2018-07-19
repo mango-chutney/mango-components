@@ -1,6 +1,6 @@
 // @flow
 
-import type { Match, Route } from 'react-router';
+import type { Route } from 'react-router';
 import { withNavigation } from './components/Navigation';
 import { withFooter } from './components/Footer';
 import * as Home from './containers/Home';
