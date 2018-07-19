@@ -34,6 +34,73 @@ export const defaultStyleProps: {|
   checkboxColor: palette.primary,
 };
 
+class Wrapper extends React.Component<any, { focused: boolean }> {
+  state = { focused: false };
+
+  ref = null;
+
+  findInputChildRef = () => {
+    if (this.ref !== null) {
+      return Array.from(this.ref.children).find(
+        element => element.nodeName === 'INPUT',
+      );
+    }
+
+    return null;
+  };
+
+  handleInputChildFocus = () => {
+    this.setState({ focused: true });
+  };
+
+  handleInputChildBlur = () => {
+    this.setState({ focused: false });
+  };
+
+  componentDidMount = () => {
+    const inputChildRef = this.findInputChildRef();
+
+    if (inputChildRef !== null) {
+      inputChildRef.addEventListener('focus', this.handleInputChildFocus);
+      inputChildRef.addEventListener('blur', this.handleInputChildBlur);
+    }
+  };
+
+  componentWillUnmount = () => {
+    const inputChildRef = this.findInputChildRef();
+
+    if (inputChildRef !== null) {
+      inputChildRef.removeEventListener('focus', this.handleInputChildFocus);
+      inputChildRef.removeEventListener('blur', this.handleInputChildBlur);
+    }
+  };
+
+  handleClick = () => {
+    const inputChildRef = this.findInputChildRef();
+
+    if (inputChildRef !== null) {
+      inputChildRef.click();
+    }
+  };
+
+  render() {
+    const { children, ...rest } = this.props;
+    const { focused } = this.state;
+    return (
+      <div
+        {...rest}
+        ref={ref => {
+          this.ref = ref;
+        }}
+        data-focused={focused}
+        onClick={this.handleClick}
+      >
+        {children}
+      </div>
+    );
+  }
+}
+
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
     LabelComponent: ReactComponentStyled<*>,
@@ -42,7 +109,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
   },
   typeof defaultStyleProps,
 > = styleProps => {
-  const WrapperComponent = styled.div`
+  const WrapperComponent = styled(Wrapper)`
     position: relative;
     margin-bottom: 1rem;
     text-align: left;
