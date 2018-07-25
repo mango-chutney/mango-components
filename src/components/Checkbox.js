@@ -2,8 +2,8 @@
 
 import * as React from 'react';
 import styled from 'styled-components';
-import type { ReactComponentStyled } from 'styled-components';
-import type { FieldProps } from 'redux-form';
+import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-components';
+import type { FieldProps as $FieldProps } from 'redux-form';
 import { rem, darken } from 'polished';
 import { palette, fontWeights } from './constants';
 import type {
@@ -13,7 +13,8 @@ import type {
 } from './types';
 
 export type $StyledProps = {
-  ...FieldProps,
+  ...$FieldProps,
+  id?: string,
   children: React.Node,
   label: string,
   checkboxColor: string,
@@ -104,9 +105,9 @@ class Wrapper extends React.Component<any, { focused: boolean }> {
 
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
-    LabelComponent: ReactComponentStyled<*>,
-    InputComponent: ReactComponentStyled<*>,
-    WrapperComponent: ReactComponentStyled<*>,
+    LabelComponent: $ReactComponentStyled<*>,
+    InputComponent: $ReactComponentStyled<*>,
+    WrapperComponent: $ReactComponentStyled<*>,
   },
   typeof defaultStyleProps,
 > = styleProps => {

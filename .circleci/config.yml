@@ -11,7 +11,7 @@ jobs:
             - "85:1c:6b:27:39:0e:31:48:df:91:e5:87:86:c3:97:f3"
       - restore_cache:
           key: dependency-cache-yarn-{{ checksum "package.json" }}
-      - run: yarn install
+      - run: yarn && yarn run install-peers && cd examples && yarn
       - save_cache:
           key: dependency-cache-yarn-{{ checksum "package.json" }}
           paths:

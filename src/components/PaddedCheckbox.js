@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import styled from 'styled-components';
-import type { ReactComponentStyled } from 'styled-components';
+import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-components';
 import { rem, transparentize } from 'polished';
 import type {
   $ComponentFactory,
@@ -34,9 +34,9 @@ export const defaultStyleProps: {|
 
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
-    LabelComponent: ReactComponentStyled<*>,
-    InputComponent: ReactComponentStyled<*>,
-    WrapperComponent: ReactComponentStyled<*>,
+    LabelComponent: $ReactComponentStyled<*>,
+    InputComponent: $ReactComponentStyled<*>,
+    WrapperComponent: $ReactComponentStyled<*>,
   },
   typeof defaultStyleProps,
   // eslint-disable-next-line no-unused-vars

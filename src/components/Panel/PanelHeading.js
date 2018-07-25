@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import styled from 'styled-components';
-import type { ReactComponentStyled } from 'styled-components';
+import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-components';
 import { darken, rem } from 'polished';
 import type {
   $ComponentFactory,
@@ -41,7 +41,7 @@ export const defaultStyleProps: {|
 
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
-    PanelHeadingComponent: ReactComponentStyled<*>,
+    PanelHeadingComponent: $ReactComponentStyled<*>,
   },
   typeof defaultStyleProps,
 > = styleProps => {

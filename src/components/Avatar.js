@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import styled from 'styled-components';
-import type { ReactComponentStyled } from 'styled-components';
+import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-components';
 import { rem } from 'polished';
 import type {
   $ComponentFactory,
@@ -58,7 +58,7 @@ function selectColor(namespace) {
 
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
-    AvatarComponent: ReactComponentStyled<*>,
+    AvatarComponent: $ReactComponentStyled<*>,
   },
   typeof defaultStyleProps,
 > = styleProps => {

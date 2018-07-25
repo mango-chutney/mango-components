@@ -2,18 +2,18 @@
 
 import * as React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import type { Location } from 'react-router-dom';
+import type { Location as $Location } from 'react-router-dom';
 import routes from '../routes';
-import type { ExtendedRoute } from '../routes';
+import type { $ExtendedRoute } from '../routes';
 
-function Navigation(props: { location: Location }) {
+function Navigation(props: { location: $Location }) {
   const { location } = props;
 
   return (
     <ul>
       {routes
         .filter(
-          (route: ExtendedRoute) =>
+          (route: $ExtendedRoute) =>
             route.path && route.shouldShowInNavigationComponent,
         )
         .map(route => (
@@ -35,7 +35,7 @@ export default Navigation;
 export function withNavigation(
   WrappedComponent: React.ComponentType<*>,
 ): React.ComponentType<*> {
-  return (props: { location: Location }) => {
+  return (props: { location: $Location }) => {
     const { location } = props;
     return (
       <div>

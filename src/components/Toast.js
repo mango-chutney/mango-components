@@ -4,7 +4,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Portal } from 'react-portal';
 import styled, { css, keyframes } from 'styled-components';
-import type { ReactComponentStyled } from 'styled-components';
+import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-components';
 import { rem } from 'polished';
 import type {
   $ComponentFactory,
@@ -15,6 +15,7 @@ import { palette } from './constants';
 
 export type $StyledProps = {
   children: React.Node,
+  id?: string,
   duration: number, // seconds - if 0 then forever
   active: boolean,
 };
@@ -84,7 +85,7 @@ const fadeOutAnimation = keyframes`
 
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
-    ToastComponent: ReactComponentStyled<*>,
+    ToastComponent: $ReactComponentStyled<*>,
   },
   typeof defaultStyleProps,
   // eslint-disable-next-line no-unused-vars
@@ -144,6 +145,7 @@ class Toast extends React.Component<$Props, $State> {
     duration: 10,
     active: false,
   };
+
   state = { shouldRender: false, fadingOut: false };
 
   componentDidMount() {
@@ -199,7 +201,7 @@ class Toast extends React.Component<$Props, $State> {
     }
   }
 
-  timeout = null;
+  timeout: TimeoutID;
 
   render() {
     const { children, duration, active, ToastComponent, ...rest } = this.props;

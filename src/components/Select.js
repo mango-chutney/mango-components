@@ -2,8 +2,8 @@
 
 import * as React from 'react';
 import styled from 'styled-components';
-import type { ReactComponentStyled } from 'styled-components';
-import type { FieldProps } from 'redux-form';
+import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-components';
+import type { FieldProps as $FieldProps } from 'redux-form';
 import { rem, transparentize } from 'polished';
 import tristicons from 'tristicons';
 import { palette, fontWeights, fontStack } from './constants';
@@ -14,7 +14,8 @@ import type {
 } from './types';
 
 export type $StyledProps = {
-  ...FieldProps,
+  ...$FieldProps,
+  id?: string,
   children: React.Node,
   label: string,
   placeholder: string,
@@ -49,9 +50,9 @@ export const defaultStyleProps: {|
 
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
-    SelectComponent: ReactComponentStyled<*>,
-    SelectContainerComponent: ReactComponentStyled<*>,
-    LabelComponent: ReactComponentStyled<*>,
+    SelectComponent: $ReactComponentStyled<*>,
+    SelectContainerComponent: $ReactComponentStyled<*>,
+    LabelComponent: $ReactComponentStyled<*>,
   },
   typeof defaultStyleProps,
 > = styleProps => {

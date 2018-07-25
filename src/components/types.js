@@ -1,13 +1,13 @@
 // @flow
 
 import * as React from 'react';
-import type { ReactComponentStyled } from 'styled-components';
+import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-components';
 
 export type $ComponentFactory<
   $StyledComponentsFactoryProps,
 > = () => React.ComponentType<$StyledComponentsFactoryProps>;
 
-export type $StyledComponents = { [string]: ReactComponentStyled<*> };
+export type $StyledComponents = { [string]: $ReactComponentStyled<*> };
 
 export type $StyledSubComponentsFactory<
   $StyledComponents, // eslint-disable-line no-shadow

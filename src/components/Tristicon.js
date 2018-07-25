@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import type { ReactComponentStyled } from 'styled-components';
+import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-components';
 import { rem } from 'polished';
 import tristicons from 'tristicons';
 import { woff } from 'tristicons/dist/json/base64-woff.json';
@@ -43,7 +43,7 @@ export const createFontFace = () => css`
 
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
-    TristiconComponent: ReactComponentStyled<*>,
+    TristiconComponent: $ReactComponentStyled<*>,
   },
   typeof defaultStyleProps,
   // eslint-disable-next-line no-unused-vars

@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import type { FormProps } from 'redux-form';
+import type { FormProps as $FormProps } from 'redux-form';
 // Explicitly import from index.js, not from the "main" property of package.json
 // in the directory.
 import MC from 'mango-components';
@@ -15,7 +15,7 @@ const PaddedCheckbox = MC.PaddedCheckbox.createComponent();
 const TextArea = MC.TextArea.createComponent();
 const Select = MC.Select.createComponent();
 
-type Props = {} & FormProps;
+type Props = {} & $FormProps;
 
 type State = {
   done: boolean,

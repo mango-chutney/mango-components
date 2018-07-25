@@ -17,7 +17,7 @@ import * as Tristicon from './containers/Tristicon';
 // Please generate a key for each route using `uuidgen` because these will be
 // spread into react components.
 
-export type ExtendedRoute = {
+export type $ExtendedRoute = {
   ...Route,
   key: string,
   name: string,
@@ -25,7 +25,7 @@ export type ExtendedRoute = {
   shouldShowInNavigationComponent: boolean,
 };
 
-const routes: Array<ExtendedRoute> = [
+const routes: Array<$ExtendedRoute> = [
   {
     component: Home.component,
     exact: true,
@@ -105,7 +105,7 @@ const routes: Array<ExtendedRoute> = [
     shouldShowInNavigationComponent: false,
   },
 ].map(
-  (route: *): ExtendedRoute =>
+  (route: *): $ExtendedRoute =>
     ({
       ...route,
       component: withFooter(withNavigation(route.component)),

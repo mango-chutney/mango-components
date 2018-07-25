@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import styled from 'styled-components';
-import type { ReactComponentStyled } from 'styled-components';
+import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-components';
 import type {
   $ComponentFactory,
   $MangoComponent,
@@ -28,7 +28,7 @@ export const defaultStyleProps: {|
 
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
-    NestedRadialProgressBarsComponent: ReactComponentStyled<*>,
+    NestedRadialProgressBarsComponent: $ReactComponentStyled<*>,
   },
   typeof defaultStyleProps,
   // eslint-disable-next-line no-unused-vars

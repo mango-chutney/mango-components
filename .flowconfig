@@ -1,7 +1,7 @@
 [ignore]
 <PROJECT_ROOT>/node_modules/styled-components/*
-<PROJECT_ROOT>/examples/node_modules/*
-<PROJECT_ROOT>/node_modules/tristicons/src/templates/icons.json
+<PROJECT_ROOT>/node_modules/tristicons/templates/icons.json
+<PROJECT_ROOT>/examples/node_modules/tristicons/templates/icons.json
 
 [include]
 
@@ -10,4 +10,3 @@
 [lints]
 
 [options]
-module.name_mapper='^mango-components' ->'<PROJECT_ROOT>'

@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import styled from 'styled-components';
-import type { ReactComponentStyled } from 'styled-components';
+import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-components';
 import type {
   $ComponentFactory,
   $MangoComponent,
@@ -29,8 +29,8 @@ export const defaultStyleProps: {} = {};
 /* eslint-disable no-unused-vars */
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
-    AnchorComponent: ReactComponentStyled<*>,
-    DivComponent: ReactComponentStyled<*>,
+    AnchorComponent: $ReactComponentStyled<*>,
+    DivComponent: $ReactComponentStyled<*>,
   },
   typeof defaultStyleProps,
 > = styleProps => {

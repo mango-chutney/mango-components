@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Portal } from 'react-portal';
 import { Arrow, Popper } from 'react-popper';
 import styled from 'styled-components';
-import type { ReactComponentStyled } from 'styled-components';
+import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-components';
 import PopperJS from 'popper.js';
 import ParentNodePopperManager from './ParentNodePopperManager';
 import type {
@@ -87,8 +87,8 @@ export const defaultStyleProps: {|
 
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
-    PopperComponent: ReactComponentStyled<*>,
-    ArrowComponent: ReactComponentStyled<*>,
+    PopperComponent: $ReactComponentStyled<*>,
+    ArrowComponent: $ReactComponentStyled<*>,
   },
   typeof defaultStyleProps,
 > = styleProps => {

@@ -3,7 +3,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import classNames from 'classnames';
-import type { ReactComponentStyled } from 'styled-components';
+import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-components';
 import type {
   $ComponentFactory,
   $MangoComponent,
@@ -29,7 +29,7 @@ export const defaultStyleProps: {|
 
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
-    PanelSectionComponent: ReactComponentStyled<*>,
+    PanelSectionComponent: $ReactComponentStyled<*>,
   },
   typeof defaultStyleProps,
 > = styleProps => {

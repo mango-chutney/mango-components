@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react';
-import type { ReactComponentStyled } from 'styled-components';
+import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-components';
 import type {
   $ComponentFactory,
   $MangoComponent,
@@ -37,7 +37,7 @@ export { defaultStyleProps };
 
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
-    AnchorButtonComponent: ReactComponentStyled<*>,
+    AnchorButtonComponent: $ReactComponentStyled<*>,
   },
   typeof defaultStyleProps,
   // eslint-disable-next-line no-unused-vars
