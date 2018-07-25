@@ -19,18 +19,18 @@ module.exports = (env, argv) => {
           {
             test: /\.js$/,
             include: [
-              path.resolve(__dirname, './components'),
-              path.resolve(__dirname, './routes.js'),
-              path.resolve(__dirname, './containers'),
-              path.resolve(__dirname, './store'),
-              path.resolve(__dirname, './reducers'),
-              path.resolve(__dirname, './index.js'),
-              path.resolve(__dirname, './../src'),
+              path.resolve(path.join(__dirname, 'components')),
+              path.resolve(path.join(__dirname, 'routes.js')),
+              path.resolve(path.join(__dirname, 'containers')),
+              path.resolve(path.join(__dirname, 'store')),
+              path.resolve(path.join(__dirname, 'reducers')),
+              path.resolve(path.join(__dirname, 'index.js')),
+              path.resolve(path.join(__dirname, '..', 'src')),
             ],
             use: [
               {
                 loader: 'babel-loader',
-                query: {
+                options: {
                   babelrc: false,
                   compact: false,
                   presets: [
@@ -43,11 +43,11 @@ module.exports = (env, argv) => {
                         useBuiltIns: 'entry',
                       },
                     ],
-                    '@babel/preset-stage-2',
                     '@babel/react',
                     '@babel/flow',
                   ],
                   plugins: [
+                    '@babel/plugin-proposal-class-properties',
                     ['styled-components', { ssr: true, displayName: false }],
                   ],
                 },
@@ -66,6 +66,10 @@ module.exports = (env, argv) => {
       ],
       resolve: {
         alias: {
+          'styled-components': path.resolve(
+            __dirname,
+            './node_modules/styled-components',
+          ),
           'mango-components': path.resolve(__dirname, './../src/index.js'),
           react: path.resolve(__dirname, './node_modules/react'),
           'react-dom': path.resolve(__dirname, './node_modules/react-dom'),

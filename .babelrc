@@ -7,8 +7,10 @@
       }
     ],
     "@babel/preset-react",
-    "@babel/preset-flow",
-    "@babel/preset-stage-2"
+    "@babel/preset-flow"
   ],
-  "plugins": [["styled-components", { "ssr": true, "displayName": false }]]
+  "plugins": [
+    "@babel/plugin-proposal-class-properties",
+    ["styled-components", { "ssr": true, "displayName": false }]
+  ]
 }

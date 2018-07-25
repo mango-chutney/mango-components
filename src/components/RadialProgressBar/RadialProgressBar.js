@@ -115,12 +115,11 @@ export function RadialProgressBar(props: $Props) {
   const percentageToDashoffset = percentage
     ? (percentage >= 100 && '0') ||
       (percentage < 0 && dashArray - dashArray * 0.01) ||
-      dashArray - dashArray * percentage / 100
+      dashArray - (dashArray * percentage) / 100
     : dashArray - dashArray * 0.01;
 
   const strokeWidth =
-    defaultSize /
-    (width ? width * 0.9 : defaultSize) *
+    (defaultSize / (width ? width * 0.9 : defaultSize)) *
     (strokeWidthScale || defaultStrokeWidthScale);
 
   return (

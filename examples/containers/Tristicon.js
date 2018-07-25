@@ -36,7 +36,7 @@ export class TristiconExample extends React.Component<Props, State> {
         </p>
         <pre>
           <code>
-            {//prettier-ignore
+            {// prettier-ignore
             stripIndent(`
               injectGlobal\`
                 \${MC.Tristicon.createFontFace()}

@@ -10,49 +10,41 @@
     "build": "npm-run-all --sequential clean transpile",
     "check": "flow check",
     "clean": "rm -rf lib build",
-    "jest": "jest",
+    "install-peers": "node -e \"const peers = Object.entries(require('./package.json').peerDependencies || {}).map(d => d.join('@')).join(' '); if (peers.length) process.stdout.write('yarn add -P --no-lockfile ' + String(peers));\" | sh",
     "lint": "npm-run-all run-prettier run-eslint check",
-    "run-eslint": "./scripts/eslint.sh",
-    "run-prettier": "./scripts/prettier.sh",
+    "run-eslint": "./scripts/run-eslint.sh",
+    "run-prettier": "./scripts/run-prettier.sh",
     "start": "webpack -d --progress --config webpack.config.js",
+    "test": "jest",
     "transpile": "./scripts/build.sh"
   },
   "dependencies": {
-    "classnames": "^2.2.5",
-    "popper.js": "^1.12.6",
-    "react-popper": "^0.7.4",
+    "classnames": "2.2.5",
+    "popper.js": "1.12.6",
+    "react-popper": "0.7.4",
     "tristicons": "https://github.com/mango-chutney/tristicons/archive/81ef6d51d8ea06fafe83a584e33b7b94183e8409.tar.gz"
   },
   "devDependencies": {
-    "@babel/cli": "7.0.0-beta.40",
-    "@babel/core": "7.0.0-beta.40",
-    "@babel/plugin-proposal-object-rest-spread": "7.0.0-beta.40",
-    "@babel/preset-env": "7.0.0-beta.40",
-    "@babel/preset-flow": "7.0.0-beta.40",
-    "@babel/preset-react": "7.0.0-beta.40",
-    "@babel/preset-stage-2": "7.0.0-beta.40",
+    "@babel/cli": "^7.0.0-beta.54",
+    "@babel/core": "^7.0.0-beta.54",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.54",
+    "@babel/preset-env": "^7.0.0-beta.54",
+    "@babel/preset-flow": "^7.0.0-beta.54",
+    "@babel/preset-react": "^7.0.0-beta.54",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-eslint": "^8.2.1",
-    "babel-jest": "^22.4.1",
-    "babel-plugin-styled-components": "^1.5.0",
-    "eslint": "^4.15.0",
+    "babel-eslint": "^8.2.6",
+    "babel-jest": "^23.4.0",
+    "babel-plugin-styled-components": "^1.5.1",
+    "eslint": "^5.2.0",
     "eslint-config-mango": "^1.0.2",
-    "flow-bin": "^0.57.3",
-    "flow-typed": "^2.2.0",
-    "jest": "^22.4.2",
-    "jest-styled-components": "^4.11.0-1",
-    "npm-run-all": "^4.1.1",
-    "polished": "^1.9.2",
-    "prettier": "^1.7.4",
+    "flow-bin": "^0.77.0",
+    "flow-typed": "^2.5.1",
+    "jest": "^23.4.1",
+    "jest-styled-components": "^5.0.1",
+    "npm-run-all": "^4.1.3",
+    "prettier": "^1.13.7",
     "raf": "^3.4.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-portal": "^4.1.3",
-    "react-redux": "^5.0.7",
-    "react-test-renderer": "^16.2.0",
-    "redux": "^3.7.2",
-    "redux-form": "^7.2.3",
-    "styled-components": "^3.1.6"
+    "react-test-renderer": "^16.4.1"
   },
   "jest": {
     "testPathIgnorePatterns": [
@@ -62,20 +54,27 @@
   },
   "prettier": {
     "trailingComma": "all",
-    "singleQuote": true
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": ".babelrc",
+        "options": {
+          "parser": "json"
+        }
+      }
+    ]
   },
   "browserslist": [
     "> 1% in au"
   ],
   "peerDependencies": {
-    "@babel/polyfill": "7.0.0-beta.40",
-    "polished": "^1.9.2",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-portal": "^4.1.2",
-    "react-redux": "^5.0.6",
-    "redux": "^3.7.2",
-    "redux-form": "^7.2.3",
-    "styled-components": "^3.1.6"
+    "polished": "^1.9.3",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-portal": "^4.0.0",
+    "react-redux": "^5.0.0",
+    "redux": "^4.0.0",
+    "redux-form": "^7.4.2",
+    "styled-components": "^3.3.3"
   }
 }
