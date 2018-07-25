@@ -2,6 +2,34 @@
 
 A repository of re-useable styled components
 
+## Hacking
+
+Install dependencies and peer dependencies:
+
+```
+# You need to run this install-peers command again each time you run `yarn`.
+$ yarn && yarn run install-peers
+```
+
+Make changes and run tests:
+
+```
+$ yarn run tests
+```
+
+Run the examples:
+
+```
+$ cd examples
+$ yarn && yarn run start
+```
+
+Finally, run the build script and commit the changes:
+
+```
+$ yarn run build
+```
+
 ## Usage
 
 #### Using default component
