@@ -13,6 +13,7 @@ type Props = {};
 
 type State = {};
 
+// eslint-disable-next-line no-unused-expressions
 injectGlobal`
   ${MC.Tristicon.createFontFace()}
 `;
@@ -30,7 +31,7 @@ export class TristiconExample extends React.Component<Props, State> {
         </p>
         <p>
           Another option is to use the Base 64 encoded WOFF file inline, so you
-          don't have to copy font files. You can use the{' '}
+          don&rsquo;t have to copy font files. You can use the{' '}
           <code>createFontFace</code> export from the <code>Tristicon</code>{' '}
           component for this:
         </p>
