@@ -20,7 +20,8 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "popper.js": "^1.12.6",
-    "react-popper": "^0.7.4"
+    "react-popper": "^0.7.4",
+    "tristicons": "https://github.com/mango-chutney/tristicons/archive/81ef6d51d8ea06fafe83a584e33b7b94183e8409.tar.gz"
   },
   "devDependencies": {
     "@babel/cli": "7.0.0-beta.40",
@@ -51,18 +52,21 @@
     "react-test-renderer": "^16.2.0",
     "redux": "^3.7.2",
     "redux-form": "^7.2.3",
-    "styled-components": "^3.1.6",
-    "tristicons":
-      "https://github.com/mango-chutney/tristicons/archive/3ac62c5.tar.gz"
+    "styled-components": "^3.1.6"
   },
   "jest": {
-    "testPathIgnorePatterns": ["<rootDir>/lib/", "<rootDir>/examples/"]
+    "testPathIgnorePatterns": [
+      "<rootDir>/lib/",
+      "<rootDir>/examples/"
+    ]
   },
   "prettier": {
     "trailingComma": "all",
     "singleQuote": true
   },
-  "browserslist": ["> 1% in au"],
+  "browserslist": [
+    "> 1% in au"
+  ],
   "peerDependencies": {
     "@babel/polyfill": "7.0.0-beta.40",
     "polished": "^1.9.2",
@@ -72,8 +76,6 @@
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-form": "^7.2.3",
-    "styled-components": "^3.1.6",
-    "tristicons":
-      "https://github.com/mango-chutney/tristicons/archive/3ac62c5.tar.gz"
+    "styled-components": "^3.1.6"
   }
 }

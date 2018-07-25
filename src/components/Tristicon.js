@@ -1,10 +1,11 @@
 // @flow
 
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import type { ReactComponentStyled } from 'styled-components';
 import { rem } from 'polished';
 import tristicons from 'tristicons';
+import { woff } from 'tristicons/dist/json/base64-woff.json';
 import type {
   $ComponentFactory,
   $MangoComponent,
@@ -30,6 +31,15 @@ export const defaultStyleProps: {|
 function getTristiconContent(iconName) {
   return tristicons[iconName];
 }
+
+export const createFontFace = () => css`
+  @font-face {
+    font-family: tristicons;
+    font-style: normal;
+    font-weight: normal;
+    src: url(data:application/x-font-woff;charset=utf-8;base64,${woff});
+  }
+`;
 
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
