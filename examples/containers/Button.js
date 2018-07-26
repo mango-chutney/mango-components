@@ -1,12 +1,11 @@
 // @flow
 
 import * as React from 'react';
-// Explicitly import from index.js, not from the "main" property of package.json
-// in the directory.
-import MC from 'mango-components';
+import { createComponent as createButtonComponent } from 'mango-components/es/Button';
+import { createComponent as createAnchorButtonComponent } from 'mango-components/es/AnchorButton';
 
-const Button = MC.Button.createComponent();
-const AnchorButton = MC.AnchorButton.createComponent();
+const Button = createButtonComponent();
+const AnchorButton = createAnchorButtonComponent();
 
 type Props = {};
 

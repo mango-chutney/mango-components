@@ -1,22 +1,22 @@
 // @flow
 
-import * as AnchorButton from './components/AnchorButton';
-import * as Avatar from './components/Avatar';
-import * as Button from './components/Button';
-import * as Checkbox from './components/Checkbox';
-import * as Input from './components/Input';
-import * as MadeWithMangoChutney from './components/MadeWithMangoChutney';
-import * as PaddedCheckbox from './components/PaddedCheckbox';
-import { Panel, PanelHeading, PanelSection } from './components/Panel';
-import {
-  NestedRadialProgressBars,
-  RadialProgressBar,
-} from './components/RadialProgressBar';
-import * as Select from './components/Select';
-import * as Tootlip from './components/Tootlip';
-import * as Tristicon from './components/Tristicon';
-import * as TextArea from './components/TextArea';
-import * as Toast from './components/Toast';
+import * as AnchorButton from './AnchorButton';
+import * as Avatar from './Avatar';
+import * as Button from './Button';
+import * as Checkbox from './Checkbox';
+import * as Input from './Input';
+import * as MadeWithMangoChutney from './MadeWithMangoChutney';
+import * as NestedRadialProgressBars from './NestedRadialProgressBars';
+import * as PaddedCheckbox from './PaddedCheckbox';
+import * as Panel from './Panel';
+import * as PanelHeading from './PanelHeading';
+import * as PanelSection from './PanelSection';
+import * as RadialProgressBar from './RadialProgressBar';
+import * as Select from './Select';
+import * as TextArea from './TextArea';
+import * as Toast from './Toast';
+import * as Tootlip from './Tootlip';
+import * as Tristicon from './Tristicon';
 
 export {
   AnchorButton,

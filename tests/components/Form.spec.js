@@ -7,13 +7,17 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import { Field, reduxForm, reducer as formReducer } from 'redux-form';
 import renderer from 'react-test-renderer';
-import MC from '../../src';
+import { createComponent as createCheckboxComponent } from '../../src/Checkbox';
+import { createComponent as createInputComponent } from '../../src/Input';
+import { createComponent as createPaddedCheckboxComponent } from '../../src/PaddedCheckbox';
+import { createComponent as createSelectComponent } from '../../src/Select';
+import { createComponent as createTextAreaComponent } from '../../src/TextArea';
 
-const Checkbox = MC.Checkbox.createComponent();
-const Input = MC.Input.createComponent();
-const PaddedCheckbox = MC.PaddedCheckbox.createComponent();
-const Select = MC.Select.createComponent();
-const TextArea = MC.TextArea.createComponent();
+const Checkbox = createCheckboxComponent();
+const Input = createInputComponent();
+const PaddedCheckbox = createPaddedCheckboxComponent();
+const Select = createSelectComponent();
+const TextArea = createTextAreaComponent();
 
 const store = createStore(combineReducers({ form: formReducer }));
 

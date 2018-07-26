@@ -1,5 +1,6 @@
 node_modules
 flow-typed
-build
-./lib
-./examples/node_modules
+es
+cjs
+examples/dist
+examples/node_modules

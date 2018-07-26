@@ -4,9 +4,9 @@ import 'raf/polyfill';
 import 'jest-styled-components';
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MC from '../../src';
+import { createComponent as createTristiconComponent } from '../../src/Tristicon';
 
-const Tristicon = MC.Tristicon.createComponent();
+const Tristicon = createTristiconComponent();
 
 function TristiconComponent() {
   return <Tristicon icon="star" />;

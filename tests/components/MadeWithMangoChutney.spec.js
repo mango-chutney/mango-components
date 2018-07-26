@@ -4,9 +4,9 @@ import 'raf/polyfill';
 import 'jest-styled-components';
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MC from '../../src';
+import { createComponent as createMadeWithMangoChutneyComponent } from '../../src/MadeWithMangoChutney';
 
-const MadeWithMangoChutney = MC.MadeWithMangoChutney.createComponent();
+const MadeWithMangoChutney = createMadeWithMangoChutneyComponent();
 
 function MadeWithMangoChutneyComponent() {
   return <MadeWithMangoChutney />;

@@ -1,11 +1,9 @@
 // @flow
 
 import * as React from 'react';
-// Explicitly import from index.js, not from the "main" property of package.json
-// in the directory.
-import MC from 'mango-components';
+import { createComponent as createAvatarComponent } from 'mango-components/es/Avatar';
 
-const Avatar = MC.Avatar.createComponent();
+const Avatar = createAvatarComponent();
 
 type Props = {};
 

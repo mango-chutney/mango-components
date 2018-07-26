@@ -1,9 +1,9 @@
 // @flow
 
 import * as React from 'react';
-import MC from 'mango-components';
+import { createComponent as createMadeWithMangoChutneyComponent } from 'mango-components/es/MadeWithMangoChutney';
 
-const MadeWithMangoChutney = MC.MadeWithMangoChutney.createComponent();
+const MadeWithMangoChutney = createMadeWithMangoChutneyComponent();
 
 function Footer() {
   return <MadeWithMangoChutney />;

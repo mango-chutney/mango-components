@@ -4,11 +4,13 @@ import 'raf/polyfill';
 import 'jest-styled-components';
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MC from '../../src';
+import { createComponent as createPanelComponent } from '../../src/Panel';
+import { createComponent as createPanelHeadingComponent } from '../../src/PanelHeading';
+import { createComponent as createPanelSectionComponent } from '../../src/PanelSection';
 
-const Panel = MC.Panel.createComponent();
-const PanelHeading = MC.PanelHeading.createComponent();
-const PanelSection = MC.PanelSection.createComponent();
+const Panel = createPanelComponent();
+const PanelHeading = createPanelHeadingComponent();
+const PanelSection = createPanelSectionComponent();
 
 function PanelComponents() {
   return (

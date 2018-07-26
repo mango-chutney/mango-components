@@ -4,9 +4,9 @@ import 'raf/polyfill';
 import 'jest-styled-components';
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MC from '../../src';
+import { createComponent as createRadialProgressBarComponent } from '../../src/RadialProgressBar';
 
-const RadialProgressBar = MC.RadialProgressBar.createComponent();
+const RadialProgressBar = createRadialProgressBarComponent();
 
 function RadialProgressBarComponent() {
   return (

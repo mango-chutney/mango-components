@@ -1,13 +1,14 @@
 // @flow
 
 import * as React from 'react';
-// Explicitly import from index.js, not from the "main" property of package.json
-// in the directory.
-import MC from 'mango-components';
 import { injectGlobal } from 'styled-components';
 import stripIndent from 'strip-indent';
+import {
+  createComponent as createTristiconComponent,
+  createFontFace as createTristiconFontFace,
+} from 'mango-components/es/Tristicon';
 
-const Tristicon = MC.Tristicon.createComponent();
+const Tristicon = createTristiconComponent();
 
 type Props = {};
 
@@ -15,7 +16,7 @@ type State = {};
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
-  ${MC.Tristicon.createFontFace()}
+  ${createTristiconFontFace()}
 `;
 
 export class TristiconExample extends React.Component<Props, State> {

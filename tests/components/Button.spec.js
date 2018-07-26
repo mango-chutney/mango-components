@@ -4,9 +4,9 @@ import 'raf/polyfill';
 import 'jest-styled-components';
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MC from '../../src';
+import { createComponent as createButtonComponent } from '../../src/Button';
 
-const Button = MC.Button.createComponent();
+const Button = createButtonComponent();
 
 function ButtonComponent() {
   return (

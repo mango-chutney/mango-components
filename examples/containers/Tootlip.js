@@ -1,11 +1,10 @@
 // @flow
 
 import * as React from 'react';
-// Explicitly import from index.js, not from the "main" property of package.json
-// in the directory.
-import MC from 'mango-components';
-
-const { placements, createComponent: createTootlipComponent } = MC.Tootlip;
+import {
+  placements,
+  createComponent as createTootlipComponent,
+} from 'mango-components/es/Tootlip';
 
 const Tootlip = createTootlipComponent();
 

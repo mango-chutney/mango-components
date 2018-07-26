@@ -3,9 +3,9 @@
 import * as React from 'react';
 // Explicitly import from index.js, not from the "main" property of package.json
 // in the directory.
-import MC from 'mango-components';
+import { createComponent as createToastComponent } from 'mango-components/es/Toast';
 
-const Toast = MC.Toast.createComponent();
+const Toast = createToastComponent();
 
 type Props = {};
 

@@ -3,17 +3,21 @@
 import * as React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import type { FormProps as $FormProps } from 'redux-form';
-// Explicitly import from index.js, not from the "main" property of package.json
-// in the directory.
-import MC from 'mango-components';
+import { createComponent as createTootlipComponent } from 'mango-components/es/Tootlip';
+import { createComponent as createButtonComponent } from 'mango-components/es/Button';
+import { createComponent as createInputComponent } from 'mango-components/es/Input';
+import { createComponent as createCheckboxComponent } from 'mango-components/es/Checkbox';
+import { createComponent as createPaddedCheckboxComponent } from 'mango-components/es/PaddedCheckbox';
+import { createComponent as createTextAreaComponent } from 'mango-components/es/TextArea';
+import { createComponent as createSelectComponent } from 'mango-components/es/Select';
 
-const Tootlip = MC.Tootlip.createComponent();
-const Button = MC.Button.createComponent();
-const Input = MC.Input.createComponent();
-const Checkbox = MC.Checkbox.createComponent();
-const PaddedCheckbox = MC.PaddedCheckbox.createComponent();
-const TextArea = MC.TextArea.createComponent();
-const Select = MC.Select.createComponent();
+const Tootlip = createTootlipComponent();
+const Button = createButtonComponent();
+const Input = createInputComponent();
+const Checkbox = createCheckboxComponent();
+const PaddedCheckbox = createPaddedCheckboxComponent();
+const TextArea = createTextAreaComponent();
+const Select = createSelectComponent();
 
 type Props = {} & $FormProps;
 

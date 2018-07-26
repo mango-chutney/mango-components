@@ -25,7 +25,7 @@ module.exports = (env, argv) => {
               path.resolve(path.join(__dirname, 'store')),
               path.resolve(path.join(__dirname, 'reducers')),
               path.resolve(path.join(__dirname, 'index.js')),
-              path.resolve(path.join(__dirname, '..', 'src')),
+              // path.resolve(path.join(__dirname, '..', 'src')),
             ],
             use: [
               {
@@ -70,7 +70,6 @@ module.exports = (env, argv) => {
             __dirname,
             './node_modules/styled-components',
           ),
-          'mango-components': path.resolve(__dirname, './../src/index.js'),
           react: path.resolve(__dirname, './node_modules/react'),
           'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
         },

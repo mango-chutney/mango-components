@@ -1,12 +1,12 @@
 // @flow
 
 import * as React from 'react';
-// Explicitly import from index.js, not from the "main" property of package.json
-// in the directory.
-import MC from 'mango-components';
 
-const RadialProgressBar = MC.RadialProgressBar.createComponent();
-const NestedRadialProgressBars = MC.NestedRadialProgressBars.createComponent();
+import { createComponent as createRadialProgressBarComponent } from 'mango-components/es/RadialProgressBar';
+import { createComponent as createNestedRadialProgressBarsComponent } from 'mango-components/es/NestedRadialProgressBars';
+
+const RadialProgressBar = createRadialProgressBarComponent();
+const NestedRadialProgressBars = createNestedRadialProgressBarsComponent();
 
 type Props = {};
 

@@ -1,13 +1,13 @@
 // @flow
 
 import * as React from 'react';
-// Explicitly import from index.js, not from the "main" property of package.json
-// in the directory.
-import MC from 'mango-components';
+import { createComponent as createPanelComponent } from 'mango-components/es/Panel';
+import { createComponent as createPanelSectionComponent } from 'mango-components/es/PanelSection';
+import { createComponent as createPanelHeadingComponent } from 'mango-components/es/PanelHeading';
 
-const Panel = MC.Panel.createComponent();
-const PanelHeading = MC.PanelHeading.createComponent();
-const PanelSection = MC.PanelSection.createComponent();
+const Panel = createPanelComponent();
+const PanelHeading = createPanelHeadingComponent();
+const PanelSection = createPanelSectionComponent();
 
 type Props = {};
 
