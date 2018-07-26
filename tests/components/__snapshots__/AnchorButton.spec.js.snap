@@ -37,13 +37,13 @@ exports[`AnchorButton component renders correctly 1`] = `
 
 <div>
   <a
-    className="c0"
+    className="-a c0"
     href=""
   >
     Anchor Button
   </a>
   <a
-    className="c1"
+    className="-a c1"
     href=""
   >
     Expanded Anchor Button

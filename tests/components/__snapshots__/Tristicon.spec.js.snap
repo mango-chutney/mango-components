@@ -2,7 +2,7 @@
 
 exports[`Tristicon component renders correctly 1`] = `
 .c0::before {
-  content: "\\f126";
+  content: "\\f13b";
   display: inline-block;
   font: normal normal normal 0.875rem tristicons;
   font-size: inherit;

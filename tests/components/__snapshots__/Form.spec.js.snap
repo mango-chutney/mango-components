@@ -234,7 +234,7 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
 }
 
 .c11::after {
-  content: "\\f102";
+  content: "\\f10a";
   color: rgba(127,143,164,0.8);
   font: normal normal normal 0.875rem tristicons;
   line-height: 1rem;
@@ -340,6 +340,9 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   </label>
   <div
     className="c4"
+    data-focused={false}
+    onClick={[Function]}
+    role="presentation"
   >
     <input
       className="c5"
@@ -365,6 +368,9 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   </div>
   <div
     className="c4"
+    data-focused={false}
+    onClick={[Function]}
+    role="presentation"
   >
     <input
       className="c7 c5"
