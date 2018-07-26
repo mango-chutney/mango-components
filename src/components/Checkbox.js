@@ -36,6 +36,8 @@ export const defaultStyleProps: {|
 };
 
 class Wrapper extends React.Component<any, { focused: boolean }> {
+  ref = null;
+
   state = { focused: false };
 
   componentDidMount = () => {
@@ -55,8 +57,6 @@ class Wrapper extends React.Component<any, { focused: boolean }> {
       inputChildRef.removeEventListener('blur', this.handleInputChildBlur);
     }
   };
-
-  ref = null;
 
   findInputChildRef = () => {
     if (this.ref !== null) {
@@ -172,11 +172,11 @@ export const createStyledComponents: $StyledSubComponentsFactory<
 
     :checked + label > div {
       &::before {
-        background: ${props =>
-          props.checkboxColor ? props.checkboxColor : styleProps.checkboxColor};
-        border-color: ${props =>
-          props.checkboxColor
-            ? darken(0.05, props.checkboxColor)
+        background: ${({ checkboxColor }) =>
+          checkboxColor || styleProps.checkboxColor};
+        border-color: ${({ checkboxColor }) =>
+          checkboxColor
+            ? darken(0.05, checkboxColor)
             : darken(0.05, styleProps.checkboxColor)};
         transition: background-color 0.3s;
       }

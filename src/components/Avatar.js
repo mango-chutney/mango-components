@@ -69,13 +69,13 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     background-size: cover;
     border-radius: 50%;
     color: ${palette.white};
-    font-size: ${props => props.fontSize};
+    font-size: ${({ fontSize }) => fontSize};
     font-weight: ${fontWeights.semibold};
-    height: ${props => props.width};
-    line-height: ${props => props.width};
+    height: ${({ width }) => width};
+    line-height: ${({ width }) => width};
     text-align: center;
     text-transform: uppercase;
-    width: ${props => props.width};
+    width: ${({ width }) => width};
   `;
 
   return { AvatarComponent };

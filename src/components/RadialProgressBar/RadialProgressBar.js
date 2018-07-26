@@ -59,9 +59,9 @@ export const createStyledComponents: $StyledSubComponentsFactory<
   // eslint-disable-next-line no-unused-vars
 > = styleProps => {
   const WrapperComponent = styled.div`
-    height: ${props => (props.width ? rem(props.width) : rem(defaultSize))};
+    height: ${({ width }) => (width ? rem(width) : rem(defaultSize))};
     position: relative;
-    width: ${props => (props.width ? rem(props.width) : rem(defaultSize))};
+    width: ${({ width }) => (width ? rem(width) : rem(defaultSize))};
   `;
 
   const ContainerComponent = styled.div`
@@ -84,9 +84,9 @@ export const createStyledComponents: $StyledSubComponentsFactory<
   `;
 
   const ProgressCircleComponent = styled.circle`
-    stroke: ${props => props.backgroundColor || palette.primary};
-    animation: ${props =>
-      `${strokeAnimation(props.strokeDashoffset)} 0.5s normal forwards`};
+    stroke: ${({ backgroundColor }) => backgroundColor || palette.primary};
+    animation: ${({ strokeDashoffset }) =>
+      `${strokeAnimation(strokeDashoffset)} 0.5s normal forwards`};
   `;
 
   return {

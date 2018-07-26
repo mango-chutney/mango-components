@@ -41,14 +41,14 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     border: 0;
     color: ${styleProps.color};
     cursor: pointer;
-    display: ${props => (props.expanded ? 'block' : 'inline-block')};
+    display: ${({ expanded }) => (expanded ? 'block' : 'inline-block')};
     font-family: inherit;
     font-weight: ${styleProps.fontWeight};
     margin-bottom: 1rem;
     padding: 0.65rem 1.25rem;
     text-align: center;
     text-decoration: none;
-    width: ${props => (props.expanded ? '100%' : 'auto')};
+    width: ${({ expanded }) => (expanded ? '100%' : 'auto')};
   `;
 
   return { ButtonComponent };

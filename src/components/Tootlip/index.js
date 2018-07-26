@@ -103,11 +103,11 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     font-size: ${styleProps.fontSize};
     min-width: ${styleProps.minWidth};
     padding: ${styleProps.padding};
-    pointer-events: ${props => (props.clickable ? 'auto' : 'none')};
+    pointer-events: ${({ clickable }) => (clickable ? 'auto' : 'none')};
     position: absolute;
     text-align: center;
     transition: ${styleProps.transition};
-    opacity: ${props => (props.visible ? 0.9 : 0)};
+    opacity: ${({ visible }) => (visible ? 0.9 : 0)};
     max-width: ${styleProps.maxWidth};
 
     &[data-placement^='top'] {

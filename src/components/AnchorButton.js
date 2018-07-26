@@ -27,7 +27,7 @@ export function AnchorButton(props: $Props) {
   const { children, href, AnchorButtonComponent, ...rest } = props;
 
   return (
-    <AnchorButtonComponent href={props.href} {...rest}>
+    <AnchorButtonComponent href={href} {...rest}>
       {children}
     </AnchorButtonComponent>
   );

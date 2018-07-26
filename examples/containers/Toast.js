@@ -88,6 +88,7 @@ export class ToastExample extends React.Component<Props, State> {
           </Toast>
 
           <button
+            type="button"
             onClick={() => {
               this.setState({
                 toast1: !toast1,
@@ -103,6 +104,7 @@ export class ToastExample extends React.Component<Props, State> {
           </Toast>
 
           <button
+            type="button"
             onClick={() => {
               this.setState({
                 toast2: !toast2,
@@ -118,6 +120,7 @@ export class ToastExample extends React.Component<Props, State> {
           </Toast>
 
           <button
+            type="button"
             onClick={() => {
               this.setState({
                 toast3: !toast3,
@@ -133,6 +136,7 @@ export class ToastExample extends React.Component<Props, State> {
           </Toast>
 
           <button
+            type="button"
             onClick={() => {
               this.setState({
                 toast4: !toast4,
@@ -148,6 +152,7 @@ export class ToastExample extends React.Component<Props, State> {
           </Toast>
 
           <button
+            type="button"
             onClick={() => {
               this.setState({
                 toast5: !toast5,
@@ -163,6 +168,7 @@ export class ToastExample extends React.Component<Props, State> {
           </Toast>
 
           <button
+            type="button"
             onClick={() => {
               this.setState({
                 toast6: !toast6,

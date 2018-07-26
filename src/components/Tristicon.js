@@ -50,11 +50,10 @@ export const createStyledComponents: $StyledSubComponentsFactory<
 > = styleProps => {
   const TristiconComponent = styled.i`
     &::before {
-      content: "${props =>
-        props.icon ? getTristiconContent(props.icon) : ''}";
+      content: "${({ icon }) => (icon ? getTristiconContent(icon) : '')}";
       display: inline-block;
       font: normal normal normal ${rem(14)} tristicons;
-      font-size: ${props => props.fontSize || 'inherit'};
+      font-size: ${({ fontSize }) => fontSize || 'inherit'};
       text-rendering: auto;
       vertical-align: inherit;
     }

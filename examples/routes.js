@@ -1,8 +1,6 @@
 // @flow
 
 import type { Route } from 'react-router';
-import { withNavigation } from './components/Navigation';
-import { withFooter } from './components/Footer';
 import * as Home from './containers/Home';
 import * as Avatar from './containers/Avatar';
 import * as Button from './containers/Button';
@@ -104,12 +102,6 @@ const routes: Array<$ExtendedRoute> = [
     name: '404',
     shouldShowInNavigationComponent: false,
   },
-].map(
-  (route: *): $ExtendedRoute =>
-    ({
-      ...route,
-      component: withFooter(withNavigation(route.component)),
-    }: Object),
-);
+];
 
 export default routes;

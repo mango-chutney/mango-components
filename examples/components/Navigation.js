@@ -21,7 +21,6 @@ function Navigation(props: { location: $Location }) {
             {location.pathname === route.path ? (
               <NavLink to={route.path}>{route.name}</NavLink>
             ) : (
-              // eslint-disable-next-line jsx-a11y/anchor-is-valid
               <Link to={route.path}>{route.name}</Link>
             )}
           </li>

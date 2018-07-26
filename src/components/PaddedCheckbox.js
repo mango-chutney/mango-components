@@ -57,9 +57,9 @@ export const createStyledComponents: $StyledSubComponentsFactory<
   const StyledInputComponent = styled(baseComponents.InputComponent)`
     :checked + label {
       transition: all 300ms ease;
-      background: ${props =>
-        props.checkboxColor
-          ? transparentize(0.8, props.checkboxColor)
+      background: ${({ checkboxColor }) =>
+        checkboxColor
+          ? transparentize(0.8, checkboxColor)
           : transparentize(0.8, styleProps.checkboxColor)};
     }
   `;

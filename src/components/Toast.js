@@ -104,28 +104,28 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     user-select: none;
     transition: all 15ms ease;
 
-    ${props =>
-      props.fadingOut &&
+    ${({ fadingOut }) =>
+      fadingOut &&
       css`
         animation: ${fadeOutAnimation} 0.3s ease-out normal forwards;
       `};
 
-    ${props =>
-      props.alert &&
+    ${({ alert }) =>
+      alert &&
       css`
         background: ${palette.alert};
         color: white;
       `};
 
-    ${props =>
-      props.success &&
+    ${({ success }) =>
+      success &&
       css`
         background: ${palette.success};
         color: white;
       `};
 
-    ${props =>
-      props.inactive &&
+    ${({ inactive }) =>
+      inactive &&
       css`
         background: ${palette.inactive};
         color: white;
@@ -165,10 +165,12 @@ class Toast extends React.Component<$Props, $State> {
     }
   }
 
-  componentWillReceiveProps(nextProps: $Props) {
-    if (nextProps.active && nextProps.active !== this.props.active) {
+  componentWillReceiveProps({ active: next }: $Props) {
+    const { active: prev } = this.props;
+
+    if (next && next !== prev) {
       this.activate();
-    } else if (!nextProps.active && nextProps.active !== this.props.active) {
+    } else if (!next && next !== prev) {
       this.close();
     }
   }
