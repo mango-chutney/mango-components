@@ -10,6 +10,7 @@ import { createComponent as createCheckboxComponent } from 'mango-components/es/
 import { createComponent as createPaddedCheckboxComponent } from 'mango-components/es/PaddedCheckbox';
 import { createComponent as createTextAreaComponent } from 'mango-components/es/TextArea';
 import { createComponent as createSelectComponent } from 'mango-components/es/Select';
+import { createComponent as createTypeaheadInputComponent } from 'mango-components/es/TypeaheadInput';
 
 const Tootlip = createTootlipComponent();
 const Button = createButtonComponent();
@@ -18,6 +19,7 @@ const Checkbox = createCheckboxComponent();
 const PaddedCheckbox = createPaddedCheckboxComponent();
 const TextArea = createTextAreaComponent();
 const Select = createSelectComponent();
+const TypeaheadInput = createTypeaheadInputComponent();
 
 type Props = {} & $FormProps;
 
@@ -103,6 +105,12 @@ export class Form extends React.Component<Props, State> {
               <option value="option-2">Option 2</option>
             </Field>
           </div>
+          <Field
+            name="fruit"
+            label="Enter fruit name"
+            items={['apple', 'orange', 'pear', 'banana']}
+            component={TypeaheadInput}
+          />
           <Button onClick={handleSubmit(this.submit)}>
             Go
             <Tootlip visible={submitting}>OK, please wait a moment…</Tootlip>
