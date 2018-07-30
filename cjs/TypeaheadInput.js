@@ -249,7 +249,7 @@ function (_React$Component) {
         innerRef: _this.inputRef
       })), isOpen && !!filteredItems.length && React.createElement(MenuComponent, null, filteredItems.map(function (item, index) {
         return React.createElement(ItemComponent, _objectSpread({}, getItemProps({
-          key: item,
+          key: mapItemToString(item),
           index: index,
           item: item
         }), {

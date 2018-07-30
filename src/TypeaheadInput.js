@@ -263,7 +263,7 @@ class TypeaheadInput extends React.Component<$Props, $State> {
                     <ItemComponent
                       {...{
                         ...getItemProps({
-                          key: item,
+                          key: mapItemToString(item),
                           index,
                           item,
                         }),
