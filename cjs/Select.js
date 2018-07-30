@@ -18,7 +18,7 @@ require("core-js/modules/es6.function.name");
 
 var React = _interopRequireWildcard(require("react"));
 
-var _styledComponents = _interopRequireDefault(require("styled-components"));
+var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _polished = require("polished");
 
@@ -55,11 +55,17 @@ exports.defaultStyleProps = defaultStyleProps;
 var createStyledComponents = function createStyledComponents(styleProps) {
   var SelectComponent = _styledComponents.default.select.withConfig({
     componentId: "s4vmyyd-0"
-  })(["appearance:none;background-color:", ";background-image:linear-gradient( ", ",", " );border-color:", ";border-radius:0.25rem;border-style:solid;border-width:0.05rem;color:", ";display:block;font-family:", ";height:2.6rem;margin-bottom:1rem;outline:0;padding:0.5rem 1rem;transition:border-color 300ms ease;width:100%;::-ms-expand{display:none;}:active,:focus{border-color:", ";}option{width:100%;}"], styleProps.backgroundColor, _constants.palette.white, styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.activeBorderColor);
+  })(["appearance:none;background-color:", ";background-image:linear-gradient( ", ",", " );border-color:", ";border-radius:0.25rem;border-style:solid;border-width:0.05rem;color:", ";display:block;font-family:", ";height:2.6rem;margin-bottom:1rem;outline:0;padding:0.5rem 1rem;transition:border-color 300ms ease;width:100%;::-ms-expand{display:none;}:active,:focus{border-color:", ";}option{width:100%;}", ";"], styleProps.backgroundColor, _constants.palette.white, styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.activeBorderColor, function (_ref) {
+    var invalid = _ref.invalid;
+    return invalid && (0, _styledComponents.css)(["border-color:", ";"], _constants.palette.alert);
+  });
 
   var LabelComponent = _styledComponents.default.span.withConfig({
     componentId: "s4vmyyd-1"
-  })(["font-size:", ";font-weight:", ";display:block;"], styleProps.fontSize, styleProps.fontWeight);
+  })(["font-size:", ";font-weight:", ";display:block;", ";"], styleProps.fontSize, styleProps.fontWeight, function (_ref2) {
+    var invalid = _ref2.invalid;
+    return invalid && (0, _styledComponents.css)(["color:", ";"], _constants.palette.alert);
+  });
 
   var SelectContainerComponent = _styledComponents.default.div.withConfig({
     componentId: "s4vmyyd-2"
@@ -74,19 +80,23 @@ var createStyledComponents = function createStyledComponents(styleProps) {
 
 exports.createStyledComponents = createStyledComponents;
 
-function Select(_ref) {
-  var SelectComponent = _ref.SelectComponent,
-      SelectContainerComponent = _ref.SelectContainerComponent,
-      LabelComponent = _ref.LabelComponent,
-      children = _ref.children,
-      input = _ref.input,
-      label = _ref.label,
-      meta = _ref.meta,
-      rest = _objectWithoutProperties(_ref, ["SelectComponent", "SelectContainerComponent", "LabelComponent", "children", "input", "label", "meta"]);
+function Select(_ref3) {
+  var SelectComponent = _ref3.SelectComponent,
+      SelectContainerComponent = _ref3.SelectContainerComponent,
+      LabelComponent = _ref3.LabelComponent,
+      children = _ref3.children,
+      input = _ref3.input,
+      label = _ref3.label,
+      meta = _ref3.meta,
+      invalid = _ref3.invalid,
+      rest = _objectWithoutProperties(_ref3, ["SelectComponent", "SelectContainerComponent", "LabelComponent", "children", "input", "label", "meta", "invalid"]);
 
   return React.createElement("label", {
     htmlFor: rest.id || input && input.name
-  }, label && React.createElement(LabelComponent, null, label), React.createElement(SelectContainerComponent, null, React.createElement(SelectComponent, _extends({}, input, rest, {
+  }, label && React.createElement(LabelComponent, {
+    invalid: invalid
+  }, label), React.createElement(SelectContainerComponent, null, React.createElement(SelectComponent, _extends({}, input, rest, {
+    invalid: invalid,
     id: rest.id || input && input.name
   }), children)));
 }

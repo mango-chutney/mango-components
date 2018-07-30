@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-components';
 import type { FieldProps as $FieldProps } from 'redux-form';
 import { rem, transparentize } from 'polished';
@@ -17,6 +17,7 @@ export type $StyledProps = {
   id?: string,
   label: string,
   placeholder: string,
+  invalid?: boolean,
 };
 
 export type $Props = {
@@ -76,23 +77,40 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     :focus {
       border-color: ${styleProps.activeBorderColor};
     }
+
+    ${({ invalid }) =>
+      invalid &&
+      css`
+        border-color: ${palette.alert};
+
+        ::placeholder {
+          color: ${palette.alert};
+        }
+      `};
   `;
 
   const LabelComponent = styled.span`
     font-size: ${styleProps.fontSize};
     font-weight: ${styleProps.fontWeight};
     display: block;
+
+    ${({ invalid }) =>
+      invalid &&
+      css`
+        color: ${palette.alert};
+      `};
   `;
 
   return { TextAreaComponent, LabelComponent };
 };
 
-export function Input({
+export function TextArea({
   TextAreaComponent,
   LabelComponent,
   input,
   meta,
   label,
+  invalid,
   ...rest
 }: $Props) {
   return (
@@ -102,6 +120,7 @@ export function Input({
         <TextAreaComponent
           {...input}
           {...rest}
+          invalid={invalid}
           id={rest.id || (input && input.name)}
         />
       </span>
@@ -112,7 +131,7 @@ export function Input({
 export const createComponent: $ComponentFactory<$StyledProps> = () => {
   const defaultStyledComponents = createStyledComponents(defaultStyleProps);
   return (props: $StyledProps) => (
-    <Input {...{ ...defaultStyledComponents, ...props }} />
+    <TextArea {...{ ...defaultStyledComponents, ...props }} />
   );
 };
 

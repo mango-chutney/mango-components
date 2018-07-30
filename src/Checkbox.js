@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-components';
 import type { FieldProps as $FieldProps } from 'redux-form';
 import { rem, darken } from 'polished';
@@ -18,6 +18,7 @@ export type $StyledProps = {
   children: React.Node,
   label: string,
   checkboxColor: string,
+  invalid?: boolean,
 };
 
 export type $Props = {
@@ -125,6 +126,12 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     display: inline-block;
     font-size: 1rem;
 
+    ${({ invalid }) =>
+      invalid &&
+      css`
+        color: ${palette.alert};
+      `};
+
     > div {
       min-height: ${rem(styleProps.checkboxSize)};
       line-height: ${rem(styleProps.checkboxSize)};
@@ -147,6 +154,12 @@ export const createStyledComponents: $StyledSubComponentsFactory<
         border: 1px solid ${palette.border};
         background: ${palette.lightGray};
         margin-right: 1rem;
+
+        ${({ invalid }) =>
+          invalid &&
+          css`
+            border-color: ${palette.alert};
+          `};
       }
 
       &::after {
@@ -205,6 +218,7 @@ export function Checkbox({
   input,
   meta,
   label,
+  invalid,
   ...rest
 }: $Props) {
   return (
@@ -214,11 +228,13 @@ export function Checkbox({
         id={rest.id || (input && input.name)}
         type="checkbox"
         checkboxColor={checkboxColor}
+        invalid={invalid}
         {...rest}
       />
       <LabelComponent
         htmlFor={rest.id || (input && input.name)}
         checkboxColor={checkboxColor}
+        invalid={invalid}
       >
         <div>{children || label || ''}</div>
       </LabelComponent>
