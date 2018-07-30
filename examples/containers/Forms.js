@@ -11,6 +11,7 @@ import { createComponent as createPaddedCheckboxComponent } from 'mango-componen
 import { createComponent as createTextAreaComponent } from 'mango-components/es/TextArea';
 import { createComponent as createSelectComponent } from 'mango-components/es/Select';
 import { createComponent as createTypeaheadInputComponent } from 'mango-components/es/TypeaheadInput';
+import { createComponent as createDatePickerComponent } from 'mango-components/es/DatePicker';
 
 const Tootlip = createTootlipComponent();
 const Button = createButtonComponent();
@@ -20,6 +21,7 @@ const PaddedCheckbox = createPaddedCheckboxComponent();
 const TextArea = createTextAreaComponent();
 const Select = createSelectComponent();
 const TypeaheadInput = createTypeaheadInputComponent();
+const DatePicker = createDatePickerComponent();
 
 type Props = {} & $FormProps;
 
@@ -110,6 +112,11 @@ export class Form extends React.Component<Props, State> {
             label="Enter fruit name"
             items={['apple', 'orange', 'pear', 'banana']}
             component={TypeaheadInput}
+          />
+          <Field
+            name="vegetable"
+            label="Enter vegetable date"
+            component={DatePicker}
           />
           <Button onClick={handleSubmit(this.submit)}>
             Go

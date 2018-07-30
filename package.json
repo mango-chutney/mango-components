@@ -24,6 +24,7 @@
     "lodash": "^4.17.10",
     "match-sorter": "^2.2.3",
     "popper.js": "1.12.6",
+    "react-day-picker": "^7.1.10",
     "react-popper": "0.7.4",
     "tristicons": "https://github.com/mango-chutney/tristicons/archive/81ef6d51d8ea06fafe83a584e33b7b94183e8409.tar.gz"
   },
@@ -71,6 +72,7 @@
     "> 1% in au"
   ],
   "peerDependencies": {
+    "luxon": "^1.3.3",
     "polished": "^1.9.3",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
