@@ -15,7 +15,6 @@ import type {
   $MangoComponent,
   $StyledSubComponentsFactory,
 } from './types';
-import { palette, globalRadius } from './constants';
 
 export type $StyledProps = {
   id?: string,
@@ -29,9 +28,14 @@ export type $Props = {
   LabelComponent: React.ComponentType<*>,
   MenuComponent: React.ComponentType<*>,
   MenuWrapperComponent: React.ComponentType<*>,
-  filterItems: (items: Array<any>, inputValue: any) => Array<any>,
+  filterItems: (
+    items: Array<any>,
+    mapItemToString: (item: any) => string,
+    inputValue: any,
+  ) => Array<any>,
   items: Array<any>,
   mapItemToString: (item: any) => string,
+  renderItem: (item: any) => React.Node,
 } & $StyledProps;
 
 export const defaultStyleProps = defaultInputStyleProps;
@@ -48,14 +52,10 @@ export const createStyledComponents: $StyledSubComponentsFactory<
   // eslint-disable-next-line no-unused-vars
 > = styleProps => {
   const MenuComponent = styled.div`
-    background: ${palette.white};
-    border-radius: 0 0 ${globalRadius} ${globalRadius};
-    border-top: 0;
-    border: 1px solid ${palette.border};
-    left: 0;
-    overflow: hidden;
+    background: white;
     position: absolute;
     top: 100%;
+    left: 0;
     width: 100%;
     z-index: 4;
   `;
@@ -66,10 +66,9 @@ export const createStyledComponents: $StyledSubComponentsFactory<
 
   const ItemComponent = styled.div`
     background-color: ${({ highlightedIndex, index }) =>
-      highlightedIndex === index ? palette.border : palette.white};
+      highlightedIndex === index ? 'lightgray' : 'white'};
     font-weight: ${({ selectedItem, item }) =>
       selectedItem === item ? 'bold' : 'normal'};
-    padding: 0.25rem 1rem;
   `;
 
   return {
@@ -95,6 +94,7 @@ class TypeaheadInput extends React.Component<$Props, $State> {
       }),
 
     mapItemToString: item => item || '',
+    renderItem: item => item || '',
   };
 
   state = {
@@ -222,7 +222,9 @@ class TypeaheadInput extends React.Component<$Props, $State> {
       input,
       items,
       label,
+      mapItemToString,
       meta,
+      renderItem,
       ...rest
     } = this.props;
 
@@ -270,7 +272,7 @@ class TypeaheadInput extends React.Component<$Props, $State> {
                         highlightedIndex,
                       }}
                     >
-                      {item}
+                      {renderItem(item)}
                     </ItemComponent>
                   ))}
                 </MenuComponent>
