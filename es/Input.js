@@ -9,7 +9,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { rem, transparentize } from 'polished';
 import { palette, fontWeights, fontStack } from './constants';
 export var defaultStyleProps = {
@@ -25,26 +25,36 @@ export var defaultStyleProps = {
 export var createStyledComponents = function createStyledComponents(styleProps) {
   var InputComponent = styled.input.withConfig({
     componentId: "ga0twe-0"
-  })(["appearance:none;background-color:", ";border-color:", ";border-radius:4px;border-style:solid;border-width:1px;color:", ";display:block;font-family:", ";height:2.6rem;margin-bottom:1rem;outline:0;padding:0.5rem 1rem;transition:border-color 300ms ease;width:100%;::placeholder{color:", ";}:active,:focus{border-color:", ";}"], styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.placeholderColor, styleProps.activeBorderColor);
+  })(["appearance:none;background-color:", ";border-color:", ";border-radius:4px;border-style:solid;border-width:1px;color:", ";display:block;font-family:", ";height:2.6rem;margin-bottom:1rem;outline:0;padding:0.5rem 1rem;transition:border-color 300ms ease;width:100%;::placeholder{color:", ";}:active,:focus{border-color:", ";}", ";"], styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.placeholderColor, styleProps.activeBorderColor, function (_ref) {
+    var invalid = _ref.invalid;
+    return invalid && css(["border-color:", ";::placeholder{color:", ";}"], palette.alert, palette.alert);
+  });
   var LabelComponent = styled.span.withConfig({
     componentId: "ga0twe-1"
-  })(["font-size:", ";font-weight:", ";display:block;"], styleProps.fontSize, styleProps.fontWeight);
+  })(["font-size:", ";font-weight:", ";display:block;", ";"], styleProps.fontSize, styleProps.fontWeight, function (_ref2) {
+    var invalid = _ref2.invalid;
+    return invalid && css(["color:", ";"], palette.alert);
+  });
   return {
     InputComponent: InputComponent,
     LabelComponent: LabelComponent
   };
 };
-export function Input(_ref) {
-  var InputComponent = _ref.InputComponent,
-      LabelComponent = _ref.LabelComponent,
-      input = _ref.input,
-      meta = _ref.meta,
-      label = _ref.label,
-      rest = _objectWithoutPropertiesLoose(_ref, ["InputComponent", "LabelComponent", "input", "meta", "label"]);
+export function Input(_ref3) {
+  var InputComponent = _ref3.InputComponent,
+      LabelComponent = _ref3.LabelComponent,
+      input = _ref3.input,
+      meta = _ref3.meta,
+      label = _ref3.label,
+      invalid = _ref3.invalid,
+      rest = _objectWithoutPropertiesLoose(_ref3, ["InputComponent", "LabelComponent", "input", "meta", "label", "invalid"]);
 
   return React.createElement("label", {
     htmlFor: rest.id || input && input.name
-  }, label && React.createElement(LabelComponent, null, label), React.createElement("span", null, React.createElement(InputComponent, _extends({}, input, rest, {
+  }, label && React.createElement(LabelComponent, {
+    invalid: invalid
+  }, label), React.createElement("span", null, React.createElement(InputComponent, _extends({}, input, rest, {
+    invalid: invalid,
     id: rest.id || input && input.name
   }))));
 }

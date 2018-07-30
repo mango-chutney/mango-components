@@ -17,7 +17,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { rem, darken } from 'polished';
 import { palette, fontWeights } from './constants';
 export var defaultStyleProps = {
@@ -126,14 +126,20 @@ export var createStyledComponents = function createStyledComponents(styleProps) 
 
   var LabelComponent = styled.label.withConfig({
     componentId: "s156yctp-1"
-  })(["cursor:pointer;font-weight:", ";display:inline-block;font-size:1rem;> div{min-height:", ";line-height:", ";position:relative;border:1px solid transparent;display:block;&::before,&::after{width:", ";height:", ";cursor:pointer;content:'';display:inline-block;border-radius:4px;vertical-align:middle;}&::before{border:1px solid ", ";background:", ";margin-right:1rem;}&::after{position:absolute;left:0;border:1px solid transparent;line-height:", ";margin-top:", ";text-align:center;transform:scale(0);}}"], fontWeights.semibold, rem(styleProps.checkboxSize), rem(styleProps.checkboxSize), rem(styleProps.checkboxSize), rem(styleProps.checkboxSize), palette.border, palette.lightGray, rem(styleProps.checkboxSize), rem(styleProps.checkboxSize * 0.1));
+  })(["cursor:pointer;font-weight:", ";display:inline-block;font-size:1rem;", ";> div{min-height:", ";line-height:", ";position:relative;border:1px solid transparent;display:block;&::before,&::after{width:", ";height:", ";cursor:pointer;content:'';display:inline-block;border-radius:4px;vertical-align:middle;}&::before{border:1px solid ", ";background:", ";margin-right:1rem;", ";}&::after{position:absolute;left:0;border:1px solid transparent;line-height:", ";margin-top:", ";text-align:center;transform:scale(0);}}"], fontWeights.semibold, function (_ref2) {
+    var invalid = _ref2.invalid;
+    return invalid && css(["color:", ";"], palette.alert);
+  }, rem(styleProps.checkboxSize), rem(styleProps.checkboxSize), rem(styleProps.checkboxSize), rem(styleProps.checkboxSize), palette.border, palette.lightGray, function (_ref3) {
+    var invalid = _ref3.invalid;
+    return invalid && css(["border-color:", ";"], palette.alert);
+  }, rem(styleProps.checkboxSize), rem(styleProps.checkboxSize * 0.1));
   var InputComponent = styled.input.withConfig({
     componentId: "s156yctp-2"
-  })(["opacity:0;width:0;position:absolute;&[disabled]{cursor:pointer;}:checked + label > div{&::before{background:", ";border-color:", ";transition:background-color 0.3s;}&::after{content:'';background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSd4TWlkWU1pZCcgd2lkdGg9JzE2LjUnIGhlaWdodD0nMTUnIHZpZXdCb3g9JzAgMCAxNi41IDE1Jz48cGF0aCBmaWxsPScjZmZmJyBmaWxsLXJ1bGU9J2V2ZW5vZGQnIGQ9J00xNi41MTUsMS4wNzEgQzE2LjM5OSwwLjgyNyAxNS45MTQsLTAuMDMwIDE1LjUxNSwwLjAwMSBDMTQuMjg5LDAuNzY1IDEyLjY5MywyLjM1NCAxMS42MzgsMy4zNjIgQzkuNTI4LDUuMzc4IDcuNTAzLDcuNDg2IDUuNTA4LDkuNjI0IEwxLjUxNiw1Ljg5NyBMMC4wMDUsNy40ODYgQzIuMjAwLDkuODM3IDQuNTY3LDEyLjM3MyA2LjUwNSwxNS4wMDAgQzguOTg2LDEwLjYzMiAxMy4wMzUsNC4zNzAgMTYuNTE1LDEuMDcxIEwxNi41MTUsMS4wNzEgWicvPjwvc3ZnPg==');background-position:50% 40%;background-repeat:no-repeat;background-size:70%;transition:all 0.25s;transform:scale(1);}}"], function (_ref2) {
-    var checkboxColor = _ref2.checkboxColor;
+  })(["opacity:0;width:0;position:absolute;&[disabled]{cursor:pointer;}:checked + label > div{&::before{background:", ";border-color:", ";transition:background-color 0.3s;}&::after{content:'';background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSd4TWlkWU1pZCcgd2lkdGg9JzE2LjUnIGhlaWdodD0nMTUnIHZpZXdCb3g9JzAgMCAxNi41IDE1Jz48cGF0aCBmaWxsPScjZmZmJyBmaWxsLXJ1bGU9J2V2ZW5vZGQnIGQ9J00xNi41MTUsMS4wNzEgQzE2LjM5OSwwLjgyNyAxNS45MTQsLTAuMDMwIDE1LjUxNSwwLjAwMSBDMTQuMjg5LDAuNzY1IDEyLjY5MywyLjM1NCAxMS42MzgsMy4zNjIgQzkuNTI4LDUuMzc4IDcuNTAzLDcuNDg2IDUuNTA4LDkuNjI0IEwxLjUxNiw1Ljg5NyBMMC4wMDUsNy40ODYgQzIuMjAwLDkuODM3IDQuNTY3LDEyLjM3MyA2LjUwNSwxNS4wMDAgQzguOTg2LDEwLjYzMiAxMy4wMzUsNC4zNzAgMTYuNTE1LDEuMDcxIEwxNi41MTUsMS4wNzEgWicvPjwvc3ZnPg==');background-position:50% 40%;background-repeat:no-repeat;background-size:70%;transition:all 0.25s;transform:scale(1);}}"], function (_ref4) {
+    var checkboxColor = _ref4.checkboxColor;
     return checkboxColor || styleProps.checkboxColor;
-  }, function (_ref3) {
-    var checkboxColor = _ref3.checkboxColor;
+  }, function (_ref5) {
+    var checkboxColor = _ref5.checkboxColor;
     return checkboxColor ? darken(0.05, checkboxColor) : darken(0.05, styleProps.checkboxColor);
   });
   return {
@@ -142,24 +148,27 @@ export var createStyledComponents = function createStyledComponents(styleProps) 
     WrapperComponent: WrapperComponent
   };
 };
-export function Checkbox(_ref4) {
-  var InputComponent = _ref4.InputComponent,
-      LabelComponent = _ref4.LabelComponent,
-      WrapperComponent = _ref4.WrapperComponent,
-      children = _ref4.children,
-      checkboxColor = _ref4.checkboxColor,
-      input = _ref4.input,
-      meta = _ref4.meta,
-      label = _ref4.label,
-      rest = _objectWithoutPropertiesLoose(_ref4, ["InputComponent", "LabelComponent", "WrapperComponent", "children", "checkboxColor", "input", "meta", "label"]);
+export function Checkbox(_ref6) {
+  var InputComponent = _ref6.InputComponent,
+      LabelComponent = _ref6.LabelComponent,
+      WrapperComponent = _ref6.WrapperComponent,
+      children = _ref6.children,
+      checkboxColor = _ref6.checkboxColor,
+      input = _ref6.input,
+      meta = _ref6.meta,
+      label = _ref6.label,
+      invalid = _ref6.invalid,
+      rest = _objectWithoutPropertiesLoose(_ref6, ["InputComponent", "LabelComponent", "WrapperComponent", "children", "checkboxColor", "input", "meta", "label", "invalid"]);
 
   return React.createElement(WrapperComponent, null, React.createElement(InputComponent, _extends({}, input, {
     id: rest.id || input && input.name,
     type: "checkbox",
-    checkboxColor: checkboxColor
+    checkboxColor: checkboxColor,
+    invalid: invalid
   }, rest)), React.createElement(LabelComponent, {
     htmlFor: rest.id || input && input.name,
-    checkboxColor: checkboxColor
+    checkboxColor: checkboxColor,
+    invalid: invalid
   }, React.createElement("div", null, children || label || '')));
 }
 export var createComponent = function createComponent() {

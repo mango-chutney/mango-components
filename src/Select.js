@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-components';
 import type { FieldProps as $FieldProps } from 'redux-form';
 import { rem, transparentize } from 'polished';
@@ -19,6 +19,7 @@ export type $StyledProps = {
   children: React.Node,
   label: string,
   placeholder: string,
+  invalid?: boolean,
 };
 
 export type $Props = {
@@ -89,12 +90,24 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     option {
       width: 100%;
     }
+
+    ${({ invalid }) =>
+      invalid &&
+      css`
+        border-color: ${palette.alert};
+      `};
   `;
 
   const LabelComponent = styled.span`
     font-size: ${styleProps.fontSize};
     font-weight: ${styleProps.fontWeight};
     display: block;
+
+    ${({ invalid }) =>
+      invalid &&
+      css`
+        color: ${palette.alert};
+      `};
   `;
 
   const SelectContainerComponent = styled.div`
@@ -122,15 +135,17 @@ export function Select({
   input,
   label,
   meta,
+  invalid,
   ...rest
 }: $Props) {
   return (
     <label htmlFor={rest.id || (input && input.name)}>
-      {label && <LabelComponent>{label}</LabelComponent>}
+      {label && <LabelComponent invalid={invalid}>{label}</LabelComponent>}
       <SelectContainerComponent>
         <SelectComponent
           {...input}
           {...rest}
+          invalid={invalid}
           id={rest.id || (input && input.name)}
         >
           {children}

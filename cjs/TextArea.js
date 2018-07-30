@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Input = Input;
+exports.TextArea = TextArea;
 exports.default = exports.createComponent = exports.createStyledComponents = exports.defaultStyleProps = void 0;
 
 require("core-js/modules/es6.object.assign");
@@ -18,13 +18,11 @@ require("core-js/modules/es6.function.name");
 
 var React = _interopRequireWildcard(require("react"));
 
-var _styledComponents = _interopRequireDefault(require("styled-components"));
+var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _polished = require("polished");
 
 var _constants = require("./constants");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -53,11 +51,17 @@ exports.defaultStyleProps = defaultStyleProps;
 var createStyledComponents = function createStyledComponents(styleProps) {
   var TextAreaComponent = _styledComponents.default.textarea.withConfig({
     componentId: "orybjj-0"
-  })(["appearance:none;background-color:", ";border-color:", ";border-radius:0.25rem;border-style:solid;border-width:0.05rem;color:", ";display:block;font-family:", ";margin-bottom:1rem;outline:0;padding:1.25rem 1rem;transition:border-color 300ms ease;width:100%;::placeholder{color:", ";}:active,:focus{border-color:", ";}"], styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.placeholderColor, styleProps.activeBorderColor);
+  })(["appearance:none;background-color:", ";border-color:", ";border-radius:0.25rem;border-style:solid;border-width:0.05rem;color:", ";display:block;font-family:", ";margin-bottom:1rem;outline:0;padding:1.25rem 1rem;transition:border-color 300ms ease;width:100%;::placeholder{color:", ";}:active,:focus{border-color:", ";}", ";"], styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.placeholderColor, styleProps.activeBorderColor, function (_ref) {
+    var invalid = _ref.invalid;
+    return invalid && (0, _styledComponents.css)(["border-color:", ";::placeholder{color:", ";}"], _constants.palette.alert, _constants.palette.alert);
+  });
 
   var LabelComponent = _styledComponents.default.span.withConfig({
     componentId: "orybjj-1"
-  })(["font-size:", ";font-weight:", ";display:block;"], styleProps.fontSize, styleProps.fontWeight);
+  })(["font-size:", ";font-weight:", ";display:block;", ";"], styleProps.fontSize, styleProps.fontWeight, function (_ref2) {
+    var invalid = _ref2.invalid;
+    return invalid && (0, _styledComponents.css)(["color:", ";"], _constants.palette.alert);
+  });
 
   return {
     TextAreaComponent: TextAreaComponent,
@@ -67,17 +71,19 @@ var createStyledComponents = function createStyledComponents(styleProps) {
 
 exports.createStyledComponents = createStyledComponents;
 
-function Input(_ref) {
-  var TextAreaComponent = _ref.TextAreaComponent,
-      LabelComponent = _ref.LabelComponent,
-      input = _ref.input,
-      meta = _ref.meta,
-      label = _ref.label,
-      rest = _objectWithoutProperties(_ref, ["TextAreaComponent", "LabelComponent", "input", "meta", "label"]);
+function TextArea(_ref3) {
+  var TextAreaComponent = _ref3.TextAreaComponent,
+      LabelComponent = _ref3.LabelComponent,
+      input = _ref3.input,
+      meta = _ref3.meta,
+      label = _ref3.label,
+      invalid = _ref3.invalid,
+      rest = _objectWithoutProperties(_ref3, ["TextAreaComponent", "LabelComponent", "input", "meta", "label", "invalid"]);
 
   return React.createElement("label", {
     htmlFor: rest.id || input && input.name
   }, label && React.createElement(LabelComponent, null, label), React.createElement("span", null, React.createElement(TextAreaComponent, _extends({}, input, rest, {
+    invalid: invalid,
     id: rest.id || input && input.name
   }))));
 }
@@ -85,7 +91,7 @@ function Input(_ref) {
 var createComponent = function createComponent() {
   var defaultStyledComponents = createStyledComponents(defaultStyleProps);
   return function (props) {
-    return React.createElement(Input, _objectSpread({}, defaultStyledComponents, props));
+    return React.createElement(TextArea, _objectSpread({}, defaultStyledComponents, props));
   };
 };
 
