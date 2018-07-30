@@ -124,7 +124,7 @@ export class Form extends React.Component<Props, State> {
               })
             }
             renderItem={item => (
-              <div style={{ backgroundColor: item.color }}>{item.name}</div>
+              <span style={{ color: item.color }}>{item.name}</span>
             )}
             mapItemToString={fruit => (fruit ? fruit.name : '')}
             component={TypeaheadInput}
