@@ -256,7 +256,7 @@ function (_React$Component) {
           index: index,
           selectedItem: selectedItem,
           highlightedIndex: highlightedIndex
-        }), renderItem(item));
+        }), typeof renderItem === 'function' ? renderItem(item) : mapItemToString(item));
       })))));
     });
 
@@ -300,10 +300,9 @@ _defineProperty(TypeaheadInput, "defaultProps", {
       maxRanking: _matchSorter.default.rankings.STARTS_WITH
     });
   },
+  // Your mapItemToString function will be used as the key for each item, so
+  // make sure it's unique.
   mapItemToString: function mapItemToString(item) {
-    return item || '';
-  },
-  renderItem: function renderItem(item) {
     return item || '';
   }
 });

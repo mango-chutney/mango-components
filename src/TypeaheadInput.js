@@ -35,7 +35,7 @@ export type $Props = {
   ) => Array<any>,
   items: Array<any>,
   mapItemToString: (item: any) => string,
-  renderItem: (item: any) => React.Node,
+  renderItem?: (item: any) => React.Node, // defaults to mapItemToString
 } & $StyledProps;
 
 export const defaultStyleProps = defaultInputStyleProps;
@@ -93,8 +93,9 @@ class TypeaheadInput extends React.Component<$Props, $State> {
         maxRanking: matchSorter.rankings.STARTS_WITH,
       }),
 
+    // Your mapItemToString function will be used as the key for each item, so
+    // make sure it's unique.
     mapItemToString: item => item || '',
-    renderItem: item => item || '',
   };
 
   state = {
@@ -272,7 +273,9 @@ class TypeaheadInput extends React.Component<$Props, $State> {
                         highlightedIndex,
                       }}
                     >
-                      {renderItem(item)}
+                      {typeof renderItem === 'function'
+                        ? renderItem(item)
+                        : mapItemToString(item)}
                     </ItemComponent>
                   ))}
                 </MenuComponent>
