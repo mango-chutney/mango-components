@@ -7,5 +7,6 @@ find . \
      -not -path './node_modules/*' \
      -not -path './examples/node_modules/*' \
      -not -path './flow-typed/*' \
-     -not -path './lib/*' \
+     -not -path './cjs/*' \
+     -not -path './es/*' \
      -print0 | xargs --null "$(npm bin)/eslint" --fix
