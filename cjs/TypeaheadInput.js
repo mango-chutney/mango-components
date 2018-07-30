@@ -25,8 +25,6 @@ var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 var _Input = require("./Input");
 
-var _constants = require("./constants");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
@@ -63,7 +61,7 @@ exports.defaultStyleProps = defaultStyleProps;
 var createStyledComponents = function createStyledComponents(styleProps) {
   var MenuComponent = _styledComponents.default.div.withConfig({
     componentId: "s1ah6m0p-0"
-  })(["background:", ";border-radius:0 0 ", " ", ";border-top:0;border:1px solid ", ";left:0;overflow:hidden;position:absolute;top:100%;width:100%;z-index:4;"], _constants.palette.white, _constants.globalRadius, _constants.globalRadius, _constants.palette.border);
+  })(["background:white;position:absolute;top:100%;left:0;width:100%;z-index:4;"]);
 
   var MenuWrapperComponent = _styledComponents.default.div.withConfig({
     componentId: "s1ah6m0p-1"
@@ -71,10 +69,10 @@ var createStyledComponents = function createStyledComponents(styleProps) {
 
   var ItemComponent = _styledComponents.default.div.withConfig({
     componentId: "s1ah6m0p-2"
-  })(["background-color:", ";font-weight:", ";padding:0.25rem 1rem;"], function (_ref) {
+  })(["background-color:", ";font-weight:", ";"], function (_ref) {
     var highlightedIndex = _ref.highlightedIndex,
         index = _ref.index;
-    return highlightedIndex === index ? _constants.palette.border : _constants.palette.white;
+    return highlightedIndex === index ? 'lightgray' : 'white';
   }, function (_ref2) {
     var selectedItem = _ref2.selectedItem,
         item = _ref2.item;
@@ -225,8 +223,10 @@ function (_React$Component) {
           input = _this$props.input,
           items = _this$props.items,
           label = _this$props.label,
+          mapItemToString = _this$props.mapItemToString,
           meta = _this$props.meta,
-          rest = _objectWithoutProperties(_this$props, ["InputComponent", "ItemComponent", "LabelComponent", "MenuComponent", "MenuWrapperComponent", "filterItems", "input", "items", "label", "meta"]);
+          renderItem = _this$props.renderItem,
+          rest = _objectWithoutProperties(_this$props, ["InputComponent", "ItemComponent", "LabelComponent", "MenuComponent", "MenuWrapperComponent", "filterItems", "input", "items", "label", "mapItemToString", "meta", "renderItem"]);
 
       var filteredItems = filterItems(items, inputValue);
       return React.createElement("div", null, React.createElement(LabelComponent, getLabelProps(), label, React.createElement(MenuWrapperComponent, null, React.createElement(InputComponent, _objectSpread({}, getInputProps(input), rest, {
@@ -256,7 +256,7 @@ function (_React$Component) {
           index: index,
           selectedItem: selectedItem,
           highlightedIndex: highlightedIndex
-        }), item);
+        }), renderItem(item));
       })))));
     });
 
@@ -301,6 +301,9 @@ _defineProperty(TypeaheadInput, "defaultProps", {
     });
   },
   mapItemToString: function mapItemToString(item) {
+    return item || '';
+  },
+  renderItem: function renderItem(item) {
     return item || '';
   }
 });

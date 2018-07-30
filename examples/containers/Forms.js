@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import matchSorter from 'match-sorter';
 import type { FormProps as $FormProps } from 'redux-form';
 import { createComponent as createTootlipComponent } from 'mango-components/es/Tootlip';
 import { createComponent as createButtonComponent } from 'mango-components/es/Button';
@@ -110,7 +111,22 @@ export class Form extends React.Component<Props, State> {
           <Field
             name="fruit"
             label="Enter fruit name"
-            items={['apple', 'orange', 'pear', 'banana']}
+            items={[
+              { name: 'apple', color: 'red' },
+              { name: 'orange', color: 'orange' },
+              { name: 'pear', color: 'green' },
+              { name: 'banana', color: 'yellow' },
+            ]}
+            filterItems={(items, inputValue) =>
+              matchSorter(items, inputValue, {
+                keys: ['name'],
+                maxRanking: matchSorter.rankings.STARTS_WITH,
+              })
+            }
+            renderItem={item => (
+              <div style={{ backgroundColor: item.color }}>{item.name}</div>
+            )}
+            mapItemToString={fruit => (fruit ? fruit.name : '')}
             component={TypeaheadInput}
           />
           <Field
