@@ -312,7 +312,9 @@ class DatePicker extends React.Component<$Props, void> {
           formatDate={formatDate}
           parseDate={parseDate}
           placeholder={`${DateTime.local().toFormat(dateFormat)}`}
-          component={inputProps => <InputComponent {...inputProps} />}
+          component={inputProps => (
+            <InputComponent {...inputProps} name={input.name} />
+          )}
           onDayChange={this.handleOnDayChange}
           overlayComponent={({
             children,
