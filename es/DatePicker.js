@@ -9,6 +9,12 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
+function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 import * as React from 'react';
 import styled from 'styled-components';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
@@ -66,45 +72,80 @@ export var createStyledComponents = function createStyledComponents(styleProps) 
   });
 };
 
-function DatePicker(_ref) {
-  var InputComponent = _ref.InputComponent,
-      LabelComponent = _ref.LabelComponent,
-      OverlayWrapperComponent = _ref.OverlayWrapperComponent,
-      OverlayComponent = _ref.OverlayComponent,
-      input = _ref.input,
-      label = _ref.label,
-      dateFormat = _ref.dateFormat,
-      inputProps = _ref.inputProps,
-      calendarProps = _ref.calendarProps,
-      rest = _objectWithoutPropertiesLoose(_ref, ["InputComponent", "LabelComponent", "OverlayWrapperComponent", "OverlayComponent", "input", "label", "dateFormat", "inputProps", "calendarProps"]);
+var DatePicker =
+/*#__PURE__*/
+function (_React$Component) {
+  _inheritsLoose(DatePicker, _React$Component);
 
-  return React.createElement("label", {
-    htmlFor: input.name
-  }, label && React.createElement(LabelComponent, null, label), React.createElement(DayPickerInput, _extends({
-    format: dateFormat,
-    formatDate: formatDate,
-    parseDate: parseDate,
-    placeholder: "" + DateTime.local().toFormat(dateFormat),
-    inputProps: Object.assign({}, input),
-    component: function component(props) {
-      return React.createElement(InputComponent, props);
-    },
-    onDayChange: function onDayChange(day) {
-      return input.onChange(formatDate(day, dateFormat));
-    },
-    overlayComponent: function overlayComponent(_ref2) {
-      var children = _ref2.children,
-          props = _objectWithoutPropertiesLoose(_ref2, ["children"]);
+  function DatePicker() {
+    var _this;
 
-      return React.createElement(OverlayWrapperComponent, props, React.createElement(OverlayComponent, null, children));
-    },
-    dayPickerProps: Object.assign({}, calendarProps)
-  }, rest)));
-}
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-DatePicker.defaultProps = {
+    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
+
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "inputRef", React.createRef());
+
+    return _this;
+  }
+
+  var _proto = DatePicker.prototype;
+
+  _proto.componentDidMount = function componentDidMount() {
+    if (this.inputRef.current) {
+      this.inputRef.current.focus();
+    }
+  };
+
+  _proto.render = function render() {
+    var _this2 = this;
+
+    var _this$props = this.props,
+        InputComponent = _this$props.InputComponent,
+        LabelComponent = _this$props.LabelComponent,
+        OverlayWrapperComponent = _this$props.OverlayWrapperComponent,
+        OverlayComponent = _this$props.OverlayComponent,
+        input = _this$props.input,
+        label = _this$props.label,
+        dateFormat = _this$props.dateFormat,
+        calendarProps = _this$props.calendarProps,
+        rest = _objectWithoutPropertiesLoose(_this$props, ["InputComponent", "LabelComponent", "OverlayWrapperComponent", "OverlayComponent", "input", "label", "dateFormat", "calendarProps"]);
+
+    return React.createElement("label", {
+      htmlFor: input.name
+    }, label && React.createElement(LabelComponent, null, label), React.createElement(DayPickerInput, _extends({
+      format: dateFormat,
+      formatDate: formatDate,
+      parseDate: parseDate,
+      placeholder: "" + DateTime.local().toFormat(dateFormat),
+      inputProps: Object.assign({}, input),
+      component: function component(inputProps) {
+        return React.createElement(InputComponent, _extends({}, inputProps, {
+          innerRef: _this2.inputRef
+        }));
+      },
+      onDayChange: function onDayChange(day) {
+        return input.onChange(formatDate(day, dateFormat));
+      },
+      overlayComponent: function overlayComponent(_ref) {
+        var children = _ref.children,
+            overlayProps = _objectWithoutPropertiesLoose(_ref, ["children"]);
+
+        return React.createElement(OverlayWrapperComponent, overlayProps, React.createElement(OverlayComponent, null, children));
+      },
+      dayPickerProps: Object.assign({}, calendarProps)
+    }, rest)));
+  };
+
+  return DatePicker;
+}(React.Component);
+
+_defineProperty(DatePicker, "defaultProps", {
   dateFormat: 'dd/LL/yyyy'
-};
+});
+
 export var createComponent = function createComponent() {
   var defaultStyledComponents = createStyledComponents(defaultStyleProps);
   return function (props) {

@@ -271,49 +271,62 @@ export const createStyledComponents: $StyledSubComponentsFactory<
   };
 };
 
-function DatePicker({
-  InputComponent,
-  LabelComponent,
-  OverlayWrapperComponent,
-  OverlayComponent,
-  input,
-  label,
-  dateFormat,
-  inputProps,
-  calendarProps,
-  ...rest
-}: $Props) {
-  return (
-    <label htmlFor={input.name}>
-      {label && <LabelComponent>{label}</LabelComponent>}
-      <DayPickerInput
-        format={dateFormat}
-        formatDate={formatDate}
-        parseDate={parseDate}
-        placeholder={`${DateTime.local().toFormat(dateFormat)}`}
-        inputProps={{ ...input }}
-        component={props => <InputComponent {...props} />}
-        onDayChange={day => input.onChange(formatDate(day, dateFormat))}
-        overlayComponent={({
-          children,
-          ...props
-        }: {
-          children: React.Node,
-        }) => (
-          <OverlayWrapperComponent {...props}>
-            <OverlayComponent>{children}</OverlayComponent>
-          </OverlayWrapperComponent>
-        )}
-        dayPickerProps={{ ...calendarProps }}
-        {...rest}
-      />
-    </label>
-  );
-}
+class DatePicker extends React.Component<$Props, void> {
+  inputRef = React.createRef();
 
-DatePicker.defaultProps = {
-  dateFormat: 'dd/LL/yyyy',
-};
+  static defaultProps = {
+    dateFormat: 'dd/LL/yyyy',
+  };
+
+  componentDidMount() {
+    if (this.inputRef.current) {
+      this.inputRef.current.focus();
+    }
+  }
+
+  render() {
+    const {
+      InputComponent,
+      LabelComponent,
+      OverlayWrapperComponent,
+      OverlayComponent,
+      input,
+      label,
+      dateFormat,
+      calendarProps,
+      ...rest
+    } = this.props;
+
+    return (
+      <label htmlFor={input.name}>
+        {label && <LabelComponent>{label}</LabelComponent>}
+        <DayPickerInput
+          format={dateFormat}
+          formatDate={formatDate}
+          parseDate={parseDate}
+          placeholder={`${DateTime.local().toFormat(dateFormat)}`}
+          inputProps={{ ...input }}
+          component={inputProps => (
+            <InputComponent {...inputProps} innerRef={this.inputRef} />
+          )}
+          onDayChange={day => input.onChange(formatDate(day, dateFormat))}
+          overlayComponent={({
+            children,
+            ...overlayProps
+          }: {
+            children: React.Node,
+          }) => (
+            <OverlayWrapperComponent {...overlayProps}>
+              <OverlayComponent>{children}</OverlayComponent>
+            </OverlayWrapperComponent>
+          )}
+          dayPickerProps={{ ...calendarProps }}
+          {...rest}
+        />
+      </label>
+    );
+  }
+}
 
 export const createComponent: $ComponentFactory<$Props> = () => {
   const defaultStyledComponents = createStyledComponents(defaultStyleProps);
