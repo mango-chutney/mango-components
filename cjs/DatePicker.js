@@ -183,7 +183,9 @@ function (_React$Component) {
         parseDate: parseDate,
         placeholder: "".concat(_luxon.DateTime.local().toFormat(dateFormat)),
         component: function component(inputProps) {
-          return React.createElement(InputComponent, inputProps);
+          return React.createElement(InputComponent, _extends({}, inputProps, {
+            name: input.name
+          }));
         },
         onDayChange: this.handleOnDayChange,
         overlayComponent: function overlayComponent(_ref) {
