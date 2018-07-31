@@ -4,7 +4,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-components';
 import type { FieldProps as $FieldProps } from 'redux-form';
-import { rem, transparentize } from 'polished';
+import { rem, transparentize, darken } from 'polished';
 import { palette, fontWeights, fontStack } from './constants';
 import type {
   $ComponentFactory,
@@ -18,6 +18,7 @@ export type $StyledProps = {
   label: string,
   placeholder: string,
   invalid?: boolean,
+  disabled?: boolean,
 };
 
 export type $Props = {
@@ -88,6 +89,18 @@ export const createStyledComponents: $StyledSubComponentsFactory<
           color: ${palette.alert};
         }
       `};
+
+    ${({ disabled }) =>
+      disabled &&
+      css`
+        background-color: ${darken(0.05, styleProps.backgroundColor)};
+        color: ${darken(0.05, styleProps.color)};
+        cursor: not-allowed;
+
+        ::placeholder {
+          color: ${darken(0.05, styleProps.placeholderColor)};
+        }
+      `};
   `;
 
   const LabelComponent = styled.span`
@@ -112,16 +125,22 @@ export function Input({
   meta,
   label,
   invalid,
+  disabled,
   ...rest
 }: $Props) {
   return (
     <label htmlFor={rest.id || (input && input.name)}>
-      {label && <LabelComponent invalid={invalid}>{label}</LabelComponent>}
+      {label && (
+        <LabelComponent invalid={invalid} disabled={disabled}>
+          {label}
+        </LabelComponent>
+      )}
       <span>
         <InputComponent
           {...input}
           {...rest}
           invalid={invalid}
+          disabled={disabled}
           id={rest.id || (input && input.name)}
         />
       </span>

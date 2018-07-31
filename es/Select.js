@@ -10,7 +10,7 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { rem, transparentize } from 'polished';
+import { rem, transparentize, darken } from 'polished';
 import tristicons from 'tristicons';
 import { palette, fontWeights, fontStack } from './constants';
 export var defaultStyleProps = {
@@ -26,14 +26,17 @@ export var defaultStyleProps = {
 export var createStyledComponents = function createStyledComponents(styleProps) {
   var SelectComponent = styled.select.withConfig({
     componentId: "s4vmyyd-0"
-  })(["appearance:none;background-color:", ";background-image:linear-gradient( ", ",", " );border-color:", ";border-radius:0.25rem;border-style:solid;border-width:0.05rem;color:", ";display:block;font-family:", ";height:2.6rem;margin-bottom:1rem;outline:0;padding:0.5rem 1rem;transition:border-color 300ms ease;width:100%;::-ms-expand{display:none;}:active,:focus{border-color:", ";}option{width:100%;}", ";"], styleProps.backgroundColor, palette.white, styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.activeBorderColor, function (_ref) {
+  })(["appearance:none;background-color:", ";background-image:linear-gradient( ", ",", " );border-color:", ";border-radius:0.25rem;border-style:solid;border-width:0.05rem;color:", ";display:block;font-family:", ";height:2.6rem;margin-bottom:1rem;outline:0;padding:0.5rem 1rem;transition:border-color 300ms ease;width:100%;::-ms-expand{display:none;}:active,:focus{border-color:", ";}option{width:100%;}", ";", ";"], styleProps.backgroundColor, palette.white, styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.activeBorderColor, function (_ref) {
     var invalid = _ref.invalid;
     return invalid && css(["border-color:", ";"], palette.alert);
+  }, function (_ref2) {
+    var disabled = _ref2.disabled;
+    return disabled && css(["background-color:", ";background-image:linear-gradient( ", ",", " );color:", ";cursor:not-allowed;"], darken(0.05, styleProps.backgroundColor), darken(0.05, palette.white), darken(0.05, styleProps.backgroundColor), darken(0.05, styleProps.color));
   });
   var LabelComponent = styled.span.withConfig({
     componentId: "s4vmyyd-1"
-  })(["font-size:", ";font-weight:", ";display:block;", ";"], styleProps.fontSize, styleProps.fontWeight, function (_ref2) {
-    var invalid = _ref2.invalid;
+  })(["font-size:", ";font-weight:", ";display:block;", ";"], styleProps.fontSize, styleProps.fontWeight, function (_ref3) {
+    var invalid = _ref3.invalid;
     return invalid && css(["color:", ";"], palette.alert);
   });
   var SelectContainerComponent = styled.div.withConfig({
@@ -45,16 +48,17 @@ export var createStyledComponents = function createStyledComponents(styleProps) 
     LabelComponent: LabelComponent
   };
 };
-export function Select(_ref3) {
-  var SelectComponent = _ref3.SelectComponent,
-      SelectContainerComponent = _ref3.SelectContainerComponent,
-      LabelComponent = _ref3.LabelComponent,
-      children = _ref3.children,
-      input = _ref3.input,
-      label = _ref3.label,
-      meta = _ref3.meta,
-      invalid = _ref3.invalid,
-      rest = _objectWithoutPropertiesLoose(_ref3, ["SelectComponent", "SelectContainerComponent", "LabelComponent", "children", "input", "label", "meta", "invalid"]);
+export function Select(_ref4) {
+  var SelectComponent = _ref4.SelectComponent,
+      SelectContainerComponent = _ref4.SelectContainerComponent,
+      LabelComponent = _ref4.LabelComponent,
+      children = _ref4.children,
+      input = _ref4.input,
+      label = _ref4.label,
+      meta = _ref4.meta,
+      invalid = _ref4.invalid,
+      disabled = _ref4.disabled,
+      rest = _objectWithoutPropertiesLoose(_ref4, ["SelectComponent", "SelectContainerComponent", "LabelComponent", "children", "input", "label", "meta", "invalid", "disabled"]);
 
   return React.createElement("label", {
     htmlFor: rest.id || input && input.name
@@ -62,6 +66,7 @@ export function Select(_ref3) {
     invalid: invalid
   }, label), React.createElement(SelectContainerComponent, null, React.createElement(SelectComponent, _extends({}, input, rest, {
     invalid: invalid,
+    disabled: disabled,
     id: rest.id || input && input.name
   }), children)));
 }

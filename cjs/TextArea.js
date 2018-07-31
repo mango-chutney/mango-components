@@ -51,15 +51,18 @@ exports.defaultStyleProps = defaultStyleProps;
 var createStyledComponents = function createStyledComponents(styleProps) {
   var TextAreaComponent = _styledComponents.default.textarea.withConfig({
     componentId: "orybjj-0"
-  })(["appearance:none;background-color:", ";border-color:", ";border-radius:0.25rem;border-style:solid;border-width:0.05rem;color:", ";display:block;font-family:", ";margin-bottom:1rem;outline:0;padding:1.25rem 1rem;transition:border-color 300ms ease;width:100%;::placeholder{color:", ";}:active,:focus{border-color:", ";}", ";"], styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.placeholderColor, styleProps.activeBorderColor, function (_ref) {
+  })(["appearance:none;background-color:", ";border-color:", ";border-radius:0.25rem;border-style:solid;border-width:0.05rem;color:", ";display:block;font-family:", ";margin-bottom:1rem;outline:0;padding:1.25rem 1rem;transition:border-color 300ms ease;width:100%;::placeholder{color:", ";}:active,:focus{border-color:", ";}", ";", ";"], styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.placeholderColor, styleProps.activeBorderColor, function (_ref) {
     var invalid = _ref.invalid;
     return invalid && (0, _styledComponents.css)(["border-color:", ";::placeholder{color:", ";}"], _constants.palette.alert, _constants.palette.alert);
+  }, function (_ref2) {
+    var disabled = _ref2.disabled;
+    return disabled && (0, _styledComponents.css)(["background-color:", ";color:", ";cursor:not-allowed;::placeholder{color:", ";}"], (0, _polished.darken)(0.05, styleProps.backgroundColor), (0, _polished.darken)(0.05, styleProps.color), (0, _polished.darken)(0.05, styleProps.placeholderColor));
   });
 
   var LabelComponent = _styledComponents.default.span.withConfig({
     componentId: "orybjj-1"
-  })(["font-size:", ";font-weight:", ";display:block;", ";"], styleProps.fontSize, styleProps.fontWeight, function (_ref2) {
-    var invalid = _ref2.invalid;
+  })(["font-size:", ";font-weight:", ";display:block;", ";"], styleProps.fontSize, styleProps.fontWeight, function (_ref3) {
+    var invalid = _ref3.invalid;
     return invalid && (0, _styledComponents.css)(["color:", ";"], _constants.palette.alert);
   });
 
@@ -71,19 +74,24 @@ var createStyledComponents = function createStyledComponents(styleProps) {
 
 exports.createStyledComponents = createStyledComponents;
 
-function TextArea(_ref3) {
-  var TextAreaComponent = _ref3.TextAreaComponent,
-      LabelComponent = _ref3.LabelComponent,
-      input = _ref3.input,
-      meta = _ref3.meta,
-      label = _ref3.label,
-      invalid = _ref3.invalid,
-      rest = _objectWithoutProperties(_ref3, ["TextAreaComponent", "LabelComponent", "input", "meta", "label", "invalid"]);
+function TextArea(_ref4) {
+  var TextAreaComponent = _ref4.TextAreaComponent,
+      LabelComponent = _ref4.LabelComponent,
+      input = _ref4.input,
+      meta = _ref4.meta,
+      label = _ref4.label,
+      invalid = _ref4.invalid,
+      disabled = _ref4.disabled,
+      rest = _objectWithoutProperties(_ref4, ["TextAreaComponent", "LabelComponent", "input", "meta", "label", "invalid", "disabled"]);
 
   return React.createElement("label", {
     htmlFor: rest.id || input && input.name
-  }, label && React.createElement(LabelComponent, null, label), React.createElement("span", null, React.createElement(TextAreaComponent, _extends({}, input, rest, {
+  }, label && React.createElement(LabelComponent, {
     invalid: invalid,
+    disabled: disabled
+  }, label), React.createElement("span", null, React.createElement(TextAreaComponent, _extends({}, input, rest, {
+    invalid: invalid,
+    disabled: disabled,
     id: rest.id || input && input.name
   }))));
 }

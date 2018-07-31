@@ -55,15 +55,18 @@ exports.defaultStyleProps = defaultStyleProps;
 var createStyledComponents = function createStyledComponents(styleProps) {
   var SelectComponent = _styledComponents.default.select.withConfig({
     componentId: "s4vmyyd-0"
-  })(["appearance:none;background-color:", ";background-image:linear-gradient( ", ",", " );border-color:", ";border-radius:0.25rem;border-style:solid;border-width:0.05rem;color:", ";display:block;font-family:", ";height:2.6rem;margin-bottom:1rem;outline:0;padding:0.5rem 1rem;transition:border-color 300ms ease;width:100%;::-ms-expand{display:none;}:active,:focus{border-color:", ";}option{width:100%;}", ";"], styleProps.backgroundColor, _constants.palette.white, styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.activeBorderColor, function (_ref) {
+  })(["appearance:none;background-color:", ";background-image:linear-gradient( ", ",", " );border-color:", ";border-radius:0.25rem;border-style:solid;border-width:0.05rem;color:", ";display:block;font-family:", ";height:2.6rem;margin-bottom:1rem;outline:0;padding:0.5rem 1rem;transition:border-color 300ms ease;width:100%;::-ms-expand{display:none;}:active,:focus{border-color:", ";}option{width:100%;}", ";", ";"], styleProps.backgroundColor, _constants.palette.white, styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.activeBorderColor, function (_ref) {
     var invalid = _ref.invalid;
     return invalid && (0, _styledComponents.css)(["border-color:", ";"], _constants.palette.alert);
+  }, function (_ref2) {
+    var disabled = _ref2.disabled;
+    return disabled && (0, _styledComponents.css)(["background-color:", ";background-image:linear-gradient( ", ",", " );color:", ";cursor:not-allowed;"], (0, _polished.darken)(0.05, styleProps.backgroundColor), (0, _polished.darken)(0.05, _constants.palette.white), (0, _polished.darken)(0.05, styleProps.backgroundColor), (0, _polished.darken)(0.05, styleProps.color));
   });
 
   var LabelComponent = _styledComponents.default.span.withConfig({
     componentId: "s4vmyyd-1"
-  })(["font-size:", ";font-weight:", ";display:block;", ";"], styleProps.fontSize, styleProps.fontWeight, function (_ref2) {
-    var invalid = _ref2.invalid;
+  })(["font-size:", ";font-weight:", ";display:block;", ";"], styleProps.fontSize, styleProps.fontWeight, function (_ref3) {
+    var invalid = _ref3.invalid;
     return invalid && (0, _styledComponents.css)(["color:", ";"], _constants.palette.alert);
   });
 
@@ -80,16 +83,17 @@ var createStyledComponents = function createStyledComponents(styleProps) {
 
 exports.createStyledComponents = createStyledComponents;
 
-function Select(_ref3) {
-  var SelectComponent = _ref3.SelectComponent,
-      SelectContainerComponent = _ref3.SelectContainerComponent,
-      LabelComponent = _ref3.LabelComponent,
-      children = _ref3.children,
-      input = _ref3.input,
-      label = _ref3.label,
-      meta = _ref3.meta,
-      invalid = _ref3.invalid,
-      rest = _objectWithoutProperties(_ref3, ["SelectComponent", "SelectContainerComponent", "LabelComponent", "children", "input", "label", "meta", "invalid"]);
+function Select(_ref4) {
+  var SelectComponent = _ref4.SelectComponent,
+      SelectContainerComponent = _ref4.SelectContainerComponent,
+      LabelComponent = _ref4.LabelComponent,
+      children = _ref4.children,
+      input = _ref4.input,
+      label = _ref4.label,
+      meta = _ref4.meta,
+      invalid = _ref4.invalid,
+      disabled = _ref4.disabled,
+      rest = _objectWithoutProperties(_ref4, ["SelectComponent", "SelectContainerComponent", "LabelComponent", "children", "input", "label", "meta", "invalid", "disabled"]);
 
   return React.createElement("label", {
     htmlFor: rest.id || input && input.name
@@ -97,6 +101,7 @@ function Select(_ref3) {
     invalid: invalid
   }, label), React.createElement(SelectContainerComponent, null, React.createElement(SelectComponent, _extends({}, input, rest, {
     invalid: invalid,
+    disabled: disabled,
     id: rest.id || input && input.name
   }), children)));
 }

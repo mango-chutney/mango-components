@@ -116,7 +116,7 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
 }
 
 .c6[disabled] {
-  cursor: pointer;
+  cursor: not-allowed;
 }
 
 .c6:checked + .c7::before,
