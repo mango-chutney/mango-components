@@ -10,7 +10,7 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { rem, transparentize } from 'polished';
+import { rem, transparentize, darken } from 'polished';
 import { palette, fontWeights, fontStack } from './constants';
 export var defaultStyleProps = {
   backgroundColor: palette.lightGray,
@@ -25,14 +25,17 @@ export var defaultStyleProps = {
 export var createStyledComponents = function createStyledComponents(styleProps) {
   var TextAreaComponent = styled.textarea.withConfig({
     componentId: "orybjj-0"
-  })(["appearance:none;background-color:", ";border-color:", ";border-radius:0.25rem;border-style:solid;border-width:0.05rem;color:", ";display:block;font-family:", ";margin-bottom:1rem;outline:0;padding:1.25rem 1rem;transition:border-color 300ms ease;width:100%;::placeholder{color:", ";}:active,:focus{border-color:", ";}", ";"], styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.placeholderColor, styleProps.activeBorderColor, function (_ref) {
+  })(["appearance:none;background-color:", ";border-color:", ";border-radius:0.25rem;border-style:solid;border-width:0.05rem;color:", ";display:block;font-family:", ";margin-bottom:1rem;outline:0;padding:1.25rem 1rem;transition:border-color 300ms ease;width:100%;::placeholder{color:", ";}:active,:focus{border-color:", ";}", ";", ";"], styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.placeholderColor, styleProps.activeBorderColor, function (_ref) {
     var invalid = _ref.invalid;
     return invalid && css(["border-color:", ";::placeholder{color:", ";}"], palette.alert, palette.alert);
+  }, function (_ref2) {
+    var disabled = _ref2.disabled;
+    return disabled && css(["background-color:", ";color:", ";cursor:not-allowed;::placeholder{color:", ";}"], darken(0.05, styleProps.backgroundColor), darken(0.05, styleProps.color), darken(0.05, styleProps.placeholderColor));
   });
   var LabelComponent = styled.span.withConfig({
     componentId: "orybjj-1"
-  })(["font-size:", ";font-weight:", ";display:block;", ";"], styleProps.fontSize, styleProps.fontWeight, function (_ref2) {
-    var invalid = _ref2.invalid;
+  })(["font-size:", ";font-weight:", ";display:block;", ";"], styleProps.fontSize, styleProps.fontWeight, function (_ref3) {
+    var invalid = _ref3.invalid;
     return invalid && css(["color:", ";"], palette.alert);
   });
   return {
@@ -40,19 +43,24 @@ export var createStyledComponents = function createStyledComponents(styleProps) 
     LabelComponent: LabelComponent
   };
 };
-export function TextArea(_ref3) {
-  var TextAreaComponent = _ref3.TextAreaComponent,
-      LabelComponent = _ref3.LabelComponent,
-      input = _ref3.input,
-      meta = _ref3.meta,
-      label = _ref3.label,
-      invalid = _ref3.invalid,
-      rest = _objectWithoutPropertiesLoose(_ref3, ["TextAreaComponent", "LabelComponent", "input", "meta", "label", "invalid"]);
+export function TextArea(_ref4) {
+  var TextAreaComponent = _ref4.TextAreaComponent,
+      LabelComponent = _ref4.LabelComponent,
+      input = _ref4.input,
+      meta = _ref4.meta,
+      label = _ref4.label,
+      invalid = _ref4.invalid,
+      disabled = _ref4.disabled,
+      rest = _objectWithoutPropertiesLoose(_ref4, ["TextAreaComponent", "LabelComponent", "input", "meta", "label", "invalid", "disabled"]);
 
   return React.createElement("label", {
     htmlFor: rest.id || input && input.name
-  }, label && React.createElement(LabelComponent, null, label), React.createElement("span", null, React.createElement(TextAreaComponent, _extends({}, input, rest, {
+  }, label && React.createElement(LabelComponent, {
     invalid: invalid,
+    disabled: disabled
+  }, label), React.createElement("span", null, React.createElement(TextAreaComponent, _extends({}, input, rest, {
+    invalid: invalid,
+    disabled: disabled,
     id: rest.id || input && input.name
   }))));
 }

@@ -19,6 +19,7 @@ export type $StyledProps = {
   label: string,
   checkboxColor: string,
   invalid?: boolean,
+  disabled?: boolean,
 } & $FieldProps;
 
 export type $Props = {
@@ -99,6 +100,13 @@ export const createStyledComponents: $StyledSubComponentsFactory<
         css`
           border-color: ${palette.alert};
         `};
+
+      ${({ disabled }) =>
+        disabled &&
+        css`
+          background-color: ${darken(0.05, palette.lightGray)};
+          cursor: not-allowed;
+        `};
     }
 
     &::after {
@@ -124,7 +132,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     opacity: 0;
 
     &[disabled] {
-      cursor: pointer;
+      cursor: not-allowed;
     }
 
     :checked + ${CheckboxBackgroundComponent} {
@@ -176,6 +184,8 @@ export function Checkbox({
   input: { name, value, ...inputProps },
   label,
   meta,
+  invalid,
+  disabled,
   ...rest
 }: $Props) {
   return (
@@ -189,9 +199,11 @@ export function Checkbox({
             name,
             checked: value,
             type: 'checkbox',
+            invalid,
+            disabled,
           }}
         />
-        <CheckboxBackgroundComponent />
+        <CheckboxBackgroundComponent invalid={invalid} disabled={disabled} />
       </CheckboxContainerComponent>
       <LabelComponent htmlFor={id || name}>
         {children || label || ''}

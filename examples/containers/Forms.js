@@ -67,11 +67,43 @@ export class Form extends React.Component<Props, State> {
             component={Input}
           />
           <Field
+            type="text"
+            name="invalid-text"
+            placeholder="invalid field"
+            label="invalid field"
+            component={Input}
+            invalid
+          />
+          <Field
+            type="text"
+            name="disabled-text"
+            placeholder="disabled field"
+            label="disabled field"
+            component={Input}
+            disabled
+          />
+          <Field
             type="textarea"
             name="textarea"
             label="textarea"
             placeholder="textarea"
             component={TextArea}
+          />
+          <Field
+            type="textarea"
+            name="invalid-textarea"
+            label="invalid textarea"
+            placeholder="invalid textarea"
+            component={TextArea}
+            invalid
+          />
+          <Field
+            type="textarea"
+            name="textarea"
+            label="textarea"
+            placeholder="textarea"
+            component={TextArea}
+            disabled
           />
           <div>
             <Field
@@ -105,6 +137,24 @@ export class Form extends React.Component<Props, State> {
           </div>
           <div>
             <Field
+              name="invalid-checken"
+              label="This guy is invalid."
+              placeholder="invalid checken"
+              component={Checkbox}
+              invalid
+            />
+          </div>
+          <div>
+            <Field
+              name="disabled-checken"
+              label="This guy is disabled."
+              placeholder="disabled checken"
+              component={Checkbox}
+              disabled
+            />
+          </div>
+          <div>
+            <Field
               name="paddedchecken"
               label="paddedchecken"
               placeholder="paddedchecken"
@@ -117,6 +167,30 @@ export class Form extends React.Component<Props, State> {
               label="select"
               placeholder="select"
               component={Select}
+            >
+              <option value="option-1">Option 1</option>
+              <option value="option-2">Option 2</option>
+            </Field>
+          </div>
+          <div>
+            <Field
+              name="disabled-select"
+              label="disabled select"
+              placeholder="disabled select"
+              component={Select}
+              disabled
+            >
+              <option value="option-1">Option 1</option>
+              <option value="option-2">Option 2</option>
+            </Field>
+          </div>
+          <div>
+            <Field
+              name="invalid-select"
+              label="invalid select"
+              placeholder="invalid select"
+              component={Select}
+              invalid
             >
               <option value="option-1">Option 1</option>
               <option value="option-2">Option 2</option>

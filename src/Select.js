@@ -4,7 +4,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-components';
 import type { FieldProps as $FieldProps } from 'redux-form';
-import { rem, transparentize } from 'polished';
+import { rem, transparentize, darken } from 'polished';
 import tristicons from 'tristicons';
 import { palette, fontWeights, fontStack } from './constants';
 import type {
@@ -20,6 +20,7 @@ export type $StyledProps = {
   label: string,
   placeholder: string,
   invalid?: boolean,
+  disabled?: boolean,
 };
 
 export type $Props = {
@@ -96,6 +97,18 @@ export const createStyledComponents: $StyledSubComponentsFactory<
       css`
         border-color: ${palette.alert};
       `};
+
+    ${({ disabled }) =>
+      disabled &&
+      css`
+        background-color: ${darken(0.05, styleProps.backgroundColor)};
+        background-image: linear-gradient(
+          ${darken(0.05, palette.white)},
+          ${darken(0.05, styleProps.backgroundColor)}
+        );
+        color: ${darken(0.05, styleProps.color)};
+        cursor: not-allowed;
+      `};
   `;
 
   const LabelComponent = styled.span`
@@ -136,6 +149,7 @@ export function Select({
   label,
   meta,
   invalid,
+  disabled,
   ...rest
 }: $Props) {
   return (
@@ -146,6 +160,7 @@ export function Select({
           {...input}
           {...rest}
           invalid={invalid}
+          disabled={disabled}
           id={rest.id || (input && input.name)}
         >
           {children}
