@@ -13,20 +13,21 @@ import type {
 } from './types';
 
 export type $StyledProps = {
-  ...$FieldProps,
   id?: string,
+  name: string,
   children: React.Node,
   label: string,
   checkboxColor: string,
   invalid?: boolean,
-};
+} & $FieldProps;
 
 export type $Props = {
-  ...$StyledProps,
-  LabelComponent: React.ComponentType<*>,
+  CheckboxBackgroundComponent: React.ComponentType<*>,
+  CheckboxContainerComponent: React.ComponentType<*>,
   InputComponent: React.ComponentType<*>,
+  LabelComponent: React.ComponentType<*>,
   WrapperComponent: React.ComponentType<*>,
-};
+} & $StyledProps;
 
 export const defaultStyleProps: {|
   checkboxSize: number,
@@ -36,91 +37,30 @@ export const defaultStyleProps: {|
   checkboxColor: palette.primary,
 };
 
-class Wrapper extends React.Component<any, { focused: boolean }> {
-  ref = null;
-
-  state = { focused: false };
-
-  componentDidMount = () => {
-    const inputChildRef = this.findInputChildRef();
-
-    if (inputChildRef !== null) {
-      inputChildRef.addEventListener('focus', this.handleInputChildFocus);
-      inputChildRef.addEventListener('blur', this.handleInputChildBlur);
-    }
-  };
-
-  componentWillUnmount = () => {
-    const inputChildRef = this.findInputChildRef();
-
-    if (inputChildRef !== null) {
-      inputChildRef.removeEventListener('focus', this.handleInputChildFocus);
-      inputChildRef.removeEventListener('blur', this.handleInputChildBlur);
-    }
-  };
-
-  findInputChildRef = () => {
-    if (this.ref !== null) {
-      return Array.from(this.ref.children).find(
-        element => element.nodeName === 'INPUT',
-      );
-    }
-
-    return null;
-  };
-
-  handleClickOrKeyPress = () => {
-    const inputChildRef = this.findInputChildRef();
-
-    if (inputChildRef !== null) {
-      inputChildRef.click();
-    }
-  };
-
-  handleInputChildBlur = () => {
-    this.setState({ focused: false });
-  };
-
-  handleInputChildFocus = () => {
-    this.setState({ focused: true });
-  };
-
-  render() {
-    const { children, ...rest } = this.props;
-    const { focused } = this.state;
-    return (
-      <div
-        {...rest}
-        role="presentation"
-        ref={ref => {
-          this.ref = ref;
-        }}
-        data-focused={focused}
-        onClick={this.handleClickOrKeyPress}
-      >
-        {children}
-      </div>
-    );
-  }
-}
-
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
-    LabelComponent: $ReactComponentStyled<*>,
+    CheckboxBackgroundComponent: $ReactComponentStyled<*>,
+    CheckboxContainerComponent: $ReactComponentStyled<*>,
     InputComponent: $ReactComponentStyled<*>,
+    LabelComponent: $ReactComponentStyled<*>,
     WrapperComponent: $ReactComponentStyled<*>,
   },
   typeof defaultStyleProps,
 > = styleProps => {
-  const WrapperComponent = styled(Wrapper)`
+  const WrapperComponent = styled.div`
+    margin: 1rem 0;
+  `;
+
+  const CheckboxContainerComponent = styled.div`
     position: relative;
-    margin-bottom: 1rem;
-    text-align: left;
+    margin: 0;
+    height: ${rem(styleProps.checkboxSize)};
+    width: ${rem(styleProps.checkboxSize)};
     display: inline-block;
   `;
 
   // some label stuff in checkbox to get :checked property
-  const LabelComponent = styled.label`
+  const CheckboxBackgroundComponent = styled.div`
     cursor: pointer;
     font-weight: ${fontWeights.semibold};
     display: inline-block;
@@ -132,65 +72,71 @@ export const createStyledComponents: $StyledSubComponentsFactory<
         color: ${palette.alert};
       `};
 
-    > div {
-      min-height: ${rem(styleProps.checkboxSize)};
-      line-height: ${rem(styleProps.checkboxSize)};
-      position: relative;
+    min-height: ${rem(styleProps.checkboxSize)};
+    line-height: ${rem(styleProps.checkboxSize)};
+    position: relative;
+    border: 1px solid transparent;
+    display: block;
+
+    &::before,
+    &::after {
+      width: ${rem(styleProps.checkboxSize)};
+      height: ${rem(styleProps.checkboxSize)};
+      cursor: pointer;
+      content: '';
+      display: inline-block;
+      border-radius: 4px;
+      vertical-align: middle;
+    }
+
+    &::before {
+      border: 1px solid ${palette.border};
+      background: ${palette.lightGray};
+      margin-right: 1rem;
+
+      ${({ invalid }) =>
+        invalid &&
+        css`
+          border-color: ${palette.alert};
+        `};
+    }
+
+    &::after {
+      position: absolute;
+      left: 0;
       border: 1px solid transparent;
-      display: block;
-
-      &::before,
-      &::after {
-        width: ${rem(styleProps.checkboxSize)};
-        height: ${rem(styleProps.checkboxSize)};
-        cursor: pointer;
-        content: '';
-        display: inline-block;
-        border-radius: 4px;
-        vertical-align: middle;
-      }
-
-      &::before {
-        border: 1px solid ${palette.border};
-        background: ${palette.lightGray};
-        margin-right: 1rem;
-
-        ${({ invalid }) =>
-          invalid &&
-          css`
-            border-color: ${palette.alert};
-          `};
-      }
-
-      &::after {
-        position: absolute;
-        left: 0;
-        border: 1px solid transparent;
-        line-height: ${rem(styleProps.checkboxSize)};
-        margin-top: ${rem(styleProps.checkboxSize * 0.1)};
-        text-align: center;
-        transform: scale(0);
-      }
+      line-height: ${rem(styleProps.checkboxSize)};
+      margin-top: ${rem(styleProps.checkboxSize * 0.1)};
+      text-align: center;
+      transform: scale(0);
     }
   `;
 
   const InputComponent = styled.input`
-    opacity: 0;
-    width: 0;
+    width: 100%;
+    height: 100%;
     position: absolute;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    z-index: 9001;
+    opacity: 0;
 
     &[disabled] {
       cursor: pointer;
     }
 
-    :checked + label > div {
+    :checked + ${CheckboxBackgroundComponent} {
+      &::before,
+      &::after {
+        top: 0;
+        left: 0;
+      }
+
       &::before {
-        background: ${({ checkboxColor }) =>
-          checkboxColor || styleProps.checkboxColor};
-        border-color: ${({ checkboxColor }) =>
-          checkboxColor
-            ? darken(0.05, checkboxColor)
-            : darken(0.05, styleProps.checkboxColor)};
+        background: ${styleProps.checkboxColor};
+        border-color: ${darken(0.05, styleProps.checkboxColor)};
         transition: background-color 0.3s;
       }
 
@@ -206,37 +152,49 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     }
   `;
 
-  return { LabelComponent, InputComponent, WrapperComponent };
+  const LabelComponent = styled.label`
+    margin-left: 1rem;
+  `;
+
+  return {
+    CheckboxContainerComponent,
+    CheckboxBackgroundComponent,
+    LabelComponent,
+    InputComponent,
+    WrapperComponent,
+  };
 };
 
 export function Checkbox({
+  CheckboxBackgroundComponent,
+  CheckboxContainerComponent,
   InputComponent,
   LabelComponent,
   WrapperComponent,
   children,
-  checkboxColor,
-  input,
-  meta,
+  id,
+  input: { name, value, ...inputProps },
   label,
-  invalid,
+  meta,
   ...rest
 }: $Props) {
   return (
     <WrapperComponent>
-      <InputComponent
-        {...input}
-        id={rest.id || (input && input.name)}
-        type="checkbox"
-        checkboxColor={checkboxColor}
-        invalid={invalid}
-        {...rest}
-      />
-      <LabelComponent
-        htmlFor={rest.id || (input && input.name)}
-        checkboxColor={checkboxColor}
-        invalid={invalid}
-      >
-        <div>{children || label || ''}</div>
+      <CheckboxContainerComponent>
+        <InputComponent
+          {...{
+            ...rest,
+            ...inputProps,
+            id: id || name,
+            name,
+            checked: value,
+            type: 'checkbox',
+          }}
+        />
+        <CheckboxBackgroundComponent />
+      </CheckboxContainerComponent>
+      <LabelComponent htmlFor={id || name}>
+        {children || label || ''}
       </LabelComponent>
     </WrapperComponent>
   );

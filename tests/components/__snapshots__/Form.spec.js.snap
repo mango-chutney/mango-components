@@ -2,20 +2,30 @@
 
 exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders correctly 1`] = `
 .c4 {
+  margin: 1rem 0;
+}
+
+.c5 {
   position: relative;
-  margin-bottom: 1rem;
-  text-align: left;
+  margin: 0;
+  height: 1.25rem;
+  width: 1.25rem;
   display: inline-block;
 }
 
-.c6 {
+.c11 {
+  position: relative;
+  margin: 0;
+  height: 2.5rem;
+  width: 2.5rem;
+  display: inline-block;
+}
+
+.c8 {
   cursor: pointer;
   font-weight: 600;
   display: inline-block;
   font-size: 1rem;
-}
-
-.c6 > div {
   min-height: 1.25rem;
   line-height: 1.25rem;
   position: relative;
@@ -23,8 +33,8 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   display: block;
 }
 
-.c6 > div::before,
-.c6 > div::after {
+.c8::before,
+.c8::after {
   width: 1.25rem;
   height: 1.25rem;
   cursor: pointer;
@@ -34,13 +44,13 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   vertical-align: middle;
 }
 
-.c6 > div::before {
+.c8::before {
   border: 1px solid #e2e7ee;
   background: #fafbfc;
   margin-right: 1rem;
 }
 
-.c6 > div::after {
+.c8::after {
   position: absolute;
   left: 0;
   border: 1px solid transparent;
@@ -52,14 +62,11 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   transform: scale(0);
 }
 
-.c9 {
+.c13 {
   cursor: pointer;
   font-weight: 600;
   display: inline-block;
   font-size: 1rem;
-}
-
-.c9 > div {
   min-height: 2.5rem;
   line-height: 2.5rem;
   position: relative;
@@ -67,8 +74,8 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   display: block;
 }
 
-.c9 > div::before,
-.c9 > div::after {
+.c13::before,
+.c13::after {
   width: 2.5rem;
   height: 2.5rem;
   cursor: pointer;
@@ -78,13 +85,13 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   vertical-align: middle;
 }
 
-.c9 > div::before {
+.c13::before {
   border: 1px solid #e2e7ee;
   background: #fafbfc;
   margin-right: 1rem;
 }
 
-.c9 > div::after {
+.c13::after {
   position: absolute;
   left: 0;
   border: 1px solid transparent;
@@ -96,24 +103,36 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   transform: scale(0);
 }
 
-.c5 {
-  opacity: 0;
-  width: 0;
+.c6 {
+  width: 100%;
+  height: 100%;
   position: absolute;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+  z-index: 9001;
+  opacity: 0;
 }
 
-.c5[disabled] {
+.c6[disabled] {
   cursor: pointer;
 }
 
-.c5:checked + label > div::before {
+.c6:checked + .c7::before,
+.c6:checked + .c7::after {
+  top: 0;
+  left: 0;
+}
+
+.c6:checked + .c7::before {
   background: #2ea1f8;
   border-color: #1596f7;
   -webkit-transition: background-color 0.3s;
   transition: background-color 0.3s;
 }
 
-.c5:checked + label > div::after {
+.c6:checked + .c7::after {
   content: '';
   background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSd4TWlkWU1pZCcgd2lkdGg9JzE2LjUnIGhlaWdodD0nMTUnIHZpZXdCb3g9JzAgMCAxNi41IDE1Jz48cGF0aCBmaWxsPScjZmZmJyBmaWxsLXJ1bGU9J2V2ZW5vZGQnIGQ9J00xNi41MTUsMS4wNzEgQzE2LjM5OSwwLjgyNyAxNS45MTQsLTAuMDMwIDE1LjUxNSwwLjAwMSBDMTQuMjg5LDAuNzY1IDEyLjY5MywyLjM1NCAxMS42MzgsMy4zNjIgQzkuNTI4LDUuMzc4IDcuNTAzLDcuNDg2IDUuNTA4LDkuNjI0IEwxLjUxNiw1Ljg5NyBMMC4wMDUsNy40ODYgQzIuMjAwLDkuODM3IDQuNTY3LDEyLjM3MyA2LjUwNSwxNS4wMDAgQzguOTg2LDEwLjYzMiAxMy4wMzUsNC4zNzAgMTYuNTE1LDEuMDcxIEwxNi41MTUsMS4wNzEgWicvPjwvc3ZnPg==');
   background-position: 50% 40%;
@@ -124,6 +143,10 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
+}
+
+.c9 {
+  margin-left: 1rem;
 }
 
 .c1 {
@@ -174,7 +197,7 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   display: block;
 }
 
-.c8 {
+.c10 {
   padding: 2rem;
   display: inline-block;
   font-size: 1.5rem;
@@ -182,13 +205,13 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   border-radius: 0.25rem;
 }
 
-.c7:checked + label {
+.c12:checked + label {
   -webkit-transition: all 300ms ease;
   transition: all 300ms ease;
   background: rgba(46,161,248,0.2);
 }
 
-.c12 {
+.c16 {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -210,30 +233,30 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   width: 100%;
 }
 
-.c12::-ms-expand {
+.c16::-ms-expand {
   display: none;
 }
 
-.c12:active,
-.c12:focus {
+.c16:active,
+.c16:focus {
   border-color: #354052;
 }
 
-.c12 option {
+.c16 option {
   width: 100%;
 }
 
-.c10 {
+.c14 {
   font-size: 0.875rem;
   font-weight: 600;
   display: block;
 }
 
-.c11 {
+.c15 {
   position: relative;
 }
 
-.c11::after {
+.c15::after {
   content: "\\f10a";
   color: rgba(127,143,164,0.8);
   font: normal normal normal 0.875rem tristicons;
@@ -340,73 +363,77 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   </label>
   <div
     className="c4"
-    data-focused={false}
-    onClick={[Function]}
-    role="presentation"
   >
-    <input
+    <div
       className="c5"
-      id="checkbox"
-      name="checkbox"
-      onBlur={[Function]}
-      onChange={[Function]}
-      onDragStart={[Function]}
-      onDrop={[Function]}
-      onFocus={[Function]}
-      placeholder="Checkbox"
-      type="checkbox"
-      value=""
-    />
+    >
+      <input
+        checked=""
+        className="c6"
+        id="checkbox"
+        name="checkbox"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onDragStart={[Function]}
+        onDrop={[Function]}
+        onFocus={[Function]}
+        placeholder="Checkbox"
+        type="checkbox"
+      />
+      <div
+        className="c7 c8"
+      />
+    </div>
     <label
-      className="c6"
+      className="c9"
       htmlFor="checkbox"
     >
-      <div>
-        Checkbox
-      </div>
+      Checkbox
     </label>
   </div>
   <div
-    className="c4"
-    data-focused={false}
-    onClick={[Function]}
-    role="presentation"
+    className="c10 c4"
   >
-    <input
-      className="c7 c5"
-      id="padded-checkbox"
-      name="padded-checkbox"
-      onBlur={[Function]}
-      onChange={[Function]}
-      onDragStart={[Function]}
-      onDrop={[Function]}
-      onFocus={[Function]}
-      placeholder="PaddedCheckbox"
-      type="checkbox"
-      value=""
-    />
+    <div
+      className="c11"
+    >
+      <input
+        checked=""
+        className="c12 c6"
+        id="padded-checkbox"
+        name="padded-checkbox"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onDragStart={[Function]}
+        onDrop={[Function]}
+        onFocus={[Function]}
+        placeholder="PaddedCheckbox"
+        type="checkbox"
+      />
+      <div
+        className="c7 c13"
+      />
+    </div>
     <label
-      className="c8 c9"
+      className="c9"
       htmlFor="padded-checkbox"
     >
-      <div>
-        PaddedCheckbox
-      </div>
+      PaddedCheckbox
     </label>
   </div>
   <label
     htmlFor="select"
   >
     <span
-      className="c10"
+      className="c14"
     >
       select
     </span>
     <div
-      className="c11"
+      className="c15"
     >
       <select
-        className="c12"
+        className="c16"
         id="select"
         name="select"
         onBlur={[Function]}

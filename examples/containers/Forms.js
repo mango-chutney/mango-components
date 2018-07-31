@@ -76,18 +76,32 @@ export class Form extends React.Component<Props, State> {
           <div>
             <Field
               name="checken"
-              label="checken"
+              label="This guy has no children, but a label prop."
               placeholder="checken"
               component={Checkbox}
             />
           </div>
           <div>
-            <Field
-              name="checken2"
-              label="checken2"
-              placeholder="checken2"
-              component={Checkbox}
-            />
+            <Field name="checken2" placeholder="checken2" component={Checkbox}>
+              This guy has a link:{' '}
+              <a href="http://mangochutney.com.au">
+                http://mangochutney.com.au
+              </a>
+            </Field>
+          </div>
+          <div>
+            <Field name="checken3" placeholder="checken3" component={Checkbox}>
+              This guy has a Button:{' '}
+              <button
+                type="button"
+                onClick={() => {
+                  // eslint-disable-next-line no-alert
+                  alert('Thanks for following the instructions.');
+                }}
+              >
+                press me
+              </button>
+            </Field>
           </div>
           <div>
             <Field

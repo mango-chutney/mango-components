@@ -37,7 +37,7 @@ exports.defaultStyleProps = defaultStyleProps;
 
 var createStyledComponents = function createStyledComponents(styleProps) {
   var baseComponents = (0, _Checkbox.createStyledComponents)(_objectSpread({}, defaultStyleProps, styleProps));
-  var StyledLabelComponent = (0, _styledComponents.default)(baseComponents.LabelComponent).withConfig({
+  var StyledWrapperComponent = (0, _styledComponents.default)(baseComponents.WrapperComponent).withConfig({
     componentId: "s3sxrcn-0"
   })(["padding:2rem;display:inline-block;font-size:", ";background:", ";border-radius:", ";"], (0, _polished.rem)(24), (0, _polished.transparentize)(0.5, _constants.palette.border), (0, _polished.rem)(4));
   var StyledInputComponent = (0, _styledComponents.default)(baseComponents.InputComponent).withConfig({
@@ -47,7 +47,7 @@ var createStyledComponents = function createStyledComponents(styleProps) {
     return checkboxColor ? (0, _polished.transparentize)(0.8, checkboxColor) : (0, _polished.transparentize)(0.8, styleProps.checkboxColor);
   });
   return _objectSpread({}, baseComponents, {
-    LabelComponent: StyledLabelComponent,
+    WrapperComponent: StyledWrapperComponent,
     InputComponent: StyledInputComponent
   });
 };
