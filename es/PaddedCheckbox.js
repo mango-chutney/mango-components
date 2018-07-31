@@ -10,7 +10,7 @@ export var defaultStyleProps = {
 };
 export var createStyledComponents = function createStyledComponents(styleProps) {
   var baseComponents = createStyledCheckboxComponents(Object.assign({}, defaultStyleProps, styleProps));
-  var StyledLabelComponent = styled(baseComponents.LabelComponent).withConfig({
+  var StyledWrapperComponent = styled(baseComponents.WrapperComponent).withConfig({
     componentId: "s3sxrcn-0"
   })(["padding:2rem;display:inline-block;font-size:", ";background:", ";border-radius:", ";"], rem(24), transparentize(0.5, palette.border), rem(4));
   var StyledInputComponent = styled(baseComponents.InputComponent).withConfig({
@@ -20,7 +20,7 @@ export var createStyledComponents = function createStyledComponents(styleProps) 
     return checkboxColor ? transparentize(0.8, checkboxColor) : transparentize(0.8, styleProps.checkboxColor);
   });
   return Object.assign({}, baseComponents, {
-    LabelComponent: StyledLabelComponent,
+    WrapperComponent: StyledWrapperComponent,
     InputComponent: StyledInputComponent
   });
 };

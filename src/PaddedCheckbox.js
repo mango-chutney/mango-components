@@ -34,8 +34,10 @@ export const defaultStyleProps: {|
 
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
-    LabelComponent: $ReactComponentStyled<*>,
+    CheckboxBackgroundComponent: $ReactComponentStyled<*>,
+    CheckboxContainerComponent: $ReactComponentStyled<*>,
     InputComponent: $ReactComponentStyled<*>,
+    LabelComponent: $ReactComponentStyled<*>,
     WrapperComponent: $ReactComponentStyled<*>,
   },
   typeof defaultStyleProps,
@@ -46,7 +48,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     ...styleProps,
   });
 
-  const StyledLabelComponent = styled(baseComponents.LabelComponent)`
+  const StyledWrapperComponent = styled(baseComponents.WrapperComponent)`
     padding: 2rem;
     display: inline-block;
     font-size: ${rem(24)};
@@ -66,7 +68,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
 
   return {
     ...baseComponents,
-    LabelComponent: StyledLabelComponent,
+    WrapperComponent: StyledWrapperComponent,
     InputComponent: StyledInputComponent,
   };
 };
