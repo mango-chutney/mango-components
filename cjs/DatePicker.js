@@ -143,24 +143,36 @@ function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "datePickerRef", React.createRef());
 
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleOnDayChange", function (day) {
+      var _this$props = _this.props,
+          input = _this$props.input,
+          dateFormat = _this$props.dateFormat;
+
+      if (day) {
+        input.onChange(formatDate(day, dateFormat));
+
+        if (_this.datePickerRef.current) {
+          _this.datePickerRef.current.hideDayPicker();
+        }
+      }
+    });
+
     return _this;
   }
 
   _createClass(DatePicker, [{
     key: "render",
     value: function render() {
-      var _this2 = this;
-
-      var _this$props = this.props,
-          InputComponent = _this$props.InputComponent,
-          LabelComponent = _this$props.LabelComponent,
-          OverlayWrapperComponent = _this$props.OverlayWrapperComponent,
-          OverlayComponent = _this$props.OverlayComponent,
-          input = _this$props.input,
-          label = _this$props.label,
-          dateFormat = _this$props.dateFormat,
-          calendarProps = _this$props.calendarProps,
-          rest = _objectWithoutProperties(_this$props, ["InputComponent", "LabelComponent", "OverlayWrapperComponent", "OverlayComponent", "input", "label", "dateFormat", "calendarProps"]);
+      var _this$props2 = this.props,
+          InputComponent = _this$props2.InputComponent,
+          LabelComponent = _this$props2.LabelComponent,
+          OverlayWrapperComponent = _this$props2.OverlayWrapperComponent,
+          OverlayComponent = _this$props2.OverlayComponent,
+          input = _this$props2.input,
+          label = _this$props2.label,
+          dateFormat = _this$props2.dateFormat,
+          calendarProps = _this$props2.calendarProps,
+          rest = _objectWithoutProperties(_this$props2, ["InputComponent", "LabelComponent", "OverlayWrapperComponent", "OverlayComponent", "input", "label", "dateFormat", "calendarProps"]);
 
       return React.createElement("label", {
         htmlFor: input.name
@@ -173,22 +185,15 @@ function (_React$Component) {
         component: function component(inputProps) {
           return React.createElement(InputComponent, inputProps);
         },
-        onDayChange: function onDayChange(day) {
-          if (day) {
-            input.onChange(formatDate(day, dateFormat));
-
-            if (_this2.datePickerRef.current) {
-              _this2.datePickerRef.current.hideDayPicker();
-            }
-          }
-        },
+        onDayChange: this.handleOnDayChange,
         overlayComponent: function overlayComponent(_ref) {
           var children = _ref.children,
               overlayProps = _objectWithoutProperties(_ref, ["children"]);
 
           return React.createElement(OverlayWrapperComponent, overlayProps, React.createElement(OverlayComponent, null, children));
         },
-        dayPickerProps: _objectSpread({}, calendarProps)
+        dayPickerProps: _objectSpread({}, calendarProps),
+        value: input.value
       }, rest)));
     }
   }]);

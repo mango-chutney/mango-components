@@ -278,6 +278,18 @@ class DatePicker extends React.Component<$Props, void> {
     dateFormat: 'dd/LL/yyyy',
   };
 
+  handleOnDayChange = day => {
+    const { input, dateFormat } = this.props;
+
+    if (day) {
+      input.onChange(formatDate(day, dateFormat));
+
+      if (this.datePickerRef.current) {
+        this.datePickerRef.current.hideDayPicker();
+      }
+    }
+  };
+
   render() {
     const {
       InputComponent,
@@ -301,15 +313,7 @@ class DatePicker extends React.Component<$Props, void> {
           parseDate={parseDate}
           placeholder={`${DateTime.local().toFormat(dateFormat)}`}
           component={inputProps => <InputComponent {...inputProps} />}
-          onDayChange={day => {
-            if (day) {
-              input.onChange(formatDate(day, dateFormat));
-
-              if (this.datePickerRef.current) {
-                this.datePickerRef.current.hideDayPicker();
-              }
-            }
-          }}
+          onDayChange={this.handleOnDayChange}
           overlayComponent={({
             children,
             ...overlayProps
@@ -321,6 +325,7 @@ class DatePicker extends React.Component<$Props, void> {
             </OverlayWrapperComponent>
           )}
           dayPickerProps={{ ...calendarProps }}
+          value={input.value}
           {...rest}
         />
       </label>

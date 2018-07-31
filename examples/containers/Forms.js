@@ -217,11 +217,7 @@ export class Form extends React.Component<Props, State> {
             mapItemToString={fruit => (fruit ? fruit.name : '')}
             component={TypeaheadInput}
           />
-          <Field
-            name="vegetable"
-            label="Enter vegetable date"
-            component={DatePicker}
-          />
+          <Field name="soup" label="Enter soup date" component={DatePicker} />
           <Button onClick={handleSubmit(this.submit)}>
             Go
             <Tootlip visible={submitting}>OK, please wait a moment…</Tootlip>
