@@ -272,17 +272,11 @@ export const createStyledComponents: $StyledSubComponentsFactory<
 };
 
 class DatePicker extends React.Component<$Props, void> {
-  inputRef = React.createRef();
+  datePickerRef = React.createRef();
 
   static defaultProps = {
     dateFormat: 'dd/LL/yyyy',
   };
-
-  componentDidMount() {
-    if (this.inputRef.current) {
-      this.inputRef.current.focus();
-    }
-  }
 
   render() {
     const {
@@ -301,15 +295,21 @@ class DatePicker extends React.Component<$Props, void> {
       <label htmlFor={input.name}>
         {label && <LabelComponent>{label}</LabelComponent>}
         <DayPickerInput
+          ref={this.datePickerRef}
           format={dateFormat}
           formatDate={formatDate}
           parseDate={parseDate}
           placeholder={`${DateTime.local().toFormat(dateFormat)}`}
-          inputProps={{ ...input }}
-          component={inputProps => (
-            <InputComponent {...inputProps} innerRef={this.inputRef} />
-          )}
-          onDayChange={day => input.onChange(formatDate(day, dateFormat))}
+          component={inputProps => <InputComponent {...inputProps} />}
+          onDayChange={day => {
+            if (day) {
+              input.onChange(formatDate(day, dateFormat));
+
+              if (this.datePickerRef.current) {
+                this.datePickerRef.current.hideDayPicker();
+              }
+            }
+          }}
           overlayComponent={({
             children,
             ...overlayProps
