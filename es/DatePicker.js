@@ -86,18 +86,12 @@ function (_React$Component) {
 
     _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "inputRef", React.createRef());
+    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "datePickerRef", React.createRef());
 
     return _this;
   }
 
   var _proto = DatePicker.prototype;
-
-  _proto.componentDidMount = function componentDidMount() {
-    if (this.inputRef.current) {
-      this.inputRef.current.focus();
-    }
-  };
 
   _proto.render = function render() {
     var _this2 = this;
@@ -116,18 +110,22 @@ function (_React$Component) {
     return React.createElement("label", {
       htmlFor: input.name
     }, label && React.createElement(LabelComponent, null, label), React.createElement(DayPickerInput, _extends({
+      ref: this.datePickerRef,
       format: dateFormat,
       formatDate: formatDate,
       parseDate: parseDate,
       placeholder: "" + DateTime.local().toFormat(dateFormat),
-      inputProps: Object.assign({}, input),
       component: function component(inputProps) {
-        return React.createElement(InputComponent, _extends({}, inputProps, {
-          innerRef: _this2.inputRef
-        }));
+        return React.createElement(InputComponent, inputProps);
       },
       onDayChange: function onDayChange(day) {
-        return input.onChange(formatDate(day, dateFormat));
+        if (day) {
+          input.onChange(formatDate(day, dateFormat));
+
+          if (_this2.datePickerRef.current) {
+            _this2.datePickerRef.current.hideDayPicker();
+          }
+        }
       },
       overlayComponent: function overlayComponent(_ref) {
         var children = _ref.children,
