@@ -23,7 +23,7 @@ require("core-js/modules/es6.string.bold");
 
 var React = _interopRequireWildcard(require("react"));
 
-var _styledComponents = _interopRequireDefault(require("styled-components"));
+var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _DayPickerInput = _interopRequireDefault(require("react-day-picker/DayPickerInput"));
 
@@ -104,7 +104,10 @@ var parseDate = function parseDate(dateString, format) {
 var createStyledComponents = function createStyledComponents(styleProps) {
   var LabelComponent = _styledComponents.default.span.withConfig({
     componentId: "s43u0y-0"
-  })(["font-size:", ";font-weight:", ";display:block;"], styleProps.fontSize, styleProps.fontWeight);
+  })(["font-size:", ";font-weight:", ";display:block;", ";"], styleProps.fontSize, styleProps.fontWeight, function (_ref) {
+    var invalid = _ref.invalid;
+    return invalid && (0, _styledComponents.css)(["color:", ";"], _constants.palette.alert);
+  });
 
   var OverlayWrapperComponent = _styledComponents.default.div.withConfig({
     componentId: "s43u0y-1"
@@ -172,11 +175,16 @@ function (_React$Component) {
           label = _this$props2.label,
           dateFormat = _this$props2.dateFormat,
           calendarProps = _this$props2.calendarProps,
-          rest = _objectWithoutProperties(_this$props2, ["InputComponent", "LabelComponent", "OverlayWrapperComponent", "OverlayComponent", "input", "label", "dateFormat", "calendarProps"]);
+          invalid = _this$props2.invalid,
+          disabled = _this$props2.disabled,
+          rest = _objectWithoutProperties(_this$props2, ["InputComponent", "LabelComponent", "OverlayWrapperComponent", "OverlayComponent", "input", "label", "dateFormat", "calendarProps", "invalid", "disabled"]);
 
       return React.createElement("label", {
         htmlFor: input.name
-      }, label && React.createElement(LabelComponent, null, label), React.createElement(_DayPickerInput.default, _extends({
+      }, label && React.createElement(LabelComponent, {
+        invalid: invalid,
+        disabled: disabled
+      }, label), React.createElement(_DayPickerInput.default, _extends({
         ref: this.datePickerRef,
         format: dateFormat,
         formatDate: formatDate,
@@ -184,18 +192,22 @@ function (_React$Component) {
         placeholder: "".concat(_luxon.DateTime.local().toFormat(dateFormat)),
         component: function component(inputProps) {
           return React.createElement(InputComponent, _extends({}, inputProps, {
-            name: input.name
+            name: input.name,
+            invalid: invalid,
+            disabled: disabled
           }));
         },
         onDayChange: this.handleOnDayChange,
-        overlayComponent: function overlayComponent(_ref) {
-          var children = _ref.children,
-              overlayProps = _objectWithoutProperties(_ref, ["children"]);
+        overlayComponent: function overlayComponent(_ref2) {
+          var children = _ref2.children,
+              overlayProps = _objectWithoutProperties(_ref2, ["children"]);
 
           return React.createElement(OverlayWrapperComponent, overlayProps, React.createElement(OverlayComponent, null, children));
         },
         dayPickerProps: _objectSpread({}, calendarProps),
-        value: input.value
+        value: input.value,
+        invalid: invalid,
+        disabled: disabled
       }, rest)));
     }
   }]);

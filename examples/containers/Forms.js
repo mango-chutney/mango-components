@@ -218,6 +218,18 @@ export class Form extends React.Component<Props, State> {
             component={TypeaheadInput}
           />
           <Field name="soup" label="Enter soup date" component={DatePicker} />
+          <Field
+            name="soup-invalid"
+            label="Enter soup date invalid"
+            invalid
+            component={DatePicker}
+          />
+          <Field
+            name="soup-disabled"
+            label="Enter soup date disabled"
+            disabled
+            component={DatePicker}
+          />
           <Button onClick={handleSubmit(this.submit)}>
             Go
             <Tootlip visible={submitting}>OK, please wait a moment…</Tootlip>

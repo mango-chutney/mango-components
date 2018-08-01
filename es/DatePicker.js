@@ -16,7 +16,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { DateTime } from 'luxon';
 import { rem } from 'polished';
@@ -58,7 +58,10 @@ var parseDate = function parseDate(dateString, format) {
 export var createStyledComponents = function createStyledComponents(styleProps) {
   var LabelComponent = styled.span.withConfig({
     componentId: "s43u0y-0"
-  })(["font-size:", ";font-weight:", ";display:block;"], styleProps.fontSize, styleProps.fontWeight);
+  })(["font-size:", ";font-weight:", ";display:block;", ";"], styleProps.fontSize, styleProps.fontWeight, function (_ref) {
+    var invalid = _ref.invalid;
+    return invalid && css(["color:", ";"], palette.alert);
+  });
   var OverlayWrapperComponent = styled.div.withConfig({
     componentId: "s43u0y-1"
   })(["position:relative;"]);
@@ -117,11 +120,16 @@ function (_React$Component) {
         label = _this$props2.label,
         dateFormat = _this$props2.dateFormat,
         calendarProps = _this$props2.calendarProps,
-        rest = _objectWithoutPropertiesLoose(_this$props2, ["InputComponent", "LabelComponent", "OverlayWrapperComponent", "OverlayComponent", "input", "label", "dateFormat", "calendarProps"]);
+        invalid = _this$props2.invalid,
+        disabled = _this$props2.disabled,
+        rest = _objectWithoutPropertiesLoose(_this$props2, ["InputComponent", "LabelComponent", "OverlayWrapperComponent", "OverlayComponent", "input", "label", "dateFormat", "calendarProps", "invalid", "disabled"]);
 
     return React.createElement("label", {
       htmlFor: input.name
-    }, label && React.createElement(LabelComponent, null, label), React.createElement(DayPickerInput, _extends({
+    }, label && React.createElement(LabelComponent, {
+      invalid: invalid,
+      disabled: disabled
+    }, label), React.createElement(DayPickerInput, _extends({
       ref: this.datePickerRef,
       format: dateFormat,
       formatDate: formatDate,
@@ -129,18 +137,22 @@ function (_React$Component) {
       placeholder: "" + DateTime.local().toFormat(dateFormat),
       component: function component(inputProps) {
         return React.createElement(InputComponent, _extends({}, inputProps, {
-          name: input.name
+          name: input.name,
+          invalid: invalid,
+          disabled: disabled
         }));
       },
       onDayChange: this.handleOnDayChange,
-      overlayComponent: function overlayComponent(_ref) {
-        var children = _ref.children,
-            overlayProps = _objectWithoutPropertiesLoose(_ref, ["children"]);
+      overlayComponent: function overlayComponent(_ref2) {
+        var children = _ref2.children,
+            overlayProps = _objectWithoutPropertiesLoose(_ref2, ["children"]);
 
         return React.createElement(OverlayWrapperComponent, overlayProps, React.createElement(OverlayComponent, null, children));
       },
       dayPickerProps: Object.assign({}, calendarProps),
-      value: input.value
+      value: input.value,
+      invalid: invalid,
+      disabled: disabled
     }, rest)));
   };
 
