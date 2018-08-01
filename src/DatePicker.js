@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { DateTime } from 'luxon';
 import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-components';
@@ -22,6 +22,8 @@ export type $StyledProps = {
   id?: string,
   label: string,
   placeholder: string,
+  invalid?: boolean,
+  disabled?: boolean,
 } & $FieldProps;
 
 export type $Props = {
@@ -95,6 +97,12 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     font-size: ${styleProps.fontSize};
     font-weight: ${styleProps.fontWeight};
     display: block;
+
+    ${({ invalid }) =>
+      invalid &&
+      css`
+        color: ${palette.alert};
+      `};
   `;
 
   const OverlayWrapperComponent = styled.div`
@@ -300,12 +308,18 @@ class DatePicker extends React.Component<$Props, void> {
       label,
       dateFormat,
       calendarProps,
+      invalid,
+      disabled,
       ...rest
     } = this.props;
 
     return (
       <label htmlFor={input.name}>
-        {label && <LabelComponent>{label}</LabelComponent>}
+        {label && (
+          <LabelComponent invalid={invalid} disabled={disabled}>
+            {label}
+          </LabelComponent>
+        )}
         <DayPickerInput
           ref={this.datePickerRef}
           format={dateFormat}
@@ -313,7 +327,12 @@ class DatePicker extends React.Component<$Props, void> {
           parseDate={parseDate}
           placeholder={`${DateTime.local().toFormat(dateFormat)}`}
           component={inputProps => (
-            <InputComponent {...inputProps} name={input.name} />
+            <InputComponent
+              {...inputProps}
+              name={input.name}
+              invalid={invalid}
+              disabled={disabled}
+            />
           )}
           onDayChange={this.handleOnDayChange}
           overlayComponent={({
@@ -328,6 +347,8 @@ class DatePicker extends React.Component<$Props, void> {
           )}
           dayPickerProps={{ ...calendarProps }}
           value={input.value}
+          invalid={invalid}
+          disabled={disabled}
           {...rest}
         />
       </label>
