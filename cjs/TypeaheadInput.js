@@ -31,6 +31,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
@@ -51,11 +53,9 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var defaultStyleProps = _Input.defaultStyleProps;
+var defaultStyleProps = {};
 exports.defaultStyleProps = defaultStyleProps;
 
 var createStyledComponents = function createStyledComponents(styleProps) {
@@ -79,11 +79,11 @@ var createStyledComponents = function createStyledComponents(styleProps) {
     return selectedItem === item ? 'bold' : 'normal';
   });
 
-  return _objectSpread({}, (0, _Input.createStyledComponents)(_Input.defaultStyleProps), {
+  return {
     ItemComponent: ItemComponent,
     MenuComponent: MenuComponent,
     MenuWrapperComponent: MenuWrapperComponent
-  });
+  };
 };
 
 exports.createStyledComponents = createStyledComponents;
@@ -216,7 +216,6 @@ function (_React$Component) {
       var _this$props = _this.props,
           InputComponent = _this$props.InputComponent,
           ItemComponent = _this$props.ItemComponent,
-          LabelComponent = _this$props.LabelComponent,
           MenuComponent = _this$props.MenuComponent,
           MenuWrapperComponent = _this$props.MenuWrapperComponent,
           filterItems = _this$props.filterItems,
@@ -224,12 +223,14 @@ function (_React$Component) {
           items = _this$props.items,
           label = _this$props.label,
           mapItemToString = _this$props.mapItemToString,
-          meta = _this$props.meta,
           renderItem = _this$props.renderItem,
-          rest = _objectWithoutProperties(_this$props, ["InputComponent", "ItemComponent", "LabelComponent", "MenuComponent", "MenuWrapperComponent", "filterItems", "input", "items", "label", "mapItemToString", "meta", "renderItem"]);
+          rest = _objectWithoutProperties(_this$props, ["InputComponent", "ItemComponent", "MenuComponent", "MenuWrapperComponent", "filterItems", "input", "items", "label", "mapItemToString", "renderItem"]);
 
       var filteredItems = filterItems(items, inputValue);
-      return React.createElement("div", null, React.createElement(LabelComponent, getLabelProps(), label, React.createElement(MenuWrapperComponent, null, React.createElement(InputComponent, _objectSpread({}, getInputProps(input), rest, {
+
+      var inputProps = _objectSpread({}, rest, {
+        label: (0, _Input.remapLabelProps)(label, getLabelProps()),
+        input: _objectSpread({}, input, getInputProps(input)),
         onChange: _this.createChangeHandler({
           getInputProps: getInputProps
         }),
@@ -246,9 +247,12 @@ function (_React$Component) {
         // styled-components won't propagate the `ref` prop.  If
         // `InputComponent` is not a styled-component, you will need to
         // map the `inputRef` prop to `ref`.
-        innerRef: _this.inputRef
-      })), isOpen && !!filteredItems.length && React.createElement(MenuComponent, null, filteredItems.map(function (item, index) {
-        return React.createElement(ItemComponent, _objectSpread({}, getItemProps({
+        ref: _this.inputRef,
+        InputDecoratorComponent: MenuWrapperComponent
+      });
+
+      var createItemProps = function createItemProps(item, index) {
+        return _objectSpread({}, getItemProps({
           key: mapItemToString(item),
           index: index,
           item: item
@@ -256,8 +260,13 @@ function (_React$Component) {
           index: index,
           selectedItem: selectedItem,
           highlightedIndex: highlightedIndex
-        }), typeof renderItem === 'function' ? renderItem(item) : mapItemToString(item));
-      })))));
+        });
+      }; // This is wrapped in a div to satisfy downshift.
+
+
+      return React.createElement("div", null, React.createElement(InputComponent, inputProps, isOpen && !!filteredItems.length && React.createElement(MenuComponent, null, filteredItems.map(function (item, index) {
+        return React.createElement(ItemComponent, createItemProps(item, index), typeof renderItem === 'function' ? renderItem(item) : mapItemToString(item));
+      }))));
     });
 
     return _this;
@@ -309,8 +318,11 @@ _defineProperty(TypeaheadInput, "defaultProps", {
 
 var createComponent = function createComponent() {
   var defaultStyledComponents = createStyledComponents(defaultStyleProps);
+  var InputComponent = (0, _Input.createComponent)();
   return function (props) {
-    return React.createElement(TypeaheadInput, _objectSpread({}, defaultStyledComponents, props));
+    return React.createElement(TypeaheadInput, _objectSpread({
+      InputComponent: InputComponent
+    }, defaultStyledComponents, props));
   };
 };
 

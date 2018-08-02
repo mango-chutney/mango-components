@@ -7,8 +7,8 @@ import styled from 'styled-components';
 import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-components';
 import type { FieldProps as $FieldProps } from 'redux-form';
 import {
-  defaultStyleProps as defaultInputStyleProps,
-  createStyledComponents as createInputStyledComponents,
+  createComponent as createInputComponent,
+  remapLabelProps,
 } from './Input';
 import type {
   $ComponentFactory,
@@ -18,14 +18,13 @@ import type {
 
 export type $StyledProps = {
   id?: string,
-  label: string,
+  label: React.ElementConfig<'label'>,
   placeholder: string,
 } & $FieldProps;
 
 export type $Props = {
   InputComponent: React.ComponentType<*>,
   ItemComponent: React.ComponentType<*>,
-  LabelComponent: React.ComponentType<*>,
   MenuComponent: React.ComponentType<*>,
   MenuWrapperComponent: React.ComponentType<*>,
   filterItems: (
@@ -38,13 +37,11 @@ export type $Props = {
   renderItem?: (item: any) => React.Node, // defaults to mapItemToString
 } & $StyledProps;
 
-export const defaultStyleProps = defaultInputStyleProps;
+export const defaultStyleProps = {};
 
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
-    InputComponent: $ReactComponentStyled<*>,
     ItemComponent: $ReactComponentStyled<*>,
-    LabelComponent: $ReactComponentStyled<*>,
     MenuComponent: $ReactComponentStyled<*>,
     MenuWrapperComponent: $ReactComponentStyled<*>,
   },
@@ -72,7 +69,6 @@ export const createStyledComponents: $StyledSubComponentsFactory<
   `;
 
   return {
-    ...createInputStyledComponents(defaultInputStyleProps),
     ItemComponent,
     MenuComponent,
     MenuWrapperComponent,
@@ -216,7 +212,6 @@ class TypeaheadInput extends React.Component<$Props, $State> {
     const {
       InputComponent,
       ItemComponent,
-      LabelComponent,
       MenuComponent,
       MenuWrapperComponent,
       filterItems,
@@ -224,64 +219,62 @@ class TypeaheadInput extends React.Component<$Props, $State> {
       items,
       label,
       mapItemToString,
-      meta,
       renderItem,
       ...rest
     } = this.props;
 
     const filteredItems = filterItems(items, inputValue);
 
+    const inputProps = {
+      ...rest,
+      label: remapLabelProps(label, getLabelProps()),
+      input: { ...input, ...getInputProps(input) },
+      onChange: this.createChangeHandler({ getInputProps }),
+      // This ref dance is to preserve the cursor position.
+      //
+      // See these issues for more details:
+      // https://github.com/facebook/react/issues/955
+      // https://github.com/facebook/react/issues/12762
+      // https://github.com/paypal/downshift/issues/217
+      // https://github.com/erikras/redux-form/issues/2049
+      // https://github.com/erikras/redux-form/issues/3253
+      //
+      // Also, we're using the `innerRef` prop because
+      // styled-components won't propagate the `ref` prop.  If
+      // `InputComponent` is not a styled-component, you will need to
+      // map the `inputRef` prop to `ref`.
+      ref: this.inputRef,
+      InputDecoratorComponent: MenuWrapperComponent,
+    };
+
+    const createItemProps = (item, index) => ({
+      ...getItemProps({
+        key: mapItemToString(item),
+        index,
+        item,
+      }),
+      index,
+      selectedItem,
+      highlightedIndex,
+    });
+
+    // This is wrapped in a div to satisfy downshift.
     return (
       <div>
-        <LabelComponent {...getLabelProps()}>
-          {label}
-          <MenuWrapperComponent>
-            <InputComponent
-              {...{
-                ...getInputProps(input),
-                ...rest,
-                onChange: this.createChangeHandler({ getInputProps }),
-                // This ref dance is to preserve the cursor position.
-                //
-                // See these issues for more details:
-                // https://github.com/facebook/react/issues/955
-                // https://github.com/facebook/react/issues/12762
-                // https://github.com/paypal/downshift/issues/217
-                // https://github.com/erikras/redux-form/issues/2049
-                // https://github.com/erikras/redux-form/issues/3253
-                //
-                // Also, we're using the `innerRef` prop because
-                // styled-components won't propagate the `ref` prop.  If
-                // `InputComponent` is not a styled-component, you will need to
-                // map the `inputRef` prop to `ref`.
-                innerRef: this.inputRef,
-              }}
-            />
-            {isOpen &&
-              !!filteredItems.length && (
-                <MenuComponent>
-                  {filteredItems.map((item, index) => (
-                    <ItemComponent
-                      {...{
-                        ...getItemProps({
-                          key: mapItemToString(item),
-                          index,
-                          item,
-                        }),
-                        index,
-                        selectedItem,
-                        highlightedIndex,
-                      }}
-                    >
-                      {typeof renderItem === 'function'
-                        ? renderItem(item)
-                        : mapItemToString(item)}
-                    </ItemComponent>
-                  ))}
-                </MenuComponent>
-              )}
-          </MenuWrapperComponent>
-        </LabelComponent>
+        <InputComponent {...inputProps}>
+          {isOpen &&
+            !!filteredItems.length && (
+              <MenuComponent>
+                {filteredItems.map((item, index) => (
+                  <ItemComponent {...createItemProps(item, index)}>
+                    {typeof renderItem === 'function'
+                      ? renderItem(item)
+                      : mapItemToString(item)}
+                  </ItemComponent>
+                ))}
+              </MenuComponent>
+            )}
+        </InputComponent>
       </div>
     );
   };
@@ -303,8 +296,11 @@ class TypeaheadInput extends React.Component<$Props, $State> {
 
 export const createComponent: $ComponentFactory<$Props> = () => {
   const defaultStyledComponents = createStyledComponents(defaultStyleProps);
+  const InputComponent = createInputComponent();
   return (props: $Props) => (
-    <TypeaheadInput {...{ ...defaultStyledComponents, ...props }} />
+    <TypeaheadInput
+      {...{ InputComponent, ...defaultStyledComponents, ...props }}
+    />
   );
 };
 

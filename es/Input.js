@@ -1,10 +1,8 @@
 import "core-js/modules/web.dom.iterable";
 import "core-js/modules/es6.array.iterator";
 import "core-js/modules/es6.object.keys";
-import "core-js/modules/es6.object.assign";
 import "core-js/modules/es6.function.name";
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+import "core-js/modules/es6.object.assign";
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
@@ -13,14 +11,14 @@ import styled, { css } from 'styled-components';
 import { rem, transparentize, darken } from 'polished';
 import { palette, fontWeights, fontStack } from './constants';
 export var defaultStyleProps = {
+  activeBorderColor: palette.black,
   backgroundColor: palette.lightGray,
   borderColor: palette.border,
   color: palette.black,
   fontFamily: fontStack,
-  placeholderColor: String(transparentize(0.2, palette.darkGray)),
-  activeBorderColor: palette.black,
   fontSize: rem(14),
-  fontWeight: fontWeights.semibold
+  fontWeight: fontWeights.semibold,
+  placeholderColor: String(transparentize(0.2, palette.darkGray))
 };
 export var createStyledComponents = function createStyledComponents(styleProps) {
   var InputComponent = styled.input.withConfig({
@@ -32,38 +30,63 @@ export var createStyledComponents = function createStyledComponents(styleProps) 
     var disabled = _ref2.disabled;
     return disabled && css(["background-color:", ";color:", ";cursor:not-allowed;::placeholder{color:", ";}"], darken(0.05, styleProps.backgroundColor), darken(0.05, styleProps.color), darken(0.05, styleProps.placeholderColor));
   });
-  var LabelComponent = styled.span.withConfig({
+  var InputDecoratorComponent = styled.span.withConfig({
     componentId: "ga0twe-1"
+  })(["display:block;"]);
+  var LabelComponent = styled.label.withConfig({
+    componentId: "ga0twe-2"
   })(["font-size:", ";font-weight:", ";display:block;", ";"], styleProps.fontSize, styleProps.fontWeight, function (_ref3) {
     var invalid = _ref3.invalid;
     return invalid && css(["color:", ";"], palette.alert);
   });
   return {
     InputComponent: InputComponent,
+    InputDecoratorComponent: InputDecoratorComponent,
     LabelComponent: LabelComponent
   };
 };
+export var remapLabelProps = function remapLabelProps(label, extraProps) {
+  if (!label) {
+    return Object.assign({
+      children: null
+    }, extraProps);
+  }
+
+  if (typeof label === 'string') {
+    return Object.assign({}, extraProps, {
+      children: label
+    });
+  }
+
+  return Object.assign({}, label, extraProps);
+};
 export function Input(_ref4) {
   var InputComponent = _ref4.InputComponent,
+      InputDecoratorComponent = _ref4.InputDecoratorComponent,
       LabelComponent = _ref4.LabelComponent,
-      input = _ref4.input,
-      meta = _ref4.meta,
-      label = _ref4.label,
-      invalid = _ref4.invalid,
+      children = _ref4.children,
       disabled = _ref4.disabled,
-      rest = _objectWithoutPropertiesLoose(_ref4, ["InputComponent", "LabelComponent", "input", "meta", "label", "invalid", "disabled"]);
+      id = _ref4.id,
+      input = _ref4.input,
+      label = _ref4.label,
+      meta = _ref4.meta,
+      rest = _objectWithoutPropertiesLoose(_ref4, ["InputComponent", "InputDecoratorComponent", "LabelComponent", "children", "disabled", "id", "input", "label", "meta"]);
 
-  return React.createElement("label", {
-    htmlFor: rest.id || input && input.name
-  }, label && React.createElement(LabelComponent, {
+  var invalid = meta.invalid;
+
+  var _remapLabelProps = remapLabelProps(label, {
+    htmlFor: label && label.htmlFor || id || input && input.name,
     invalid: invalid,
     disabled: disabled
-  }, label), React.createElement("span", null, React.createElement(InputComponent, _extends({}, input, rest, {
+  }),
+      labelChild = _remapLabelProps.children,
+      labelProps = _objectWithoutPropertiesLoose(_remapLabelProps, ["children"]);
+
+  return React.createElement(LabelComponent, labelProps, labelChild, React.createElement(InputDecoratorComponent, null, React.createElement(InputComponent, Object.assign({}, input, rest, {
+    id: id || input && input.name,
     invalid: invalid,
     disabled: disabled
-  }, {
-    id: rest.id || input && input.name
-  }))));
+  })), children));
 }
 export var createComponent = function createComponent() {
   var defaultStyledComponents = createStyledComponents(defaultStyleProps);
