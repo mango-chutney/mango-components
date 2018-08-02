@@ -335,6 +335,7 @@ class DatePicker extends React.Component<$Props, void> {
       // to edit the value yourself.  Just make it read only for now, so the
       // only way to manipulate it is by using the picker.
       readOnly: true,
+      autoComplete: 'off',
     };
 
     const composedDatePickerProps = {
