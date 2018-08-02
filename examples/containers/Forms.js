@@ -90,25 +90,22 @@ export class Form extends React.Component<Props, State> {
             disabled
           />
           <Field
-            type="textarea"
             name="textarea"
-            label="textarea"
-            placeholder="textarea"
+            label="TextArea"
+            placeholder="TextArea"
             component={TextArea}
           />
           <Field
-            type="textarea"
             name="invalid-textarea"
-            label="invalid textarea"
-            placeholder="invalid textarea"
+            label="Invalid TextArea"
+            placeholder="Invalid TextArea"
             component={TextArea}
             invalid
           />
           <Field
-            type="textarea"
-            name="textarea"
-            label="textarea"
-            placeholder="textarea"
+            name="disabled-textarea"
+            label="Disabled TextArea"
+            placeholder="Disabled TextArea"
             component={TextArea}
             disabled
           />
