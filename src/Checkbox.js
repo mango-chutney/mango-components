@@ -11,16 +11,7 @@ import type {
   $MangoComponent,
   $StyledSubComponentsFactory,
 } from './types';
-
-export type $StyledProps = {
-  id?: string,
-  name: string,
-  children: React.Node,
-  label: string,
-  checkboxColor: string,
-  invalid?: boolean,
-  disabled?: boolean,
-} & $FieldProps;
+import { createFormControlElementProps, createLabelProps } from './Input';
 
 export type $Props = {
   CheckboxBackgroundComponent: React.ComponentType<*>,
@@ -28,7 +19,9 @@ export type $Props = {
   InputComponent: React.ComponentType<*>,
   LabelComponent: React.ComponentType<*>,
   WrapperComponent: React.ComponentType<*>,
-} & $StyledProps;
+  label: string | React.ElementConfig<'label'>,
+} & React.ElementConfig<'input'> &
+  $FieldProps;
 
 export const defaultStyleProps: {|
   checkboxSize: number,
@@ -67,8 +60,9 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     display: inline-block;
     font-size: 1rem;
 
-    ${({ invalid }) =>
-      invalid &&
+    ${({ error, touched }) =>
+      error &&
+      touched &&
       css`
         color: ${palette.alert};
       `};
@@ -95,8 +89,9 @@ export const createStyledComponents: $StyledSubComponentsFactory<
       background: ${palette.lightGray};
       margin-right: 1rem;
 
-      ${({ invalid }) =>
-        invalid &&
+      ${({ error, touched }) =>
+        error &&
+        touched &&
         css`
           border-color: ${palette.alert};
         `};
@@ -173,48 +168,44 @@ export const createStyledComponents: $StyledSubComponentsFactory<
   };
 };
 
-export function Checkbox({
-  CheckboxBackgroundComponent,
-  CheckboxContainerComponent,
-  InputComponent,
-  LabelComponent,
-  WrapperComponent,
-  children,
-  id,
-  input: { name, value, ...inputProps },
-  label,
-  meta,
-  invalid,
-  disabled,
-  ...rest
-}: $Props) {
+export function Checkbox(props: $Props) {
+  const {
+    CheckboxBackgroundComponent,
+    CheckboxContainerComponent,
+    InputComponent,
+    LabelComponent,
+    WrapperComponent,
+    label,
+    value,
+    ...rest
+  } = props;
+
+  // Pull these out to pass to the CheckboxBackgroundComponent, but don't remove
+  // them from the 'rest' object (so that they still get applied to the input
+  // and label components).
+  const { disabled, meta } = props;
+
+  const { children, ...labelProps } = createLabelProps(label, rest);
+
   return (
     <WrapperComponent>
       <CheckboxContainerComponent>
         <InputComponent
-          {...{
-            ...rest,
-            ...inputProps,
-            id: id || name,
-            name,
-            checked: value,
+          {...createFormControlElementProps(rest, {
             type: 'checkbox',
-            invalid,
-            disabled,
-          }}
+            checked: value,
+          })}
         />
-        <CheckboxBackgroundComponent invalid={invalid} disabled={disabled} />
+        <CheckboxBackgroundComponent {...{ ...meta, disabled }} />
       </CheckboxContainerComponent>
-      <LabelComponent htmlFor={id || name}>
-        {children || label || ''}
-      </LabelComponent>
+      <LabelComponent {...labelProps}>{children}</LabelComponent>
     </WrapperComponent>
   );
 }
 
-export const createComponent: $ComponentFactory<$StyledProps> = () => {
+export const createComponent: $ComponentFactory<$Props> = () => {
   const defaultStyledComponents = createStyledComponents(defaultStyleProps);
-  return (props: $StyledProps) => (
+  return (props: $Props) => (
     <Checkbox {...{ ...defaultStyledComponents, ...props }} />
   );
 };
@@ -223,4 +214,4 @@ export default ({
   defaultStyleProps,
   createStyledComponents,
   createComponent,
-}: $MangoComponent<typeof defaultStyleProps, $StyledProps>);
+}: $MangoComponent<typeof defaultStyleProps, $Props>);

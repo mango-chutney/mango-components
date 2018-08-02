@@ -7,28 +7,20 @@ import type { FieldProps as $FieldProps } from 'redux-form';
 import { rem, transparentize, darken } from 'polished';
 import tristicons from 'tristicons';
 import { palette, fontWeights, fontStack } from './constants';
+import { createFormControlElementProps, createLabelProps } from './Input';
 import type {
   $ComponentFactory,
   $MangoComponent,
   $StyledSubComponentsFactory,
 } from './types';
 
-export type $StyledProps = {
-  ...$FieldProps,
-  id?: string,
-  children: React.Node,
-  label: string,
-  placeholder: string,
-  invalid?: boolean,
-  disabled?: boolean,
-};
-
 export type $Props = {
-  ...$StyledProps,
   SelectComponent: React.ComponentType<*>,
-  SelectContainerComponent: React.ComponentType<*>,
+  InputDecoratorComponent: React.ComponentType<*>,
   LabelComponent: React.ComponentType<*>,
-};
+  label: string | React.ElementConfig<'label'>,
+} & React.ElementConfig<'select'> &
+  $FieldProps;
 
 export const defaultStyleProps: {|
   backgroundColor: string,
@@ -53,7 +45,7 @@ export const defaultStyleProps: {|
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
     SelectComponent: $ReactComponentStyled<*>,
-    SelectContainerComponent: $ReactComponentStyled<*>,
+    InputDecoratorComponent: $ReactComponentStyled<*>,
     LabelComponent: $ReactComponentStyled<*>,
   },
   typeof defaultStyleProps,
@@ -92,8 +84,9 @@ export const createStyledComponents: $StyledSubComponentsFactory<
       width: 100%;
     }
 
-    ${({ invalid }) =>
-      invalid &&
+    ${({ error, touched }) =>
+      error &&
+      touched &&
       css`
         border-color: ${palette.alert};
       `};
@@ -111,19 +104,21 @@ export const createStyledComponents: $StyledSubComponentsFactory<
       `};
   `;
 
-  const LabelComponent = styled.span`
+  const LabelComponent = styled.label`
     font-size: ${styleProps.fontSize};
     font-weight: ${styleProps.fontWeight};
     display: block;
 
-    ${({ invalid }) =>
-      invalid &&
+    ${({ error, touched }) =>
+      error &&
+      touched &&
       css`
         color: ${palette.alert};
       `};
   `;
 
-  const SelectContainerComponent = styled.div`
+  const InputDecoratorComponent = styled.span`
+    display: block;
     position: relative;
 
     &::after {
@@ -137,42 +132,39 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     }
   `;
 
-  return { SelectComponent, SelectContainerComponent, LabelComponent };
+  return { SelectComponent, InputDecoratorComponent, LabelComponent };
 };
 
-export function Select({
-  SelectComponent,
-  SelectContainerComponent,
-  LabelComponent,
-  children,
-  input,
-  label,
-  meta,
-  invalid,
-  disabled,
-  ...rest
-}: $Props) {
+export function Select(props: $Props) {
+  const {
+    SelectComponent,
+    InputDecoratorComponent,
+    LabelComponent,
+    label,
+    children: selectChildren,
+    ...rest
+  } = props;
+
+  const { children: labelChildren, ...labelProps } = createLabelProps(
+    label,
+    rest,
+  );
+
   return (
-    <label htmlFor={rest.id || (input && input.name)}>
-      {label && <LabelComponent invalid={invalid}>{label}</LabelComponent>}
-      <SelectContainerComponent>
-        <SelectComponent
-          {...input}
-          {...rest}
-          invalid={invalid}
-          disabled={disabled}
-          id={rest.id || (input && input.name)}
-        >
-          {children}
+    <LabelComponent {...labelProps}>
+      {labelChildren}
+      <InputDecoratorComponent>
+        <SelectComponent {...createFormControlElementProps(rest)}>
+          {selectChildren}
         </SelectComponent>
-      </SelectContainerComponent>
-    </label>
+      </InputDecoratorComponent>
+    </LabelComponent>
   );
 }
 
-export const createComponent: $ComponentFactory<$StyledProps> = () => {
+export const createComponent: $ComponentFactory<$Props> = () => {
   const defaultStyledComponents = createStyledComponents(defaultStyleProps);
-  return (props: $StyledProps) => (
+  return (props: $Props) => (
     <Select {...{ ...defaultStyledComponents, ...props }} />
   );
 };
@@ -181,4 +173,4 @@ export default ({
   defaultStyleProps,
   createStyledComponents,
   createComponent,
-}: $MangoComponent<typeof defaultStyleProps, $StyledProps>);
+}: $MangoComponent<typeof defaultStyleProps, $Props>);

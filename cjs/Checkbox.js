@@ -12,8 +12,6 @@ require("core-js/modules/es6.array.iterator");
 
 require("core-js/modules/es6.object.keys");
 
-require("core-js/modules/es6.function.name");
-
 var React = _interopRequireWildcard(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
@@ -21,6 +19,8 @@ var _styledComponents = _interopRequireWildcard(require("styled-components"));
 var _polished = require("polished");
 
 var _constants = require("./constants");
+
+var _Input = require("./Input");
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -51,11 +51,13 @@ var createStyledComponents = function createStyledComponents(styleProps) {
   var CheckboxBackgroundComponent = _styledComponents.default.div.withConfig({
     componentId: "s156yctp-2"
   })(["cursor:pointer;font-weight:", ";display:inline-block;font-size:1rem;", ";min-height:", ";line-height:", ";position:relative;border:1px solid transparent;display:block;&::before,&::after{width:", ";height:", ";cursor:pointer;content:'';display:inline-block;border-radius:4px;vertical-align:middle;}&::before{border:1px solid ", ";background:", ";margin-right:1rem;", ";", ";}&::after{position:absolute;left:0;border:1px solid transparent;line-height:", ";margin-top:", ";text-align:center;transform:scale(0);}"], _constants.fontWeights.semibold, function (_ref) {
-    var invalid = _ref.invalid;
-    return invalid && (0, _styledComponents.css)(["color:", ";"], _constants.palette.alert);
+    var error = _ref.error,
+        touched = _ref.touched;
+    return error && touched && (0, _styledComponents.css)(["color:", ";"], _constants.palette.alert);
   }, (0, _polished.rem)(styleProps.checkboxSize), (0, _polished.rem)(styleProps.checkboxSize), (0, _polished.rem)(styleProps.checkboxSize), (0, _polished.rem)(styleProps.checkboxSize), _constants.palette.border, _constants.palette.lightGray, function (_ref2) {
-    var invalid = _ref2.invalid;
-    return invalid && (0, _styledComponents.css)(["border-color:", ";"], _constants.palette.alert);
+    var error = _ref2.error,
+        touched = _ref2.touched;
+    return error && touched && (0, _styledComponents.css)(["border-color:", ";"], _constants.palette.alert);
   }, function (_ref3) {
     var disabled = _ref3.disabled;
     return disabled && (0, _styledComponents.css)(["background-color:", ";cursor:not-allowed;"], (0, _polished.darken)(0.05, _constants.palette.lightGray));
@@ -80,37 +82,32 @@ var createStyledComponents = function createStyledComponents(styleProps) {
 
 exports.createStyledComponents = createStyledComponents;
 
-function Checkbox(_ref4) {
-  var CheckboxBackgroundComponent = _ref4.CheckboxBackgroundComponent,
-      CheckboxContainerComponent = _ref4.CheckboxContainerComponent,
-      InputComponent = _ref4.InputComponent,
-      LabelComponent = _ref4.LabelComponent,
-      WrapperComponent = _ref4.WrapperComponent,
-      children = _ref4.children,
-      id = _ref4.id,
-      _ref4$input = _ref4.input,
-      name = _ref4$input.name,
-      value = _ref4$input.value,
-      inputProps = _objectWithoutProperties(_ref4$input, ["name", "value"]),
-      label = _ref4.label,
-      meta = _ref4.meta,
-      invalid = _ref4.invalid,
-      disabled = _ref4.disabled,
-      rest = _objectWithoutProperties(_ref4, ["CheckboxBackgroundComponent", "CheckboxContainerComponent", "InputComponent", "LabelComponent", "WrapperComponent", "children", "id", "input", "label", "meta", "invalid", "disabled"]);
+function Checkbox(props) {
+  var CheckboxBackgroundComponent = props.CheckboxBackgroundComponent,
+      CheckboxContainerComponent = props.CheckboxContainerComponent,
+      InputComponent = props.InputComponent,
+      LabelComponent = props.LabelComponent,
+      WrapperComponent = props.WrapperComponent,
+      label = props.label,
+      value = props.value,
+      rest = _objectWithoutProperties(props, ["CheckboxBackgroundComponent", "CheckboxContainerComponent", "InputComponent", "LabelComponent", "WrapperComponent", "label", "value"]); // Pull these out to pass to the CheckboxBackgroundComponent, but don't remove
+  // them from the 'rest' object (so that they still get applied to the input
+  // and label components).
 
-  return React.createElement(WrapperComponent, null, React.createElement(CheckboxContainerComponent, null, React.createElement(InputComponent, _objectSpread({}, rest, inputProps, {
-    id: id || name,
-    name: name,
-    checked: value,
+
+  var disabled = props.disabled,
+      meta = props.meta;
+
+  var _createLabelProps = (0, _Input.createLabelProps)(label, rest),
+      children = _createLabelProps.children,
+      labelProps = _objectWithoutProperties(_createLabelProps, ["children"]);
+
+  return React.createElement(WrapperComponent, null, React.createElement(CheckboxContainerComponent, null, React.createElement(InputComponent, (0, _Input.createFormControlElementProps)(rest, {
     type: 'checkbox',
-    invalid: invalid,
+    checked: value
+  })), React.createElement(CheckboxBackgroundComponent, _objectSpread({}, meta, {
     disabled: disabled
-  })), React.createElement(CheckboxBackgroundComponent, {
-    invalid: invalid,
-    disabled: disabled
-  })), React.createElement(LabelComponent, {
-    htmlFor: id || name
-  }, children || label || ''));
+  }))), React.createElement(LabelComponent, labelProps, children));
 }
 
 var createComponent = function createComponent() {

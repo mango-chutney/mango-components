@@ -9,6 +9,7 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { rem, transparentize, darken } from 'polished';
+import invariant from 'invariant';
 import { palette, fontWeights, fontStack } from './constants';
 export var defaultStyleProps = {
   activeBorderColor: palette.black,
@@ -24,8 +25,9 @@ export var createStyledComponents = function createStyledComponents(styleProps) 
   var InputComponent = styled.input.withConfig({
     componentId: "ga0twe-0"
   })(["appearance:none;background-color:", ";border-color:", ";border-radius:4px;border-style:solid;border-width:1px;color:", ";display:block;font-family:", ";height:2.6rem;margin-bottom:1rem;outline:0;padding:0.5rem 1rem;transition:border-color 300ms ease;width:100%;::placeholder{color:", ";}:active,:focus{border-color:", ";}", ";", ";"], styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.placeholderColor, styleProps.activeBorderColor, function (_ref) {
-    var invalid = _ref.invalid;
-    return invalid && css(["border-color:", ";::placeholder{color:", ";}"], palette.alert, palette.alert);
+    var error = _ref.error,
+        touched = _ref.touched;
+    return error && touched && css(["border-color:", ";::placeholder{color:", ";}"], palette.alert, palette.alert);
   }, function (_ref2) {
     var disabled = _ref2.disabled;
     return disabled && css(["background-color:", ";color:", ";cursor:not-allowed;::placeholder{color:", ";}"], darken(0.05, styleProps.backgroundColor), darken(0.05, styleProps.color), darken(0.05, styleProps.placeholderColor));
@@ -36,8 +38,9 @@ export var createStyledComponents = function createStyledComponents(styleProps) 
   var LabelComponent = styled.label.withConfig({
     componentId: "ga0twe-2"
   })(["font-size:", ";font-weight:", ";display:block;", ";"], styleProps.fontSize, styleProps.fontWeight, function (_ref3) {
-    var invalid = _ref3.invalid;
-    return invalid && css(["color:", ";"], palette.alert);
+    var error = _ref3.error,
+        touched = _ref3.touched;
+    return error && touched && css(["color:", ";"], palette.alert);
   });
   return {
     InputComponent: InputComponent,
@@ -45,48 +48,86 @@ export var createStyledComponents = function createStyledComponents(styleProps) 
     LabelComponent: LabelComponent
   };
 };
-export var remapLabelProps = function remapLabelProps(label, extraProps) {
+
+var createLabelObject = function createLabelObject(label) {
   if (!label) {
-    return Object.assign({
-      children: null
-    }, extraProps);
+    return {};
   }
 
   if (typeof label === 'string') {
-    return Object.assign({}, extraProps, {
+    return {
       children: label
-    });
+    };
   }
 
-  return Object.assign({}, label, extraProps);
+  return Object.assign({}, label);
 };
-export function Input(_ref4) {
-  var InputComponent = _ref4.InputComponent,
-      InputDecoratorComponent = _ref4.InputDecoratorComponent,
-      LabelComponent = _ref4.LabelComponent,
-      children = _ref4.children,
-      disabled = _ref4.disabled,
-      id = _ref4.id,
-      input = _ref4.input,
-      label = _ref4.label,
-      meta = _ref4.meta,
-      rest = _objectWithoutPropertiesLoose(_ref4, ["InputComponent", "InputDecoratorComponent", "LabelComponent", "children", "disabled", "id", "input", "label", "meta"]);
 
-  var invalid = meta.invalid;
+export var createInputIdAttribute = function createInputIdAttribute(_ref4) {
+  var id = _ref4.id,
+      input = _ref4.input;
 
-  var _remapLabelProps = remapLabelProps(label, {
-    htmlFor: label && label.htmlFor || id || input && input.name,
-    invalid: invalid,
-    disabled: disabled
-  }),
-      labelChild = _remapLabelProps.children,
-      labelProps = _objectWithoutPropertiesLoose(_remapLabelProps, ["children"]);
+  if (id) {
+    return id;
+  }
 
-  return React.createElement(LabelComponent, labelProps, labelChild, React.createElement(InputDecoratorComponent, null, React.createElement(InputComponent, Object.assign({}, input, rest, {
-    id: id || input && input.name,
-    invalid: invalid,
-    disabled: disabled
-  })), children));
+  if (input && typeof input === 'object' && typeof input.name === 'string') {
+    return input.name;
+  }
+
+  return invariant(false, "Couldn't find or infer 'id' attribute for input element");
+};
+
+var createLabelForAttribute = function createLabelForAttribute(props) {
+  var id = props.id,
+      label = props.label;
+
+  if (label && typeof label === 'object' && typeof label.htmlFor === 'string') {
+    return label.htmlFor;
+  }
+
+  if (id) {
+    return id;
+  }
+
+  return createInputIdAttribute(props);
+};
+
+export var createLabelProps = function createLabelProps(label, props) {
+  var meta = props.meta,
+      input = props.input,
+      children = props.children,
+      rest = _objectWithoutPropertiesLoose(props, ["meta", "input", "children"]);
+
+  var labelProps = createLabelObject(label);
+  return Object.assign({}, meta, rest, labelProps, {
+    children: children || labelProps.children || undefined,
+    htmlFor: createLabelForAttribute(props)
+  });
+};
+export var createFormControlElementProps = function createFormControlElementProps(props, extraProps) {
+  var children = props.children,
+      label = props.label,
+      meta = props.meta,
+      input = props.input,
+      rest = _objectWithoutPropertiesLoose(props, ["children", "label", "meta", "input"]);
+
+  return Object.assign({}, input, meta, rest, extraProps, {
+    id: createInputIdAttribute(props)
+  });
+};
+export function Input(props) {
+  var InputComponent = props.InputComponent,
+      InputDecoratorComponent = props.InputDecoratorComponent,
+      LabelComponent = props.LabelComponent,
+      label = props.label,
+      rest = _objectWithoutPropertiesLoose(props, ["InputComponent", "InputDecoratorComponent", "LabelComponent", "label"]);
+
+  var _createLabelProps = createLabelProps(label, rest),
+      labelChildren = _createLabelProps.labelChildren,
+      labelProps = _objectWithoutPropertiesLoose(_createLabelProps, ["labelChildren"]);
+
+  return React.createElement(LabelComponent, labelProps, labelChildren, React.createElement(InputDecoratorComponent, null, React.createElement(InputComponent, createFormControlElementProps(rest))));
 }
 export var createComponent = function createComponent() {
   var defaultStyledComponents = createStyledComponents(defaultStyleProps);

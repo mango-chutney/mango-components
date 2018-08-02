@@ -4,7 +4,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.Input = Input;
-exports.default = exports.createComponent = exports.remapLabelProps = exports.createStyledComponents = exports.defaultStyleProps = void 0;
+exports.default = exports.createComponent = exports.createFormControlElementProps = exports.createLabelProps = exports.createInputIdAttribute = exports.createStyledComponents = exports.defaultStyleProps = void 0;
+
+require("core-js/modules/es7.symbol.async-iterator");
+
+require("core-js/modules/es6.symbol");
 
 require("core-js/modules/web.dom.iterable");
 
@@ -20,13 +24,19 @@ var _styledComponents = _interopRequireWildcard(require("styled-components"));
 
 var _polished = require("polished");
 
+var _invariant = _interopRequireDefault(require("invariant"));
+
 var _constants = require("./constants");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -48,8 +58,9 @@ var createStyledComponents = function createStyledComponents(styleProps) {
   var InputComponent = _styledComponents.default.input.withConfig({
     componentId: "ga0twe-0"
   })(["appearance:none;background-color:", ";border-color:", ";border-radius:4px;border-style:solid;border-width:1px;color:", ";display:block;font-family:", ";height:2.6rem;margin-bottom:1rem;outline:0;padding:0.5rem 1rem;transition:border-color 300ms ease;width:100%;::placeholder{color:", ";}:active,:focus{border-color:", ";}", ";", ";"], styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.placeholderColor, styleProps.activeBorderColor, function (_ref) {
-    var invalid = _ref.invalid;
-    return invalid && (0, _styledComponents.css)(["border-color:", ";::placeholder{color:", ";}"], _constants.palette.alert, _constants.palette.alert);
+    var error = _ref.error,
+        touched = _ref.touched;
+    return error && touched && (0, _styledComponents.css)(["border-color:", ";::placeholder{color:", ";}"], _constants.palette.alert, _constants.palette.alert);
   }, function (_ref2) {
     var disabled = _ref2.disabled;
     return disabled && (0, _styledComponents.css)(["background-color:", ";color:", ";cursor:not-allowed;::placeholder{color:", ";}"], (0, _polished.darken)(0.05, styleProps.backgroundColor), (0, _polished.darken)(0.05, styleProps.color), (0, _polished.darken)(0.05, styleProps.placeholderColor));
@@ -62,8 +73,9 @@ var createStyledComponents = function createStyledComponents(styleProps) {
   var LabelComponent = _styledComponents.default.label.withConfig({
     componentId: "ga0twe-2"
   })(["font-size:", ";font-weight:", ";display:block;", ";"], styleProps.fontSize, styleProps.fontWeight, function (_ref3) {
-    var invalid = _ref3.invalid;
-    return invalid && (0, _styledComponents.css)(["color:", ";"], _constants.palette.alert);
+    var error = _ref3.error,
+        touched = _ref3.touched;
+    return error && touched && (0, _styledComponents.css)(["color:", ";"], _constants.palette.alert);
   });
 
   return {
@@ -75,51 +87,93 @@ var createStyledComponents = function createStyledComponents(styleProps) {
 
 exports.createStyledComponents = createStyledComponents;
 
-var remapLabelProps = function remapLabelProps(label, extraProps) {
+var createLabelObject = function createLabelObject(label) {
   if (!label) {
-    return _objectSpread({
-      children: null
-    }, extraProps);
+    return {};
   }
 
   if (typeof label === 'string') {
-    return _objectSpread({}, extraProps, {
+    return {
       children: label
-    });
+    };
   }
 
-  return _objectSpread({}, label, extraProps);
+  return _objectSpread({}, label);
 };
 
-exports.remapLabelProps = remapLabelProps;
+var createInputIdAttribute = function createInputIdAttribute(_ref4) {
+  var id = _ref4.id,
+      input = _ref4.input;
 
-function Input(_ref4) {
-  var InputComponent = _ref4.InputComponent,
-      InputDecoratorComponent = _ref4.InputDecoratorComponent,
-      LabelComponent = _ref4.LabelComponent,
-      children = _ref4.children,
-      disabled = _ref4.disabled,
-      id = _ref4.id,
-      input = _ref4.input,
-      label = _ref4.label,
-      meta = _ref4.meta,
-      rest = _objectWithoutProperties(_ref4, ["InputComponent", "InputDecoratorComponent", "LabelComponent", "children", "disabled", "id", "input", "label", "meta"]);
+  if (id) {
+    return id;
+  }
 
-  var invalid = meta.invalid;
+  if (input && _typeof(input) === 'object' && typeof input.name === 'string') {
+    return input.name;
+  }
 
-  var _remapLabelProps = remapLabelProps(label, {
-    htmlFor: label && label.htmlFor || id || input && input.name,
-    invalid: invalid,
-    disabled: disabled
-  }),
-      labelChild = _remapLabelProps.children,
-      labelProps = _objectWithoutProperties(_remapLabelProps, ["children"]);
+  return (0, _invariant.default)(false, "Couldn't find or infer 'id' attribute for input element");
+};
 
-  return React.createElement(LabelComponent, labelProps, labelChild, React.createElement(InputDecoratorComponent, null, React.createElement(InputComponent, _objectSpread({}, input, rest, {
-    id: id || input && input.name,
-    invalid: invalid,
-    disabled: disabled
-  })), children));
+exports.createInputIdAttribute = createInputIdAttribute;
+
+var createLabelForAttribute = function createLabelForAttribute(props) {
+  var id = props.id,
+      label = props.label;
+
+  if (label && _typeof(label) === 'object' && typeof label.htmlFor === 'string') {
+    return label.htmlFor;
+  }
+
+  if (id) {
+    return id;
+  }
+
+  return createInputIdAttribute(props);
+};
+
+var createLabelProps = function createLabelProps(label, props) {
+  var meta = props.meta,
+      input = props.input,
+      children = props.children,
+      rest = _objectWithoutProperties(props, ["meta", "input", "children"]);
+
+  var labelProps = createLabelObject(label);
+  return _objectSpread({}, meta, rest, labelProps, {
+    children: children || labelProps.children || undefined,
+    htmlFor: createLabelForAttribute(props)
+  });
+};
+
+exports.createLabelProps = createLabelProps;
+
+var createFormControlElementProps = function createFormControlElementProps(props, extraProps) {
+  var children = props.children,
+      label = props.label,
+      meta = props.meta,
+      input = props.input,
+      rest = _objectWithoutProperties(props, ["children", "label", "meta", "input"]);
+
+  return _objectSpread({}, input, meta, rest, extraProps, {
+    id: createInputIdAttribute(props)
+  });
+};
+
+exports.createFormControlElementProps = createFormControlElementProps;
+
+function Input(props) {
+  var InputComponent = props.InputComponent,
+      InputDecoratorComponent = props.InputDecoratorComponent,
+      LabelComponent = props.LabelComponent,
+      label = props.label,
+      rest = _objectWithoutProperties(props, ["InputComponent", "InputDecoratorComponent", "LabelComponent", "label"]);
+
+  var _createLabelProps = createLabelProps(label, rest),
+      labelChildren = _createLabelProps.labelChildren,
+      labelProps = _objectWithoutProperties(_createLabelProps, ["labelChildren"]);
+
+  return React.createElement(LabelComponent, labelProps, labelChildren, React.createElement(InputDecoratorComponent, null, React.createElement(InputComponent, createFormControlElementProps(rest))));
 }
 
 var createComponent = function createComponent() {

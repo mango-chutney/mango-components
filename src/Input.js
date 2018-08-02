@@ -5,23 +5,22 @@ import styled, { css } from 'styled-components';
 import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-components';
 import type { FieldProps as $FieldProps } from 'redux-form';
 import { rem, transparentize, darken } from 'polished';
+import invariant from 'invariant';
 import { palette, fontWeights, fontStack } from './constants';
 import type {
   $ComponentFactory,
+  $FormControlElementConfig,
   $MangoComponent,
   $StyledSubComponentsFactory,
 } from './types';
-
-export type $StyledProps = {
-  label: string | React.ElementConfig<'label'>,
-} & React.ElementConfig<'input'> &
-  $FieldProps;
 
 export type $Props = {
   InputComponent: React.ComponentType<*>,
   InputDecoratorComponent: React.ComponentType<*>,
   LabelComponent: React.ComponentType<*>,
-} & $StyledProps;
+  label: string | React.ElementConfig<'label'>,
+} & React.ElementConfig<'input'> &
+  $FieldProps;
 
 export const defaultStyleProps: {|
   activeBorderColor: string,
@@ -77,8 +76,9 @@ export const createStyledComponents: $StyledSubComponentsFactory<
       border-color: ${styleProps.activeBorderColor};
     }
 
-    ${({ invalid }) =>
-      invalid &&
+    ${({ error, touched }) =>
+      error &&
+      touched &&
       css`
         border-color: ${palette.alert};
 
@@ -109,8 +109,9 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     font-weight: ${styleProps.fontWeight};
     display: block;
 
-    ${({ invalid }) =>
-      invalid &&
+    ${({ error, touched }) =>
+      error &&
+      touched &&
       css`
         color: ${palette.alert};
       `};
@@ -123,71 +124,125 @@ export const createStyledComponents: $StyledSubComponentsFactory<
   };
 };
 
-export const remapLabelProps = (
+const createLabelObject = (
   label: string | React.ElementConfig<'label'> | void,
-  extraProps: React.ElementConfig<'label'>,
 ): React.ElementConfig<'label'> => {
   if (!label) {
-    return {
-      ...extraProps,
-    };
+    return {};
   }
 
   if (typeof label === 'string') {
     return {
-      ...extraProps,
       children: label,
     };
   }
 
   return {
     ...label,
-    ...extraProps,
   };
 };
 
-export function Input({
-  InputComponent,
-  InputDecoratorComponent,
-  LabelComponent,
-  children,
-  disabled,
+export const createInputIdAttribute = ({
   id,
   input,
-  label,
-  meta,
-  ...rest
-}: $Props) {
-  const { invalid } = meta;
+}: $FormControlElementConfig & $FieldProps): string => {
+  if (id) {
+    return id;
+  }
 
-  const { children: labelChild, ...labelProps } = remapLabelProps(label, {
-    htmlFor: (label && label.htmlFor) || id || (input && input.name),
-    invalid,
-    disabled,
-  });
+  if (input && typeof input === 'object' && typeof input.name === 'string') {
+    return input.name;
+  }
+
+  return invariant(
+    false,
+    `Couldn't find or infer 'id' attribute for input element`,
+  );
+};
+
+const createLabelForAttribute = (
+  props: $FormControlElementConfig & $FieldProps,
+): string => {
+  const { id, label } = props;
+
+  if (label && typeof label === 'object' && typeof label.htmlFor === 'string') {
+    return label.htmlFor;
+  }
+
+  if (id) {
+    return id;
+  }
+
+  return createInputIdAttribute(props);
+};
+
+export const createLabelProps = (
+  label: string | React.ElementConfig<'label'> | void,
+  props: $FormControlElementConfig & $FieldProps,
+): React.ElementConfig<'label'> => {
+  const {
+    meta,
+    input, // don't apply input element props to label
+    children,
+    ...rest
+  } = props;
+
+  const labelProps = createLabelObject(label);
+
+  return {
+    ...meta,
+    ...rest,
+    ...labelProps,
+    children: children || labelProps.children || undefined,
+    htmlFor: createLabelForAttribute(props),
+  };
+};
+
+export const createFormControlElementProps = (
+  props: $FormControlElementConfig & $FieldProps,
+  extraProps?: $FormControlElementConfig,
+): $FormControlElementConfig => {
+  const {
+    children, // don't apply label's children to input
+    label,
+    meta,
+    input,
+    ...rest
+  } = props;
+
+  return {
+    ...input,
+    ...meta,
+    ...rest,
+    ...extraProps,
+    id: createInputIdAttribute(props),
+  };
+};
+
+export function Input(props: $Props) {
+  const {
+    InputComponent,
+    InputDecoratorComponent,
+    LabelComponent,
+    label,
+    ...rest
+  } = props;
+
+  const { labelChildren, ...labelProps } = createLabelProps(label, rest);
 
   return (
     <LabelComponent {...labelProps}>
-      {labelChild}
+      {labelChildren}
       <InputDecoratorComponent>
-        <InputComponent
-          {...{
-            ...input,
-            ...rest,
-            id: id || (input && input.name),
-            invalid,
-            disabled,
-          }}
-        />
-        {children}
+        <InputComponent {...createFormControlElementProps(rest)} />
       </InputDecoratorComponent>
     </LabelComponent>
   );
 }
 
-export const createComponent: $ComponentFactory<$StyledProps> = () => {
+export const createComponent: $ComponentFactory<$Props> = () => {
   const defaultStyledComponents = createStyledComponents(defaultStyleProps);
-  return (props: $StyledProps) => (
+  return (props: $Props) => (
     <Input {...{ ...defaultStyledComponents, ...props }} />
   );
 };
@@ -196,4 +251,4 @@ export default ({
   defaultStyleProps,
   createStyledComponents,
   createComponent,
-}: $MangoComponent<typeof defaultStyleProps, $StyledProps>);
+}: $MangoComponent<typeof defaultStyleProps, $Props>);

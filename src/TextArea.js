@@ -6,54 +6,66 @@ import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-compo
 import type { FieldProps as $FieldProps } from 'redux-form';
 import { rem, transparentize, darken } from 'polished';
 import { palette, fontWeights, fontStack } from './constants';
+import { createLabelProps, createFormControlElementProps } from './Input';
 import type {
   $ComponentFactory,
   $MangoComponent,
   $StyledSubComponentsFactory,
 } from './types';
 
-export type $StyledProps = {
-  ...$FieldProps,
-  id?: string,
-  label: string,
-  placeholder: string,
-  invalid?: boolean,
-  disabled?: boolean,
-};
-
 export type $Props = {
-  ...$StyledProps,
-  TextAreaComponent: React.ComponentType<*>,
+  InputDecoratorComponent: React.ComponentType<*>,
   LabelComponent: React.ComponentType<*>,
-};
+  TextAreaComponent: React.ComponentType<*>,
+  label: string | React.ElementConfig<'label'>,
+} & React.ElementConfig<'textarea'> &
+  $FieldProps;
 
 export const defaultStyleProps: {|
+  activeBorderColor: string,
   backgroundColor: string,
   borderColor: string,
   color: string,
   fontFamily: string,
-  placeholderColor: string,
-  activeBorderColor: string,
   fontSize: string,
   fontWeight: string | number,
+  placeholderColor: string,
 |} = {
+  activeBorderColor: palette.black,
   backgroundColor: palette.lightGray,
   borderColor: palette.border,
   color: palette.black,
   fontFamily: fontStack,
-  placeholderColor: String(transparentize(0.2, palette.darkGray)),
-  activeBorderColor: palette.black,
   fontSize: rem(14),
   fontWeight: fontWeights.semibold,
+  placeholderColor: String(transparentize(0.2, palette.darkGray)),
 };
 
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
-    TextAreaComponent: $ReactComponentStyled<*>,
+    InputDecoratorComponent: $ReactComponentStyled<*>,
     LabelComponent: $ReactComponentStyled<*>,
+    TextAreaComponent: $ReactComponentStyled<*>,
   },
   typeof defaultStyleProps,
 > = styleProps => {
+  const InputDecoratorComponent = styled.span`
+    display: block;
+  `;
+
+  const LabelComponent = styled.label`
+    font-size: ${styleProps.fontSize};
+    font-weight: ${styleProps.fontWeight};
+    display: block;
+
+    ${({ error, touched }) =>
+      error &&
+      touched &&
+      css`
+        color: ${palette.alert};
+      `};
+  `;
+
   const TextAreaComponent = styled.textarea`
     appearance: none;
     background-color: ${styleProps.backgroundColor};
@@ -79,8 +91,9 @@ export const createStyledComponents: $StyledSubComponentsFactory<
       border-color: ${styleProps.activeBorderColor};
     }
 
-    ${({ invalid }) =>
-      invalid &&
+    ${({ error, touched }) =>
+      error &&
+      touched &&
       css`
         border-color: ${palette.alert};
 
@@ -102,54 +115,40 @@ export const createStyledComponents: $StyledSubComponentsFactory<
       `};
   `;
 
-  const LabelComponent = styled.span`
-    font-size: ${styleProps.fontSize};
-    font-weight: ${styleProps.fontWeight};
-    display: block;
-
-    ${({ invalid }) =>
-      invalid &&
-      css`
-        color: ${palette.alert};
-      `};
-  `;
-
-  return { TextAreaComponent, LabelComponent };
+  return {
+    InputDecoratorComponent,
+    LabelComponent,
+    TextAreaComponent,
+  };
 };
 
-export function TextArea({
-  TextAreaComponent,
-  LabelComponent,
-  input,
-  meta,
-  label,
-  invalid,
-  disabled,
-  ...rest
-}: $Props) {
+export function TextArea(props: $Props) {
+  const {
+    InputDecoratorComponent,
+    LabelComponent,
+    TextAreaComponent,
+    label,
+    ...rest
+  } = props;
+
+  const { children: labelChildren, ...labelProps } = createLabelProps(
+    label,
+    rest,
+  );
+
   return (
-    <label htmlFor={rest.id || (input && input.name)}>
-      {label && (
-        <LabelComponent invalid={invalid} disabled={disabled}>
-          {label}
-        </LabelComponent>
-      )}
-      <span>
-        <TextAreaComponent
-          {...input}
-          {...rest}
-          invalid={invalid}
-          disabled={disabled}
-          id={rest.id || (input && input.name)}
-        />
-      </span>
-    </label>
+    <LabelComponent {...labelProps}>
+      {labelChildren}
+      <InputDecoratorComponent>
+        <TextAreaComponent {...createFormControlElementProps(rest)} />
+      </InputDecoratorComponent>
+    </LabelComponent>
   );
 }
 
-export const createComponent: $ComponentFactory<$StyledProps> = () => {
+export const createComponent: $ComponentFactory<$Props> = () => {
   const defaultStyledComponents = createStyledComponents(defaultStyleProps);
-  return (props: $StyledProps) => (
+  return (props: $Props) => (
     <TextArea {...{ ...defaultStyledComponents, ...props }} />
   );
 };
@@ -158,4 +157,4 @@ export default ({
   defaultStyleProps,
   createStyledComponents,
   createComponent,
-}: $MangoComponent<typeof defaultStyleProps, $StyledProps>);
+}: $MangoComponent<typeof defaultStyleProps, $Props>);

@@ -45,12 +45,11 @@ export class Form extends React.Component<Props, State> {
     const {
       submitting,
       submitSucceeded,
-      submitFailed,
       handleSubmit,
       reset,
     } = this.props;
 
-    if (submitSucceeded || submitFailed) {
+    if (submitSucceeded) {
       setTimeout(() => reset(), 3000);
     }
 
@@ -247,23 +246,24 @@ export class Form extends React.Component<Props, State> {
     );
   }
 }
+
 const validate = values => {
   const errors = {};
 
-  if (values.password) {
-    if (values.password.length === 0) {
-      errors.password = 'Please enter a password!';
-    }
-  } else {
+  if (!values.password) {
     errors.password = 'Please enter a password!';
   }
 
-  if (values.email) {
-    if (values.email.length === 0) {
-      errors.email = 'Please enter your email address!';
-    }
-  } else {
+  if (!values.email) {
     errors.email = 'Please enter your email address!';
+  }
+
+  if (!values.fruit) {
+    errors.fruit = 'Please enter your fruit!';
+  }
+
+  if (!fruits.some(({ name }) => name === values.fruit)) {
+    errors.fruit = 'That is not one of the available fruits!';
   }
 
   errors['invalid-select'] = true;
@@ -275,28 +275,9 @@ const validate = values => {
   return errors;
 };
 
-const asyncValidate = values =>
-  new Promise(resolve => {
-    const errors = {};
-
-    if (values.fruit) {
-      if (!fruits.some(({ name }) => name === values.fruit)) {
-        errors.fruit = 'Please enter your fruit!';
-      }
-    }
-
-    if (Object.keys(errors).length === 0) {
-      return resolve();
-    }
-
-    throw errors;
-  });
-
 export const component = reduxForm({
   form: 'Form',
   validate,
-  asyncValidate,
-  asyncBlurFields: ['fruit'],
 })(Form);
 
 export default component;

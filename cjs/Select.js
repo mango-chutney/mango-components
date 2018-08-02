@@ -6,15 +6,11 @@ Object.defineProperty(exports, "__esModule", {
 exports.Select = Select;
 exports.default = exports.createComponent = exports.createStyledComponents = exports.defaultStyleProps = void 0;
 
-require("core-js/modules/es6.object.assign");
-
 require("core-js/modules/web.dom.iterable");
 
 require("core-js/modules/es6.array.iterator");
 
 require("core-js/modules/es6.object.keys");
-
-require("core-js/modules/es6.function.name");
 
 var React = _interopRequireWildcard(require("react"));
 
@@ -26,6 +22,8 @@ var _tristicons = _interopRequireDefault(require("tristicons"));
 
 var _constants = require("./constants");
 
+var _Input = require("./Input");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
@@ -33,8 +31,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
@@ -56,54 +52,48 @@ var createStyledComponents = function createStyledComponents(styleProps) {
   var SelectComponent = _styledComponents.default.select.withConfig({
     componentId: "s4vmyyd-0"
   })(["appearance:none;background-color:", ";background-image:linear-gradient( ", ",", " );border-color:", ";border-radius:0.25rem;border-style:solid;border-width:0.05rem;color:", ";display:block;font-family:", ";height:2.6rem;margin-bottom:1rem;outline:0;padding:0.5rem 1rem;transition:border-color 300ms ease;width:100%;::-ms-expand{display:none;}:active,:focus{border-color:", ";}option{width:100%;}", ";", ";"], styleProps.backgroundColor, _constants.palette.white, styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.activeBorderColor, function (_ref) {
-    var invalid = _ref.invalid;
-    return invalid && (0, _styledComponents.css)(["border-color:", ";"], _constants.palette.alert);
+    var error = _ref.error,
+        touched = _ref.touched;
+    return error && touched && (0, _styledComponents.css)(["border-color:", ";"], _constants.palette.alert);
   }, function (_ref2) {
     var disabled = _ref2.disabled;
     return disabled && (0, _styledComponents.css)(["background-color:", ";background-image:linear-gradient( ", ",", " );color:", ";cursor:not-allowed;"], (0, _polished.darken)(0.05, styleProps.backgroundColor), (0, _polished.darken)(0.05, _constants.palette.white), (0, _polished.darken)(0.05, styleProps.backgroundColor), (0, _polished.darken)(0.05, styleProps.color));
   });
 
-  var LabelComponent = _styledComponents.default.span.withConfig({
+  var LabelComponent = _styledComponents.default.label.withConfig({
     componentId: "s4vmyyd-1"
   })(["font-size:", ";font-weight:", ";display:block;", ";"], styleProps.fontSize, styleProps.fontWeight, function (_ref3) {
-    var invalid = _ref3.invalid;
-    return invalid && (0, _styledComponents.css)(["color:", ";"], _constants.palette.alert);
+    var error = _ref3.error,
+        touched = _ref3.touched;
+    return error && touched && (0, _styledComponents.css)(["color:", ";"], _constants.palette.alert);
   });
 
-  var SelectContainerComponent = _styledComponents.default.div.withConfig({
+  var InputDecoratorComponent = _styledComponents.default.span.withConfig({
     componentId: "s4vmyyd-2"
-  })(["position:relative;&::after{content:", ";color:", ";font:normal normal normal ", " tristicons;line-height:1rem;position:absolute;right:1rem;top:0.75rem;}"], "\"".concat(_tristicons.default['chevron-down'], "\""), styleProps.placeholderColor, (0, _polished.rem)(14));
+  })(["display:block;position:relative;&::after{content:", ";color:", ";font:normal normal normal ", " tristicons;line-height:1rem;position:absolute;right:1rem;top:0.75rem;}"], "\"".concat(_tristicons.default['chevron-down'], "\""), styleProps.placeholderColor, (0, _polished.rem)(14));
 
   return {
     SelectComponent: SelectComponent,
-    SelectContainerComponent: SelectContainerComponent,
+    InputDecoratorComponent: InputDecoratorComponent,
     LabelComponent: LabelComponent
   };
 };
 
 exports.createStyledComponents = createStyledComponents;
 
-function Select(_ref4) {
-  var SelectComponent = _ref4.SelectComponent,
-      SelectContainerComponent = _ref4.SelectContainerComponent,
-      LabelComponent = _ref4.LabelComponent,
-      children = _ref4.children,
-      input = _ref4.input,
-      label = _ref4.label,
-      meta = _ref4.meta,
-      invalid = _ref4.invalid,
-      disabled = _ref4.disabled,
-      rest = _objectWithoutProperties(_ref4, ["SelectComponent", "SelectContainerComponent", "LabelComponent", "children", "input", "label", "meta", "invalid", "disabled"]);
+function Select(props) {
+  var SelectComponent = props.SelectComponent,
+      InputDecoratorComponent = props.InputDecoratorComponent,
+      LabelComponent = props.LabelComponent,
+      label = props.label,
+      selectChildren = props.children,
+      rest = _objectWithoutProperties(props, ["SelectComponent", "InputDecoratorComponent", "LabelComponent", "label", "children"]);
 
-  return React.createElement("label", {
-    htmlFor: rest.id || input && input.name
-  }, label && React.createElement(LabelComponent, {
-    invalid: invalid
-  }, label), React.createElement(SelectContainerComponent, null, React.createElement(SelectComponent, _extends({}, input, rest, {
-    invalid: invalid,
-    disabled: disabled,
-    id: rest.id || input && input.name
-  }), children)));
+  var _createLabelProps = (0, _Input.createLabelProps)(label, rest),
+      labelChildren = _createLabelProps.children,
+      labelProps = _objectWithoutProperties(_createLabelProps, ["children"]);
+
+  return React.createElement(LabelComponent, labelProps, labelChildren, React.createElement(InputDecoratorComponent, null, React.createElement(SelectComponent, (0, _Input.createFormControlElementProps)(rest), selectChildren)));
 }
 
 var createComponent = function createComponent() {

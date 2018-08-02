@@ -84,24 +84,20 @@ export const createStyledComponents: $StyledSubComponentsFactory<
 export function Avatar(props: $Props) {
   const {
     AvatarComponent,
-    backgroundColor,
     backgroundImage,
     children,
     name,
     style,
-    width,
     ...rest
   } = props;
 
   return (
     <AvatarComponent
-      backgroundColor={backgroundColor}
       style={{
         backgroundColor: name && selectColor(name),
         backgroundImage: backgroundImage && `url(${backgroundImage})`,
         ...style,
       }}
-      width={width}
       {...rest}
     >
       {(!backgroundImage && name && name.charAt(0)) || children}
