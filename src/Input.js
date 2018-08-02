@@ -13,43 +13,40 @@ import type {
 } from './types';
 
 export type $StyledProps = {
-  ...$FieldProps,
-  id?: string,
-  label: string,
-  placeholder: string,
-  invalid?: boolean,
-  disabled?: boolean,
-};
+  label: string | React.ElementConfig<'label'>,
+} & React.ElementConfig<'input'> &
+  $FieldProps;
 
 export type $Props = {
-  ...$StyledProps,
   InputComponent: React.ComponentType<*>,
+  InputDecoratorComponent: React.ComponentType<*>,
   LabelComponent: React.ComponentType<*>,
-};
+} & $StyledProps;
 
 export const defaultStyleProps: {|
+  activeBorderColor: string,
   backgroundColor: string,
   borderColor: string,
   color: string,
   fontFamily: string,
-  placeholderColor: string,
-  activeBorderColor: string,
   fontSize: string,
   fontWeight: string | number,
+  placeholderColor: string,
 |} = {
+  activeBorderColor: palette.black,
   backgroundColor: palette.lightGray,
   borderColor: palette.border,
   color: palette.black,
   fontFamily: fontStack,
-  placeholderColor: String(transparentize(0.2, palette.darkGray)),
-  activeBorderColor: palette.black,
   fontSize: rem(14),
   fontWeight: fontWeights.semibold,
+  placeholderColor: String(transparentize(0.2, palette.darkGray)),
 };
 
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
     InputComponent: $ReactComponentStyled<*>,
+    InputDecoratorComponent: $ReactComponentStyled<*>,
     LabelComponent: $ReactComponentStyled<*>,
   },
   typeof defaultStyleProps,
@@ -103,7 +100,11 @@ export const createStyledComponents: $StyledSubComponentsFactory<
       `};
   `;
 
-  const LabelComponent = styled.span`
+  const InputDecoratorComponent = styled.span`
+    display: block;
+  `;
+
+  const LabelComponent = styled.label`
     font-size: ${styleProps.fontSize};
     font-weight: ${styleProps.fontWeight};
     display: block;
@@ -115,33 +116,73 @@ export const createStyledComponents: $StyledSubComponentsFactory<
       `};
   `;
 
-  return { InputComponent, LabelComponent };
+  return {
+    InputComponent,
+    InputDecoratorComponent,
+    LabelComponent,
+  };
+};
+
+export const remapLabelProps = (
+  label: string | React.ElementConfig<'label'> | void,
+  extraProps: React.ElementConfig<'label'>,
+): React.ElementConfig<'label'> => {
+  if (!label) {
+    return {
+      children: null,
+      ...extraProps,
+    };
+  }
+
+  if (typeof label === 'string') {
+    return {
+      ...extraProps,
+      children: label,
+    };
+  }
+
+  return {
+    ...label,
+    ...extraProps,
+  };
 };
 
 export function Input({
   InputComponent,
+  InputDecoratorComponent,
   LabelComponent,
-  input,
-  meta,
-  label,
-  invalid,
+  children,
   disabled,
+  id,
+  input,
+  label,
+  meta,
   ...rest
 }: $Props) {
+  const { invalid } = meta;
+
+  const { children: labelChild, ...labelProps } = remapLabelProps(label, {
+    htmlFor: (label && label.htmlFor) || id || (input && input.name),
+    invalid,
+    disabled,
+  });
+
   return (
-    <label htmlFor={rest.id || (input && input.name)}>
-      {label && (
-        <LabelComponent {...{ invalid, disabled }}>{label}</LabelComponent>
-      )}
-      <span>
+    <LabelComponent {...labelProps}>
+      {labelChild}
+      <InputDecoratorComponent>
         <InputComponent
-          {...input}
-          {...rest}
-          {...{ invalid, disabled }}
-          id={rest.id || (input && input.name)}
+          {...{
+            ...input,
+            ...rest,
+            id: id || (input && input.name),
+            invalid,
+            disabled,
+          }}
         />
-      </span>
-    </label>
+        {children}
+      </InputDecoratorComponent>
+    </LabelComponent>
   );
 }
 

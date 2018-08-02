@@ -30,6 +30,13 @@ type State = {
   done: boolean,
 };
 
+const fruits = [
+  { name: 'apple', color: 'red' },
+  { name: 'orange', color: 'orange' },
+  { name: 'pear', color: 'green' },
+  { name: 'banana', color: 'yellow' },
+];
+
 export class Form extends React.Component<Props, State> {
   submit = (): Promise<void> =>
     new Promise(resolve => setTimeout(() => resolve(), 3000));
@@ -199,12 +206,8 @@ export class Form extends React.Component<Props, State> {
           <Field
             name="fruit"
             label="Enter fruit name"
-            items={[
-              { name: 'apple', color: 'red' },
-              { name: 'orange', color: 'orange' },
-              { name: 'pear', color: 'green' },
-              { name: 'banana', color: 'yellow' },
-            ]}
+            items={fruits}
+            placeholder="Enter fruit name"
             filterItems={(items, inputValue) =>
               matchSorter(items, inputValue, {
                 keys: ['name'],
@@ -262,6 +265,7 @@ const validate = values => {
   } else {
     errors.password = 'Please enter a password!';
   }
+
   if (values.email) {
     if (values.email.length === 0) {
       errors.email = 'Please enter your email address!';
@@ -269,12 +273,33 @@ const validate = values => {
   } else {
     errors.email = 'Please enter your email address!';
   }
+
   return errors;
+};
+
+const asyncValidate = values => {
+  return new Promise(resolve => {
+    const errors = {};
+
+    if (values.fruit) {
+      if (!fruits.some(({ name }) => name === values.fruit)) {
+        errors.fruit = 'Please enter your fruit!';
+      }
+    }
+
+    if (Object.keys(errors).length === 0) {
+      return resolve();
+    }
+
+    throw errors;
+  });
 };
 
 export const component = reduxForm({
   form: 'Form',
   validate,
+  asyncValidate,
+  asyncBlurFields: ['fruit'],
 })(Form);
 
 export default component;

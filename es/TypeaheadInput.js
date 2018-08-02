@@ -15,8 +15,8 @@ import * as React from 'react';
 import Downshift from 'downshift';
 import matchSorter from 'match-sorter';
 import styled from 'styled-components';
-import { defaultStyleProps as defaultInputStyleProps, createStyledComponents as createInputStyledComponents } from './Input';
-export var defaultStyleProps = defaultInputStyleProps;
+import { createComponent as createInputComponent, remapLabelProps } from './Input';
+export var defaultStyleProps = {};
 export var createStyledComponents = function createStyledComponents(styleProps) {
   var MenuComponent = styled.div.withConfig({
     componentId: "s1ah6m0p-0"
@@ -35,11 +35,11 @@ export var createStyledComponents = function createStyledComponents(styleProps) 
         item = _ref2.item;
     return selectedItem === item ? 'bold' : 'normal';
   });
-  return Object.assign({}, createInputStyledComponents(defaultInputStyleProps), {
+  return {
     ItemComponent: ItemComponent,
     MenuComponent: MenuComponent,
     MenuWrapperComponent: MenuWrapperComponent
-  });
+  };
 };
 
 var TypeaheadInput =
@@ -166,7 +166,6 @@ function (_React$Component) {
       var _this$props = _this.props,
           InputComponent = _this$props.InputComponent,
           ItemComponent = _this$props.ItemComponent,
-          LabelComponent = _this$props.LabelComponent,
           MenuComponent = _this$props.MenuComponent,
           MenuWrapperComponent = _this$props.MenuWrapperComponent,
           filterItems = _this$props.filterItems,
@@ -174,12 +173,13 @@ function (_React$Component) {
           items = _this$props.items,
           label = _this$props.label,
           mapItemToString = _this$props.mapItemToString,
-          meta = _this$props.meta,
           renderItem = _this$props.renderItem,
-          rest = _objectWithoutPropertiesLoose(_this$props, ["InputComponent", "ItemComponent", "LabelComponent", "MenuComponent", "MenuWrapperComponent", "filterItems", "input", "items", "label", "mapItemToString", "meta", "renderItem"]);
+          rest = _objectWithoutPropertiesLoose(_this$props, ["InputComponent", "ItemComponent", "MenuComponent", "MenuWrapperComponent", "filterItems", "input", "items", "label", "mapItemToString", "renderItem"]);
 
       var filteredItems = filterItems(items, inputValue);
-      return React.createElement("div", null, React.createElement(LabelComponent, getLabelProps(), label, React.createElement(MenuWrapperComponent, null, React.createElement(InputComponent, Object.assign({}, getInputProps(input), rest, {
+      var inputProps = Object.assign({}, rest, {
+        label: remapLabelProps(label, getLabelProps()),
+        input: Object.assign({}, input, getInputProps(input)),
         onChange: _this.createChangeHandler({
           getInputProps: getInputProps
         }),
@@ -196,9 +196,12 @@ function (_React$Component) {
         // styled-components won't propagate the `ref` prop.  If
         // `InputComponent` is not a styled-component, you will need to
         // map the `inputRef` prop to `ref`.
-        innerRef: _this.inputRef
-      })), isOpen && !!filteredItems.length && React.createElement(MenuComponent, null, filteredItems.map(function (item, index) {
-        return React.createElement(ItemComponent, Object.assign({}, getItemProps({
+        ref: _this.inputRef,
+        InputDecoratorComponent: MenuWrapperComponent
+      });
+
+      var createItemProps = function createItemProps(item, index) {
+        return Object.assign({}, getItemProps({
           key: mapItemToString(item),
           index: index,
           item: item
@@ -206,8 +209,13 @@ function (_React$Component) {
           index: index,
           selectedItem: selectedItem,
           highlightedIndex: highlightedIndex
-        }), typeof renderItem === 'function' ? renderItem(item) : mapItemToString(item));
-      })))));
+        });
+      }; // This is wrapped in a div to satisfy downshift.
+
+
+      return React.createElement("div", null, React.createElement(InputComponent, inputProps, isOpen && !!filteredItems.length && React.createElement(MenuComponent, null, filteredItems.map(function (item, index) {
+        return React.createElement(ItemComponent, createItemProps(item, index), typeof renderItem === 'function' ? renderItem(item) : mapItemToString(item));
+      }))));
     });
 
     return _this;
@@ -257,8 +265,11 @@ _defineProperty(TypeaheadInput, "defaultProps", {
 
 export var createComponent = function createComponent() {
   var defaultStyledComponents = createStyledComponents(defaultStyleProps);
+  var InputComponent = createInputComponent();
   return function (props) {
-    return React.createElement(TypeaheadInput, Object.assign({}, defaultStyledComponents, props));
+    return React.createElement(TypeaheadInput, Object.assign({
+      InputComponent: InputComponent
+    }, defaultStyledComponents, props));
   };
 };
 export default {
