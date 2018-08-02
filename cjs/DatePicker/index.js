@@ -186,7 +186,8 @@ function (_React$Component) {
         // Currently this component doesn't provide a good experience if you try
         // to edit the value yourself.  Just make it read only for now, so the
         // only way to manipulate it is by using the picker.
-        readOnly: true
+        readOnly: true,
+        autoComplete: 'off'
       });
 
       var composedDatePickerProps = {
