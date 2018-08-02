@@ -229,7 +229,7 @@ function (_React$Component) {
       var filteredItems = filterItems(items, inputValue);
 
       var inputProps = _objectSpread({}, rest, {
-        label: (0, _Input.remapLabelProps)(label, getLabelProps()),
+        label: (0, _Input.createLabelProps)(label, getLabelProps()),
         input: _objectSpread({}, input, getInputProps(input)),
         onChange: _this.createChangeHandler({
           getInputProps: getInputProps
@@ -247,7 +247,7 @@ function (_React$Component) {
         // styled-components won't propagate the `ref` prop.  If
         // `InputComponent` is not a styled-component, you will need to
         // map the `inputRef` prop to `ref`.
-        ref: _this.inputRef,
+        // ref: this.inputRef,
         InputDecoratorComponent: MenuWrapperComponent
       });
 

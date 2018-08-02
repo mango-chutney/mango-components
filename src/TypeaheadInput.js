@@ -8,7 +8,7 @@ import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-compo
 import type { FieldProps as $FieldProps } from 'redux-form';
 import {
   createComponent as createInputComponent,
-  remapLabelProps,
+  createLabelProps,
 } from './Input';
 import type {
   $ComponentFactory,
@@ -227,7 +227,7 @@ class TypeaheadInput extends React.Component<$Props, $State> {
 
     const inputProps = {
       ...rest,
-      label: remapLabelProps(label, getLabelProps()),
+      label: createLabelProps(label, getLabelProps()),
       input: { ...input, ...getInputProps(input) },
       onChange: this.createChangeHandler({ getInputProps }),
       // This ref dance is to preserve the cursor position.
@@ -243,7 +243,7 @@ class TypeaheadInput extends React.Component<$Props, $State> {
       // styled-components won't propagate the `ref` prop.  If
       // `InputComponent` is not a styled-component, you will need to
       // map the `inputRef` prop to `ref`.
-      ref: this.inputRef,
+      // ref: this.inputRef,
       InputDecoratorComponent: MenuWrapperComponent,
     };
 

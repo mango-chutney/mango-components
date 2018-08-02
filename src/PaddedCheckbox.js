@@ -13,15 +13,11 @@ import {
   createStyledComponents as createStyledCheckboxComponents,
   Checkbox,
 } from './Checkbox';
-import type { $StyledProps as $StyledCheckboxProps } from './Checkbox';
+import type { $Props as $CheckboxProps } from './Checkbox';
 import { palette } from './constants';
 
-export type $StyledProps = {
-  ...$StyledCheckboxProps,
-};
-
 export type $Props = {
-  ...$StyledProps,
+  ...$CheckboxProps,
 };
 
 export const defaultStyleProps: {|
@@ -73,9 +69,9 @@ export const createStyledComponents: $StyledSubComponentsFactory<
   };
 };
 
-export const createComponent: $ComponentFactory<$StyledProps> = () => {
+export const createComponent: $ComponentFactory<$Props> = () => {
   const defaultStyledComponents = createStyledComponents(defaultStyleProps);
-  return (props: $StyledProps) => (
+  return (props: $Props) => (
     <Checkbox {...{ ...defaultStyledComponents, ...props }} />
   );
 };
@@ -84,4 +80,4 @@ export default ({
   defaultStyleProps,
   createStyledComponents,
   createComponent,
-}: $MangoComponent<typeof defaultStyleProps, $StyledProps>);
+}: $MangoComponent<typeof defaultStyleProps, $Props>);

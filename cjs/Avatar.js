@@ -84,21 +84,17 @@ exports.createStyledComponents = createStyledComponents;
 
 function Avatar(props) {
   var AvatarComponent = props.AvatarComponent,
-      backgroundColor = props.backgroundColor,
       backgroundImage = props.backgroundImage,
       children = props.children,
       name = props.name,
       style = props.style,
-      width = props.width,
-      rest = _objectWithoutProperties(props, ["AvatarComponent", "backgroundColor", "backgroundImage", "children", "name", "style", "width"]);
+      rest = _objectWithoutProperties(props, ["AvatarComponent", "backgroundImage", "children", "name", "style"]);
 
   return React.createElement(AvatarComponent, _extends({
-    backgroundColor: backgroundColor,
     style: _objectSpread({
       backgroundColor: name && selectColor(name),
       backgroundImage: backgroundImage && "url(".concat(backgroundImage, ")")
-    }, style),
-    width: width
+    }, style)
   }, rest), !backgroundImage && name && name.charAt(0) || children);
 }
 

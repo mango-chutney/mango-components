@@ -2,7 +2,6 @@ import "core-js/modules/web.dom.iterable";
 import "core-js/modules/es6.array.iterator";
 import "core-js/modules/es6.object.keys";
 import "core-js/modules/es6.object.assign";
-import "core-js/modules/es6.function.name";
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
@@ -10,6 +9,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { rem, darken } from 'polished';
 import { palette, fontWeights } from './constants';
+import { createFormControlElementProps, createLabelProps } from './Input';
 export var defaultStyleProps = {
   checkboxSize: 20,
   checkboxColor: palette.primary
@@ -25,11 +25,13 @@ export var createStyledComponents = function createStyledComponents(styleProps) 
   var CheckboxBackgroundComponent = styled.div.withConfig({
     componentId: "s156yctp-2"
   })(["cursor:pointer;font-weight:", ";display:inline-block;font-size:1rem;", ";min-height:", ";line-height:", ";position:relative;border:1px solid transparent;display:block;&::before,&::after{width:", ";height:", ";cursor:pointer;content:'';display:inline-block;border-radius:4px;vertical-align:middle;}&::before{border:1px solid ", ";background:", ";margin-right:1rem;", ";", ";}&::after{position:absolute;left:0;border:1px solid transparent;line-height:", ";margin-top:", ";text-align:center;transform:scale(0);}"], fontWeights.semibold, function (_ref) {
-    var invalid = _ref.invalid;
-    return invalid && css(["color:", ";"], palette.alert);
+    var error = _ref.error,
+        touched = _ref.touched;
+    return error && touched && css(["color:", ";"], palette.alert);
   }, rem(styleProps.checkboxSize), rem(styleProps.checkboxSize), rem(styleProps.checkboxSize), rem(styleProps.checkboxSize), palette.border, palette.lightGray, function (_ref2) {
-    var invalid = _ref2.invalid;
-    return invalid && css(["border-color:", ";"], palette.alert);
+    var error = _ref2.error,
+        touched = _ref2.touched;
+    return error && touched && css(["border-color:", ";"], palette.alert);
   }, function (_ref3) {
     var disabled = _ref3.disabled;
     return disabled && css(["background-color:", ";cursor:not-allowed;"], darken(0.05, palette.lightGray));
@@ -48,37 +50,32 @@ export var createStyledComponents = function createStyledComponents(styleProps) 
     WrapperComponent: WrapperComponent
   };
 };
-export function Checkbox(_ref4) {
-  var CheckboxBackgroundComponent = _ref4.CheckboxBackgroundComponent,
-      CheckboxContainerComponent = _ref4.CheckboxContainerComponent,
-      InputComponent = _ref4.InputComponent,
-      LabelComponent = _ref4.LabelComponent,
-      WrapperComponent = _ref4.WrapperComponent,
-      children = _ref4.children,
-      id = _ref4.id,
-      _ref4$input = _ref4.input,
-      name = _ref4$input.name,
-      value = _ref4$input.value,
-      inputProps = _objectWithoutPropertiesLoose(_ref4$input, ["name", "value"]),
-      label = _ref4.label,
-      meta = _ref4.meta,
-      invalid = _ref4.invalid,
-      disabled = _ref4.disabled,
-      rest = _objectWithoutPropertiesLoose(_ref4, ["CheckboxBackgroundComponent", "CheckboxContainerComponent", "InputComponent", "LabelComponent", "WrapperComponent", "children", "id", "input", "label", "meta", "invalid", "disabled"]);
+export function Checkbox(props) {
+  var CheckboxBackgroundComponent = props.CheckboxBackgroundComponent,
+      CheckboxContainerComponent = props.CheckboxContainerComponent,
+      InputComponent = props.InputComponent,
+      LabelComponent = props.LabelComponent,
+      WrapperComponent = props.WrapperComponent,
+      label = props.label,
+      value = props.value,
+      rest = _objectWithoutPropertiesLoose(props, ["CheckboxBackgroundComponent", "CheckboxContainerComponent", "InputComponent", "LabelComponent", "WrapperComponent", "label", "value"]); // Pull these out to pass to the CheckboxBackgroundComponent, but don't remove
+  // them from the 'rest' object (so that they still get applied to the input
+  // and label components).
 
-  return React.createElement(WrapperComponent, null, React.createElement(CheckboxContainerComponent, null, React.createElement(InputComponent, Object.assign({}, rest, inputProps, {
-    id: id || name,
-    name: name,
-    checked: value,
+
+  var disabled = props.disabled,
+      meta = props.meta;
+
+  var _createLabelProps = createLabelProps(label, rest),
+      children = _createLabelProps.children,
+      labelProps = _objectWithoutPropertiesLoose(_createLabelProps, ["children"]);
+
+  return React.createElement(WrapperComponent, null, React.createElement(CheckboxContainerComponent, null, React.createElement(InputComponent, createFormControlElementProps(rest, {
     type: 'checkbox',
-    invalid: invalid,
+    checked: value
+  })), React.createElement(CheckboxBackgroundComponent, Object.assign({}, meta, {
     disabled: disabled
-  })), React.createElement(CheckboxBackgroundComponent, {
-    invalid: invalid,
-    disabled: disabled
-  })), React.createElement(LabelComponent, {
-    htmlFor: id || name
-  }, children || label || ''));
+  }))), React.createElement(LabelComponent, labelProps, children));
 }
 export var createComponent = function createComponent() {
   var defaultStyledComponents = createStyledComponents(defaultStyleProps);

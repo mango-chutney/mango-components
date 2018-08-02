@@ -21,6 +21,7 @@
   "dependencies": {
     "classnames": "2.2.5",
     "downshift": "^2.0.19",
+    "invariant": "^2.2.4",
     "lodash": "^4.17.10",
     "match-sorter": "^2.2.3",
     "popper.js": "1.12.6",

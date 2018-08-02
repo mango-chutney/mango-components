@@ -25,3 +25,10 @@ export interface $MangoComponent<
   >;
   createComponent: $ComponentFactory<$StyledComponentProps>;
 }
+
+export type $FormControlElementConfig = $Rest<
+  | React.ElementConfig<'input'>
+  | React.ElementConfig<'textarea'>
+  | React.ElementConfig<'select'>,
+  {| children: React.Node |},
+>;

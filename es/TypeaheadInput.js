@@ -15,7 +15,7 @@ import * as React from 'react';
 import Downshift from 'downshift';
 import matchSorter from 'match-sorter';
 import styled from 'styled-components';
-import { createComponent as createInputComponent, remapLabelProps } from './Input';
+import { createComponent as createInputComponent, createLabelProps } from './Input';
 export var defaultStyleProps = {};
 export var createStyledComponents = function createStyledComponents(styleProps) {
   var MenuComponent = styled.div.withConfig({
@@ -178,7 +178,7 @@ function (_React$Component) {
 
       var filteredItems = filterItems(items, inputValue);
       var inputProps = Object.assign({}, rest, {
-        label: remapLabelProps(label, getLabelProps()),
+        label: createLabelProps(label, getLabelProps()),
         input: Object.assign({}, input, getInputProps(input)),
         onChange: _this.createChangeHandler({
           getInputProps: getInputProps
@@ -196,7 +196,7 @@ function (_React$Component) {
         // styled-components won't propagate the `ref` prop.  If
         // `InputComponent` is not a styled-component, you will need to
         // map the `inputRef` prop to `ref`.
-        ref: _this.inputRef,
+        // ref: this.inputRef,
         InputDecoratorComponent: MenuWrapperComponent
       });
 
