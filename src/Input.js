@@ -131,16 +131,13 @@ export function Input({
   return (
     <label htmlFor={rest.id || (input && input.name)}>
       {label && (
-        <LabelComponent invalid={invalid} disabled={disabled}>
-          {label}
-        </LabelComponent>
+        <LabelComponent {...{ invalid, disabled }}>{label}</LabelComponent>
       )}
       <span>
         <InputComponent
           {...input}
           {...rest}
-          invalid={invalid}
-          disabled={disabled}
+          {...{ invalid, disabled }}
           id={rest.id || (input && input.name)}
         />
       </span>

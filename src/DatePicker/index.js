@@ -1,22 +1,20 @@
 // @flow
 
 import * as React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+import type { FieldProps as $FieldProps } from 'redux-form';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { DateTime } from 'luxon';
 import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-components';
-import type { FieldProps as $FieldProps } from 'redux-form';
 import { rem } from 'polished';
-import {
-  defaultStyleProps as defaultInputStyleProps,
-  createStyledComponents as createInputStyledComponents,
-} from './Input';
+import { createComponent as createInputComponent } from '../Input';
 import type {
   $ComponentFactory,
   $MangoComponent,
   $StyledSubComponentsFactory,
-} from './types';
-import { palette, fontWeights } from './constants';
+} from '../types';
+import type { $ReactDayPickerInputProps } from './types';
+import { palette, fontWeights } from '../constants';
 
 export type $StyledProps = {
   id?: string,
@@ -31,9 +29,8 @@ export type $Props = {
   LabelComponent: React.ComponentType<*>,
   OverlayWrapperComponent: React.ComponentType<*>,
   OverlayComponent: React.ComponentType<*>,
-  dateFormat: string,
-  calendarProps: *,
-} & $StyledProps;
+} & $StyledProps &
+  $ReactDayPickerInputProps;
 
 export const defaultStyleProps: {|
   overlayBackgroundColor: string,
@@ -71,40 +68,13 @@ export const defaultStyleProps: {|
   weekNumberFontSize: rem(8),
 };
 
-const formatDate = (dateObject, format) =>
-  DateTime.fromJSDate(dateObject).toFormat(format);
-
-const parseDate = (dateString, format) => {
-  const dateFromFormat = DateTime.fromFormat(dateString, format);
-
-  if (dateFromFormat.isValid) {
-    return dateFromFormat.toJSDate();
-  }
-
-  return undefined;
-};
-
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
-    InputComponent: $ReactComponentStyled<*>,
-    LabelComponent: $ReactComponentStyled<*>,
     OverlayWrapperComponent: $ReactComponentStyled<*>,
     OverlayComponent: $ReactComponentStyled<*>,
   },
   typeof defaultStyleProps,
 > = styleProps => {
-  const LabelComponent = styled.span`
-    font-size: ${styleProps.fontSize};
-    font-weight: ${styleProps.fontWeight};
-    display: block;
-
-    ${({ invalid }) =>
-      invalid &&
-      css`
-        color: ${palette.alert};
-      `};
-  `;
-
   const OverlayWrapperComponent = styled.div`
     position: relative;
   `;
@@ -163,7 +133,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
 
     .DayPicker-NavButton--prev {
       margin-right: 1.5rem;
-      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAwCAYAAAB5R9gVAAAABGdBTUEAALGPC/xhBQAAAVVJREFUWAnN2G0KgjAYwPHpGfRkaZeqvgQaK+hY3SUHrk1YzNLay/OiEFp92I+/Mp2F2Mh2lLISWnflFjzH263RQjzMZ19wgs73ez0o1WmtW+dgA01VxrE3p6l2GLsnBy1VYQOtVSEH/atCCgqpQgKKqYIOiq2CBkqtggLKqQIKgqgCBjpJ2Y5CdJ+zrT9A7HHSTA1dxUdHgzCqJIEwq0SDsKsEg6iqBIEoq/wEcVRZBXFV+QJxV5mBtlDFB5VjYTaGZ2sf4R9PM7U9ZU+lLuaetPP/5Die3ToO1+u+MKtHs06qODB2zBnI/jBd4MPQm1VkY79Tb18gB+C62FdBFsZR6yeIo1YQiLJWMIiqVjQIu1YSCLNWFgijVjYIuhYYCKoWKAiiFgoopxYaKLUWOii2FgkophYp6F3r42W5A9s9OcgNvva8xQaysKXlFytoqdYmQH6tF3toSUo0INq9AAAAAElFTkSuQmCC');
+      nnbackground-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAwCAYAAAB5R9gVAAAABGdBTUEAALGPC/xhBQAAAVVJREFUWAnN2G0KgjAYwPHpGfRkaZeqvgQaK+hY3SUHrk1YzNLay/OiEFp92I+/Mp2F2Mh2lLISWnflFjzH263RQjzMZ19wgs73ez0o1WmtW+dgA01VxrE3p6l2GLsnBy1VYQOtVSEH/atCCgqpQgKKqYIOiq2CBkqtggLKqQIKgqgCBjpJ2Y5CdJ+zrT9A7HHSTA1dxUdHgzCqJIEwq0SDsKsEg6iqBIEoq/wEcVRZBXFV+QJxV5mBtlDFB5VjYTaGZ2sf4R9PM7U9ZU+lLuaetPP/5Die3ToO1+u+MKtHs06qODB2zBnI/jBd4MPQm1VkY79Tb18gB+C62FdBFsZR6yeIo1YQiLJWMIiqVjQIu1YSCLNWFgijVjYIuhYYCKoWKAiiFgoopxYaKLUWOii2FgkophYp6F3r42W5A9s9OcgNvva8xQaysKXlFytoqdYmQH6tF3toSUo0INq9AAAAAElFTkSuQmCC');
     }
 
     .DayPicker-NavButton--next {
@@ -272,8 +242,6 @@ export const createStyledComponents: $StyledSubComponentsFactory<
   `;
 
   return {
-    ...createInputStyledComponents(defaultInputStyleProps),
-    LabelComponent,
     OverlayWrapperComponent,
     OverlayComponent,
   };
@@ -284,10 +252,21 @@ class DatePicker extends React.Component<$Props, void> {
 
   static defaultProps = {
     dateFormat: 'dd/LL/yyyy',
+    formatDate: (date: Date, format: string): string =>
+      DateTime.fromJSDate(date).toFormat(format),
+    parseDate: (date: string, format: string): ?Date => {
+      const dateFromFormat = DateTime.fromFormat(date, format);
+
+      if (dateFromFormat.isValid) {
+        return dateFromFormat.toJSDate();
+      }
+
+      return undefined;
+    },
   };
 
   handleOnDayChange = day => {
-    const { input, dateFormat } = this.props;
+    const { dateFormat, formatDate, input, onDayChange } = this.props;
 
     if (day) {
       input.onChange(formatDate(day, dateFormat));
@@ -296,70 +275,102 @@ class DatePicker extends React.Component<$Props, void> {
         this.datePickerRef.current.hideDayPicker();
       }
     }
+
+    if (onDayChange && typeof onDayChange === 'function') {
+      onDayChange(day);
+    }
   };
 
   render() {
     const {
       InputComponent,
-      LabelComponent,
       OverlayWrapperComponent,
       OverlayComponent,
-      input,
-      label,
+      classNames,
+      clickUnselectsDay,
+      component, // Unused, use InputComponent instead.
       dateFormat,
-      calendarProps,
-      invalid,
-      disabled,
-      ...rest
+      dayPickerProps,
+      // `format` will always be undefined when a Field child.  Use `dateFormat`
+      // instead, it will get passed down as `format` to the wrapped
+      // DayPickerInput component.
+      format,
+      formatDate,
+      hideOnDayClick,
+      inputProps,
+      keepFocus,
+      onBlur,
+      onChange,
+      onClick,
+      onDayChange, // Will be called after this.handleOnDayChange.
+      onFocus,
+      onKeyUp,
+      overlayComponent,
+      parseDate,
+      placeholder, // This will always be undefined if used as a Field child.
+      showOverlay,
+      value, // This will always be undefined if used as a Field child.
+      input, // Passed down by redux-form when used as a Field child
+      meta, // Passed down by redux-form when used as a Field child
+      ...rest // these will be applied to InputComponent.
     } = this.props;
 
-    return (
-      <label htmlFor={input.name}>
-        {label && (
-          <LabelComponent invalid={invalid} disabled={disabled}>
-            {label}
-          </LabelComponent>
-        )}
-        <DayPickerInput
-          ref={this.datePickerRef}
-          format={dateFormat}
-          formatDate={formatDate}
-          parseDate={parseDate}
-          placeholder={`${DateTime.local().toFormat(dateFormat)}`}
-          component={inputProps => (
-            <InputComponent
-              {...inputProps}
-              name={input.name}
-              invalid={invalid}
-              disabled={disabled}
-            />
-          )}
-          onDayChange={this.handleOnDayChange}
-          overlayComponent={({
-            children,
-            ...overlayProps
-          }: {
-            children: React.Node,
-          }) => (
-            <OverlayWrapperComponent {...overlayProps}>
-              <OverlayComponent>{children}</OverlayComponent>
-            </OverlayWrapperComponent>
-          )}
-          dayPickerProps={{ ...calendarProps }}
-          value={input.value}
-          invalid={invalid}
-          disabled={disabled}
-          {...rest}
-        />
-      </label>
+    const ComposedOverlayComponent = ({
+      children,
+      ...overlayProps
+    }: {
+      children: React.Node,
+    }) => (
+      <OverlayWrapperComponent {...overlayProps}>
+        <OverlayComponent>{children}</OverlayComponent>
+      </OverlayWrapperComponent>
     );
+
+    const fieldProps = {
+      ...inputProps,
+      ...rest,
+      input,
+      meta,
+      // Currently this component doesn't provide a good experience if you try
+      // to edit the value yourself.  Just make it read only for now, so the
+      // only way to manipulate it is by using the picker.
+      readOnly: true,
+    };
+
+    const composedDatePickerProps = {
+      ref: this.datePickerRef,
+      value, // this will always be undefined if used as a Field child
+      inputProps: fieldProps,
+      placeholder,
+      format: dateFormat,
+      formatDate,
+      parseDate,
+      showOverlay,
+      dayPickerProps,
+      hideOnDayClick,
+      clickUnselectsDay,
+      keepFocus,
+      component: InputComponent,
+      overlayComponent: ComposedOverlayComponent,
+      classNames,
+      onDayChange: this.handleOnDayChange,
+      onChange,
+      onClick,
+      onFocus,
+      onBlur,
+      onKeyUp,
+    };
+
+    return <DayPickerInput {...composedDatePickerProps} />;
   }
 }
 
 export const createComponent: $ComponentFactory<$Props> = () => {
   const defaultStyledComponents = createStyledComponents(defaultStyleProps);
+  const InputComponent = createInputComponent();
+
   return (props: $Props) => (
-    <DatePicker {...{ ...defaultStyledComponents, ...props }} />
+    <DatePicker {...{ InputComponent, ...defaultStyledComponents, ...props }} />
   );
 };
 

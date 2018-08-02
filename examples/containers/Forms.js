@@ -217,17 +217,24 @@ export class Form extends React.Component<Props, State> {
             mapItemToString={fruit => (fruit ? fruit.name : '')}
             component={TypeaheadInput}
           />
-          <Field name="soup" label="Enter soup date" component={DatePicker} />
+          <Field
+            name="soup"
+            label="Enter soup date"
+            autoComplete="off"
+            component={DatePicker}
+          />
           <Field
             name="soup-invalid"
             label="Enter soup date invalid"
             invalid
+            autoComplete="off"
             component={DatePicker}
           />
           <Field
             name="soup-disabled"
             label="Enter soup date disabled"
             disabled
+            autoComplete="off"
             component={DatePicker}
           />
           <Button onClick={handleSubmit(this.submit)}>

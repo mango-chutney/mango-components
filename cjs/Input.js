@@ -91,7 +91,8 @@ function Input(_ref4) {
     disabled: disabled
   }, label), React.createElement("span", null, React.createElement(InputComponent, _extends({}, input, rest, {
     invalid: invalid,
-    disabled: disabled,
+    disabled: disabled
+  }, {
     id: rest.id || input && input.name
   }))));
 }
