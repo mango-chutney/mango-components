@@ -79,7 +79,6 @@ export class Form extends React.Component<Props, State> {
             placeholder="invalid field"
             label="invalid field"
             component={Input}
-            invalid
           />
           <Field
             type="text"
@@ -100,7 +99,6 @@ export class Form extends React.Component<Props, State> {
             label="Invalid TextArea"
             placeholder="Invalid TextArea"
             component={TextArea}
-            invalid
           />
           <Field
             name="disabled-textarea"
@@ -145,7 +143,6 @@ export class Form extends React.Component<Props, State> {
               label="This guy is invalid."
               placeholder="invalid checken"
               component={Checkbox}
-              invalid
             />
           </div>
           <div>
@@ -194,7 +191,6 @@ export class Form extends React.Component<Props, State> {
               label="invalid select"
               placeholder="invalid select"
               component={Select}
-              invalid
             >
               <option value="option-1">Option 1</option>
               <option value="option-2">Option 2</option>
@@ -224,14 +220,13 @@ export class Form extends React.Component<Props, State> {
             component={DatePicker}
           />
           <Field
-            name="soup-invalid"
+            name="invalid-soup"
             label="Enter soup date invalid"
-            invalid
             autoComplete="off"
             component={DatePicker}
           />
           <Field
-            name="soup-disabled"
+            name="disabled-soup"
             label="Enter soup date disabled"
             disabled
             autoComplete="off"
@@ -271,11 +266,17 @@ const validate = values => {
     errors.email = 'Please enter your email address!';
   }
 
+  errors['invalid-select'] = true;
+  errors['invalid-soup'] = true;
+  errors['invalid-text'] = true;
+  errors['invalid-textarea'] = true;
+  errors['invalid-checken'] = true;
+
   return errors;
 };
 
-const asyncValidate = values => {
-  return new Promise(resolve => {
+const asyncValidate = values =>
+  new Promise(resolve => {
     const errors = {};
 
     if (values.fruit) {
@@ -290,7 +291,6 @@ const asyncValidate = values => {
 
     throw errors;
   });
-};
 
 export const component = reduxForm({
   form: 'Form',
