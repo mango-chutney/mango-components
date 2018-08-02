@@ -129,7 +129,6 @@ export const remapLabelProps = (
 ): React.ElementConfig<'label'> => {
   if (!label) {
     return {
-      children: null,
       ...extraProps,
     };
   }
