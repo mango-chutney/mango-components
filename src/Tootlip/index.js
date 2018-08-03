@@ -28,8 +28,8 @@ export type $StyledProps = {
 
 export type $Props = {
   ...$StyledProps,
-  ArrowComponent: React.ComponentType<*>,
-  PopperComponent: React.ComponentType<*>,
+  ArrowComponent: React.ElementType,
+  PopperComponent: React.ElementType,
 };
 
 export function UnmanagedTootlip(props: $Props) {

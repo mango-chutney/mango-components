@@ -20,7 +20,7 @@ export type $StyledProps = {
 
 export type $Props = {
   ...$StyledProps,
-  AnchorButtonComponent: React.ComponentType<*>,
+  AnchorButtonComponent: React.ElementType,
 };
 
 export function AnchorButton(props: $Props) {

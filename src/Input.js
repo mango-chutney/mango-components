@@ -15,9 +15,9 @@ import type {
 } from './types';
 
 export type $Props = {
-  InputComponent: React.ComponentType<*>,
-  InputDecoratorComponent: React.ComponentType<*>,
-  LabelComponent: React.ComponentType<*>,
+  InputComponent: React.ElementType,
+  InputDecoratorComponent: React.ElementType,
+  LabelComponent: React.ElementType,
   label: string | React.ElementConfig<'label'>,
 } & React.ElementConfig<'input'> &
   $FieldProps;
@@ -183,6 +183,7 @@ export const createLabelProps = (
   const {
     meta,
     input, // don't apply input element props to label
+    custom, // don't apply input element props to label
     children,
     ...rest
   } = props;

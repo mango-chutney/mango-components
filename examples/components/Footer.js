@@ -12,8 +12,8 @@ function Footer() {
 export default Footer;
 
 export function withFooter(
-  WrappedComponent: React.ComponentType<*>,
-): React.ComponentType<*> {
+  WrappedComponent: React.ElementType,
+): React.ElementType {
   return (props: *) => (
     <div>
       <WrappedComponent {...props} />

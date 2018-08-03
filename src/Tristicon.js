@@ -19,7 +19,7 @@ export type $StyledProps = {
 
 export type $Props = {
   ...$StyledProps,
-  TristiconComponent: React.ComponentType<*>,
+  TristiconComponent: React.ElementType,
 };
 
 export const defaultStyleProps: {|

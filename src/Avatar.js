@@ -23,7 +23,7 @@ export type $StyledProps = {
 
 export type $Props = {
   ...$StyledProps,
-  AvatarComponent: React.ComponentType<*>,
+  AvatarComponent: React.ElementType,
 };
 
 export const defaultStyleProps: {|

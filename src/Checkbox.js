@@ -14,11 +14,11 @@ import type {
 import { createFormControlElementProps, createLabelProps } from './Input';
 
 export type $Props = {
-  CheckboxBackgroundComponent: React.ComponentType<*>,
-  CheckboxContainerComponent: React.ComponentType<*>,
-  InputComponent: React.ComponentType<*>,
-  LabelComponent: React.ComponentType<*>,
-  WrapperComponent: React.ComponentType<*>,
+  CheckboxBackgroundComponent: React.ElementType,
+  CheckboxContainerComponent: React.ElementType,
+  InputComponent: React.ElementType,
+  LabelComponent: React.ElementType,
+  WrapperComponent: React.ElementType,
   label: string | React.ElementConfig<'label'>,
 } & React.ElementConfig<'input'> &
   $FieldProps;

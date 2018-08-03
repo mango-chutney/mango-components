@@ -18,7 +18,7 @@ export type $StyledProps = {
 
 export type $Props = {
   ...$StyledProps,
-  ButtonComponent: React.ComponentType<*>,
+  ButtonComponent: React.ElementType,
 };
 
 export const defaultStyleProps: {|

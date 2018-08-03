@@ -15,9 +15,9 @@ import type {
 } from './types';
 
 export type $Props = {
-  SelectComponent: React.ComponentType<*>,
-  InputDecoratorComponent: React.ComponentType<*>,
-  LabelComponent: React.ComponentType<*>,
+  SelectComponent: React.ElementType,
+  InputDecoratorComponent: React.ElementType,
+  LabelComponent: React.ElementType,
   label: string | React.ElementConfig<'label'>,
 } & React.ElementConfig<'select'> &
   $FieldProps;

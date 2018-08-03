@@ -14,9 +14,9 @@ import type {
 } from './types';
 
 export type $Props = {
-  InputDecoratorComponent: React.ComponentType<*>,
-  LabelComponent: React.ComponentType<*>,
-  TextAreaComponent: React.ComponentType<*>,
+  InputDecoratorComponent: React.ElementType,
+  LabelComponent: React.ElementType,
+  TextAreaComponent: React.ElementType,
   label: string | React.ElementConfig<'label'>,
 } & React.ElementConfig<'textarea'> &
   $FieldProps;

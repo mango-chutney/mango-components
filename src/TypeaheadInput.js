@@ -17,17 +17,15 @@ import type {
 } from './types';
 
 export type $StyledProps = {
-  id?: string,
-  label: React.ElementConfig<'label'>,
-  placeholder: string,
+  label: string | React.ElementConfig<'label'>,
 } & $FieldProps;
 
 export type $Props = {
-  InputComponent: React.ComponentType<*>,
-  ItemComponent: React.ComponentType<*>,
-  MenuComponent: React.ComponentType<*>,
-  MenuWrapperComponent: React.ComponentType<*>,
-  WrapperComponent: React.ComponentType<*>,
+  InputComponent: React.ElementType,
+  ItemComponent: React.ElementType,
+  MenuComponent: React.ElementType,
+  MenuWrapperComponent: React.ElementType,
+  WrapperComponent: React.ElementType,
   filterItems: (
     items: Array<any>,
     mapItemToString: (item: any) => string,

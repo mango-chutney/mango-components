@@ -17,7 +17,7 @@ export type $StyledProps = {
 
 export type $Props = {
   ...$StyledProps,
-  PanelHeadingComponent: React.ComponentType<*>,
+  PanelHeadingComponent: React.ElementType,
 };
 
 export const defaultStyleProps: {|

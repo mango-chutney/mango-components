@@ -17,8 +17,8 @@ export type $StyledProps = {
 
 export type $Props = {
   ...$StyledProps,
-  AnchorComponent: React.ComponentType<*>,
-  DivComponent: React.ComponentType<*>,
+  AnchorComponent: React.ElementType,
+  DivComponent: React.ElementType,
 };
 
 export const defaultStyleProps: {} = {};
