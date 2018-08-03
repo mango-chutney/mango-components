@@ -63,12 +63,13 @@ var createStyledComponents = function createStyledComponents(styleProps) {
     componentId: "s1ah6m0p-0"
   })(["background:white;position:absolute;top:100%;left:0;width:100%;z-index:4;"]);
 
-  var MenuWrapperComponent = _styledComponents.default.div.withConfig({
-    componentId: "s1ah6m0p-1"
-  })(["position:relative;"]);
+  var _createStyledInputCom = (0, _Input.createStyledComponents)(_Input.defaultStyleProps),
+      InputDecoratorComponent = _createStyledInputCom.InputDecoratorComponent;
+
+  var MenuWrapperComponent = InputDecoratorComponent.withComponent('div');
 
   var ItemComponent = _styledComponents.default.div.withConfig({
-    componentId: "s1ah6m0p-2"
+    componentId: "s1ah6m0p-1"
   })(["background-color:", ";font-weight:", ";"], function (_ref) {
     var highlightedIndex = _ref.highlightedIndex,
         index = _ref.index;

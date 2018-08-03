@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.Input = Input;
-exports.default = exports.createComponent = exports.createFormControlElementProps = exports.createLabelProps = exports.createInputIdAttribute = exports.createStyledComponents = exports.defaultStyleProps = void 0;
+exports.default = exports.createComponent = exports.createInputDecoratorProps = exports.createFormControlElementProps = exports.createLabelProps = exports.createInputIdAttribute = exports.createStyledComponents = exports.defaultStyleProps = void 0;
 
 require("core-js/modules/es7.symbol.async-iterator");
 
@@ -25,6 +25,8 @@ var _styledComponents = _interopRequireWildcard(require("styled-components"));
 var _polished = require("polished");
 
 var _invariant = _interopRequireDefault(require("invariant"));
+
+var _tristicons = _interopRequireDefault(require("tristicons"));
 
 var _constants = require("./constants");
 
@@ -69,6 +71,7 @@ var defaultStyleProps = {
   placeholderColor: String((0, _polished.transparentize)(0.2, _constants.palette.darkGray))
 };
 exports.defaultStyleProps = defaultStyleProps;
+var tristiconsSpin = (0, _styledComponents.keyframes)(["0%{transform:rotate(0deg);}100%{transform:rotate(359deg);}"]);
 
 var createStyledComponents = function createStyledComponents(styleProps) {
   var InputComponent = _styledComponents.default.input.withConfig({
@@ -84,13 +87,20 @@ var createStyledComponents = function createStyledComponents(styleProps) {
 
   var InputDecoratorComponent = _styledComponents.default.span.withConfig({
     componentId: "ga0twe-1"
-  })(["display:block;"]);
+  })(["display:block;position:relative;&::after{content:'';color:", ";font:normal normal normal ", " tristicons;line-height:1rem;position:absolute;right:1rem;top:0.75rem;}", ";", ";"], styleProps.placeholderColor, (0, _polished.rem)(14), function (_ref3) {
+    var asyncValidating = _ref3.asyncValidating;
+    return asyncValidating && (0, _styledComponents.css)(["::after{animation:", " 2s infinite linear;content:", ";}"], tristiconsSpin, "\"".concat(_tristicons.default.loading, "\""));
+  }, function (_ref4) {
+    var error = _ref4.error,
+        touched = _ref4.touched;
+    return error && touched && (0, _styledComponents.css)(["::after{color:", ";content:", ";}"], _constants.palette.alert, "\"".concat(_tristicons.default['cross-circle'], "\""));
+  });
 
   var LabelComponent = _styledComponents.default.label.withConfig({
     componentId: "ga0twe-2"
-  })(["font-size:", ";font-weight:", ";display:block;", ";"], styleProps.fontSize, styleProps.fontWeight, function (_ref3) {
-    var error = _ref3.error,
-        touched = _ref3.touched;
+  })(["font-size:", ";font-weight:", ";display:block;", ";"], styleProps.fontSize, styleProps.fontWeight, function (_ref5) {
+    var error = _ref5.error,
+        touched = _ref5.touched;
     return error && touched && (0, _styledComponents.css)(["color:", ";"], _constants.palette.alert);
   });
 
@@ -117,9 +127,9 @@ var createLabelObject = function createLabelObject(label) {
   return _objectSpread({}, label);
 };
 
-var createInputIdAttribute = function createInputIdAttribute(_ref4) {
-  var id = _ref4.id,
-      input = _ref4.input;
+var createInputIdAttribute = function createInputIdAttribute(_ref6) {
+  var id = _ref6.id,
+      input = _ref6.input;
 
   if (id) {
     return id;
@@ -179,19 +189,29 @@ var createFormControlElementProps = function createFormControlElementProps(props
 
 exports.createFormControlElementProps = createFormControlElementProps;
 
+var createInputDecoratorProps = function createInputDecoratorProps(_ref7) {
+  var disabled = _ref7.disabled,
+      meta = _ref7.meta;
+  return _objectSpread({
+    disabled: disabled
+  }, meta);
+};
+
+exports.createInputDecoratorProps = createInputDecoratorProps;
+
 function Input(props) {
   var InputComponent = props.InputComponent,
       InputDecoratorComponent = props.InputDecoratorComponent,
       LabelComponent = props.LabelComponent,
       label = props.label,
-      children = props.children,
+      inputDecoratorChildren = props.children,
       rest = _objectWithoutProperties(props, ["InputComponent", "InputDecoratorComponent", "LabelComponent", "label", "children"]);
 
   var _createLabelProps = createLabelProps(label, rest),
       labelChildren = _createLabelProps.children,
       labelProps = _objectWithoutProperties(_createLabelProps, ["children"]);
 
-  return React.createElement(LabelComponent, labelProps, labelChildren, React.createElement(InputDecoratorComponent, null, React.createElement(InputComponent, createFormControlElementProps(rest)), children));
+  return React.createElement(LabelComponent, labelProps, labelChildren, React.createElement(InputDecoratorComponent, createInputDecoratorProps(rest), React.createElement(InputComponent, createFormControlElementProps(rest)), inputDecoratorChildren));
 }
 
 var createComponent = function createComponent() {

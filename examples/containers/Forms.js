@@ -83,6 +83,13 @@ export class Form extends React.Component<Props, State> {
             disabled
           />
           <Field
+            type="text"
+            name="async-validating-text"
+            placeholder="async-validating-text"
+            label="async validating field"
+            component={Input}
+          />
+          <Field
             name="textarea"
             label="TextArea"
             placeholder="TextArea"
@@ -273,9 +280,17 @@ const validate = values => {
   return errors;
 };
 
+const asyncValidate = () =>
+  new Promise(resolve => setTimeout(resolve, 1000)).then(() => {
+    const errors = { 'async-validating-text': ':(' };
+    throw errors;
+  });
+
 export const component = reduxForm({
   form: 'Form',
   validate,
+  asyncValidate,
+  asyncBlurFields: ['async-validating-text'],
 })(Form);
 
 export default component;

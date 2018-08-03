@@ -15,17 +15,19 @@ import * as React from 'react';
 import Downshift from 'downshift';
 import matchSorter from 'match-sorter';
 import styled from 'styled-components';
-import { createComponent as createInputComponent, createLabelProps } from './Input';
+import { createComponent as createInputComponent, createLabelProps, createStyledComponents as createStyledInputComponents, defaultStyleProps as defaultInputStyleProps } from './Input';
 export var defaultStyleProps = {};
 export var createStyledComponents = function createStyledComponents(styleProps) {
   var MenuComponent = styled.div.withConfig({
     componentId: "s1ah6m0p-0"
   })(["background:white;position:absolute;top:100%;left:0;width:100%;z-index:4;"]);
-  var MenuWrapperComponent = styled.div.withConfig({
-    componentId: "s1ah6m0p-1"
-  })(["position:relative;"]);
+
+  var _createStyledInputCom = createStyledInputComponents(defaultInputStyleProps),
+      InputDecoratorComponent = _createStyledInputCom.InputDecoratorComponent;
+
+  var MenuWrapperComponent = InputDecoratorComponent.withComponent('div');
   var ItemComponent = styled.div.withConfig({
-    componentId: "s1ah6m0p-2"
+    componentId: "s1ah6m0p-1"
   })(["background-color:", ";font-weight:", ";"], function (_ref) {
     var highlightedIndex = _ref.highlightedIndex,
         index = _ref.index;

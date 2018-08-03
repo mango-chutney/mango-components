@@ -45,26 +45,18 @@ var defaultStyleProps = {
 exports.defaultStyleProps = defaultStyleProps;
 
 var createStyledComponents = function createStyledComponents(styleProps) {
-  var InputDecoratorComponent = _styledComponents.default.span.withConfig({
-    componentId: "orybjj-0"
-  })(["display:block;"]);
-
-  var LabelComponent = _styledComponents.default.label.withConfig({
-    componentId: "orybjj-1"
-  })(["font-size:", ";font-weight:", ";display:block;", ";"], styleProps.fontSize, styleProps.fontWeight, function (_ref) {
-    var error = _ref.error,
-        touched = _ref.touched;
-    return error && touched && (0, _styledComponents.css)(["color:", ";"], _constants.palette.alert);
-  });
+  var _createStyledInputCom = (0, _Input.createStyledComponents)(_Input.defaultStyleProps),
+      InputDecoratorComponent = _createStyledInputCom.InputDecoratorComponent,
+      LabelComponent = _createStyledInputCom.LabelComponent;
 
   var TextAreaComponent = _styledComponents.default.textarea.withConfig({
-    componentId: "orybjj-2"
-  })(["appearance:none;background-color:", ";border-color:", ";border-radius:0.25rem;border-style:solid;border-width:0.05rem;color:", ";display:block;font-family:", ";margin-bottom:1rem;outline:0;padding:1.25rem 1rem;transition:border-color 300ms ease;width:100%;::placeholder{color:", ";}:active,:focus{border-color:", ";}", ";", ";"], styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.placeholderColor, styleProps.activeBorderColor, function (_ref2) {
-    var error = _ref2.error,
-        touched = _ref2.touched;
+    componentId: "orybjj-0"
+  })(["resize:vertical;appearance:none;background-color:", ";border-color:", ";border-radius:0.25rem;border-style:solid;border-width:0.05rem;color:", ";display:block;font-family:", ";margin-bottom:1rem;outline:0;padding:1.25rem 1rem;transition:border-color 300ms ease;width:100%;::placeholder{color:", ";}:active,:focus{border-color:", ";}", ";", ";"], styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.placeholderColor, styleProps.activeBorderColor, function (_ref) {
+    var error = _ref.error,
+        touched = _ref.touched;
     return error && touched && (0, _styledComponents.css)(["border-color:", ";::placeholder{color:", ";}"], _constants.palette.alert, _constants.palette.alert);
-  }, function (_ref3) {
-    var disabled = _ref3.disabled;
+  }, function (_ref2) {
+    var disabled = _ref2.disabled;
     return disabled && (0, _styledComponents.css)(["background-color:", ";color:", ";cursor:not-allowed;::placeholder{color:", ";}"], (0, _polished.darken)(0.05, styleProps.backgroundColor), (0, _polished.darken)(0.05, styleProps.color), (0, _polished.darken)(0.05, styleProps.placeholderColor));
   });
 
@@ -88,7 +80,7 @@ function TextArea(props) {
       labelChildren = _createLabelProps.children,
       labelProps = _objectWithoutProperties(_createLabelProps, ["children"]);
 
-  return React.createElement(LabelComponent, labelProps, labelChildren, React.createElement(InputDecoratorComponent, null, React.createElement(TextAreaComponent, (0, _Input.createFormControlElementProps)(rest))));
+  return React.createElement(LabelComponent, labelProps, labelChildren, React.createElement(InputDecoratorComponent, (0, _Input.createInputDecoratorProps)(rest), React.createElement(TextAreaComponent, (0, _Input.createFormControlElementProps)(rest))));
 }
 
 var createComponent = function createComponent() {

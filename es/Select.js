@@ -5,12 +5,24 @@ import "core-js/modules/es6.object.assign";
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
+function _templateObject() {
+  var data = _taggedTemplateLiteralLoose(["\n    ", ";\n  "]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteralLoose(strings, raw) { if (!raw) { raw = strings.slice(0); } strings.raw = raw; return strings; }
+
 import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { rem, transparentize, darken } from 'polished';
 import tristicons from 'tristicons';
 import { palette, fontWeights, fontStack } from './constants';
-import { createFormControlElementProps, createLabelProps } from './Input';
+import { createFormControlElementProps, createInputDecoratorProps, createLabelProps, createStyledComponents as createStyledInputComponents, defaultStyleProps as defaultInputStyleProps } from './Input';
 export var defaultStyleProps = {
   backgroundColor: palette.lightGray,
   borderColor: palette.border,
@@ -32,16 +44,15 @@ export var createStyledComponents = function createStyledComponents(styleProps) 
     var disabled = _ref2.disabled;
     return disabled && css(["background-color:", ";background-image:linear-gradient( ", ",", " );color:", ";cursor:not-allowed;"], darken(0.05, styleProps.backgroundColor), darken(0.05, palette.white), darken(0.05, styleProps.backgroundColor), darken(0.05, styleProps.color));
   });
-  var LabelComponent = styled.label.withConfig({
-    componentId: "s4vmyyd-1"
-  })(["font-size:", ";font-weight:", ";display:block;", ";"], styleProps.fontSize, styleProps.fontWeight, function (_ref3) {
-    var error = _ref3.error,
-        touched = _ref3.touched;
-    return error && touched && css(["color:", ";"], palette.alert);
+
+  var _createStyledInputCom = createStyledInputComponents(defaultInputStyleProps),
+      LabelComponent = _createStyledInputCom.LabelComponent,
+      BaseInputDecoratorComponent = _createStyledInputCom.InputDecoratorComponent;
+
+  var InputDecoratorComponent = BaseInputDecoratorComponent.extend(_templateObject(), function (_ref3) {
+    var valid = _ref3.valid;
+    return valid && css(["&::after{content:", ";}"], "\"" + tristicons['chevron-down'] + "\"");
   });
-  var InputDecoratorComponent = styled.span.withConfig({
-    componentId: "s4vmyyd-2"
-  })(["display:block;position:relative;&::after{content:", ";color:", ";font:normal normal normal ", " tristicons;line-height:1rem;position:absolute;right:1rem;top:0.75rem;}"], "\"" + tristicons['chevron-down'] + "\"", styleProps.placeholderColor, rem(14));
   return {
     SelectComponent: SelectComponent,
     InputDecoratorComponent: InputDecoratorComponent,
@@ -60,7 +71,7 @@ export function Select(props) {
       labelChildren = _createLabelProps.children,
       labelProps = _objectWithoutPropertiesLoose(_createLabelProps, ["children"]);
 
-  return React.createElement(LabelComponent, labelProps, labelChildren, React.createElement(InputDecoratorComponent, null, React.createElement(SelectComponent, createFormControlElementProps(rest), selectChildren)));
+  return React.createElement(LabelComponent, labelProps, labelChildren, React.createElement(InputDecoratorComponent, createInputDecoratorProps(rest), React.createElement(SelectComponent, createFormControlElementProps(rest), selectChildren)));
 }
 export var createComponent = function createComponent() {
   var defaultStyledComponents = createStyledComponents(defaultStyleProps);

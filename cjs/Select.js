@@ -12,6 +12,8 @@ require("core-js/modules/es6.array.iterator");
 
 require("core-js/modules/es6.object.keys");
 
+require("core-js/modules/es6.object.freeze");
+
 var React = _interopRequireWildcard(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
@@ -35,6 +37,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n    ", ";\n  "]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 var defaultStyleProps = {
   backgroundColor: _constants.palette.lightGray,
@@ -60,18 +74,14 @@ var createStyledComponents = function createStyledComponents(styleProps) {
     return disabled && (0, _styledComponents.css)(["background-color:", ";background-image:linear-gradient( ", ",", " );color:", ";cursor:not-allowed;"], (0, _polished.darken)(0.05, styleProps.backgroundColor), (0, _polished.darken)(0.05, _constants.palette.white), (0, _polished.darken)(0.05, styleProps.backgroundColor), (0, _polished.darken)(0.05, styleProps.color));
   });
 
-  var LabelComponent = _styledComponents.default.label.withConfig({
-    componentId: "s4vmyyd-1"
-  })(["font-size:", ";font-weight:", ";display:block;", ";"], styleProps.fontSize, styleProps.fontWeight, function (_ref3) {
-    var error = _ref3.error,
-        touched = _ref3.touched;
-    return error && touched && (0, _styledComponents.css)(["color:", ";"], _constants.palette.alert);
+  var _createStyledInputCom = (0, _Input.createStyledComponents)(_Input.defaultStyleProps),
+      LabelComponent = _createStyledInputCom.LabelComponent,
+      BaseInputDecoratorComponent = _createStyledInputCom.InputDecoratorComponent;
+
+  var InputDecoratorComponent = BaseInputDecoratorComponent.extend(_templateObject(), function (_ref3) {
+    var valid = _ref3.valid;
+    return valid && (0, _styledComponents.css)(["&::after{content:", ";}"], "\"".concat(_tristicons.default['chevron-down'], "\""));
   });
-
-  var InputDecoratorComponent = _styledComponents.default.span.withConfig({
-    componentId: "s4vmyyd-2"
-  })(["display:block;position:relative;&::after{content:", ";color:", ";font:normal normal normal ", " tristicons;line-height:1rem;position:absolute;right:1rem;top:0.75rem;}"], "\"".concat(_tristicons.default['chevron-down'], "\""), styleProps.placeholderColor, (0, _polished.rem)(14));
-
   return {
     SelectComponent: SelectComponent,
     InputDecoratorComponent: InputDecoratorComponent,
@@ -93,7 +103,7 @@ function Select(props) {
       labelChildren = _createLabelProps.children,
       labelProps = _objectWithoutProperties(_createLabelProps, ["children"]);
 
-  return React.createElement(LabelComponent, labelProps, labelChildren, React.createElement(InputDecoratorComponent, null, React.createElement(SelectComponent, (0, _Input.createFormControlElementProps)(rest), selectChildren)));
+  return React.createElement(LabelComponent, labelProps, labelChildren, React.createElement(InputDecoratorComponent, (0, _Input.createInputDecoratorProps)(rest), React.createElement(SelectComponent, (0, _Input.createFormControlElementProps)(rest), selectChildren)));
 }
 
 var createComponent = function createComponent() {
