@@ -27,6 +27,7 @@ export type $Props = {
   ItemComponent: React.ComponentType<*>,
   MenuComponent: React.ComponentType<*>,
   MenuWrapperComponent: React.ComponentType<*>,
+  WrapperComponent: React.ComponentType<*>,
   filterItems: (
     items: Array<any>,
     mapItemToString: (item: any) => string,
@@ -90,6 +91,8 @@ class TypeaheadInput extends React.Component<$Props, $State> {
     // Your mapItemToString function will be used as the key for each item, so
     // make sure it's unique.
     mapItemToString: item => item || '',
+
+    WrapperComponent: 'div', // Downshift wants to be wrapped in a div.
   };
 
   handleSelect = (selectedItem: any) => {
@@ -178,6 +181,7 @@ class TypeaheadInput extends React.Component<$Props, $State> {
     selectedItem,
   }) => {
     const {
+      WrapperComponent,
       InputComponent,
       ItemComponent,
       MenuComponent,
@@ -215,9 +219,8 @@ class TypeaheadInput extends React.Component<$Props, $State> {
       highlightedIndex,
     });
 
-    // This is wrapped in a div to satisfy downshift.
     return (
-      <div>
+      <WrapperComponent>
         <InputComponent {...inputProps}>
           {isOpen &&
             !!filteredItems.length && (
@@ -232,7 +235,7 @@ class TypeaheadInput extends React.Component<$Props, $State> {
               </MenuComponent>
             )}
         </InputComponent>
-      </div>
+      </WrapperComponent>
     );
   };
 
