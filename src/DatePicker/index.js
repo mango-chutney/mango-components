@@ -307,7 +307,7 @@ class DatePicker extends React.Component<$Props, void> {
       onKeyUp,
       overlayComponent,
       parseDate,
-      placeholder, // This will always be undefined if used as a Field child.
+      placeholder,
       showOverlay,
       value, // This will always be undefined if used as a Field child.
       input, // Passed down by redux-form when used as a Field child
@@ -342,7 +342,7 @@ class DatePicker extends React.Component<$Props, void> {
       ref: this.datePickerRef,
       value, // this will always be undefined if used as a Field child
       inputProps: fieldProps,
-      placeholder,
+      placeholder: placeholder || formatDate(new Date(), dateFormat),
       format: dateFormat,
       formatDate,
       parseDate,
