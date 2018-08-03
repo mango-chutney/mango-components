@@ -106,13 +106,6 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(TypeaheadInput)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "inputRef", React.createRef());
-
-    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
-      selectionStart: 0,
-      selectionEnd: 0
-    });
-
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleSelect", function (selectedItem) {
       var onChange = _this.props.input.onChange; // Unlike `createChangeHandler`, don't compose this with the one from
       // Downshift because the value we are provided is not an event.  We could
@@ -124,14 +117,8 @@ function (_React$Component) {
       // change in the future).  Just be aware that if you use something other
       // than redux-form that the 'onChange' prop will be called with a value, not
       // an event.
-      // The type signature in redux-form: https://github.com/erikras/redux-form/blob/2811705a22430450540b84cddf429b42b222e28d/src/FieldProps.types.js.flow#L33
-
-      if (_this.inputRef.current && selectedItem) {
-        _this.setState({
-          selectionStart: selectedItem.length,
-          selectionEnd: selectedItem.length
-        });
-      }
+      // The type signature in redux-form:
+      // https://github.com/erikras/redux-form/blob/2811705a22430450540b84cddf429b42b222e28d/src/FieldProps.types.js.flow#L33
 
       if (typeof onChange === 'function') {
         onChange(selectedItem);
@@ -149,13 +136,6 @@ function (_React$Component) {
 
         var _getInputProps = getInputProps(input),
             onChange = _getInputProps.onChange;
-
-        if (_this.inputRef.current) {
-          _this.setState({
-            selectionStart: _this.inputRef.current.selectionStart,
-            selectionEnd: _this.inputRef.current.selectionEnd
-          });
-        }
 
         if (typeof onChange === 'function') {
           onChange(event);
@@ -230,24 +210,11 @@ function (_React$Component) {
 
       var inputProps = _objectSpread({}, rest, {
         label: (0, _Input.createLabelProps)(label, getLabelProps()),
-        input: _objectSpread({}, input, getInputProps(input)),
-        onChange: _this.createChangeHandler({
-          getInputProps: getInputProps
+        input: _objectSpread({}, input, getInputProps(input), {
+          onChange: _this.createChangeHandler({
+            getInputProps: getInputProps
+          })
         }),
-        // This ref dance is to preserve the cursor position.
-        //
-        // See these issues for more details:
-        // https://github.com/facebook/react/issues/955
-        // https://github.com/facebook/react/issues/12762
-        // https://github.com/paypal/downshift/issues/217
-        // https://github.com/erikras/redux-form/issues/2049
-        // https://github.com/erikras/redux-form/issues/3253
-        //
-        // Also, we're using the `innerRef` prop because
-        // styled-components won't propagate the `ref` prop.  If
-        // `InputComponent` is not a styled-component, you will need to
-        // map the `inputRef` prop to `ref`.
-        // ref: this.inputRef,
         InputDecoratorComponent: MenuWrapperComponent
       });
 
@@ -273,20 +240,6 @@ function (_React$Component) {
   }
 
   _createClass(TypeaheadInput, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      if (this.inputRef.current === null) {
-        return;
-      }
-
-      if (this.inputRef.current) {
-        var _this$state = this.state,
-            selectionStart = _this$state.selectionStart,
-            selectionEnd = _this$state.selectionEnd;
-        this.inputRef.current.setSelectionRange(selectionStart, selectionEnd);
-      }
-    }
-  }, {
     key: "render",
     value: function render() {
       var _this$props2 = this.props,
