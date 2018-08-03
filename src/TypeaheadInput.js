@@ -9,6 +9,8 @@ import type { FieldProps as $FieldProps } from 'redux-form';
 import {
   createComponent as createInputComponent,
   createLabelProps,
+  createStyledComponents as createStyledInputComponents,
+  defaultStyleProps as defaultInputStyleProps,
 } from './Input';
 import type {
   $ComponentFactory,
@@ -56,9 +58,11 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     z-index: 4;
   `;
 
-  const MenuWrapperComponent = styled.div`
-    position: relative;
-  `;
+  const { InputDecoratorComponent } = createStyledInputComponents(
+    defaultInputStyleProps,
+  );
+
+  const MenuWrapperComponent = InputDecoratorComponent.withComponent('div');
 
   const ItemComponent = styled.div`
     background-color: ${({ highlightedIndex, index }) =>

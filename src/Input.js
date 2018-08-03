@@ -1,11 +1,12 @@
 // @flow
 
 import * as React from 'react';
-import styled, { css } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-components';
 import type { FieldProps as $FieldProps } from 'redux-form';
 import { rem, transparentize, darken } from 'polished';
 import invariant from 'invariant';
+import tristicons from 'tristicons';
 import { palette, fontWeights, fontStack } from './constants';
 import type {
   $ComponentFactory,
@@ -41,6 +42,16 @@ export const defaultStyleProps: {|
   fontWeight: fontWeights.semibold,
   placeholderColor: String(transparentize(0.2, palette.darkGray)),
 };
+
+const tristiconsSpin = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(359deg);
+  }
+`;
 
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
@@ -102,6 +113,36 @@ export const createStyledComponents: $StyledSubComponentsFactory<
 
   const InputDecoratorComponent = styled.span`
     display: block;
+    position: relative;
+
+    &::after {
+      content: '';
+      color: ${styleProps.placeholderColor};
+      font: normal normal normal ${rem(14)} tristicons;
+      line-height: 1rem;
+      position: absolute;
+      right: 1rem;
+      top: 0.75rem;
+    }
+
+    ${({ asyncValidating }) =>
+      asyncValidating &&
+      css`
+        ::after {
+          animation: ${tristiconsSpin} 2s infinite linear;
+          content: ${`"${tristicons.loading}"`};
+        }
+      `};
+
+    ${({ error, touched }) =>
+      error &&
+      touched &&
+      css`
+        ::after {
+          color: ${palette.alert};
+          content: ${`"${tristicons['cross-circle']}"`};
+        }
+      `};
   `;
 
   const LabelComponent = styled.label`
@@ -220,13 +261,21 @@ export const createFormControlElementProps = (
   };
 };
 
+export const createInputDecoratorProps = ({
+  disabled,
+  meta,
+}: $FormControlElementConfig & $FieldProps): { [string]: string } => ({
+  disabled,
+  ...meta,
+});
+
 export function Input(props: $Props) {
   const {
     InputComponent,
     InputDecoratorComponent,
     LabelComponent,
     label,
-    children,
+    children: inputDecoratorChildren,
     ...rest
   } = props;
 
@@ -238,9 +287,9 @@ export function Input(props: $Props) {
   return (
     <LabelComponent {...labelProps}>
       {labelChildren}
-      <InputDecoratorComponent>
+      <InputDecoratorComponent {...createInputDecoratorProps(rest)}>
         <InputComponent {...createFormControlElementProps(rest)} />
-        {children}
+        {inputDecoratorChildren}
       </InputDecoratorComponent>
     </LabelComponent>
   );

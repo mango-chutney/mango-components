@@ -12,6 +12,8 @@ require("core-js/modules/es6.array.iterator");
 
 require("core-js/modules/es6.object.keys");
 
+require("core-js/modules/es6.object.freeze");
+
 var React = _interopRequireWildcard(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
@@ -32,6 +34,18 @@ function _objectWithoutProperties(source, excluded) { if (source == null) return
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n    display: inline-block;\n    margin-left: 1rem;\n  "]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
 var defaultStyleProps = {
   checkboxSize: 20,
   checkboxColor: _constants.palette.primary
@@ -39,41 +53,37 @@ var defaultStyleProps = {
 exports.defaultStyleProps = defaultStyleProps;
 
 var createStyledComponents = function createStyledComponents(styleProps) {
+  var _createStyledInputCom = (0, _Input.createStyledComponents)(_Input.defaultStyleProps),
+      InputLabelComponent = _createStyledInputCom.LabelComponent;
+
+  var LabelComponent = InputLabelComponent.extend(_templateObject());
+
   var WrapperComponent = _styledComponents.default.div.withConfig({
     componentId: "s156yctp-0"
   })(["margin:1rem 0;"]);
 
   var CheckboxContainerComponent = _styledComponents.default.div.withConfig({
     componentId: "s156yctp-1"
-  })(["position:relative;margin:0;height:", ";width:", ";display:inline-block;"], (0, _polished.rem)(styleProps.checkboxSize), (0, _polished.rem)(styleProps.checkboxSize)); // some label stuff in checkbox to get :checked property
+  })(["position:relative;margin:0;height:", ";width:", ";display:inline-block;"], (0, _polished.rem)(styleProps.checkboxSize), (0, _polished.rem)(styleProps.checkboxSize));
 
-
-  var CheckboxBackgroundComponent = _styledComponents.default.div.withConfig({
+  var InputDecoratorComponent = _styledComponents.default.div.withConfig({
     componentId: "s156yctp-2"
-  })(["cursor:pointer;font-weight:", ";display:inline-block;font-size:1rem;", ";min-height:", ";line-height:", ";position:relative;border:1px solid transparent;display:block;&::before,&::after{width:", ";height:", ";cursor:pointer;content:'';display:inline-block;border-radius:4px;vertical-align:middle;}&::before{border:1px solid ", ";background:", ";margin-right:1rem;", ";", ";}&::after{position:absolute;left:0;border:1px solid transparent;line-height:", ";margin-top:", ";text-align:center;transform:scale(0);}"], _constants.fontWeights.semibold, function (_ref) {
+  })(["cursor:pointer;display:inline-block;min-height:", ";line-height:", ";position:relative;border:1px solid transparent;display:block;&::before,&::after{width:", ";height:", ";cursor:pointer;content:'';display:inline-block;border-radius:4px;vertical-align:middle;}&::before{border:1px solid ", ";background:", ";margin-right:1rem;", ";", ";}&::after{position:absolute;left:0;border:1px solid transparent;line-height:", ";margin-top:", ";text-align:center;transform:scale(0);}"], (0, _polished.rem)(styleProps.checkboxSize), (0, _polished.rem)(styleProps.checkboxSize), (0, _polished.rem)(styleProps.checkboxSize), (0, _polished.rem)(styleProps.checkboxSize), _constants.palette.border, _constants.palette.lightGray, function (_ref) {
     var error = _ref.error,
         touched = _ref.touched;
-    return error && touched && (0, _styledComponents.css)(["color:", ";"], _constants.palette.alert);
-  }, (0, _polished.rem)(styleProps.checkboxSize), (0, _polished.rem)(styleProps.checkboxSize), (0, _polished.rem)(styleProps.checkboxSize), (0, _polished.rem)(styleProps.checkboxSize), _constants.palette.border, _constants.palette.lightGray, function (_ref2) {
-    var error = _ref2.error,
-        touched = _ref2.touched;
     return error && touched && (0, _styledComponents.css)(["border-color:", ";"], _constants.palette.alert);
-  }, function (_ref3) {
-    var disabled = _ref3.disabled;
+  }, function (_ref2) {
+    var disabled = _ref2.disabled;
     return disabled && (0, _styledComponents.css)(["background-color:", ";cursor:not-allowed;"], (0, _polished.darken)(0.05, _constants.palette.lightGray));
   }, (0, _polished.rem)(styleProps.checkboxSize), (0, _polished.rem)(styleProps.checkboxSize * 0.1));
 
   var InputComponent = _styledComponents.default.input.withConfig({
     componentId: "s156yctp-3"
-  })(["width:100%;height:100%;position:absolute;padding:0;margin:0;top:0;left:0;z-index:9001;opacity:0;&[disabled]{cursor:not-allowed;}:checked + ", "{&::before,&::after{top:0;left:0;}&::before{background:", ";border-color:", ";transition:background-color 0.3s;}&::after{content:'';background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSd4TWlkWU1pZCcgd2lkdGg9JzE2LjUnIGhlaWdodD0nMTUnIHZpZXdCb3g9JzAgMCAxNi41IDE1Jz48cGF0aCBmaWxsPScjZmZmJyBmaWxsLXJ1bGU9J2V2ZW5vZGQnIGQ9J00xNi41MTUsMS4wNzEgQzE2LjM5OSwwLjgyNyAxNS45MTQsLTAuMDMwIDE1LjUxNSwwLjAwMSBDMTQuMjg5LDAuNzY1IDEyLjY5MywyLjM1NCAxMS42MzgsMy4zNjIgQzkuNTI4LDUuMzc4IDcuNTAzLDcuNDg2IDUuNTA4LDkuNjI0IEwxLjUxNiw1Ljg5NyBMMC4wMDUsNy40ODYgQzIuMjAwLDkuODM3IDQuNTY3LDEyLjM3MyA2LjUwNSwxNS4wMDAgQzguOTg2LDEwLjYzMiAxMy4wMzUsNC4zNzAgMTYuNTE1LDEuMDcxIEwxNi41MTUsMS4wNzEgWicvPjwvc3ZnPg==');background-position:50% 40%;background-repeat:no-repeat;background-size:70%;transition:all 0.25s;transform:scale(1);}}"], CheckboxBackgroundComponent, styleProps.checkboxColor, (0, _polished.darken)(0.05, styleProps.checkboxColor));
-
-  var LabelComponent = _styledComponents.default.label.withConfig({
-    componentId: "s156yctp-4"
-  })(["margin-left:1rem;"]);
+  })(["width:100%;height:100%;position:absolute;padding:0;margin:0;top:0;left:0;z-index:9001;opacity:0;&[disabled]{cursor:not-allowed;}:checked + ", "{&::before,&::after{top:0;left:0;}&::before{background:", ";border-color:", ";transition:background-color 0.3s;}&::after{content:'';background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSd4TWlkWU1pZCcgd2lkdGg9JzE2LjUnIGhlaWdodD0nMTUnIHZpZXdCb3g9JzAgMCAxNi41IDE1Jz48cGF0aCBmaWxsPScjZmZmJyBmaWxsLXJ1bGU9J2V2ZW5vZGQnIGQ9J00xNi41MTUsMS4wNzEgQzE2LjM5OSwwLjgyNyAxNS45MTQsLTAuMDMwIDE1LjUxNSwwLjAwMSBDMTQuMjg5LDAuNzY1IDEyLjY5MywyLjM1NCAxMS42MzgsMy4zNjIgQzkuNTI4LDUuMzc4IDcuNTAzLDcuNDg2IDUuNTA4LDkuNjI0IEwxLjUxNiw1Ljg5NyBMMC4wMDUsNy40ODYgQzIuMjAwLDkuODM3IDQuNTY3LDEyLjM3MyA2LjUwNSwxNS4wMDAgQzguOTg2LDEwLjYzMiAxMy4wMzUsNC4zNzAgMTYuNTE1LDEuMDcxIEwxNi41MTUsMS4wNzEgWicvPjwvc3ZnPg==');background-position:50% 40%;background-repeat:no-repeat;background-size:70%;transition:all 0.25s;transform:scale(1);}}"], InputDecoratorComponent, styleProps.checkboxColor, (0, _polished.darken)(0.05, styleProps.checkboxColor));
 
   return {
     CheckboxContainerComponent: CheckboxContainerComponent,
-    CheckboxBackgroundComponent: CheckboxBackgroundComponent,
+    InputDecoratorComponent: InputDecoratorComponent,
     LabelComponent: LabelComponent,
     InputComponent: InputComponent,
     WrapperComponent: WrapperComponent
@@ -83,20 +93,14 @@ var createStyledComponents = function createStyledComponents(styleProps) {
 exports.createStyledComponents = createStyledComponents;
 
 function Checkbox(props) {
-  var CheckboxBackgroundComponent = props.CheckboxBackgroundComponent,
+  var InputDecoratorComponent = props.InputDecoratorComponent,
       CheckboxContainerComponent = props.CheckboxContainerComponent,
       InputComponent = props.InputComponent,
       LabelComponent = props.LabelComponent,
       WrapperComponent = props.WrapperComponent,
       label = props.label,
       value = props.value,
-      rest = _objectWithoutProperties(props, ["CheckboxBackgroundComponent", "CheckboxContainerComponent", "InputComponent", "LabelComponent", "WrapperComponent", "label", "value"]); // Pull these out to pass to the CheckboxBackgroundComponent, but don't remove
-  // them from the 'rest' object (so that they still get applied to the input
-  // and label components).
-
-
-  var disabled = props.disabled,
-      meta = props.meta;
+      rest = _objectWithoutProperties(props, ["InputDecoratorComponent", "CheckboxContainerComponent", "InputComponent", "LabelComponent", "WrapperComponent", "label", "value"]);
 
   var _createLabelProps = (0, _Input.createLabelProps)(label, rest),
       children = _createLabelProps.children,
@@ -105,9 +109,7 @@ function Checkbox(props) {
   return React.createElement(WrapperComponent, null, React.createElement(CheckboxContainerComponent, null, React.createElement(InputComponent, (0, _Input.createFormControlElementProps)(rest, {
     type: 'checkbox',
     checked: value
-  })), React.createElement(CheckboxBackgroundComponent, _objectSpread({}, meta, {
-    disabled: disabled
-  }))), React.createElement(LabelComponent, labelProps, children));
+  })), React.createElement(InputDecoratorComponent, (0, _Input.createInputDecoratorProps)(rest))), React.createElement(LabelComponent, labelProps, children));
 }
 
 var createComponent = function createComponent() {

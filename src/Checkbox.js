@@ -5,16 +5,22 @@ import styled, { css } from 'styled-components';
 import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-components';
 import type { FieldProps as $FieldProps } from 'redux-form';
 import { rem, darken } from 'polished';
-import { palette, fontWeights } from './constants';
+import { palette } from './constants';
 import type {
   $ComponentFactory,
   $MangoComponent,
   $StyledSubComponentsFactory,
 } from './types';
-import { createFormControlElementProps, createLabelProps } from './Input';
+import {
+  createFormControlElementProps,
+  createInputDecoratorProps,
+  createLabelProps,
+  createStyledComponents as createStyledInputComponents,
+  defaultStyleProps as defaultInputStyleProps,
+} from './Input';
 
 export type $Props = {
-  CheckboxBackgroundComponent: React.ElementType,
+  InputDecoratorComponent: React.ElementType,
   CheckboxContainerComponent: React.ElementType,
   InputComponent: React.ElementType,
   LabelComponent: React.ElementType,
@@ -33,7 +39,7 @@ export const defaultStyleProps: {|
 
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
-    CheckboxBackgroundComponent: $ReactComponentStyled<*>,
+    InputDecoratorComponent: $ReactComponentStyled<*>,
     CheckboxContainerComponent: $ReactComponentStyled<*>,
     InputComponent: $ReactComponentStyled<*>,
     LabelComponent: $ReactComponentStyled<*>,
@@ -41,6 +47,15 @@ export const createStyledComponents: $StyledSubComponentsFactory<
   },
   typeof defaultStyleProps,
 > = styleProps => {
+  const { LabelComponent: InputLabelComponent } = createStyledInputComponents(
+    defaultInputStyleProps,
+  );
+
+  const LabelComponent = InputLabelComponent.extend`
+    display: inline-block;
+    margin-left: 1rem;
+  `;
+
   const WrapperComponent = styled.div`
     margin: 1rem 0;
   `;
@@ -53,19 +68,9 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     display: inline-block;
   `;
 
-  // some label stuff in checkbox to get :checked property
-  const CheckboxBackgroundComponent = styled.div`
+  const InputDecoratorComponent = styled.div`
     cursor: pointer;
-    font-weight: ${fontWeights.semibold};
     display: inline-block;
-    font-size: 1rem;
-
-    ${({ error, touched }) =>
-      error &&
-      touched &&
-      css`
-        color: ${palette.alert};
-      `};
 
     min-height: ${rem(styleProps.checkboxSize)};
     line-height: ${rem(styleProps.checkboxSize)};
@@ -130,7 +135,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
       cursor: not-allowed;
     }
 
-    :checked + ${CheckboxBackgroundComponent} {
+    :checked + ${InputDecoratorComponent} {
       &::before,
       &::after {
         top: 0;
@@ -155,13 +160,9 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     }
   `;
 
-  const LabelComponent = styled.label`
-    margin-left: 1rem;
-  `;
-
   return {
     CheckboxContainerComponent,
-    CheckboxBackgroundComponent,
+    InputDecoratorComponent,
     LabelComponent,
     InputComponent,
     WrapperComponent,
@@ -170,7 +171,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
 
 export function Checkbox(props: $Props) {
   const {
-    CheckboxBackgroundComponent,
+    InputDecoratorComponent,
     CheckboxContainerComponent,
     InputComponent,
     LabelComponent,
@@ -179,11 +180,6 @@ export function Checkbox(props: $Props) {
     value,
     ...rest
   } = props;
-
-  // Pull these out to pass to the CheckboxBackgroundComponent, but don't remove
-  // them from the 'rest' object (so that they still get applied to the input
-  // and label components).
-  const { disabled, meta } = props;
 
   const { children, ...labelProps } = createLabelProps(label, rest);
 
@@ -196,7 +192,7 @@ export function Checkbox(props: $Props) {
             checked: value,
           })}
         />
-        <CheckboxBackgroundComponent {...{ ...meta, disabled }} />
+        <InputDecoratorComponent {...createInputDecoratorProps(rest)} />
       </CheckboxContainerComponent>
       <LabelComponent {...labelProps}>{children}</LabelComponent>
     </WrapperComponent>

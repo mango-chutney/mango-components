@@ -9,9 +9,10 @@ function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.crea
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 import * as React from 'react';
-import styled, { css } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import { rem, transparentize, darken } from 'polished';
 import invariant from 'invariant';
+import tristicons from 'tristicons';
 import { palette, fontWeights, fontStack } from './constants';
 export var defaultStyleProps = {
   activeBorderColor: palette.black,
@@ -23,6 +24,7 @@ export var defaultStyleProps = {
   fontWeight: fontWeights.semibold,
   placeholderColor: String(transparentize(0.2, palette.darkGray))
 };
+var tristiconsSpin = keyframes(["0%{transform:rotate(0deg);}100%{transform:rotate(359deg);}"]);
 export var createStyledComponents = function createStyledComponents(styleProps) {
   var InputComponent = styled.input.withConfig({
     componentId: "ga0twe-0"
@@ -36,12 +38,19 @@ export var createStyledComponents = function createStyledComponents(styleProps) 
   });
   var InputDecoratorComponent = styled.span.withConfig({
     componentId: "ga0twe-1"
-  })(["display:block;"]);
+  })(["display:block;position:relative;&::after{content:'';color:", ";font:normal normal normal ", " tristicons;line-height:1rem;position:absolute;right:1rem;top:0.75rem;}", ";", ";"], styleProps.placeholderColor, rem(14), function (_ref3) {
+    var asyncValidating = _ref3.asyncValidating;
+    return asyncValidating && css(["::after{animation:", " 2s infinite linear;content:", ";}"], tristiconsSpin, "\"" + tristicons.loading + "\"");
+  }, function (_ref4) {
+    var error = _ref4.error,
+        touched = _ref4.touched;
+    return error && touched && css(["::after{color:", ";content:", ";}"], palette.alert, "\"" + tristicons['cross-circle'] + "\"");
+  });
   var LabelComponent = styled.label.withConfig({
     componentId: "ga0twe-2"
-  })(["font-size:", ";font-weight:", ";display:block;", ";"], styleProps.fontSize, styleProps.fontWeight, function (_ref3) {
-    var error = _ref3.error,
-        touched = _ref3.touched;
+  })(["font-size:", ";font-weight:", ";display:block;", ";"], styleProps.fontSize, styleProps.fontWeight, function (_ref5) {
+    var error = _ref5.error,
+        touched = _ref5.touched;
     return error && touched && css(["color:", ";"], palette.alert);
   });
   return {
@@ -65,9 +74,9 @@ var createLabelObject = function createLabelObject(label) {
   return Object.assign({}, label);
 };
 
-export var createInputIdAttribute = function createInputIdAttribute(_ref4) {
-  var id = _ref4.id,
-      input = _ref4.input;
+export var createInputIdAttribute = function createInputIdAttribute(_ref6) {
+  var id = _ref6.id,
+      input = _ref6.input;
 
   if (id) {
     return id;
@@ -119,19 +128,26 @@ export var createFormControlElementProps = function createFormControlElementProp
     id: createInputIdAttribute(props)
   });
 };
+export var createInputDecoratorProps = function createInputDecoratorProps(_ref7) {
+  var disabled = _ref7.disabled,
+      meta = _ref7.meta;
+  return Object.assign({
+    disabled: disabled
+  }, meta);
+};
 export function Input(props) {
   var InputComponent = props.InputComponent,
       InputDecoratorComponent = props.InputDecoratorComponent,
       LabelComponent = props.LabelComponent,
       label = props.label,
-      children = props.children,
+      inputDecoratorChildren = props.children,
       rest = _objectWithoutPropertiesLoose(props, ["InputComponent", "InputDecoratorComponent", "LabelComponent", "label", "children"]);
 
   var _createLabelProps = createLabelProps(label, rest),
       labelChildren = _createLabelProps.children,
       labelProps = _objectWithoutPropertiesLoose(_createLabelProps, ["children"]);
 
-  return React.createElement(LabelComponent, labelProps, labelChildren, React.createElement(InputDecoratorComponent, null, React.createElement(InputComponent, createFormControlElementProps(rest)), children));
+  return React.createElement(LabelComponent, labelProps, labelChildren, React.createElement(InputDecoratorComponent, createInputDecoratorProps(rest), React.createElement(InputComponent, createFormControlElementProps(rest)), inputDecoratorChildren));
 }
 export var createComponent = function createComponent() {
   var defaultStyledComponents = createStyledComponents(defaultStyleProps); // This is a class in order to statisfy react-day-picker.

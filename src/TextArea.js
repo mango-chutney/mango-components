@@ -6,7 +6,13 @@ import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-compo
 import type { FieldProps as $FieldProps } from 'redux-form';
 import { rem, transparentize, darken } from 'polished';
 import { palette, fontWeights, fontStack } from './constants';
-import { createLabelProps, createFormControlElementProps } from './Input';
+import {
+  createFormControlElementProps,
+  createInputDecoratorProps,
+  createLabelProps,
+  createStyledComponents as createStyledInputComponents,
+  defaultStyleProps as defaultInputStyleProps,
+} from './Input';
 import type {
   $ComponentFactory,
   $MangoComponent,
@@ -49,24 +55,13 @@ export const createStyledComponents: $StyledSubComponentsFactory<
   },
   typeof defaultStyleProps,
 > = styleProps => {
-  const InputDecoratorComponent = styled.span`
-    display: block;
-  `;
-
-  const LabelComponent = styled.label`
-    font-size: ${styleProps.fontSize};
-    font-weight: ${styleProps.fontWeight};
-    display: block;
-
-    ${({ error, touched }) =>
-      error &&
-      touched &&
-      css`
-        color: ${palette.alert};
-      `};
-  `;
+  const {
+    InputDecoratorComponent,
+    LabelComponent,
+  } = createStyledInputComponents(defaultInputStyleProps);
 
   const TextAreaComponent = styled.textarea`
+    resize: vertical;
     appearance: none;
     background-color: ${styleProps.backgroundColor};
     border-color: ${styleProps.borderColor};
@@ -139,7 +134,7 @@ export function TextArea(props: $Props) {
   return (
     <LabelComponent {...labelProps}>
       {labelChildren}
-      <InputDecoratorComponent>
+      <InputDecoratorComponent {...createInputDecoratorProps(rest)}>
         <TextAreaComponent {...createFormControlElementProps(rest)} />
       </InputDecoratorComponent>
     </LabelComponent>

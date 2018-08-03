@@ -9,7 +9,7 @@ import * as React from 'react';
 import styled, { css } from 'styled-components';
 import { rem, transparentize, darken } from 'polished';
 import { palette, fontWeights, fontStack } from './constants';
-import { createLabelProps, createFormControlElementProps } from './Input';
+import { createFormControlElementProps, createInputDecoratorProps, createLabelProps, createStyledComponents as createStyledInputComponents, defaultStyleProps as defaultInputStyleProps } from './Input';
 export var defaultStyleProps = {
   activeBorderColor: palette.black,
   backgroundColor: palette.lightGray,
@@ -21,24 +21,18 @@ export var defaultStyleProps = {
   placeholderColor: String(transparentize(0.2, palette.darkGray))
 };
 export var createStyledComponents = function createStyledComponents(styleProps) {
-  var InputDecoratorComponent = styled.span.withConfig({
+  var _createStyledInputCom = createStyledInputComponents(defaultInputStyleProps),
+      InputDecoratorComponent = _createStyledInputCom.InputDecoratorComponent,
+      LabelComponent = _createStyledInputCom.LabelComponent;
+
+  var TextAreaComponent = styled.textarea.withConfig({
     componentId: "orybjj-0"
-  })(["display:block;"]);
-  var LabelComponent = styled.label.withConfig({
-    componentId: "orybjj-1"
-  })(["font-size:", ";font-weight:", ";display:block;", ";"], styleProps.fontSize, styleProps.fontWeight, function (_ref) {
+  })(["resize:vertical;appearance:none;background-color:", ";border-color:", ";border-radius:0.25rem;border-style:solid;border-width:0.05rem;color:", ";display:block;font-family:", ";margin-bottom:1rem;outline:0;padding:1.25rem 1rem;transition:border-color 300ms ease;width:100%;::placeholder{color:", ";}:active,:focus{border-color:", ";}", ";", ";"], styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.placeholderColor, styleProps.activeBorderColor, function (_ref) {
     var error = _ref.error,
         touched = _ref.touched;
-    return error && touched && css(["color:", ";"], palette.alert);
-  });
-  var TextAreaComponent = styled.textarea.withConfig({
-    componentId: "orybjj-2"
-  })(["appearance:none;background-color:", ";border-color:", ";border-radius:0.25rem;border-style:solid;border-width:0.05rem;color:", ";display:block;font-family:", ";margin-bottom:1rem;outline:0;padding:1.25rem 1rem;transition:border-color 300ms ease;width:100%;::placeholder{color:", ";}:active,:focus{border-color:", ";}", ";", ";"], styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.placeholderColor, styleProps.activeBorderColor, function (_ref2) {
-    var error = _ref2.error,
-        touched = _ref2.touched;
     return error && touched && css(["border-color:", ";::placeholder{color:", ";}"], palette.alert, palette.alert);
-  }, function (_ref3) {
-    var disabled = _ref3.disabled;
+  }, function (_ref2) {
+    var disabled = _ref2.disabled;
     return disabled && css(["background-color:", ";color:", ";cursor:not-allowed;::placeholder{color:", ";}"], darken(0.05, styleProps.backgroundColor), darken(0.05, styleProps.color), darken(0.05, styleProps.placeholderColor));
   });
   return {
@@ -58,7 +52,7 @@ export function TextArea(props) {
       labelChildren = _createLabelProps.children,
       labelProps = _objectWithoutPropertiesLoose(_createLabelProps, ["children"]);
 
-  return React.createElement(LabelComponent, labelProps, labelChildren, React.createElement(InputDecoratorComponent, null, React.createElement(TextAreaComponent, createFormControlElementProps(rest))));
+  return React.createElement(LabelComponent, labelProps, labelChildren, React.createElement(InputDecoratorComponent, createInputDecoratorProps(rest), React.createElement(TextAreaComponent, createFormControlElementProps(rest))));
 }
 export var createComponent = function createComponent() {
   var defaultStyledComponents = createStyledComponents(defaultStyleProps);

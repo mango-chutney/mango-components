@@ -30,9 +30,9 @@ export const defaultStyleProps: {|
 
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
-    CheckboxBackgroundComponent: $ReactComponentStyled<*>,
     CheckboxContainerComponent: $ReactComponentStyled<*>,
     InputComponent: $ReactComponentStyled<*>,
+    InputDecoratorComponent: $ReactComponentStyled<*>,
     LabelComponent: $ReactComponentStyled<*>,
     WrapperComponent: $ReactComponentStyled<*>,
   },

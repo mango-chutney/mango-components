@@ -7,7 +7,13 @@ import type { FieldProps as $FieldProps } from 'redux-form';
 import { rem, transparentize, darken } from 'polished';
 import tristicons from 'tristicons';
 import { palette, fontWeights, fontStack } from './constants';
-import { createFormControlElementProps, createLabelProps } from './Input';
+import {
+  createFormControlElementProps,
+  createInputDecoratorProps,
+  createLabelProps,
+  createStyledComponents as createStyledInputComponents,
+  defaultStyleProps as defaultInputStyleProps,
+} from './Input';
 import type {
   $ComponentFactory,
   $MangoComponent,
@@ -104,32 +110,19 @@ export const createStyledComponents: $StyledSubComponentsFactory<
       `};
   `;
 
-  const LabelComponent = styled.label`
-    font-size: ${styleProps.fontSize};
-    font-weight: ${styleProps.fontWeight};
-    display: block;
+  const {
+    LabelComponent,
+    InputDecoratorComponent: BaseInputDecoratorComponent,
+  } = createStyledInputComponents(defaultInputStyleProps);
 
-    ${({ error, touched }) =>
-      error &&
-      touched &&
+  const InputDecoratorComponent = BaseInputDecoratorComponent.extend`
+    ${({ valid }) =>
+      valid &&
       css`
-        color: ${palette.alert};
+        &::after {
+          content: ${`"${tristicons['chevron-down']}"`};
+        }
       `};
-  `;
-
-  const InputDecoratorComponent = styled.span`
-    display: block;
-    position: relative;
-
-    &::after {
-      content: ${`"${tristicons['chevron-down']}"`};
-      color: ${styleProps.placeholderColor};
-      font: normal normal normal ${rem(14)} tristicons;
-      line-height: 1rem;
-      position: absolute;
-      right: 1rem;
-      top: 0.75rem;
-    }
   `;
 
   return { SelectComponent, InputDecoratorComponent, LabelComponent };
@@ -153,7 +146,7 @@ export function Select(props: $Props) {
   return (
     <LabelComponent {...labelProps}>
       {labelChildren}
-      <InputDecoratorComponent>
+      <InputDecoratorComponent {...createInputDecoratorProps(rest)}>
         <SelectComponent {...createFormControlElementProps(rest)}>
           {selectChildren}
         </SelectComponent>
