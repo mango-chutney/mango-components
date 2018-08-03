@@ -81,8 +81,6 @@ type $State = {
 };
 
 class TypeaheadInput extends React.Component<$Props, $State> {
-  inputRef = React.createRef();
-
   static defaultProps = {
     filterItems: (items, inputValue) =>
       matchSorter(items, inputValue, {
@@ -93,23 +91,6 @@ class TypeaheadInput extends React.Component<$Props, $State> {
     // make sure it's unique.
     mapItemToString: item => item || '',
   };
-
-  state = {
-    selectionStart: 0,
-    selectionEnd: 0,
-  };
-
-  componentDidUpdate() {
-    if (this.inputRef.current === null) {
-      return;
-    }
-
-    if (this.inputRef.current) {
-      const { selectionStart, selectionEnd } = this.state;
-
-      this.inputRef.current.setSelectionRange(selectionStart, selectionEnd);
-    }
-  }
 
   handleSelect = (selectedItem: any) => {
     const {
@@ -127,14 +108,8 @@ class TypeaheadInput extends React.Component<$Props, $State> {
     // than redux-form that the 'onChange' prop will be called with a value, not
     // an event.
 
-    // The type signature in redux-form: https://github.com/erikras/redux-form/blob/2811705a22430450540b84cddf429b42b222e28d/src/FieldProps.types.js.flow#L33
-
-    if (this.inputRef.current && selectedItem) {
-      this.setState({
-        selectionStart: selectedItem.length,
-        selectionEnd: selectedItem.length,
-      });
-    }
+    // The type signature in redux-form:
+    // https://github.com/erikras/redux-form/blob/2811705a22430450540b84cddf429b42b222e28d/src/FieldProps.types.js.flow#L33
 
     if (typeof onChange === 'function') {
       onChange(selectedItem);
@@ -153,13 +128,6 @@ class TypeaheadInput extends React.Component<$Props, $State> {
     // Get the original onChange handler passed to this component composed with
     // the one from Downshift.
     const { onChange } = getInputProps(input);
-
-    if (this.inputRef.current) {
-      this.setState({
-        selectionStart: this.inputRef.current.selectionStart,
-        selectionEnd: this.inputRef.current.selectionEnd,
-      });
-    }
 
     if (typeof onChange === 'function') {
       onChange(event);
@@ -228,22 +196,11 @@ class TypeaheadInput extends React.Component<$Props, $State> {
     const inputProps = {
       ...rest,
       label: createLabelProps(label, getLabelProps()),
-      input: { ...input, ...getInputProps(input) },
-      onChange: this.createChangeHandler({ getInputProps }),
-      // This ref dance is to preserve the cursor position.
-      //
-      // See these issues for more details:
-      // https://github.com/facebook/react/issues/955
-      // https://github.com/facebook/react/issues/12762
-      // https://github.com/paypal/downshift/issues/217
-      // https://github.com/erikras/redux-form/issues/2049
-      // https://github.com/erikras/redux-form/issues/3253
-      //
-      // Also, we're using the `innerRef` prop because
-      // styled-components won't propagate the `ref` prop.  If
-      // `InputComponent` is not a styled-component, you will need to
-      // map the `inputRef` prop to `ref`.
-      // ref: this.inputRef,
+      input: {
+        ...input,
+        ...getInputProps(input),
+        onChange: this.createChangeHandler({ getInputProps }),
+      },
       InputDecoratorComponent: MenuWrapperComponent,
     };
 
