@@ -6,7 +6,7 @@ import "core-js/modules/es6.object.assign";
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteralLoose(["\n    display: inline-block;\n    margin-left: 1rem;\n  "]);
+  var data = _taggedTemplateLiteralLoose(["\n    display: inline-block;\n    margin-left: 1rem;\n    font-weight: normal;\n  "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -59,23 +59,23 @@ export var createStyledComponents = function createStyledComponents(styleProps) 
   };
 };
 export function Checkbox(props) {
-  var InputDecoratorComponent = props.InputDecoratorComponent,
-      CheckboxContainerComponent = props.CheckboxContainerComponent,
+  var CheckboxContainerComponent = props.CheckboxContainerComponent,
       InputComponent = props.InputComponent,
+      InputDecoratorComponent = props.InputDecoratorComponent,
       LabelComponent = props.LabelComponent,
       WrapperComponent = props.WrapperComponent,
       label = props.label,
       value = props.value,
-      rest = _objectWithoutPropertiesLoose(props, ["InputDecoratorComponent", "CheckboxContainerComponent", "InputComponent", "LabelComponent", "WrapperComponent", "label", "value"]);
+      rest = _objectWithoutPropertiesLoose(props, ["CheckboxContainerComponent", "InputComponent", "InputDecoratorComponent", "LabelComponent", "WrapperComponent", "label", "value"]);
 
   var _createLabelProps = createLabelProps(label, rest),
-      children = _createLabelProps.children,
+      labelChildren = _createLabelProps.children,
       labelProps = _objectWithoutPropertiesLoose(_createLabelProps, ["children"]);
 
   return React.createElement(WrapperComponent, null, React.createElement(CheckboxContainerComponent, null, React.createElement(InputComponent, createFormControlElementProps(rest, {
     type: 'checkbox',
     checked: value
-  })), React.createElement(InputDecoratorComponent, createInputDecoratorProps(rest))), React.createElement(LabelComponent, labelProps, children));
+  })), React.createElement(InputDecoratorComponent, createInputDecoratorProps(rest))), React.createElement(LabelComponent, labelProps, labelChildren));
 }
 export var createComponent = function createComponent() {
   var defaultStyledComponents = createStyledComponents(defaultStyleProps);
