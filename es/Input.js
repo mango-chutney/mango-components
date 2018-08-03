@@ -4,6 +4,8 @@ import "core-js/modules/es6.object.keys";
 import "core-js/modules/es6.function.name";
 import "core-js/modules/es6.object.assign";
 
+function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
+
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 import * as React from 'react';
@@ -96,8 +98,9 @@ var createLabelForAttribute = function createLabelForAttribute(props) {
 export var createLabelProps = function createLabelProps(label, props) {
   var meta = props.meta,
       input = props.input,
+      custom = props.custom,
       children = props.children,
-      rest = _objectWithoutPropertiesLoose(props, ["meta", "input", "children"]);
+      rest = _objectWithoutPropertiesLoose(props, ["meta", "input", "custom", "children"]);
 
   var labelProps = createLabelObject(label);
   return Object.assign({}, meta, rest, labelProps, {
@@ -131,10 +134,29 @@ export function Input(props) {
   return React.createElement(LabelComponent, labelProps, labelChildren, React.createElement(InputDecoratorComponent, null, React.createElement(InputComponent, createFormControlElementProps(rest)), children));
 }
 export var createComponent = function createComponent() {
-  var defaultStyledComponents = createStyledComponents(defaultStyleProps);
-  return function (props) {
-    return React.createElement(Input, Object.assign({}, defaultStyledComponents, props));
-  };
+  var defaultStyledComponents = createStyledComponents(defaultStyleProps); // This is a class in order to statisfy react-day-picker.
+  // https://github.com/gpbl/react-day-picker/issues/748
+  // eslint-disable-next-line react/prefer-stateless-function
+
+  var ComposedInput =
+  /*#__PURE__*/
+  function (_React$Component) {
+    _inheritsLoose(ComposedInput, _React$Component);
+
+    function ComposedInput() {
+      return _React$Component.apply(this, arguments) || this;
+    }
+
+    var _proto = ComposedInput.prototype;
+
+    _proto.render = function render() {
+      return React.createElement(Input, Object.assign({}, defaultStyledComponents, this.props));
+    };
+
+    return ComposedInput;
+  }(React.Component);
+
+  return ComposedInput;
 };
 export default {
   defaultStyleProps: defaultStyleProps,
