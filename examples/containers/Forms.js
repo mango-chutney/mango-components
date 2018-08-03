@@ -42,12 +42,7 @@ export class Form extends React.Component<Props, State> {
     new Promise(resolve => setTimeout(() => resolve(), 3000));
 
   render() {
-    const {
-      submitting,
-      submitSucceeded,
-      handleSubmit,
-      reset,
-    } = this.props;
+    const { submitting, submitSucceeded, handleSubmit, reset } = this.props;
 
     if (submitSucceeded) {
       setTimeout(() => reset(), 3000);
