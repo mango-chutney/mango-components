@@ -17,7 +17,7 @@ export type $StyledProps = {
 
 export type $Props = {
   ...$StyledProps,
-  NestedRadialProgressBarsComponent: React.ComponentType<*>,
+  NestedRadialProgressBarsComponent: React.ElementType,
 };
 
 export const defaultStyleProps: {|

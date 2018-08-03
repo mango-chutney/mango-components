@@ -35,10 +35,10 @@ export type $StyledProps = {
 
 export type $Props = {
   ...$StyledProps,
-  WrapperComponent: React.ComponentType<*>,
-  ContainerComponent: React.ComponentType<*>,
-  BackgroundCircleComponent: React.ComponentType<*>,
-  ProgressCircleComponent: React.ComponentType<*>,
+  WrapperComponent: React.ElementType,
+  ContainerComponent: React.ElementType,
+  BackgroundCircleComponent: React.ElementType,
+  ProgressCircleComponent: React.ElementType,
 };
 
 export const defaultStyleProps: {|

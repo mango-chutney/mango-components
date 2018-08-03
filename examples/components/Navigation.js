@@ -32,8 +32,8 @@ function Navigation(props: { location: $Location }) {
 export default Navigation;
 
 export function withNavigation(
-  WrappedComponent: React.ComponentType<*>,
-): React.ComponentType<*> {
+  WrappedComponent: React.ElementType,
+): React.ElementType {
   return (props: { location: $Location }) => {
     const { location } = props;
     return (

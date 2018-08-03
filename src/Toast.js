@@ -22,7 +22,7 @@ export type $StyledProps = {
 
 export type $Props = {
   ...$StyledProps,
-  ToastComponent: React.ComponentType<*>,
+  ToastComponent: React.ElementType,
 };
 
 export const defaultStyleProps: {|

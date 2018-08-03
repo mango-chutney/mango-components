@@ -25,10 +25,10 @@ export type $StyledProps = {
 } & $FieldProps;
 
 export type $Props = {
-  InputComponent: React.ComponentType<*>,
-  LabelComponent: React.ComponentType<*>,
-  OverlayWrapperComponent: React.ComponentType<*>,
-  OverlayComponent: React.ComponentType<*>,
+  InputComponent: React.ElementType,
+  LabelComponent: React.ElementType,
+  OverlayWrapperComponent: React.ElementType,
+  OverlayComponent: React.ElementType,
 } & $StyledProps &
   $ReactDayPickerInputProps;
 
