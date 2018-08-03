@@ -142,7 +142,7 @@ function (_React$Component) {
       value: value,
       // this will always be undefined if used as a Field child
       inputProps: fieldProps,
-      placeholder: placeholder,
+      placeholder: placeholder || formatDate(new Date(), dateFormat),
       format: dateFormat,
       formatDate: formatDate,
       parseDate: parseDate,

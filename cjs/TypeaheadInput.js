@@ -194,6 +194,7 @@ function (_React$Component) {
           selectedItem = _ref5.selectedItem;
 
       var _this$props = _this.props,
+          WrapperComponent = _this$props.WrapperComponent,
           InputComponent = _this$props.InputComponent,
           ItemComponent = _this$props.ItemComponent,
           MenuComponent = _this$props.MenuComponent,
@@ -204,7 +205,7 @@ function (_React$Component) {
           label = _this$props.label,
           mapItemToString = _this$props.mapItemToString,
           renderItem = _this$props.renderItem,
-          rest = _objectWithoutProperties(_this$props, ["InputComponent", "ItemComponent", "MenuComponent", "MenuWrapperComponent", "filterItems", "input", "items", "label", "mapItemToString", "renderItem"]);
+          rest = _objectWithoutProperties(_this$props, ["WrapperComponent", "InputComponent", "ItemComponent", "MenuComponent", "MenuWrapperComponent", "filterItems", "input", "items", "label", "mapItemToString", "renderItem"]);
 
       var filteredItems = filterItems(items, inputValue);
 
@@ -228,10 +229,9 @@ function (_React$Component) {
           selectedItem: selectedItem,
           highlightedIndex: highlightedIndex
         });
-      }; // This is wrapped in a div to satisfy downshift.
+      };
 
-
-      return React.createElement("div", null, React.createElement(InputComponent, inputProps, isOpen && !!filteredItems.length && React.createElement(MenuComponent, null, filteredItems.map(function (item, index) {
+      return React.createElement(WrapperComponent, null, React.createElement(InputComponent, inputProps, isOpen && !!filteredItems.length && React.createElement(MenuComponent, null, filteredItems.map(function (item, index) {
         return React.createElement(ItemComponent, createItemProps(item, index), typeof renderItem === 'function' ? renderItem(item) : mapItemToString(item));
       }))));
     });
@@ -266,7 +266,9 @@ _defineProperty(TypeaheadInput, "defaultProps", {
   // make sure it's unique.
   mapItemToString: function mapItemToString(item) {
     return item || '';
-  }
+  },
+  WrapperComponent: 'div' // Downshift wants to be wrapped in a div.
+
 });
 
 var createComponent = function createComponent() {
