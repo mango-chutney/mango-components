@@ -125,8 +125,8 @@ export function Input(props) {
       rest = _objectWithoutPropertiesLoose(props, ["InputComponent", "InputDecoratorComponent", "LabelComponent", "label", "children"]);
 
   var _createLabelProps = createLabelProps(label, rest),
-      labelChildren = _createLabelProps.labelChildren,
-      labelProps = _objectWithoutPropertiesLoose(_createLabelProps, ["labelChildren"]);
+      labelChildren = _createLabelProps.children,
+      labelProps = _objectWithoutPropertiesLoose(_createLabelProps, ["children"]);
 
   return React.createElement(LabelComponent, labelProps, labelChildren, React.createElement(InputDecoratorComponent, null, React.createElement(InputComponent, createFormControlElementProps(rest)), children));
 }

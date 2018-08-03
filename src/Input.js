@@ -229,7 +229,10 @@ export function Input(props: $Props) {
     ...rest
   } = props;
 
-  const { labelChildren, ...labelProps } = createLabelProps(label, rest);
+  const { children: labelChildren, ...labelProps } = createLabelProps(
+    label,
+    rest,
+  );
 
   return (
     <LabelComponent {...labelProps}>
