@@ -248,9 +248,17 @@ export function Input(props: $Props) {
 
 export const createComponent: $ComponentFactory<$Props> = () => {
   const defaultStyledComponents = createStyledComponents(defaultStyleProps);
-  return (props: $Props) => (
-    <Input {...{ ...defaultStyledComponents, ...props }} />
-  );
+
+  // This is a class in order to statisfy react-day-picker.
+  // https://github.com/gpbl/react-day-picker/issues/748
+  // eslint-disable-next-line react/prefer-stateless-function
+  class ComposedInput extends React.Component<$Props> {
+    render() {
+      return <Input {...{ ...defaultStyledComponents, ...this.props }} />;
+    }
+  }
+
+  return ComposedInput;
 };
 
 export default ({
