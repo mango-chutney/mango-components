@@ -54,6 +54,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
   const LabelComponent = InputLabelComponent.extend`
     display: inline-block;
     margin-left: 1rem;
+    font-weight: normal;
   `;
 
   const WrapperComponent = styled.div`
@@ -171,9 +172,9 @@ export const createStyledComponents: $StyledSubComponentsFactory<
 
 export function Checkbox(props: $Props) {
   const {
-    InputDecoratorComponent,
     CheckboxContainerComponent,
     InputComponent,
+    InputDecoratorComponent,
     LabelComponent,
     WrapperComponent,
     label,
@@ -181,7 +182,10 @@ export function Checkbox(props: $Props) {
     ...rest
   } = props;
 
-  const { children, ...labelProps } = createLabelProps(label, rest);
+  const { children: labelChildren, ...labelProps } = createLabelProps(
+    label,
+    rest,
+  );
 
   return (
     <WrapperComponent>
@@ -194,7 +198,7 @@ export function Checkbox(props: $Props) {
         />
         <InputDecoratorComponent {...createInputDecoratorProps(rest)} />
       </CheckboxContainerComponent>
-      <LabelComponent {...labelProps}>{children}</LabelComponent>
+      <LabelComponent {...labelProps}>{labelChildren}</LabelComponent>
     </WrapperComponent>
   );
 }
