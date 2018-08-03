@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Provider } from 'react-redux';
 import { withRouter } from 'react-router';
 import { renderRoutes } from 'react-router-config';
-import { MemoryRouter as Router, Switch } from 'react-router-dom';
+import { HashRouter as Router, Switch } from 'react-router-dom';
 import routes from '../routes';
 import { withFooter } from '../components/Footer';
 import { withNavigation } from '../components/Navigation';
