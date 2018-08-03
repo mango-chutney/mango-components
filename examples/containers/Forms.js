@@ -212,12 +212,14 @@ export class Form extends React.Component<Props, State> {
             label="Enter soup date"
             autoComplete="off"
             component={DatePicker}
+            placeholder="DD/MM/YYYY"
           />
           <Field
             name="invalid-soup"
             label="Enter soup date invalid"
             autoComplete="off"
             component={DatePicker}
+            placeholder="DD/MM/YYYY"
           />
           <Field
             name="disabled-soup"
@@ -225,6 +227,7 @@ export class Form extends React.Component<Props, State> {
             disabled
             autoComplete="off"
             component={DatePicker}
+            placeholder="DD/MM/YYYY"
           />
           <Button onClick={handleSubmit(this.submit)}>
             Go
