@@ -225,6 +225,7 @@ export function Input(props: $Props) {
     InputDecoratorComponent,
     LabelComponent,
     label,
+    children,
     ...rest
   } = props;
 
@@ -235,6 +236,7 @@ export function Input(props: $Props) {
       {labelChildren}
       <InputDecoratorComponent>
         <InputComponent {...createFormControlElementProps(rest)} />
+        {children}
       </InputDecoratorComponent>
     </LabelComponent>
   );
