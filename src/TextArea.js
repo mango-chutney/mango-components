@@ -45,6 +45,8 @@ export const createStyledComponents: $StyledSubComponentsFactory<
   } = createStyledInputComponents(defaultInputStyleProps);
 
   const TextAreaComponent = InputComponent.withComponent('textarea').extend`
+    height: auto;
+    padding: 1.25rem 1rem;
     resize: vertical;
   `;
 

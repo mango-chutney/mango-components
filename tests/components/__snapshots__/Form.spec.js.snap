@@ -311,6 +311,8 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   -webkit-transition: border-color 300ms ease;
   transition: border-color 300ms ease;
   width: 100%;
+  height: auto;
+  padding: 1.25rem 1rem;
   resize: vertical;
 }
 
