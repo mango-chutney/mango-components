@@ -39,7 +39,7 @@ function _objectWithoutProperties(source, excluded) { if (source == null) return
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n    ", ";\n  "]);
+  var data = _taggedTemplateLiteral(["\n    &::after {\n      content: ", ";\n    }\n  "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -79,10 +79,7 @@ var createStyledComponents = function createStyledComponents(styleProps) {
       LabelComponent = _createStyledInputCom.LabelComponent,
       BaseInputDecoratorComponent = _createStyledInputCom.InputDecoratorComponent;
 
-  var InputDecoratorComponent = BaseInputDecoratorComponent.extend(_templateObject(), function (_ref3) {
-    var valid = _ref3.valid;
-    return valid && (0, _styledComponents.css)(["&::after{content:", ";}"], "\"".concat(_tristicons.default['chevron-down'], "\""));
-  });
+  var InputDecoratorComponent = BaseInputDecoratorComponent.extend(_templateObject(), "\"".concat(_tristicons.default['chevron-down'], "\""));
   return {
     SelectComponent: SelectComponent,
     InputDecoratorComponent: InputDecoratorComponent,
