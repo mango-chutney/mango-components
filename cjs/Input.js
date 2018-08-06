@@ -88,7 +88,7 @@ var createStyledComponents = function createStyledComponents(styleProps) {
 
   var InputDecoratorComponent = _styledComponents.default.span.withConfig({
     componentId: "ga0twe-1"
-  })(["display:block;position:relative;&::after{content:'';color:", ";font:normal normal normal ", " tristicons;line-height:1rem;position:absolute;right:1rem;top:0.75rem;}", ";", ";"], styleProps.placeholderColor, (0, _polished.rem)(14), function (_ref3) {
+  })(["display:block;position:relative;&::after{content:'';color:", ";font:normal normal normal ", " tristicons;line-height:1rem;position:absolute;right:1rem;top:50%;transform:translateY(-50%);}", ";", ";"], styleProps.placeholderColor, (0, _polished.rem)(14), function (_ref3) {
     var asyncValidating = _ref3.meta.asyncValidating;
     return asyncValidating && (0, _styledComponents.css)(["::after{animation:", " 2s infinite linear;content:", ";}"], tristiconsSpin, "\"".concat(_tristicons.default.loading, "\""));
   }, function (_ref4) {

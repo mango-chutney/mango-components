@@ -12,6 +12,8 @@ require("core-js/modules/es6.array.iterator");
 
 require("core-js/modules/es6.object.keys");
 
+require("core-js/modules/es6.object.freeze");
+
 var React = _interopRequireWildcard(require("react"));
 
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
@@ -32,37 +34,42 @@ function _objectWithoutProperties(source, excluded) { if (source == null) return
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n          &::after {\n            display: none;\n          }\n        "]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n    resize: vertical;\n  "]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
 var defaultStyleProps = {
-  activeBorderColor: _constants.palette.black,
-  backgroundColor: _constants.palette.lightGray,
-  borderColor: _constants.palette.border,
-  color: _constants.palette.black,
-  fontFamily: _constants.fontStack,
-  fontSize: (0, _polished.rem)(14),
-  fontWeight: _constants.fontWeights.semibold,
-  placeholderColor: String((0, _polished.transparentize)(0.2, _constants.palette.darkGray))
+  shouldDisplayInputDecorator: false
 };
 exports.defaultStyleProps = defaultStyleProps;
 
 var createStyledComponents = function createStyledComponents(styleProps) {
   var _createStyledInputCom = (0, _Input.createStyledComponents)(_Input.defaultStyleProps),
+      InputComponent = _createStyledInputCom.InputComponent,
       InputDecoratorComponent = _createStyledInputCom.InputDecoratorComponent,
       LabelComponent = _createStyledInputCom.LabelComponent;
 
-  var TextAreaComponent = _styledComponents.default.textarea.withConfig({
-    componentId: "orybjj-0"
-  })(["resize:vertical;appearance:none;background-color:", ";border-color:", ";border-radius:0.25rem;border-style:solid;border-width:0.05rem;color:", ";display:block;font-family:", ";margin-bottom:1rem;outline:0;padding:1.25rem 1rem;transition:border-color 300ms ease;width:100%;::placeholder{color:", ";}:active,:focus{border-color:", ";}", ";", ";"], styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.placeholderColor, styleProps.activeBorderColor, function (_ref) {
-    var _ref$meta = _ref.meta,
-        error = _ref$meta.error,
-        touched = _ref$meta.touched;
-    return error && touched && (0, _styledComponents.css)(["border-color:", ";::placeholder{color:", ";}"], _constants.palette.alert, _constants.palette.alert);
-  }, function (_ref2) {
-    var disabled = _ref2.disabled;
-    return disabled && (0, _styledComponents.css)(["background-color:", ";color:", ";cursor:not-allowed;::placeholder{color:", ";}"], (0, _polished.darken)(0.05, styleProps.backgroundColor), (0, _polished.darken)(0.05, styleProps.color), (0, _polished.darken)(0.05, styleProps.placeholderColor));
-  });
-
+  var TextAreaComponent = InputComponent.withComponent('textarea').extend(_templateObject());
   return {
-    InputDecoratorComponent: InputDecoratorComponent,
+    InputDecoratorComponent: styleProps.shouldDisplayInputDecorator ? InputDecoratorComponent : InputDecoratorComponent.extend(_templateObject2()),
     LabelComponent: LabelComponent,
     TextAreaComponent: TextAreaComponent
   };

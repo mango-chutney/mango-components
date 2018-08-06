@@ -55,7 +55,10 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   line-height: 1rem;
   position: absolute;
   right: 1rem;
-  top: 0.75rem;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 .c0 {
@@ -64,7 +67,7 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   display: block;
 }
 
-.c9 {
+.c10 {
   font-size: 0.875rem;
   font-weight: 600;
   display: block;
@@ -73,11 +76,11 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   font-weight: normal;
 }
 
-.c4 {
+.c5 {
   margin: 1rem 0;
 }
 
-.c5 {
+.c6 {
   position: relative;
   margin: 0;
   height: 1.25rem;
@@ -85,7 +88,7 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   display: inline-block;
 }
 
-.c11 {
+.c12 {
   position: relative;
   margin: 0;
   height: 2.5rem;
@@ -93,7 +96,7 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   display: inline-block;
 }
 
-.c8 {
+.c9 {
   cursor: pointer;
   display: inline-block;
   min-height: 1.25rem;
@@ -103,8 +106,8 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   display: block;
 }
 
-.c8::before,
-.c8::after {
+.c9::before,
+.c9::after {
   width: 1.25rem;
   height: 1.25rem;
   cursor: pointer;
@@ -114,13 +117,13 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   vertical-align: middle;
 }
 
-.c8::before {
+.c9::before {
   border: 1px solid #e2e7ee;
   background: #fafbfc;
   margin-right: 1rem;
 }
 
-.c8::after {
+.c9::after {
   position: absolute;
   left: 0;
   border: 1px solid transparent;
@@ -132,7 +135,7 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   transform: scale(0);
 }
 
-.c13 {
+.c14 {
   cursor: pointer;
   display: inline-block;
   min-height: 2.5rem;
@@ -142,8 +145,8 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   display: block;
 }
 
-.c13::before,
-.c13::after {
+.c14::before,
+.c14::after {
   width: 2.5rem;
   height: 2.5rem;
   cursor: pointer;
@@ -153,13 +156,13 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   vertical-align: middle;
 }
 
-.c13::before {
+.c14::before {
   border: 1px solid #e2e7ee;
   background: #fafbfc;
   margin-right: 1rem;
 }
 
-.c13::after {
+.c14::after {
   position: absolute;
   left: 0;
   border: 1px solid transparent;
@@ -171,7 +174,7 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   transform: scale(0);
 }
 
-.c6 {
+.c7 {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -183,24 +186,24 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   opacity: 0;
 }
 
-.c6[disabled] {
+.c7[disabled] {
   cursor: not-allowed;
 }
 
-.c6:checked + .c7::before,
-.c6:checked + .c7::after {
+.c7:checked + .c8::before,
+.c7:checked + .c8::after {
   top: 0;
   left: 0;
 }
 
-.c6:checked + .c7::before {
+.c7:checked + .c8::before {
   background: #2ea1f8;
   border-color: #1596f7;
   -webkit-transition: background-color 0.3s;
   transition: background-color 0.3s;
 }
 
-.c6:checked + .c7::after {
+.c7:checked + .c8::after {
   content: '';
   background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSd4TWlkWU1pZCcgd2lkdGg9JzE2LjUnIGhlaWdodD0nMTUnIHZpZXdCb3g9JzAgMCAxNi41IDE1Jz48cGF0aCBmaWxsPScjZmZmJyBmaWxsLXJ1bGU9J2V2ZW5vZGQnIGQ9J00xNi41MTUsMS4wNzEgQzE2LjM5OSwwLjgyNyAxNS45MTQsLTAuMDMwIDE1LjUxNSwwLjAwMSBDMTQuMjg5LDAuNzY1IDEyLjY5MywyLjM1NCAxMS42MzgsMy4zNjIgQzkuNTI4LDUuMzc4IDcuNTAzLDcuNDg2IDUuNTA4LDkuNjI0IEwxLjUxNiw1Ljg5NyBMMC4wMDUsNy40ODYgQzIuMjAwLDkuODM3IDQuNTY3LDEyLjM3MyA2LjUwNSwxNS4wMDAgQzguOTg2LDEwLjYzMiAxMy4wMzUsNC4zNzAgMTYuNTE1LDEuMDcxIEwxNi41MTUsMS4wNzEgWicvPjwvc3ZnPg==');
   background-position: 50% 40%;
@@ -213,7 +216,7 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   transform: scale(1);
 }
 
-.c14 {
+.c15 {
   font-size: 0.875rem;
   font-weight: 600;
   display: block;
@@ -222,7 +225,7 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   font-weight: normal;
 }
 
-.c10 {
+.c11 {
   padding: 2rem;
   display: inline-block;
   font-size: 1.5rem;
@@ -230,13 +233,13 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   border-radius: 0.25rem;
 }
 
-.c12:checked + label {
+.c13:checked + label {
   -webkit-transition: all 300ms ease;
   transition: all 300ms ease;
   background: rgba(46,161,248,0.2);
 }
 
-.c16 {
+.c17 {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -258,74 +261,100 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   width: 100%;
 }
 
-.c16::-ms-expand {
+.c17::-ms-expand {
   display: none;
 }
 
-.c16:active,
-.c16:focus {
+.c17:active,
+.c17:focus {
   border-color: #354052;
 }
 
-.c16 option {
+.c17 option {
   width: 100%;
 }
 
-.c15 {
+.c16 {
   display: block;
   position: relative;
 }
 
-.c15::after {
+.c16::after {
   content: '';
   color: rgba(127,143,164,0.8);
   font: normal normal normal 0.875rem tristicons;
   line-height: 1rem;
   position: absolute;
   right: 1rem;
-  top: 0.75rem;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
-.c3 {
-  resize: vertical;
+.c4 {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   background-color: #fafbfc;
   border-color: #e2e7ee;
-  border-radius: 0.25rem;
+  border-radius: 4px;
   border-style: solid;
-  border-width: 0.05rem;
+  border-width: 1px;
   color: #354052;
   display: block;
   font-family: proxima-nova,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,sans-serif;
+  height: 2.6rem;
   margin-bottom: 1rem;
   outline: 0;
-  padding: 1.25rem 1rem;
+  padding: 0.5rem 1rem;
   -webkit-transition: border-color 300ms ease;
   transition: border-color 300ms ease;
   width: 100%;
+  resize: vertical;
 }
 
-.c3::-webkit-input-placeholder {
+.c4::-webkit-input-placeholder {
   color: rgba(127,143,164,0.8);
 }
 
-.c3::-moz-placeholder {
+.c4::-moz-placeholder {
   color: rgba(127,143,164,0.8);
 }
 
-.c3:-ms-input-placeholder {
+.c4:-ms-input-placeholder {
   color: rgba(127,143,164,0.8);
 }
 
-.c3::placeholder {
+.c4::placeholder {
   color: rgba(127,143,164,0.8);
 }
 
-.c3:active,
-.c3:focus {
+.c4:active,
+.c4:focus {
   border-color: #354052;
+}
+
+.c3 {
+  display: block;
+  position: relative;
+}
+
+.c3::after {
+  content: '';
+  color: rgba(127,143,164,0.8);
+  font: normal normal normal 0.875rem tristicons;
+  line-height: 1rem;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.c3::after {
+  display: none;
 }
 
 <form>
@@ -361,10 +390,10 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   >
     Text Area
     <span
-      className="c1"
+      className="-sc-ifAKCX c3"
     >
       <textarea
-        className="c3"
+        className="-textarea-sc-bxivhb c4"
         id="textarea"
         name="textarea"
         onBlur={[Function]}
@@ -378,13 +407,13 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
     </span>
   </label>
   <div
-    className="c4"
+    className="c5"
   >
     <div
-      className="c5"
+      className="c6"
     >
       <input
-        className="c6"
+        className="c7"
         id="checkbox"
         name="checkbox"
         onBlur={[Function]}
@@ -397,11 +426,11 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
         value=""
       />
       <div
-        className="c7 c8"
+        className="c8 c9"
       />
     </div>
     <label
-      className="-sc-bdVaJa c9"
+      className="-sc-bdVaJa c10"
       htmlFor="checkbox"
       placeholder="Checkbox"
     >
@@ -409,13 +438,13 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
     </label>
   </div>
   <div
-    className="c10 c4"
+    className="c11 c5"
   >
     <div
-      className="c11"
+      className="c12"
     >
       <input
-        className="c12 c6"
+        className="c13 c7"
         id="padded-checkbox"
         name="padded-checkbox"
         onBlur={[Function]}
@@ -428,11 +457,11 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
         value=""
       />
       <div
-        className="c7 c13"
+        className="c8 c14"
       />
     </div>
     <label
-      className="-sc-bwzfXH c14"
+      className="-sc-bwzfXH c15"
       htmlFor="padded-checkbox"
       placeholder="PaddedCheckbox"
     >
@@ -446,10 +475,10 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   >
     select
     <span
-      className="-sc-htpNat c15"
+      className="-sc-htpNat c16"
     >
       <select
-        className="c16"
+        className="c17"
         id="select"
         name="select"
         onBlur={[Function]}
