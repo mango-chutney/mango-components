@@ -16,12 +16,6 @@ require("core-js/modules/es6.object.freeze");
 
 var React = _interopRequireWildcard(require("react"));
 
-var _styledComponents = _interopRequireWildcard(require("styled-components"));
-
-var _polished = require("polished");
-
-var _constants = require("./constants");
-
 var _Input = require("./Input");
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
@@ -45,7 +39,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n    resize: vertical;\n  "]);
+  var data = _taggedTemplateLiteral(["\n    height: auto;\n    padding: 1.25rem 1rem;\n    resize: vertical;\n  "]);
 
   _templateObject = function _templateObject() {
     return data;

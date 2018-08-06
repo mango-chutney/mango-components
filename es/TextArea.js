@@ -16,7 +16,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteralLoose(["\n    resize: vertical;\n  "]);
+  var data = _taggedTemplateLiteralLoose(["\n    height: auto;\n    padding: 1.25rem 1rem;\n    resize: vertical;\n  "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -28,9 +28,6 @@ function _templateObject() {
 function _taggedTemplateLiteralLoose(strings, raw) { if (!raw) { raw = strings.slice(0); } strings.raw = raw; return strings; }
 
 import * as React from 'react';
-import styled, { css } from 'styled-components';
-import { rem, transparentize, darken } from 'polished';
-import { palette, fontWeights, fontStack } from './constants';
 import { createFormControlElementProps, createInputDecoratorProps, createLabelProps, createStyledComponents as createStyledInputComponents, defaultStyleProps as defaultInputStyleProps } from './Input';
 export var defaultStyleProps = {
   shouldDisplayInputDecorator: false
