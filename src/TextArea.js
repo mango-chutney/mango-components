@@ -123,6 +123,7 @@ export function TextArea(props: $Props) {
     LabelComponent,
     TextAreaComponent,
     label,
+    children: inputDecoratorChildren,
     ...rest
   } = props;
 
@@ -136,6 +137,7 @@ export function TextArea(props: $Props) {
       {labelChildren}
       <InputDecoratorComponent {...createInputDecoratorProps(rest)}>
         <TextAreaComponent {...createFormControlElementProps(rest)} />
+        {inputDecoratorChildren}
       </InputDecoratorComponent>
     </LabelComponent>
   );
