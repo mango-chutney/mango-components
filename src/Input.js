@@ -122,7 +122,8 @@ export const createStyledComponents: $StyledSubComponentsFactory<
       line-height: 1rem;
       position: absolute;
       right: 1rem;
-      top: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
     }
 
     ${({ meta: { asyncValidating } }) =>
