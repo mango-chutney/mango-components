@@ -1,11 +1,8 @@
 // @flow
 
 import * as React from 'react';
-import styled, { css } from 'styled-components';
 import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-components';
 import type { FieldProps as $FieldProps } from 'redux-form';
-import { rem, transparentize, darken } from 'polished';
-import { palette, fontWeights, fontStack } from './constants';
 import {
   createFormControlElementProps,
   createInputDecoratorProps,
@@ -28,23 +25,9 @@ export type $Props = {
   $FieldProps;
 
 export const defaultStyleProps: {|
-  activeBorderColor: string,
-  backgroundColor: string,
-  borderColor: string,
-  color: string,
-  fontFamily: string,
-  fontSize: string,
-  fontWeight: string | number,
-  placeholderColor: string,
+  shouldDisplayInputDecorator: boolean,
 |} = {
-  activeBorderColor: palette.black,
-  backgroundColor: palette.lightGray,
-  borderColor: palette.border,
-  color: palette.black,
-  fontFamily: fontStack,
-  fontSize: rem(14),
-  fontWeight: fontWeights.semibold,
-  placeholderColor: String(transparentize(0.2, palette.darkGray)),
+  shouldDisplayInputDecorator: false,
 };
 
 export const createStyledComponents: $StyledSubComponentsFactory<
@@ -56,62 +39,23 @@ export const createStyledComponents: $StyledSubComponentsFactory<
   typeof defaultStyleProps,
 > = styleProps => {
   const {
+    InputComponent,
     InputDecoratorComponent,
     LabelComponent,
   } = createStyledInputComponents(defaultInputStyleProps);
 
-  const TextAreaComponent = styled.textarea`
+  const TextAreaComponent = InputComponent.withComponent('textarea').extend`
     resize: vertical;
-    appearance: none;
-    background-color: ${styleProps.backgroundColor};
-    border-color: ${styleProps.borderColor};
-    border-radius: 0.25rem;
-    border-style: solid;
-    border-width: 0.05rem;
-    color: ${styleProps.color};
-    display: block;
-    font-family: ${styleProps.fontFamily};
-    margin-bottom: 1rem;
-    outline: 0;
-    padding: 1.25rem 1rem;
-    transition: border-color 300ms ease;
-    width: 100%;
-
-    ::placeholder {
-      color: ${styleProps.placeholderColor};
-    }
-
-    :active,
-    :focus {
-      border-color: ${styleProps.activeBorderColor};
-    }
-
-    ${({ meta: { error, touched } }) =>
-      error &&
-      touched &&
-      css`
-        border-color: ${palette.alert};
-
-        ::placeholder {
-          color: ${palette.alert};
-        }
-      `};
-
-    ${({ disabled }) =>
-      disabled &&
-      css`
-        background-color: ${darken(0.05, styleProps.backgroundColor)};
-        color: ${darken(0.05, styleProps.color)};
-        cursor: not-allowed;
-
-        ::placeholder {
-          color: ${darken(0.05, styleProps.placeholderColor)};
-        }
-      `};
   `;
 
   return {
-    InputDecoratorComponent,
+    InputDecoratorComponent: styleProps.shouldDisplayInputDecorator
+      ? InputDecoratorComponent
+      : InputDecoratorComponent.extend`
+          &::after {
+            display: none;
+          }
+        `,
     LabelComponent,
     TextAreaComponent,
   };
