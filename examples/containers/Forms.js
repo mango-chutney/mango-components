@@ -24,6 +24,17 @@ const Select = createSelectComponent();
 const TypeaheadInput = createTypeaheadInputComponent();
 const DatePicker = createDatePickerComponent();
 
+const TextAreaWithTootlip = ({
+  meta,
+  ...rest
+}: React.ElementConfig<typeof TextArea>): React.Node => (
+  <TextArea {...{ ...rest, meta }}>
+    <Tootlip visible={meta.touched && meta.error}>
+      There is an error with this field.
+    </Tootlip>
+  </TextArea>
+);
+
 type Props = {} & $FormProps;
 
 type State = {
@@ -99,7 +110,7 @@ export class Form extends React.Component<Props, State> {
             name="invalid-textarea"
             label="Invalid TextArea"
             placeholder="Invalid TextArea"
-            component={TextArea}
+            component={TextAreaWithTootlip}
           />
           <Field
             name="disabled-textarea"

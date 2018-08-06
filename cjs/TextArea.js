@@ -75,13 +75,14 @@ function TextArea(props) {
       LabelComponent = props.LabelComponent,
       TextAreaComponent = props.TextAreaComponent,
       label = props.label,
-      rest = _objectWithoutProperties(props, ["InputDecoratorComponent", "LabelComponent", "TextAreaComponent", "label"]);
+      inputDecoratorChildren = props.children,
+      rest = _objectWithoutProperties(props, ["InputDecoratorComponent", "LabelComponent", "TextAreaComponent", "label", "children"]);
 
   var _createLabelProps = (0, _Input.createLabelProps)(label, rest),
       labelChildren = _createLabelProps.children,
       labelProps = _objectWithoutProperties(_createLabelProps, ["children"]);
 
-  return React.createElement(LabelComponent, labelProps, labelChildren, React.createElement(InputDecoratorComponent, (0, _Input.createInputDecoratorProps)(rest), React.createElement(TextAreaComponent, (0, _Input.createFormControlElementProps)(rest))));
+  return React.createElement(LabelComponent, labelProps, labelChildren, React.createElement(InputDecoratorComponent, (0, _Input.createInputDecoratorProps)(rest), React.createElement(TextAreaComponent, (0, _Input.createFormControlElementProps)(rest)), inputDecoratorChildren));
 }
 
 var createComponent = function createComponent() {
