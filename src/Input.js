@@ -87,7 +87,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
       border-color: ${styleProps.activeBorderColor};
     }
 
-    ${({ error, touched }) =>
+    ${({ meta: { error, touched } }) =>
       error &&
       touched &&
       css`
@@ -125,7 +125,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
       top: 0.75rem;
     }
 
-    ${({ asyncValidating }) =>
+    ${({ meta: { asyncValidating } }) =>
       asyncValidating &&
       css`
         ::after {
@@ -134,7 +134,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
         }
       `};
 
-    ${({ error, touched }) =>
+    ${({ meta: { error, touched } }) =>
       error &&
       touched &&
       css`
@@ -150,7 +150,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     font-weight: ${styleProps.fontWeight};
     display: block;
 
-    ${({ error, touched }) =>
+    ${({ meta: { error, touched } }) =>
       error &&
       touched &&
       css`
@@ -232,9 +232,9 @@ export const createLabelProps = (
   const labelProps = createLabelObject(label);
 
   return {
-    ...meta,
     ...rest,
     ...labelProps,
+    meta,
     children: children || labelProps.children || undefined,
     htmlFor: createLabelForAttribute(props),
   };
@@ -254,9 +254,9 @@ export const createFormControlElementProps = (
 
   return {
     ...input,
-    ...meta,
     ...rest,
     ...extraProps,
+    meta,
     id: createInputIdAttribute(props),
   };
 };
@@ -264,9 +264,12 @@ export const createFormControlElementProps = (
 export const createInputDecoratorProps = ({
   disabled,
   meta,
-}: $FormControlElementConfig & $FieldProps): { [string]: string } => ({
+}: $FormControlElementConfig & $FieldProps): {
+  disabled: boolean,
+  meta: $PropertyType<$FieldProps, 'meta'>,
+} => ({
   disabled,
-  ...meta,
+  meta,
 });
 
 export function Input(props: $Props) {

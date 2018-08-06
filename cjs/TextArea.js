@@ -52,8 +52,9 @@ var createStyledComponents = function createStyledComponents(styleProps) {
   var TextAreaComponent = _styledComponents.default.textarea.withConfig({
     componentId: "orybjj-0"
   })(["resize:vertical;appearance:none;background-color:", ";border-color:", ";border-radius:0.25rem;border-style:solid;border-width:0.05rem;color:", ";display:block;font-family:", ";margin-bottom:1rem;outline:0;padding:1.25rem 1rem;transition:border-color 300ms ease;width:100%;::placeholder{color:", ";}:active,:focus{border-color:", ";}", ";", ";"], styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.placeholderColor, styleProps.activeBorderColor, function (_ref) {
-    var error = _ref.error,
-        touched = _ref.touched;
+    var _ref$meta = _ref.meta,
+        error = _ref$meta.error,
+        touched = _ref$meta.touched;
     return error && touched && (0, _styledComponents.css)(["border-color:", ";::placeholder{color:", ";}"], _constants.palette.alert, _constants.palette.alert);
   }, function (_ref2) {
     var disabled = _ref2.disabled;

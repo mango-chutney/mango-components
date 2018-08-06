@@ -286,10 +286,6 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   top: 0.75rem;
 }
 
-.c15::after {
-  content: "\\f10a";
-}
-
 .c3 {
   resize: vertical;
   -webkit-appearance: none;
@@ -335,7 +331,6 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
 <form>
   <label
     className="c0"
-    form="FormComponents"
     htmlFor="input"
     placeholder="Input"
     type="text"
@@ -343,11 +338,9 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
     Input
     <span
       className="c1"
-      form="FormComponents"
     >
       <input
         className="c2"
-        form="FormComponents"
         id="input"
         name="input"
         onBlur={[Function]}
@@ -363,18 +356,15 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   </label>
   <label
     className="c0"
-    form="FormComponents"
     htmlFor="textarea"
     placeholder="Text Area"
   >
     Text Area
     <span
       className="c1"
-      form="FormComponents"
     >
       <textarea
         className="c3"
-        form="FormComponents"
         id="textarea"
         name="textarea"
         onBlur={[Function]}
@@ -395,7 +385,6 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
     >
       <input
         className="c6"
-        form="FormComponents"
         id="checkbox"
         name="checkbox"
         onBlur={[Function]}
@@ -409,12 +398,10 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
       />
       <div
         className="c7 c8"
-        form="FormComponents"
       />
     </div>
     <label
       className="-sc-bdVaJa c9"
-      form="FormComponents"
       htmlFor="checkbox"
       placeholder="Checkbox"
     >
@@ -429,7 +416,6 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
     >
       <input
         className="c12 c6"
-        form="FormComponents"
         id="padded-checkbox"
         name="padded-checkbox"
         onBlur={[Function]}
@@ -443,12 +429,10 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
       />
       <div
         className="c7 c13"
-        form="FormComponents"
       />
     </div>
     <label
       className="-sc-bwzfXH c14"
-      form="FormComponents"
       htmlFor="padded-checkbox"
       placeholder="PaddedCheckbox"
     >
@@ -457,18 +441,15 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   </div>
   <label
     className="c0"
-    form="FormComponents"
     htmlFor="select"
     placeholder="select"
   >
     select
     <span
       className="-sc-htpNat c15"
-      form="FormComponents"
     >
       <select
         className="c16"
-        form="FormComponents"
         id="select"
         name="select"
         onBlur={[Function]}

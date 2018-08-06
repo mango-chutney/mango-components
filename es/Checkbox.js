@@ -40,8 +40,9 @@ export var createStyledComponents = function createStyledComponents(styleProps) 
   var InputDecoratorComponent = styled.div.withConfig({
     componentId: "s156yctp-2"
   })(["cursor:pointer;display:inline-block;min-height:", ";line-height:", ";position:relative;border:1px solid transparent;display:block;&::before,&::after{width:", ";height:", ";cursor:pointer;content:'';display:inline-block;border-radius:4px;vertical-align:middle;}&::before{border:1px solid ", ";background:", ";margin-right:1rem;", ";", ";}&::after{position:absolute;left:0;border:1px solid transparent;line-height:", ";margin-top:", ";text-align:center;transform:scale(0);}"], rem(styleProps.checkboxSize), rem(styleProps.checkboxSize), rem(styleProps.checkboxSize), rem(styleProps.checkboxSize), palette.border, palette.lightGray, function (_ref) {
-    var error = _ref.error,
-        touched = _ref.touched;
+    var _ref$meta = _ref.meta,
+        error = _ref$meta.error,
+        touched = _ref$meta.touched;
     return error && touched && css(["border-color:", ";"], palette.alert);
   }, function (_ref2) {
     var disabled = _ref2.disabled;

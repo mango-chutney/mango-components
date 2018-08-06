@@ -95,7 +95,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
       background: ${palette.lightGray};
       margin-right: 1rem;
 
-      ${({ error, touched }) =>
+      ${({ meta: { error, touched } }) =>
         error &&
         touched &&
         css`

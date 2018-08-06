@@ -86,7 +86,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
       border-color: ${styleProps.activeBorderColor};
     }
 
-    ${({ error, touched }) =>
+    ${({ meta: { error, touched } }) =>
       error &&
       touched &&
       css`

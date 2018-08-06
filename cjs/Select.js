@@ -66,8 +66,9 @@ var createStyledComponents = function createStyledComponents(styleProps) {
   var SelectComponent = _styledComponents.default.select.withConfig({
     componentId: "s4vmyyd-0"
   })(["appearance:none;background-color:", ";background-image:linear-gradient( ", ",", " );border-color:", ";border-radius:0.25rem;border-style:solid;border-width:0.05rem;color:", ";display:block;font-family:", ";height:2.6rem;margin-bottom:1rem;outline:0;padding:0.5rem 1rem;transition:border-color 300ms ease;width:100%;::-ms-expand{display:none;}:active,:focus{border-color:", ";}option{width:100%;}", ";", ";"], styleProps.backgroundColor, _constants.palette.white, styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.activeBorderColor, function (_ref) {
-    var error = _ref.error,
-        touched = _ref.touched;
+    var _ref$meta = _ref.meta,
+        error = _ref$meta.error,
+        touched = _ref$meta.touched;
     return error && touched && (0, _styledComponents.css)(["border-color:", ";"], _constants.palette.alert);
   }, function (_ref2) {
     var disabled = _ref2.disabled;
