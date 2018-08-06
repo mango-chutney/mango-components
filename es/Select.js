@@ -6,7 +6,7 @@ import "core-js/modules/es6.object.assign";
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteralLoose(["\n    ", ";\n  "]);
+  var data = _taggedTemplateLiteralLoose(["\n    &::after {\n      content: ", ";\n    }\n  "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -50,10 +50,7 @@ export var createStyledComponents = function createStyledComponents(styleProps) 
       LabelComponent = _createStyledInputCom.LabelComponent,
       BaseInputDecoratorComponent = _createStyledInputCom.InputDecoratorComponent;
 
-  var InputDecoratorComponent = BaseInputDecoratorComponent.extend(_templateObject(), function (_ref3) {
-    var valid = _ref3.valid;
-    return valid && css(["&::after{content:", ";}"], "\"" + tristicons['chevron-down'] + "\"");
-  });
+  var InputDecoratorComponent = BaseInputDecoratorComponent.extend(_templateObject(), "\"" + tristicons['chevron-down'] + "\"");
   return {
     SelectComponent: SelectComponent,
     InputDecoratorComponent: InputDecoratorComponent,

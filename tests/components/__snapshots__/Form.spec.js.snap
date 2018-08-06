@@ -292,6 +292,10 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   transform: translateY(-50%);
 }
 
+.c16::after {
+  content: "\\f10a";
+}
+
 .c4 {
   -webkit-appearance: none;
   -moz-appearance: none;

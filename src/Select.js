@@ -116,13 +116,9 @@ export const createStyledComponents: $StyledSubComponentsFactory<
   } = createStyledInputComponents(defaultInputStyleProps);
 
   const InputDecoratorComponent = BaseInputDecoratorComponent.extend`
-    ${({ valid }) =>
-      valid &&
-      css`
-        &::after {
-          content: ${`"${tristicons['chevron-down']}"`};
-        }
-      `};
+    &::after {
+      content: ${`"${tristicons['chevron-down']}"`};
+    }
   `;
 
   return { SelectComponent, InputDecoratorComponent, LabelComponent };
