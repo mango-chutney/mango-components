@@ -77,8 +77,9 @@ var createStyledComponents = function createStyledComponents(styleProps) {
   var InputComponent = _styledComponents.default.input.withConfig({
     componentId: "ga0twe-0"
   })(["appearance:none;background-color:", ";border-color:", ";border-radius:4px;border-style:solid;border-width:1px;color:", ";display:block;font-family:", ";height:2.6rem;margin-bottom:1rem;outline:0;padding:0.5rem 1rem;transition:border-color 300ms ease;width:100%;::placeholder{color:", ";}:active,:focus{border-color:", ";}", ";", ";"], styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.placeholderColor, styleProps.activeBorderColor, function (_ref) {
-    var error = _ref.error,
-        touched = _ref.touched;
+    var _ref$meta = _ref.meta,
+        error = _ref$meta.error,
+        touched = _ref$meta.touched;
     return error && touched && (0, _styledComponents.css)(["border-color:", ";::placeholder{color:", ";}"], _constants.palette.alert, _constants.palette.alert);
   }, function (_ref2) {
     var disabled = _ref2.disabled;
@@ -88,19 +89,21 @@ var createStyledComponents = function createStyledComponents(styleProps) {
   var InputDecoratorComponent = _styledComponents.default.span.withConfig({
     componentId: "ga0twe-1"
   })(["display:block;position:relative;&::after{content:'';color:", ";font:normal normal normal ", " tristicons;line-height:1rem;position:absolute;right:1rem;top:0.75rem;}", ";", ";"], styleProps.placeholderColor, (0, _polished.rem)(14), function (_ref3) {
-    var asyncValidating = _ref3.asyncValidating;
+    var asyncValidating = _ref3.meta.asyncValidating;
     return asyncValidating && (0, _styledComponents.css)(["::after{animation:", " 2s infinite linear;content:", ";}"], tristiconsSpin, "\"".concat(_tristicons.default.loading, "\""));
   }, function (_ref4) {
-    var error = _ref4.error,
-        touched = _ref4.touched;
+    var _ref4$meta = _ref4.meta,
+        error = _ref4$meta.error,
+        touched = _ref4$meta.touched;
     return error && touched && (0, _styledComponents.css)(["::after{color:", ";content:", ";}"], _constants.palette.alert, "\"".concat(_tristicons.default['cross-circle'], "\""));
   });
 
   var LabelComponent = _styledComponents.default.label.withConfig({
     componentId: "ga0twe-2"
   })(["font-size:", ";font-weight:", ";display:block;", ";"], styleProps.fontSize, styleProps.fontWeight, function (_ref5) {
-    var error = _ref5.error,
-        touched = _ref5.touched;
+    var _ref5$meta = _ref5.meta,
+        error = _ref5$meta.error,
+        touched = _ref5$meta.touched;
     return error && touched && (0, _styledComponents.css)(["color:", ";"], _constants.palette.alert);
   });
 
@@ -167,7 +170,8 @@ var createLabelProps = function createLabelProps(label, props) {
       rest = _objectWithoutProperties(props, ["meta", "input", "custom", "children"]);
 
   var labelProps = createLabelObject(label);
-  return _objectSpread({}, meta, rest, labelProps, {
+  return _objectSpread({}, rest, labelProps, {
+    meta: meta,
     children: children || labelProps.children || undefined,
     htmlFor: createLabelForAttribute(props)
   });
@@ -182,7 +186,8 @@ var createFormControlElementProps = function createFormControlElementProps(props
       input = props.input,
       rest = _objectWithoutProperties(props, ["children", "label", "meta", "input"]);
 
-  return _objectSpread({}, input, meta, rest, extraProps, {
+  return _objectSpread({}, input, rest, extraProps, {
+    meta: meta,
     id: createInputIdAttribute(props)
   });
 };
@@ -192,9 +197,10 @@ exports.createFormControlElementProps = createFormControlElementProps;
 var createInputDecoratorProps = function createInputDecoratorProps(_ref7) {
   var disabled = _ref7.disabled,
       meta = _ref7.meta;
-  return _objectSpread({
-    disabled: disabled
-  }, meta);
+  return {
+    disabled: disabled,
+    meta: meta
+  };
 };
 
 exports.createInputDecoratorProps = createInputDecoratorProps;

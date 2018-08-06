@@ -29,8 +29,9 @@ export var createStyledComponents = function createStyledComponents(styleProps) 
   var InputComponent = styled.input.withConfig({
     componentId: "ga0twe-0"
   })(["appearance:none;background-color:", ";border-color:", ";border-radius:4px;border-style:solid;border-width:1px;color:", ";display:block;font-family:", ";height:2.6rem;margin-bottom:1rem;outline:0;padding:0.5rem 1rem;transition:border-color 300ms ease;width:100%;::placeholder{color:", ";}:active,:focus{border-color:", ";}", ";", ";"], styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.placeholderColor, styleProps.activeBorderColor, function (_ref) {
-    var error = _ref.error,
-        touched = _ref.touched;
+    var _ref$meta = _ref.meta,
+        error = _ref$meta.error,
+        touched = _ref$meta.touched;
     return error && touched && css(["border-color:", ";::placeholder{color:", ";}"], palette.alert, palette.alert);
   }, function (_ref2) {
     var disabled = _ref2.disabled;
@@ -39,18 +40,20 @@ export var createStyledComponents = function createStyledComponents(styleProps) 
   var InputDecoratorComponent = styled.span.withConfig({
     componentId: "ga0twe-1"
   })(["display:block;position:relative;&::after{content:'';color:", ";font:normal normal normal ", " tristicons;line-height:1rem;position:absolute;right:1rem;top:0.75rem;}", ";", ";"], styleProps.placeholderColor, rem(14), function (_ref3) {
-    var asyncValidating = _ref3.asyncValidating;
+    var asyncValidating = _ref3.meta.asyncValidating;
     return asyncValidating && css(["::after{animation:", " 2s infinite linear;content:", ";}"], tristiconsSpin, "\"" + tristicons.loading + "\"");
   }, function (_ref4) {
-    var error = _ref4.error,
-        touched = _ref4.touched;
+    var _ref4$meta = _ref4.meta,
+        error = _ref4$meta.error,
+        touched = _ref4$meta.touched;
     return error && touched && css(["::after{color:", ";content:", ";}"], palette.alert, "\"" + tristicons['cross-circle'] + "\"");
   });
   var LabelComponent = styled.label.withConfig({
     componentId: "ga0twe-2"
   })(["font-size:", ";font-weight:", ";display:block;", ";"], styleProps.fontSize, styleProps.fontWeight, function (_ref5) {
-    var error = _ref5.error,
-        touched = _ref5.touched;
+    var _ref5$meta = _ref5.meta,
+        error = _ref5$meta.error,
+        touched = _ref5$meta.touched;
     return error && touched && css(["color:", ";"], palette.alert);
   });
   return {
@@ -112,7 +115,8 @@ export var createLabelProps = function createLabelProps(label, props) {
       rest = _objectWithoutPropertiesLoose(props, ["meta", "input", "custom", "children"]);
 
   var labelProps = createLabelObject(label);
-  return Object.assign({}, meta, rest, labelProps, {
+  return Object.assign({}, rest, labelProps, {
+    meta: meta,
     children: children || labelProps.children || undefined,
     htmlFor: createLabelForAttribute(props)
   });
@@ -124,16 +128,18 @@ export var createFormControlElementProps = function createFormControlElementProp
       input = props.input,
       rest = _objectWithoutPropertiesLoose(props, ["children", "label", "meta", "input"]);
 
-  return Object.assign({}, input, meta, rest, extraProps, {
+  return Object.assign({}, input, rest, extraProps, {
+    meta: meta,
     id: createInputIdAttribute(props)
   });
 };
 export var createInputDecoratorProps = function createInputDecoratorProps(_ref7) {
   var disabled = _ref7.disabled,
       meta = _ref7.meta;
-  return Object.assign({
-    disabled: disabled
-  }, meta);
+  return {
+    disabled: disabled,
+    meta: meta
+  };
 };
 export function Input(props) {
   var InputComponent = props.InputComponent,

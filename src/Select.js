@@ -90,7 +90,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
       width: 100%;
     }
 
-    ${({ error, touched }) =>
+    ${({ meta: { error, touched } }) =>
       error &&
       touched &&
       css`
