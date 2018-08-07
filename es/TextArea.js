@@ -29,15 +29,17 @@ function _taggedTemplateLiteralLoose(strings, raw) { if (!raw) { raw = strings.s
 
 import * as React from 'react';
 import { createFormControlElementProps, createInputDecoratorProps, createLabelProps, createStyledComponents as createStyledInputComponents, defaultStyleProps as defaultInputStyleProps } from './Input';
+var defaultStyledInputComponents = createStyledInputComponents(defaultInputStyleProps);
 export var defaultStyleProps = {
+  InputComponent: defaultStyledInputComponents.InputComponent,
+  InputDecoratorComponent: defaultStyledInputComponents.InputDecoratorComponent,
+  LabelComponent: defaultStyledInputComponents.LabelComponent,
   shouldDisplayInputDecorator: false
 };
 export var createStyledComponents = function createStyledComponents(styleProps) {
-  var _createStyledInputCom = createStyledInputComponents(defaultInputStyleProps),
-      InputComponent = _createStyledInputCom.InputComponent,
-      InputDecoratorComponent = _createStyledInputCom.InputDecoratorComponent,
-      LabelComponent = _createStyledInputCom.LabelComponent;
-
+  var InputComponent = styleProps.InputComponent,
+      InputDecoratorComponent = styleProps.InputDecoratorComponent,
+      LabelComponent = styleProps.LabelComponent;
   var TextAreaComponent = InputComponent.withComponent('textarea').extend(_templateObject());
   return {
     InputDecoratorComponent: styleProps.shouldDisplayInputDecorator ? InputDecoratorComponent : InputDecoratorComponent.extend(_templateObject2()),

@@ -28,24 +28,32 @@ export type $Props = {
 } & React.ElementConfig<'select'> &
   $FieldProps;
 
+const defaultStyledInputComponents = createStyledInputComponents(
+  defaultInputStyleProps,
+);
+
 export const defaultStyleProps: {|
+  InputDecoratorComponent: $ReactComponentStyled<*>,
+  LabelComponent: $ReactComponentStyled<*>,
+  activeBorderColor: string,
   backgroundColor: string,
   borderColor: string,
   color: string,
   fontFamily: string,
-  placeholderColor: string,
-  activeBorderColor: string,
   fontSize: string,
   fontWeight: string | number,
+  placeholderColor: string,
 |} = {
+  InputDecoratorComponent: defaultStyledInputComponents.InputDecoratorComponent,
+  LabelComponent: defaultStyledInputComponents.LabelComponent,
+  activeBorderColor: palette.black,
   backgroundColor: palette.lightGray,
   borderColor: palette.border,
   color: palette.black,
   fontFamily: fontStack,
-  placeholderColor: String(transparentize(0.2, palette.darkGray)),
-  activeBorderColor: palette.black,
   fontSize: rem(14),
   fontWeight: fontWeights.semibold,
+  placeholderColor: String(transparentize(0.2, palette.darkGray)),
 };
 
 export const createStyledComponents: $StyledSubComponentsFactory<
@@ -113,7 +121,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
   const {
     LabelComponent,
     InputDecoratorComponent: BaseInputDecoratorComponent,
-  } = createStyledInputComponents(defaultInputStyleProps);
+  } = styleProps;
 
   const InputDecoratorComponent = BaseInputDecoratorComponent.extend`
     &::after {

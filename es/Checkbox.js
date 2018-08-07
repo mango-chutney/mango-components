@@ -22,14 +22,14 @@ import styled, { css } from 'styled-components';
 import { rem, darken } from 'polished';
 import { palette } from './constants';
 import { createFormControlElementProps, createInputDecoratorProps, createLabelProps, createStyledComponents as createStyledInputComponents, defaultStyleProps as defaultInputStyleProps } from './Input';
+var defaultInputStyledComponents = createStyledInputComponents(defaultInputStyleProps);
 export var defaultStyleProps = {
-  checkboxSize: 20,
-  checkboxColor: palette.primary
+  LabelComponent: defaultInputStyledComponents.LabelComponent,
+  checkboxColor: palette.primary,
+  checkboxSize: 20
 };
 export var createStyledComponents = function createStyledComponents(styleProps) {
-  var _createStyledInputCom = createStyledInputComponents(defaultInputStyleProps),
-      InputLabelComponent = _createStyledInputCom.LabelComponent;
-
+  var InputLabelComponent = styleProps.LabelComponent;
   var LabelComponent = InputLabelComponent.extend(_templateObject());
   var WrapperComponent = styled.div.withConfig({
     componentId: "s156yctp-0"
