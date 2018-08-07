@@ -1,7 +1,6 @@
 // @flow
 
 import * as React from 'react';
-import styled from 'styled-components';
 import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-components';
 import { rem, transparentize } from 'polished';
 import type {
@@ -10,6 +9,7 @@ import type {
   $StyledSubComponentsFactory,
 } from './types';
 import {
+  defaultStyleProps as defaultCheckboxStyleProps,
   createStyledComponents as createStyledCheckboxComponents,
   Checkbox,
 } from './Checkbox';
@@ -20,12 +20,22 @@ export type $Props = {
   ...$CheckboxProps,
 };
 
+const baseComponents = createStyledCheckboxComponents(
+  defaultCheckboxStyleProps,
+);
+
 export const defaultStyleProps: {|
-  checkboxSize: number,
-  checkboxColor: string,
+  ...typeof defaultCheckboxStyleProps,
+  CheckboxContainerComponent: $ReactComponentStyled<*>,
+  InputComponent: $ReactComponentStyled<*>,
+  InputDecoratorComponent: $ReactComponentStyled<*>,
+  WrapperComponent: $ReactComponentStyled<*>,
 |} = {
-  checkboxSize: 40,
-  checkboxColor: palette.primary,
+  ...defaultCheckboxStyleProps,
+  CheckboxContainerComponent: baseComponents.CheckboxContainerComponent,
+  InputComponent: baseComponents.InputComponent,
+  InputDecoratorComponent: baseComponents.InputDecoratorComponent,
+  WrapperComponent: baseComponents.WrapperComponent,
 };
 
 export const createStyledComponents: $StyledSubComponentsFactory<
@@ -39,12 +49,15 @@ export const createStyledComponents: $StyledSubComponentsFactory<
   typeof defaultStyleProps,
   // eslint-disable-next-line no-unused-vars
 > = styleProps => {
-  const baseComponents = createStyledCheckboxComponents({
-    ...defaultStyleProps,
-    ...styleProps,
-  });
+  const {
+    CheckboxContainerComponent,
+    InputComponent,
+    InputDecoratorComponent,
+    LabelComponent,
+    WrapperComponent,
+  } = styleProps;
 
-  const StyledWrapperComponent = styled(baseComponents.WrapperComponent)`
+  const StyledWrapperComponent = WrapperComponent.extend`
     padding: 2rem;
     display: inline-block;
     font-size: ${rem(24)};
@@ -52,7 +65,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     border-radius: ${rem(4)};
   `;
 
-  const StyledInputComponent = styled(baseComponents.InputComponent)`
+  const StyledInputComponent = InputComponent.extend`
     :checked + label {
       transition: all 300ms ease;
       background: ${({ checkboxColor }) =>
@@ -63,9 +76,11 @@ export const createStyledComponents: $StyledSubComponentsFactory<
   `;
 
   return {
-    ...baseComponents,
-    WrapperComponent: StyledWrapperComponent,
+    CheckboxContainerComponent,
     InputComponent: StyledInputComponent,
+    InputDecoratorComponent,
+    LabelComponent,
+    WrapperComponent: StyledWrapperComponent,
   };
 };
 
