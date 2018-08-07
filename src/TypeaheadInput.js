@@ -62,7 +62,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     defaultInputStyleProps,
   );
 
-  const MenuWrapperComponent = InputDecoratorComponent.withComponent('div');
+  const MenuWrapperComponent = InputDecoratorComponent;
 
   const ItemComponent = styled.div`
     background-color: ${({ highlightedIndex, index }) =>
