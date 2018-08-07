@@ -64,7 +64,8 @@ export const createStyledComponents: $StyledSubComponentsFactory<
 
   const MenuWrapperComponent = InputDecoratorComponent;
 
-  const ItemComponent = styled.div`
+  const ItemComponent = styled.span`
+    display: block;
     background-color: ${({ highlightedIndex, index }) =>
       highlightedIndex === index ? 'lightgray' : 'white'};
     font-weight: ${({ selectedItem, item }) =>
