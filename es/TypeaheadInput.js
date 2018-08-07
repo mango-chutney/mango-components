@@ -26,9 +26,9 @@ export var createStyledComponents = function createStyledComponents(styleProps) 
       InputDecoratorComponent = _createStyledInputCom.InputDecoratorComponent;
 
   var MenuWrapperComponent = InputDecoratorComponent;
-  var ItemComponent = styled.div.withConfig({
+  var ItemComponent = styled.span.withConfig({
     componentId: "s1ah6m0p-1"
-  })(["background-color:", ";font-weight:", ";"], function (_ref) {
+  })(["display:block;background-color:", ";font-weight:", ";"], function (_ref) {
     var highlightedIndex = _ref.highlightedIndex,
         index = _ref.index;
     return highlightedIndex === index ? 'lightgray' : 'white';
