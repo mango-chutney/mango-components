@@ -18,17 +18,22 @@ export var defaultStyleProps = {
   activeBorderColor: palette.black,
   backgroundColor: palette.lightGray,
   borderColor: palette.border,
+  borderRadius: '4px',
+  borderStyle: 'solid',
+  borderWidth: '1px',
   color: palette.black,
   fontFamily: fontStack,
   fontSize: rem(14),
   fontWeight: fontWeights.semibold,
+  height: '2.6rem',
+  padding: '0.5rem 1rem',
   placeholderColor: String(transparentize(0.2, palette.darkGray))
 };
 var tristiconsSpin = keyframes(["0%{transform:rotate(0deg);}100%{transform:rotate(359deg);}"]);
 export var createStyledComponents = function createStyledComponents(styleProps) {
   var InputComponent = styled.input.withConfig({
     componentId: "ga0twe-0"
-  })(["appearance:none;background-color:", ";border-color:", ";border-radius:4px;border-style:solid;border-width:1px;color:", ";display:block;font-family:", ";height:2.6rem;margin-bottom:1rem;outline:0;padding:0.5rem 1rem;transition:border-color 300ms ease;width:100%;::placeholder{color:", ";}:active,:focus{border-color:", ";}", ";", ";"], styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.placeholderColor, styleProps.activeBorderColor, function (_ref) {
+  })(["appearance:none;background-color:", ";border-color:", ";border-radius:", ";border-style:", ";border-width:", ";color:", ";display:block;font-family:", ";height:", ";margin-bottom:1rem;outline:0;padding:", ";transition:border-color 300ms ease;width:100%;::placeholder{color:", ";}:active,:focus{border-color:", ";}", ";", ";"], styleProps.backgroundColor, styleProps.borderColor, styleProps.borderRadius, styleProps.borderStyle, styleProps.borderWidth, styleProps.color, styleProps.fontFamily, styleProps.height, styleProps.padding, styleProps.placeholderColor, styleProps.activeBorderColor, function (_ref) {
     var _ref$meta = _ref.meta,
         error = _ref$meta.error,
         touched = _ref$meta.touched;
