@@ -83,10 +83,8 @@ var createStyledComponents = function createStyledComponents(styleProps) {
     componentId: "s1ah6m0p-0"
   })(["background:white;position:absolute;top:100%;left:0;width:100%;z-index:4;"]);
 
-  var _createStyledInputCom = (0, _Input.createStyledComponents)(_Input.defaultStyleProps),
-      InputComponent = _createStyledInputCom.InputComponent,
-      InputDecoratorComponent = _createStyledInputCom.InputDecoratorComponent;
-
+  var InputComponent = styleProps.InputComponent,
+      InputDecoratorComponent = styleProps.InputDecoratorComponent;
   var MenuWrapperComponent = InputDecoratorComponent;
 
   var ItemComponent = _styledComponents.default.span.withConfig({
@@ -99,7 +97,7 @@ var createStyledComponents = function createStyledComponents(styleProps) {
 
   var StyledInputComponent = InputComponent.extend(_templateObject(), function (_ref2) {
     var inputComponentStyleProps = _ref2.styleProps;
-    return inputComponentStyleProps && inputComponentStyleProps.isOpen && inputComponentStyleProps.hasItems && (0, _styledComponents.css)(["border-bottom:0;border-bottom-left-radius:0;border-bottom-right-radius:0;"]);
+    return inputComponentStyleProps && inputComponentStyleProps.isOpen && inputComponentStyleProps.hasItems && (0, _styledComponents.css)(["&,&:active,&:focus{border-bottom:0;border-bottom-left-radius:0;border-bottom-right-radius:0;}"]);
   });
   return {
     InputComponent: StyledInputComponent,

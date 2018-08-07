@@ -71,10 +71,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     z-index: 4;
   `;
 
-  const {
-    InputComponent,
-    InputDecoratorComponent,
-  } = createStyledInputComponents(defaultInputStyleProps);
+  const { InputComponent, InputDecoratorComponent } = styleProps;
 
   const MenuWrapperComponent = InputDecoratorComponent;
 
@@ -110,9 +107,13 @@ export const createStyledComponents: $StyledSubComponentsFactory<
       inputComponentStyleProps.isOpen &&
       inputComponentStyleProps.hasItems &&
       css`
-        border-bottom: 0;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
+        &,
+        &:active,
+        &:focus {
+          border-bottom: 0;
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+        }
       `};
   `;
 
