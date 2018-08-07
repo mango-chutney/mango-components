@@ -27,19 +27,29 @@ export const defaultStyleProps: {|
   activeBorderColor: string,
   backgroundColor: string,
   borderColor: string,
+  borderRadius: string | number,
+  borderStyle: string,
+  borderWidth: string | number,
   color: string,
   fontFamily: string,
   fontSize: string,
   fontWeight: string | number,
+  height: string,
+  padding: string,
   placeholderColor: string,
 |} = {
   activeBorderColor: palette.black,
   backgroundColor: palette.lightGray,
   borderColor: palette.border,
+  borderRadius: '4px',
+  borderStyle: 'solid',
+  borderWidth: '1px',
   color: palette.black,
   fontFamily: fontStack,
   fontSize: rem(14),
   fontWeight: fontWeights.semibold,
+  height: '2.6rem',
+  padding: '0.5rem 1rem',
   placeholderColor: String(transparentize(0.2, palette.darkGray)),
 };
 
@@ -65,16 +75,16 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     appearance: none;
     background-color: ${styleProps.backgroundColor};
     border-color: ${styleProps.borderColor};
-    border-radius: 4px;
-    border-style: solid;
-    border-width: 1px;
+    border-radius: ${styleProps.borderRadius};
+    border-style: ${styleProps.borderStyle};
+    border-width: ${styleProps.borderWidth};
     color: ${styleProps.color};
     display: block;
     font-family: ${styleProps.fontFamily};
-    height: 2.6rem;
+    height: ${styleProps.height};
     margin-bottom: 1rem;
     outline: 0;
-    padding: 0.5rem 1rem;
+    padding: ${styleProps.padding};
     transition: border-color 300ms ease;
     width: 100%;
 

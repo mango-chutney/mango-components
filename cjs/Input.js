@@ -64,10 +64,15 @@ var defaultStyleProps = {
   activeBorderColor: _constants.palette.black,
   backgroundColor: _constants.palette.lightGray,
   borderColor: _constants.palette.border,
+  borderRadius: '4px',
+  borderStyle: 'solid',
+  borderWidth: '1px',
   color: _constants.palette.black,
   fontFamily: _constants.fontStack,
   fontSize: (0, _polished.rem)(14),
   fontWeight: _constants.fontWeights.semibold,
+  height: '2.6rem',
+  padding: '0.5rem 1rem',
   placeholderColor: String((0, _polished.transparentize)(0.2, _constants.palette.darkGray))
 };
 exports.defaultStyleProps = defaultStyleProps;
@@ -76,7 +81,7 @@ var tristiconsSpin = (0, _styledComponents.keyframes)(["0%{transform:rotate(0deg
 var createStyledComponents = function createStyledComponents(styleProps) {
   var InputComponent = _styledComponents.default.input.withConfig({
     componentId: "ga0twe-0"
-  })(["appearance:none;background-color:", ";border-color:", ";border-radius:4px;border-style:solid;border-width:1px;color:", ";display:block;font-family:", ";height:2.6rem;margin-bottom:1rem;outline:0;padding:0.5rem 1rem;transition:border-color 300ms ease;width:100%;::placeholder{color:", ";}:active,:focus{border-color:", ";}", ";", ";"], styleProps.backgroundColor, styleProps.borderColor, styleProps.color, styleProps.fontFamily, styleProps.placeholderColor, styleProps.activeBorderColor, function (_ref) {
+  })(["appearance:none;background-color:", ";border-color:", ";border-radius:", ";border-style:", ";border-width:", ";color:", ";display:block;font-family:", ";height:", ";margin-bottom:1rem;outline:0;padding:", ";transition:border-color 300ms ease;width:100%;::placeholder{color:", ";}:active,:focus{border-color:", ";}", ";", ";"], styleProps.backgroundColor, styleProps.borderColor, styleProps.borderRadius, styleProps.borderStyle, styleProps.borderWidth, styleProps.color, styleProps.fontFamily, styleProps.height, styleProps.padding, styleProps.placeholderColor, styleProps.activeBorderColor, function (_ref) {
     var _ref$meta = _ref.meta,
         error = _ref$meta.error,
         touched = _ref$meta.touched;

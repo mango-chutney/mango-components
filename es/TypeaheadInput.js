@@ -11,10 +11,23 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _templateObject() {
+  var data = _taggedTemplateLiteralLoose(["\n    ", ";\n  "]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteralLoose(strings, raw) { if (!raw) { raw = strings.slice(0); } strings.raw = raw; return strings; }
+
 import * as React from 'react';
 import Downshift from 'downshift';
 import matchSorter from 'match-sorter';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { darken } from 'polished';
 import { createComponent as createInputComponent, createLabelProps, createStyledComponents as createStyledInputComponents, defaultStyleProps as defaultInputStyleProps } from './Input';
 export var defaultStyleProps = {};
 export var createStyledComponents = function createStyledComponents(styleProps) {
@@ -23,21 +36,23 @@ export var createStyledComponents = function createStyledComponents(styleProps) 
   })(["background:white;position:absolute;top:100%;left:0;width:100%;z-index:4;"]);
 
   var _createStyledInputCom = createStyledInputComponents(defaultInputStyleProps),
+      InputComponent = _createStyledInputCom.InputComponent,
       InputDecoratorComponent = _createStyledInputCom.InputDecoratorComponent;
 
   var MenuWrapperComponent = InputDecoratorComponent;
   var ItemComponent = styled.span.withConfig({
     componentId: "s1ah6m0p-1"
-  })(["display:block;background-color:", ";font-weight:", ";"], function (_ref) {
+  })(["display:block;color:", ";border-left:", " ", " ", ";border-right:", " ", " ", ";padding:0.5rem 1rem;background-color:", ";&:last-child{border-bottom:", " ", " ", ";border-bottom-right-radius:", ";border-bottom-left-radius:", ";}"], defaultInputStyleProps.color, defaultInputStyleProps.borderWidth, defaultInputStyleProps.borderStyle, defaultInputStyleProps.activeBorderColor, defaultInputStyleProps.borderWidth, defaultInputStyleProps.borderStyle, defaultInputStyleProps.activeBorderColor, function (_ref) {
     var highlightedIndex = _ref.highlightedIndex,
         index = _ref.index;
-    return highlightedIndex === index ? 'lightgray' : 'white';
-  }, function (_ref2) {
-    var selectedItem = _ref2.selectedItem,
-        item = _ref2.item;
-    return selectedItem === item ? 'bold' : 'normal';
+    return highlightedIndex === index ? darken(0.05, defaultInputStyleProps.backgroundColor) : defaultInputStyleProps.backgroundColor;
+  }, defaultInputStyleProps.borderWidth, defaultInputStyleProps.borderStyle, defaultInputStyleProps.activeBorderColor, defaultInputStyleProps.borderRadius, defaultInputStyleProps.borderRadius);
+  var StyledInputComponent = InputComponent.extend(_templateObject(), function (_ref2) {
+    var inputComponentStyleProps = _ref2.styleProps;
+    return inputComponentStyleProps && inputComponentStyleProps.isOpen && inputComponentStyleProps.hasItems && css(["border-bottom:0;border-bottom-left-radius:0;border-bottom-right-radius:0;"]);
   });
   return {
+    InputComponent: StyledInputComponent,
     ItemComponent: ItemComponent,
     MenuComponent: MenuComponent,
     MenuWrapperComponent: MenuWrapperComponent
@@ -146,18 +161,19 @@ function (_React$Component) {
           selectedItem = _ref5.selectedItem;
 
       var _this$props = _this.props,
-          WrapperComponent = _this$props.WrapperComponent,
+          ComposedInputComponent = _this$props.ComposedInputComponent,
           InputComponent = _this$props.InputComponent,
           ItemComponent = _this$props.ItemComponent,
           MenuComponent = _this$props.MenuComponent,
           MenuWrapperComponent = _this$props.MenuWrapperComponent,
+          WrapperComponent = _this$props.WrapperComponent,
           filterItems = _this$props.filterItems,
           input = _this$props.input,
           items = _this$props.items,
           label = _this$props.label,
           mapItemToString = _this$props.mapItemToString,
           renderItem = _this$props.renderItem,
-          rest = _objectWithoutPropertiesLoose(_this$props, ["WrapperComponent", "InputComponent", "ItemComponent", "MenuComponent", "MenuWrapperComponent", "filterItems", "input", "items", "label", "mapItemToString", "renderItem"]);
+          rest = _objectWithoutPropertiesLoose(_this$props, ["ComposedInputComponent", "InputComponent", "ItemComponent", "MenuComponent", "MenuWrapperComponent", "WrapperComponent", "filterItems", "input", "items", "label", "mapItemToString", "renderItem"]);
 
       var filteredItems = filterItems(items, inputValue);
       var inputProps = Object.assign({}, rest, {
@@ -182,8 +198,19 @@ function (_React$Component) {
         });
       };
 
-      return React.createElement(WrapperComponent, null, React.createElement(InputComponent, inputProps, isOpen && !!filteredItems.length && React.createElement(MenuComponent, null, filteredItems.map(function (item, index) {
-        return React.createElement(ItemComponent, createItemProps(item, index), typeof renderItem === 'function' ? renderItem(item) : mapItemToString(item));
+      var styleProps = {
+        isOpen: isOpen,
+        hasItems: filteredItems.length > 0
+      };
+      return React.createElement(WrapperComponent, null, React.createElement(ComposedInputComponent, Object.assign({}, inputProps, {
+        styleProps: styleProps,
+        InputComponent: InputComponent
+      }), isOpen && !!filteredItems.length && React.createElement(MenuComponent, {
+        styleProps: styleProps
+      }, filteredItems.map(function (item, index) {
+        return React.createElement(ItemComponent, Object.assign({}, createItemProps(item, index), {
+          styleProps: styleProps
+        }), typeof renderItem === 'function' ? renderItem(item) : mapItemToString(item));
       }))));
     });
 
@@ -223,10 +250,10 @@ _defineProperty(TypeaheadInput, "defaultProps", {
 
 export var createComponent = function createComponent() {
   var defaultStyledComponents = createStyledComponents(defaultStyleProps);
-  var InputComponent = createInputComponent();
+  var ComposedInputComponent = createInputComponent();
   return function (props) {
     return React.createElement(TypeaheadInput, Object.assign({
-      InputComponent: InputComponent
+      ComposedInputComponent: ComposedInputComponent
     }, defaultStyledComponents, props));
   };
 };

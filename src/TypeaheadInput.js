@@ -3,7 +3,8 @@
 import * as React from 'react';
 import Downshift from 'downshift';
 import matchSorter from 'match-sorter';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { darken } from 'polished';
 import type { ReactComponentStyled as $ReactComponentStyled } from 'styled-components';
 import type { FieldProps as $FieldProps } from 'redux-form';
 import {
@@ -23,6 +24,7 @@ export type $StyledProps = {
 } & $FieldProps;
 
 export type $Props = {
+  ComposedInputComponent: React.ElementType,
   InputComponent: React.ElementType,
   ItemComponent: React.ElementType,
   MenuComponent: React.ElementType,
@@ -42,6 +44,7 @@ export const defaultStyleProps = {};
 
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
+    InputComponent: $ReactComponentStyled<*>,
     ItemComponent: $ReactComponentStyled<*>,
     MenuComponent: $ReactComponentStyled<*>,
     MenuWrapperComponent: $ReactComponentStyled<*>,
@@ -58,21 +61,53 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     z-index: 4;
   `;
 
-  const { InputDecoratorComponent } = createStyledInputComponents(
-    defaultInputStyleProps,
-  );
+  const {
+    InputComponent,
+    InputDecoratorComponent,
+  } = createStyledInputComponents(defaultInputStyleProps);
 
   const MenuWrapperComponent = InputDecoratorComponent;
 
   const ItemComponent = styled.span`
     display: block;
+
+    color: ${defaultInputStyleProps.color};
+    border-left: ${defaultInputStyleProps.borderWidth}
+      ${defaultInputStyleProps.borderStyle}
+      ${defaultInputStyleProps.activeBorderColor};
+    border-right: ${defaultInputStyleProps.borderWidth}
+      ${defaultInputStyleProps.borderStyle}
+      ${defaultInputStyleProps.activeBorderColor};
+    padding: 0.5rem 1rem;
+
     background-color: ${({ highlightedIndex, index }) =>
-      highlightedIndex === index ? 'lightgray' : 'white'};
-    font-weight: ${({ selectedItem, item }) =>
-      selectedItem === item ? 'bold' : 'normal'};
+      highlightedIndex === index
+        ? darken(0.05, defaultInputStyleProps.backgroundColor)
+        : defaultInputStyleProps.backgroundColor};
+
+    &:last-child {
+      border-bottom: ${defaultInputStyleProps.borderWidth}
+        ${defaultInputStyleProps.borderStyle}
+        ${defaultInputStyleProps.activeBorderColor};
+      border-bottom-right-radius: ${defaultInputStyleProps.borderRadius};
+      border-bottom-left-radius: ${defaultInputStyleProps.borderRadius};
+    }
+  `;
+
+  const StyledInputComponent = InputComponent.extend`
+    ${({ styleProps: inputComponentStyleProps }) =>
+      inputComponentStyleProps &&
+      inputComponentStyleProps.isOpen &&
+      inputComponentStyleProps.hasItems &&
+      css`
+        border-bottom: 0;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      `};
   `;
 
   return {
+    InputComponent: StyledInputComponent,
     ItemComponent,
     MenuComponent,
     MenuWrapperComponent,
@@ -184,11 +219,12 @@ class TypeaheadInput extends React.Component<$Props, $State> {
     selectedItem,
   }) => {
     const {
-      WrapperComponent,
+      ComposedInputComponent,
       InputComponent,
       ItemComponent,
       MenuComponent,
       MenuWrapperComponent,
+      WrapperComponent,
       filterItems,
       input,
       items,
@@ -222,14 +258,20 @@ class TypeaheadInput extends React.Component<$Props, $State> {
       highlightedIndex,
     });
 
+    const styleProps = { isOpen, hasItems: filteredItems.length > 0 };
+
     return (
       <WrapperComponent>
-        <InputComponent {...inputProps}>
+        <ComposedInputComponent
+          {...{ ...inputProps, styleProps, InputComponent }}
+        >
           {isOpen &&
             !!filteredItems.length && (
-              <MenuComponent>
+              <MenuComponent {...{ styleProps }}>
                 {filteredItems.map((item, index) => (
-                  <ItemComponent {...createItemProps(item, index)}>
+                  <ItemComponent
+                    {...{ ...createItemProps(item, index), styleProps }}
+                  >
                     {typeof renderItem === 'function'
                       ? renderItem(item)
                       : mapItemToString(item)}
@@ -237,7 +279,7 @@ class TypeaheadInput extends React.Component<$Props, $State> {
                 ))}
               </MenuComponent>
             )}
-        </InputComponent>
+        </ComposedInputComponent>
       </WrapperComponent>
     );
   };
@@ -259,10 +301,10 @@ class TypeaheadInput extends React.Component<$Props, $State> {
 
 export const createComponent: $ComponentFactory<$Props> = () => {
   const defaultStyledComponents = createStyledComponents(defaultStyleProps);
-  const InputComponent = createInputComponent();
+  const ComposedInputComponent = createInputComponent();
   return (props: $Props) => (
     <TypeaheadInput
-      {...{ InputComponent, ...defaultStyledComponents, ...props }}
+      {...{ ComposedInputComponent, ...defaultStyledComponents, ...props }}
     />
   );
 };
