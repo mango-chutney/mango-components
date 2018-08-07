@@ -23,15 +23,18 @@ import { rem, transparentize, darken } from 'polished';
 import tristicons from 'tristicons';
 import { palette, fontWeights, fontStack } from './constants';
 import { createFormControlElementProps, createInputDecoratorProps, createLabelProps, createStyledComponents as createStyledInputComponents, defaultStyleProps as defaultInputStyleProps } from './Input';
+var defaultStyledInputComponents = createStyledInputComponents(defaultInputStyleProps);
 export var defaultStyleProps = {
+  InputDecoratorComponent: defaultStyledInputComponents.InputDecoratorComponent,
+  LabelComponent: defaultStyledInputComponents.LabelComponent,
+  activeBorderColor: palette.black,
   backgroundColor: palette.lightGray,
   borderColor: palette.border,
   color: palette.black,
   fontFamily: fontStack,
-  placeholderColor: String(transparentize(0.2, palette.darkGray)),
-  activeBorderColor: palette.black,
   fontSize: rem(14),
-  fontWeight: fontWeights.semibold
+  fontWeight: fontWeights.semibold,
+  placeholderColor: String(transparentize(0.2, palette.darkGray))
 };
 export var createStyledComponents = function createStyledComponents(styleProps) {
   var SelectComponent = styled.select.withConfig({
@@ -45,11 +48,8 @@ export var createStyledComponents = function createStyledComponents(styleProps) 
     var disabled = _ref2.disabled;
     return disabled && css(["background-color:", ";background-image:linear-gradient( ", ",", " );color:", ";cursor:not-allowed;"], darken(0.05, styleProps.backgroundColor), darken(0.05, palette.white), darken(0.05, styleProps.backgroundColor), darken(0.05, styleProps.color));
   });
-
-  var _createStyledInputCom = createStyledInputComponents(defaultInputStyleProps),
-      LabelComponent = _createStyledInputCom.LabelComponent,
-      BaseInputDecoratorComponent = _createStyledInputCom.InputDecoratorComponent;
-
+  var LabelComponent = styleProps.LabelComponent,
+      BaseInputDecoratorComponent = styleProps.InputDecoratorComponent;
   var InputDecoratorComponent = BaseInputDecoratorComponent.extend(_templateObject(), "\"" + tristicons['chevron-down'] + "\"");
   return {
     SelectComponent: SelectComponent,

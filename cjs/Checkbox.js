@@ -46,16 +46,16 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
+var defaultInputStyledComponents = (0, _Input.createStyledComponents)(_Input.defaultStyleProps);
 var defaultStyleProps = {
-  checkboxSize: 20,
-  checkboxColor: _constants.palette.primary
+  LabelComponent: defaultInputStyledComponents.LabelComponent,
+  checkboxColor: _constants.palette.primary,
+  checkboxSize: 20
 };
 exports.defaultStyleProps = defaultStyleProps;
 
 var createStyledComponents = function createStyledComponents(styleProps) {
-  var _createStyledInputCom = (0, _Input.createStyledComponents)(_Input.defaultStyleProps),
-      InputLabelComponent = _createStyledInputCom.LabelComponent;
-
+  var InputLabelComponent = styleProps.LabelComponent;
   var LabelComponent = InputLabelComponent.extend(_templateObject());
 
   var WrapperComponent = _styledComponents.default.div.withConfig({

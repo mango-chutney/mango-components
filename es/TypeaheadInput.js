@@ -29,7 +29,11 @@ import matchSorter from 'match-sorter';
 import styled, { css } from 'styled-components';
 import { darken } from 'polished';
 import { createComponent as createInputComponent, createLabelProps, createStyledComponents as createStyledInputComponents, defaultStyleProps as defaultInputStyleProps } from './Input';
-export var defaultStyleProps = {};
+var defaultStyledInputComponents = createStyledInputComponents(defaultInputStyleProps);
+export var defaultStyleProps = {
+  InputComponent: defaultStyledInputComponents.InputComponent,
+  InputDecoratorComponent: defaultStyledInputComponents.InputDecoratorComponent
+};
 export var createStyledComponents = function createStyledComponents(styleProps) {
   var MenuComponent = styled.div.withConfig({
     componentId: "s1ah6m0p-0"

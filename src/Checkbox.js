@@ -29,12 +29,18 @@ export type $Props = {
 } & React.ElementConfig<'input'> &
   $FieldProps;
 
+const defaultInputStyledComponents = createStyledInputComponents(
+  defaultInputStyleProps,
+);
+
 export const defaultStyleProps: {|
-  checkboxSize: number,
+  LabelComponent: $ReactComponentStyled<*>,
   checkboxColor: string,
+  checkboxSize: number,
 |} = {
-  checkboxSize: 20,
+  LabelComponent: defaultInputStyledComponents.LabelComponent,
   checkboxColor: palette.primary,
+  checkboxSize: 20,
 };
 
 export const createStyledComponents: $StyledSubComponentsFactory<
@@ -47,9 +53,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
   },
   typeof defaultStyleProps,
 > = styleProps => {
-  const { LabelComponent: InputLabelComponent } = createStyledInputComponents(
-    defaultInputStyleProps,
-  );
+  const { LabelComponent: InputLabelComponent } = styleProps;
 
   const LabelComponent = InputLabelComponent.extend`
     display: inline-block;

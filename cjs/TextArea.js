@@ -50,17 +50,19 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
+var defaultStyledInputComponents = (0, _Input.createStyledComponents)(_Input.defaultStyleProps);
 var defaultStyleProps = {
+  InputComponent: defaultStyledInputComponents.InputComponent,
+  InputDecoratorComponent: defaultStyledInputComponents.InputDecoratorComponent,
+  LabelComponent: defaultStyledInputComponents.LabelComponent,
   shouldDisplayInputDecorator: false
 };
 exports.defaultStyleProps = defaultStyleProps;
 
 var createStyledComponents = function createStyledComponents(styleProps) {
-  var _createStyledInputCom = (0, _Input.createStyledComponents)(_Input.defaultStyleProps),
-      InputComponent = _createStyledInputCom.InputComponent,
-      InputDecoratorComponent = _createStyledInputCom.InputDecoratorComponent,
-      LabelComponent = _createStyledInputCom.LabelComponent;
-
+  var InputComponent = styleProps.InputComponent,
+      InputDecoratorComponent = styleProps.InputDecoratorComponent,
+      LabelComponent = styleProps.LabelComponent;
   var TextAreaComponent = InputComponent.withComponent('textarea').extend(_templateObject());
   return {
     InputDecoratorComponent: styleProps.shouldDisplayInputDecorator ? InputDecoratorComponent : InputDecoratorComponent.extend(_templateObject2()),

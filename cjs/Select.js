@@ -50,15 +50,18 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
+var defaultStyledInputComponents = (0, _Input.createStyledComponents)(_Input.defaultStyleProps);
 var defaultStyleProps = {
+  InputDecoratorComponent: defaultStyledInputComponents.InputDecoratorComponent,
+  LabelComponent: defaultStyledInputComponents.LabelComponent,
+  activeBorderColor: _constants.palette.black,
   backgroundColor: _constants.palette.lightGray,
   borderColor: _constants.palette.border,
   color: _constants.palette.black,
   fontFamily: _constants.fontStack,
-  placeholderColor: String((0, _polished.transparentize)(0.2, _constants.palette.darkGray)),
-  activeBorderColor: _constants.palette.black,
   fontSize: (0, _polished.rem)(14),
-  fontWeight: _constants.fontWeights.semibold
+  fontWeight: _constants.fontWeights.semibold,
+  placeholderColor: String((0, _polished.transparentize)(0.2, _constants.palette.darkGray))
 };
 exports.defaultStyleProps = defaultStyleProps;
 
@@ -75,10 +78,8 @@ var createStyledComponents = function createStyledComponents(styleProps) {
     return disabled && (0, _styledComponents.css)(["background-color:", ";background-image:linear-gradient( ", ",", " );color:", ";cursor:not-allowed;"], (0, _polished.darken)(0.05, styleProps.backgroundColor), (0, _polished.darken)(0.05, _constants.palette.white), (0, _polished.darken)(0.05, styleProps.backgroundColor), (0, _polished.darken)(0.05, styleProps.color));
   });
 
-  var _createStyledInputCom = (0, _Input.createStyledComponents)(_Input.defaultStyleProps),
-      LabelComponent = _createStyledInputCom.LabelComponent,
-      BaseInputDecoratorComponent = _createStyledInputCom.InputDecoratorComponent;
-
+  var LabelComponent = styleProps.LabelComponent,
+      BaseInputDecoratorComponent = styleProps.InputDecoratorComponent;
   var InputDecoratorComponent = BaseInputDecoratorComponent.extend(_templateObject(), "\"".concat(_tristicons.default['chevron-down'], "\""));
   return {
     SelectComponent: SelectComponent,

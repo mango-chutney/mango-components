@@ -24,9 +24,19 @@ export type $Props = {
 } & React.ElementConfig<'textarea'> &
   $FieldProps;
 
+const defaultStyledInputComponents = createStyledInputComponents(
+  defaultInputStyleProps,
+);
+
 export const defaultStyleProps: {|
+  InputComponent: $ReactComponentStyled<*>,
+  InputDecoratorComponent: $ReactComponentStyled<*>,
+  LabelComponent: $ReactComponentStyled<*>,
   shouldDisplayInputDecorator: boolean,
 |} = {
+  InputComponent: defaultStyledInputComponents.InputComponent,
+  InputDecoratorComponent: defaultStyledInputComponents.InputDecoratorComponent,
+  LabelComponent: defaultStyledInputComponents.LabelComponent,
   shouldDisplayInputDecorator: false,
 };
 
@@ -42,7 +52,7 @@ export const createStyledComponents: $StyledSubComponentsFactory<
     InputComponent,
     InputDecoratorComponent,
     LabelComponent,
-  } = createStyledInputComponents(defaultInputStyleProps);
+  } = styleProps;
 
   const TextAreaComponent = InputComponent.withComponent('textarea').extend`
     height: auto;

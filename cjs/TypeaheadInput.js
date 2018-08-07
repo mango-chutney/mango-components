@@ -71,7 +71,11 @@ function _templateObject() {
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var defaultStyleProps = {};
+var defaultStyledInputComponents = (0, _Input.createStyledComponents)(_Input.defaultStyleProps);
+var defaultStyleProps = {
+  InputComponent: defaultStyledInputComponents.InputComponent,
+  InputDecoratorComponent: defaultStyledInputComponents.InputDecoratorComponent
+};
 exports.defaultStyleProps = defaultStyleProps;
 
 var createStyledComponents = function createStyledComponents(styleProps) {

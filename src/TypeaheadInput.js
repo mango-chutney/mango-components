@@ -40,7 +40,17 @@ export type $Props = {
   renderItem?: (item: any) => React.Node, // defaults to mapItemToString
 } & $StyledProps;
 
-export const defaultStyleProps = {};
+const defaultStyledInputComponents = createStyledInputComponents(
+  defaultInputStyleProps,
+);
+
+export const defaultStyleProps: {|
+  InputComponent: $ReactComponentStyled<*>,
+  InputDecoratorComponent: $ReactComponentStyled<*>,
+|} = {
+  InputComponent: defaultStyledInputComponents.InputComponent,
+  InputDecoratorComponent: defaultStyledInputComponents.InputDecoratorComponent,
+};
 
 export const createStyledComponents: $StyledSubComponentsFactory<
   {
