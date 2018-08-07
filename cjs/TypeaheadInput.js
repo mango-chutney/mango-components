@@ -66,7 +66,7 @@ var createStyledComponents = function createStyledComponents(styleProps) {
   var _createStyledInputCom = (0, _Input.createStyledComponents)(_Input.defaultStyleProps),
       InputDecoratorComponent = _createStyledInputCom.InputDecoratorComponent;
 
-  var MenuWrapperComponent = InputDecoratorComponent.withComponent('div');
+  var MenuWrapperComponent = InputDecoratorComponent;
 
   var ItemComponent = _styledComponents.default.div.withConfig({
     componentId: "s1ah6m0p-1"

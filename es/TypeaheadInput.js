@@ -25,7 +25,7 @@ export var createStyledComponents = function createStyledComponents(styleProps) 
   var _createStyledInputCom = createStyledInputComponents(defaultInputStyleProps),
       InputDecoratorComponent = _createStyledInputCom.InputDecoratorComponent;
 
-  var MenuWrapperComponent = InputDecoratorComponent.withComponent('div');
+  var MenuWrapperComponent = InputDecoratorComponent;
   var ItemComponent = styled.div.withConfig({
     componentId: "s1ah6m0p-1"
   })(["background-color:", ";font-weight:", ";"], function (_ref) {
