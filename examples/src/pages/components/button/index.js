@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { createComponent as createButtonComponent } from 'mango-components/es/Button';
 import { createComponent as createAnchorButtonComponent } from 'mango-components/es/AnchorButton';
+import Layout from '../../../containers/Layout';
 
 const Button = createButtonComponent();
 const AnchorButton = createAnchorButtonComponent();
@@ -16,16 +17,14 @@ export class ButtonExample extends React.Component<Props, State> {
 
   render() {
     return (
-      <div>
+      <Layout>
         <h2>Button</h2>
         <Button onClick={() => {}}>Button</Button>
         <h2>AnchorButton</h2>
         <AnchorButton href="/">AnchorButton</AnchorButton>
-      </div>
+      </Layout>
     );
   }
 }
 
-export const component = ButtonExample;
-
-export default component;
+export default ButtonExample;

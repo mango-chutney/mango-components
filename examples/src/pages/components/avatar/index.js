@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { createComponent as createAvatarComponent } from 'mango-components/es/Avatar';
+import Layout from '../../../containers/Layout';
 
 const Avatar = createAvatarComponent();
 
@@ -14,7 +15,7 @@ export class AvatarExample extends React.Component<Props, State> {
 
   render() {
     return (
-      <div>
+      <Layout>
         <h1>Avatar</h1>
         <div>
           <p>Avatar Params</p>
@@ -88,11 +89,9 @@ export class AvatarExample extends React.Component<Props, State> {
             width="250px"
           />
         </div>
-      </div>
+      </Layout>
     );
   }
 }
 
-export const component = AvatarExample;
-
-export default component;
+export default AvatarExample;

@@ -7,6 +7,7 @@ import {
   createComponent as createTristiconComponent,
   createFontFace as createTristiconFontFace,
 } from 'mango-components/es/Tristicon';
+import Layout from '../../../containers/Layout';
 
 const Tristicon = createTristiconComponent();
 
@@ -24,7 +25,7 @@ export class TristiconExample extends React.Component<Props, State> {
 
   render() {
     return (
-      <div>
+      <Layout>
         <h2>Tristicon</h2>
         <p>
           You will need to include the tristicon fonts with webpack copy or a
@@ -60,7 +61,7 @@ export class TristiconExample extends React.Component<Props, State> {
             <Tristicon icon="facebook" />
           </p>
         </div>
-      </div>
+      </Layout>
     );
   }
 }
