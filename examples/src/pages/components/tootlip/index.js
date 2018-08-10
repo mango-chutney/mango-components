@@ -5,6 +5,7 @@ import {
   placements,
   createComponent as createTootlipComponent,
 } from 'mango-components/es/Tootlip';
+import Layout from '../../../containers/Layout';
 
 const Tootlip = createTootlipComponent();
 
@@ -40,7 +41,7 @@ export class TootlipExample extends React.Component<Props, State> {
     } = this.state;
 
     return (
-      <div>
+      <Layout>
         <h2>Tootlip</h2>
         <p>
           <span
@@ -58,11 +59,7 @@ export class TootlipExample extends React.Component<Props, State> {
             }}
           >
             Hover on me
-            <Tootlip
-              visible={isHovering}
-              appElement={document.getElementById('app')}
-              placement={placements.auto}
-            >
+            <Tootlip visible={isHovering} placement={placements.auto}>
               Hey
             </Tootlip>
           </span>{' '}
@@ -158,7 +155,7 @@ export class TootlipExample extends React.Component<Props, State> {
             </Tootlip>
           </button>
         </div>
-      </div>
+      </Layout>
     );
   }
 }

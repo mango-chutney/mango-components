@@ -13,6 +13,7 @@ import { createComponent as createTextAreaComponent } from 'mango-components/es/
 import { createComponent as createSelectComponent } from 'mango-components/es/Select';
 import { createComponent as createTypeaheadInputComponent } from 'mango-components/es/TypeaheadInput';
 import { createComponent as createDatePickerComponent } from 'mango-components/es/DatePicker';
+import Layout from '../../../containers/Layout';
 
 const Tootlip = createTootlipComponent();
 const Button = createButtonComponent();
@@ -60,7 +61,7 @@ export class Form extends React.Component<Props, State> {
     }
 
     return (
-      <div>
+      <Layout>
         <h2>Forms</h2>
         <h3>Input</h3>
         <form>
@@ -258,7 +259,7 @@ export class Form extends React.Component<Props, State> {
             </Tootlip>
           </Button>
         </form>
-      </div>
+      </Layout>
     );
   }
 }
@@ -297,11 +298,9 @@ const asyncValidate = () =>
     throw errors;
   });
 
-export const component = reduxForm({
+export default reduxForm({
   form: 'Form',
   validate,
   asyncValidate,
   asyncBlurFields: ['async-validating-text'],
 })(Form);
-
-export default component;

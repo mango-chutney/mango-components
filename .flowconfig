@@ -2,7 +2,6 @@
 <PROJECT_ROOT>/node_modules/styled-components/*
 <PROJECT_ROOT>/node_modules/tristicons/templates/icons.json
 <PROJECT_ROOT>/examples/node_modules/tristicons/templates/icons.json
-<PROJECT_ROOT>/examples/*
 
 [include]
 

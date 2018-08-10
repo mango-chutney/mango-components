@@ -4,6 +4,7 @@ import * as React from 'react';
 
 import { createComponent as createRadialProgressBarComponent } from 'mango-components/es/RadialProgressBar';
 import { createComponent as createNestedRadialProgressBarsComponent } from 'mango-components/es/NestedRadialProgressBars';
+import Layout from '../../../containers/Layout';
 
 const RadialProgressBar = createRadialProgressBarComponent();
 const NestedRadialProgressBars = createNestedRadialProgressBarsComponent();
@@ -17,7 +18,7 @@ export class RadialProgressBarExample extends React.Component<Props, State> {
 
   render() {
     return (
-      <div>
+      <Layout>
         <h1>
           <code>
             {
@@ -210,11 +211,9 @@ export class RadialProgressBarExample extends React.Component<Props, State> {
             />
           </NestedRadialProgressBars>
         </div>
-      </div>
+      </Layout>
     );
   }
 }
 
-export const component = RadialProgressBarExample;
-
-export default component;
+export default RadialProgressBarExample;

@@ -6,18 +6,11 @@ import { createComponent as createMadeWithMangoChutneyComponent } from 'mango-co
 const MadeWithMangoChutney = createMadeWithMangoChutneyComponent();
 
 function Footer() {
-  return <MadeWithMangoChutney />;
+  return (
+    <footer>
+      <MadeWithMangoChutney />
+    </footer>
+  );
 }
 
 export default Footer;
-
-export function withFooter(
-  WrappedComponent: React.ElementType,
-): React.ElementType {
-  return (props: *) => (
-    <div>
-      <WrappedComponent {...props} />
-      <Footer />
-    </div>
-  );
-}

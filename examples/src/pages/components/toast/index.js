@@ -13,6 +13,7 @@ import {
   RainbowToastComponent,
   PersistentToast as PersistentToastController,
 } from 'mango-components/es/Toast';
+import Layout from '../../../containers/Layout';
 
 const Toast = createToastComponent();
 
@@ -47,7 +48,7 @@ const CoolToast = props => (
 );
 
 const ToastExample = () => (
-  <div>
+  <Layout>
     <ToastProvider {...{ PortalComponent: ToastPortal }}>
       <h1>Toast</h1>
       <ToastConsumer>
@@ -90,9 +91,7 @@ const ToastExample = () => (
         )}
       </ToastConsumer>
     </ToastProvider>
-  </div>
+  </Layout>
 );
 
-export const component = ToastExample;
-
-export default component;
+export default ToastExample;
