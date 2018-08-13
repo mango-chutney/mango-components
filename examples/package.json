@@ -11,9 +11,9 @@
     "start": "gatsby develop"
   },
   "devDependencies": {
-    "babel-plugin-styled-components": "^1.5.1",
-    "gatsby-cli": "^2.0.0-beta.12",
-    "gh-pages": "^1.2.0",
+    "babel-plugin-styled-components": "1.5.1",
+    "gatsby-cli": "2.0.0-beta.12",
+    "gh-pages": "1.2.0",
     "prettier": "1.14.2"
   },
   "dependencies": {
