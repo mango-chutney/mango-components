@@ -6,6 +6,7 @@
   "scripts": {
     "build": "gatsby build",
     "clean": "rm -rf .cache public",
+    "deploy": "gh-pages -d public",
     "lint": "cd ../ && yarn run lint",
     "start": "gatsby develop"
   },
@@ -18,6 +19,7 @@
     "babel-loader": "8.0.0-beta.4",
     "babel-plugin-styled-components": "^1.5.1",
     "gatsby-cli": "^2.0.0-beta.12",
+    "gh-pages": "^1.2.0",
     "prettier": "1.13.7"
   },
   "dependencies": {
