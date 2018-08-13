@@ -1,13 +1,8 @@
 // @flow
 
 import * as React from 'react';
-import {
-  placements,
-  createComponent as createTootlipComponent,
-} from 'mango-components/es/Tootlip';
+import { tootlipPlacements, Tootlip } from 'mango-components';
 import Layout from '../../../containers/Layout';
-
-const Tootlip = createTootlipComponent();
 
 type Props = {};
 
@@ -59,7 +54,7 @@ export class TootlipExample extends React.Component<Props, State> {
             }}
           >
             Hover on me
-            <Tootlip visible={isHovering} placement={placements.auto}>
+            <Tootlip visible={isHovering} placement={tootlipPlacements.auto}>
               Hey
             </Tootlip>
           </span>{' '}
@@ -78,7 +73,7 @@ export class TootlipExample extends React.Component<Props, State> {
             {'Press (･ω´･ )́)'}
             <Tootlip
               visible={exampleButtonIsActive}
-              placement={placements.auto}
+              placement={tootlipPlacements.auto}
             >
               Thanks for following the instructions.
             </Tootlip>
@@ -101,7 +96,7 @@ export class TootlipExample extends React.Component<Props, State> {
             {'Right (･ω´･ )́)'}
             <Tootlip
               visible={exampleRightPlacementButtonIsActive}
-              placement={placements.right}
+              placement={tootlipPlacements.right}
             >
               Mango Chutney
             </Tootlip>
@@ -117,7 +112,7 @@ export class TootlipExample extends React.Component<Props, State> {
             {'Left (･ω´･ )́)'}
             <Tootlip
               visible={exampleLeftPlacementButtonIsActive}
-              placement={placements.left}
+              placement={tootlipPlacements.left}
             >
               Among Chutney
             </Tootlip>
@@ -133,7 +128,7 @@ export class TootlipExample extends React.Component<Props, State> {
             {'Top (･ω´･ )́)'}
             <Tootlip
               visible={exampleTopPlacementButtonIsActive}
-              placement={placements.top}
+              placement={tootlipPlacements.top}
             >
               Ace Gunny Moth
             </Tootlip>
@@ -149,7 +144,7 @@ export class TootlipExample extends React.Component<Props, State> {
             {'Bottom (･ω´･ )́)'}
             <Tootlip
               visible={exampleBottomPlacementButtonIsActive}
-              placement={placements.bottom}
+              placement={tootlipPlacements.bottom}
             >
               Cage Ohm Tunny
             </Tootlip>

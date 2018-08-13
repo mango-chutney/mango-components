@@ -1,58 +1,111 @@
 // @flow
 
-import * as AnchorButton from './AnchorButton';
-import * as Avatar from './Avatar';
-import * as Button from './Button';
-import * as Checkbox from './Checkbox';
-import * as Input from './Input';
-import * as MadeWithMangoChutney from './MadeWithMangoChutney';
-import * as NestedRadialProgressBars from './NestedRadialProgressBars';
-import * as PaddedCheckbox from './PaddedCheckbox';
-import * as Panel from './Panel';
-import * as PanelHeading from './PanelHeading';
-import * as PanelSection from './PanelSection';
-import * as RadialProgressBar from './RadialProgressBar';
-import * as Select from './Select';
-import * as TextArea from './TextArea';
-import * as Toast from './Toast';
-import * as Tootlip from './Tootlip';
-import * as Tristicon from './Tristicon';
+export { default as AnimatedRainbowGradient } from './AnimatedRainbowGradient';
+
+export { Avatar, AvatarComponent, AvatarComposer } from './Avatar';
 
 export {
   AnchorButton,
-  Avatar,
+  AnchorButtonComponent,
   Button,
-  Checkbox,
-  Input,
-  MadeWithMangoChutney,
-  NestedRadialProgressBars,
-  PaddedCheckbox,
-  Panel,
-  PanelHeading,
-  PanelSection,
-  RadialProgressBar,
-  Select,
-  TextArea,
-  Toast,
-  Tootlip,
-};
+  ButtonComponent,
+  ButtonComposer,
+} from './Button';
 
-export default {
-  AnchorButton,
-  Avatar,
-  Button,
+export {
   Checkbox,
+  CheckboxComposer,
+  CheckboxContainerComponent,
+  CheckboxInputComponent,
+  CheckboxInputDecoratorComponent,
+  CheckboxLabelComponent,
+  CheckboxWrapperComponent,
+} from './Checkbox';
+
+export {
+  DatePicker,
+  DatePickerComposedInputComponent,
+  DatePickerComposer,
+  DatePickerOverlayComponent,
+  DatePickerOverlayWrapperComponent,
+} from './DatePicker';
+
+export {
   Input,
+  InputComponent,
+  InputComposer,
+  InputDecoratorComponent,
+  InputLabelComponent,
+  createFormControlElementProps,
+  createInputDecoratorProps,
+  createInputIdAttribute,
+  createLabelForAttribute,
+  createLabelObject,
+  createLabelProps,
+} from './Input';
+
+export {
   MadeWithMangoChutney,
-  NestedRadialProgressBars,
-  PaddedCheckbox,
-  Panel,
-  PanelHeading,
-  PanelSection,
-  RadialProgressBar,
+  MadeWithMangoChutneyAnchorComponent,
+  MadeWithMangoChutneyComponent,
+  MadeWithMangoChutneyWrapperComponent,
+} from './MadeWithMangoChutney';
+
+export { Panel, PanelHeading, PanelSection } from './Panel';
+
+export {
   Select,
+  SelectComponent,
+  SelectComposer,
+  SelectInputDecoratorComponent,
+  SelectLabelComponent,
+} from './Select';
+
+export {
   TextArea,
+  TextAreaComponent,
+  TextAreaComposer,
+  TextAreaInputDecoratorComponent,
+  TextAreaLabelComponent,
+} from './TextArea';
+
+export {
+  PersistentToast,
+  PersistentToastComposer,
+  RainbowToastComponent,
   Toast,
+  ToastComponent,
+  ToastComposer,
+  ToastConsumer,
+  ToastContainerComponent,
+  ToastPortal,
+  ToastPortalComposer,
+  ToastProvider,
+  transitionStates,
+} from './Toast';
+
+export {
+  TootlipArrowComponent,
+  TootlipPopperComponent,
   Tootlip,
+  UnmanagedTootlip,
+  UnmanagedTootlipComposer,
+  placements as tootlipPlacements,
+} from './Tootlip';
+
+export {
   Tristicon,
-};
+  TristiconComponent,
+  TristiconComposer,
+  createTristiconFontFace,
+  tristicons,
+} from './Tristicon';
+
+export {
+  TypeaheadInput,
+  TypeaheadInputComponent,
+  TypeaheadInputComposer,
+  TypeaheadItemComponent,
+  TypeaheadMenuComponent,
+  TypeaheadMenuWrapperComponent,
+} from './TypeaheadInput';

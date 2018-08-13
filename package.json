@@ -1,8 +1,7 @@
 {
   "name": "mango-components",
   "version": "1.1.0",
-  "main": "./cjs/index.js",
-  "module": "./es/index.js",
+  "main": "./src/index.js",
   "repository": "https://github.com/mango-chutney/mango-components",
   "author": "Mango Chutney",
   "license": "UNLICENCED",
@@ -15,7 +14,6 @@
     "lint": "npm-run-all run-prettier run-eslint check",
     "run-eslint": "./scripts/run-eslint.sh",
     "run-prettier": "./scripts/run-prettier.sh",
-    "start": "webpack -d --progress --config webpack.config.js",
     "test": "jest"
   },
   "dependencies": {

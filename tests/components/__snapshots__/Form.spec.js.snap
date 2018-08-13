@@ -1,6 +1,95 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders correctly 1`] = `
+.c6 {
+  position: relative;
+  margin: 0;
+  height: 1.25rem;
+  width: 1.25rem;
+  display: inline-block;
+}
+
+.c7 {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+  z-index: 9001;
+  opacity: 0;
+}
+
+.c7[disabled] {
+  cursor: not-allowed;
+}
+
+.c7:checked + .c8::before,
+.c7:checked + .c8::after {
+  top: 0;
+  left: 0;
+}
+
+.c7:checked + .c8::before {
+  background: #2ea1f8;
+  border-color: #1596f7;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+}
+
+.c7:checked + .c8::after {
+  content: '';
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSd4TWlkWU1pZCcgd2lkdGg9JzE2LjUnIGhlaWdodD0nMTUnIHZpZXdCb3g9JzAgMCAxNi41IDE1Jz48cGF0aCBmaWxsPScjZmZmJyBmaWxsLXJ1bGU9J2V2ZW5vZGQnIGQ9J00xNi41MTUsMS4wNzEgQzE2LjM5OSwwLjgyNyAxNS45MTQsLTAuMDMwIDE1LjUxNSwwLjAwMSBDMTQuMjg5LDAuNzY1IDEyLjY5MywyLjM1NCAxMS42MzgsMy4zNjIgQzkuNTI4LDUuMzc4IDcuNTAzLDcuNDg2IDUuNTA4LDkuNjI0IEwxLjUxNiw1Ljg5NyBMMC4wMDUsNy40ODYgQzIuMjAwLDkuODM3IDQuNTY3LDEyLjM3MyA2LjUwNSwxNS4wMDAgQzguOTg2LDEwLjYzMiAxMy4wMzUsNC4zNzAgMTYuNTE1LDEuMDcxIEwxNi41MTUsMS4wNzEgWicvPjwvc3ZnPg==');
+  background-position: 50% 40%;
+  background-repeat: no-repeat;
+  background-size: 70%;
+  -webkit-transition: all 0.25s;
+  transition: all 0.25s;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.c9 {
+  cursor: pointer;
+  display: inline-block;
+  min-height: 1.25rem;
+  line-height: 1.25rem;
+  position: relative;
+  border: 1px solid transparent;
+  display: block;
+}
+
+.c9::before,
+.c9::after {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+  content: '';
+  display: inline-block;
+  border-radius: 4px;
+  vertical-align: middle;
+}
+
+.c9::before {
+  border: 1px solid #e2e7ee;
+  background: #fafbfc;
+  margin-right: 1rem;
+}
+
+.c9::after {
+  position: absolute;
+  left: 0;
+  border: 1px solid transparent;
+  line-height: 1.25rem;
+  margin-top: 0.125rem;
+  text-align: center;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+}
+
 .c2 {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -67,99 +156,6 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   display: block;
 }
 
-.c5 {
-  margin: 1rem 0;
-}
-
-.c6 {
-  position: relative;
-  margin: 0;
-  height: 1.25rem;
-  width: 1.25rem;
-  display: inline-block;
-}
-
-.c9 {
-  cursor: pointer;
-  display: inline-block;
-  min-height: 1.25rem;
-  line-height: 1.25rem;
-  position: relative;
-  border: 1px solid transparent;
-  display: block;
-}
-
-.c9::before,
-.c9::after {
-  width: 1.25rem;
-  height: 1.25rem;
-  cursor: pointer;
-  content: '';
-  display: inline-block;
-  border-radius: 4px;
-  vertical-align: middle;
-}
-
-.c9::before {
-  border: 1px solid #e2e7ee;
-  background: #fafbfc;
-  margin-right: 1rem;
-}
-
-.c9::after {
-  position: absolute;
-  left: 0;
-  border: 1px solid transparent;
-  line-height: 1.25rem;
-  margin-top: 0.125rem;
-  text-align: center;
-  -webkit-transform: scale(0);
-  -ms-transform: scale(0);
-  transform: scale(0);
-}
-
-.c7 {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  padding: 0;
-  margin: 0;
-  top: 0;
-  left: 0;
-  z-index: 9001;
-  opacity: 0;
-}
-
-.c7[disabled] {
-  cursor: not-allowed;
-}
-
-.c7:checked + .c8::before,
-.c7:checked + .c8::after {
-  top: 0;
-  left: 0;
-}
-
-.c7:checked + .c8::before {
-  background: #2ea1f8;
-  border-color: #1596f7;
-  -webkit-transition: background-color 0.3s;
-  transition: background-color 0.3s;
-}
-
-.c7:checked + .c8::after {
-  content: '';
-  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSd4TWlkWU1pZCcgd2lkdGg9JzE2LjUnIGhlaWdodD0nMTUnIHZpZXdCb3g9JzAgMCAxNi41IDE1Jz48cGF0aCBmaWxsPScjZmZmJyBmaWxsLXJ1bGU9J2V2ZW5vZGQnIGQ9J00xNi41MTUsMS4wNzEgQzE2LjM5OSwwLjgyNyAxNS45MTQsLTAuMDMwIDE1LjUxNSwwLjAwMSBDMTQuMjg5LDAuNzY1IDEyLjY5MywyLjM1NCAxMS42MzgsMy4zNjIgQzkuNTI4LDUuMzc4IDcuNTAzLDcuNDg2IDUuNTA4LDkuNjI0IEwxLjUxNiw1Ljg5NyBMMC4wMDUsNy40ODYgQzIuMjAwLDkuODM3IDQuNTY3LDEyLjM3MyA2LjUwNSwxNS4wMDAgQzguOTg2LDEwLjYzMiAxMy4wMzUsNC4zNzAgMTYuNTE1LDEuMDcxIEwxNi41MTUsMS4wNzEgWicvPjwvc3ZnPg==');
-  background-position: 50% 40%;
-  background-repeat: no-repeat;
-  background-size: 70%;
-  -webkit-transition: all 0.25s;
-  transition: all 0.25s;
-  -webkit-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
-}
-
 .c10 {
   font-size: 0.875rem;
   font-weight: 600;
@@ -169,104 +165,16 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   font-weight: normal;
 }
 
-.c11 {
+.c5 {
   margin: 1rem 0;
-  padding: 2rem;
-  display: inline-block;
-  font-size: 1.5rem;
-  background: rgba(226,231,238,0.5);
-  border-radius: 0.25rem;
 }
 
-.c12 {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  padding: 0;
-  margin: 0;
-  top: 0;
-  left: 0;
-  z-index: 9001;
-  opacity: 0;
-}
-
-.c12[disabled] {
-  cursor: not-allowed;
-}
-
-.c12:checked + .c8::before,
-.c12:checked + .c8::after {
-  top: 0;
-  left: 0;
-}
-
-.c12:checked + .c8::before {
-  background: #2ea1f8;
-  border-color: #1596f7;
-  -webkit-transition: background-color 0.3s;
-  transition: background-color 0.3s;
-}
-
-.c12:checked + .c8::after {
-  content: '';
-  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSd4TWlkWU1pZCcgd2lkdGg9JzE2LjUnIGhlaWdodD0nMTUnIHZpZXdCb3g9JzAgMCAxNi41IDE1Jz48cGF0aCBmaWxsPScjZmZmJyBmaWxsLXJ1bGU9J2V2ZW5vZGQnIGQ9J00xNi41MTUsMS4wNzEgQzE2LjM5OSwwLjgyNyAxNS45MTQsLTAuMDMwIDE1LjUxNSwwLjAwMSBDMTQuMjg5LDAuNzY1IDEyLjY5MywyLjM1NCAxMS42MzgsMy4zNjIgQzkuNTI4LDUuMzc4IDcuNTAzLDcuNDg2IDUuNTA4LDkuNjI0IEwxLjUxNiw1Ljg5NyBMMC4wMDUsNy40ODYgQzIuMjAwLDkuODM3IDQuNTY3LDEyLjM3MyA2LjUwNSwxNS4wMDAgQzguOTg2LDEwLjYzMiAxMy4wMzUsNC4zNzAgMTYuNTE1LDEuMDcxIEwxNi41MTUsMS4wNzEgWicvPjwvc3ZnPg==');
-  background-position: 50% 40%;
-  background-repeat: no-repeat;
-  background-size: 70%;
-  -webkit-transition: all 0.25s;
-  transition: all 0.25s;
-  -webkit-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
-}
-
-.c12:checked + label {
-  -webkit-transition: all 300ms ease;
-  transition: all 300ms ease;
-  background: rgba(46,161,248,0.2);
-}
-
-.c14 {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background-color: #fafbfc;
-  background-image: linear-gradient( #fefefe,#fafbfc );
-  border-color: #e2e7ee;
-  border-radius: 0.25rem;
-  border-style: solid;
-  border-width: 0.05rem;
-  color: #354052;
-  display: block;
-  font-family: proxima-nova,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,sans-serif;
-  height: 2.6rem;
-  margin-bottom: 1rem;
-  outline: 0;
-  padding: 0.5rem 1rem;
-  -webkit-transition: border-color 300ms ease;
-  transition: border-color 300ms ease;
-  width: 100%;
-}
-
-.c14::-ms-expand {
-  display: none;
-}
-
-.c14:active,
-.c14:focus {
-  border-color: #354052;
-}
-
-.c14 option {
-  width: 100%;
-}
-
-.c13 {
+.c11 {
   display: block;
   position: relative;
 }
 
-.c13::after {
+.c11::after {
   content: '';
   color: rgba(127,143,164,0.8);
   font: normal normal normal 0.875rem tristicons;
@@ -279,8 +187,80 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   transform: translateY(-50%);
 }
 
-.c13::after {
+.c11::after {
   content: "\\f10a";
+}
+
+.c12 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #fafbfc;
+  border-color: #e2e7ee;
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  color: #354052;
+  display: block;
+  font-family: proxima-nova,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,sans-serif;
+  height: 2.6rem;
+  margin-bottom: 1rem;
+  outline: 0;
+  padding: 0.5rem 1rem;
+  -webkit-transition: border-color 300ms ease;
+  transition: border-color 300ms ease;
+  width: 100%;
+}
+
+.c12::-webkit-input-placeholder {
+  color: rgba(127,143,164,0.8);
+}
+
+.c12::-moz-placeholder {
+  color: rgba(127,143,164,0.8);
+}
+
+.c12:-ms-input-placeholder {
+  color: rgba(127,143,164,0.8);
+}
+
+.c12::placeholder {
+  color: rgba(127,143,164,0.8);
+}
+
+.c12:active,
+.c12:focus {
+  border-color: #354052;
+}
+
+.c12::-ms-expand {
+  display: none;
+}
+
+.c12 option {
+  width: 100%;
+}
+
+.c3 {
+  display: block;
+  position: relative;
+}
+
+.c3::after {
+  content: '';
+  color: rgba(127,143,164,0.8);
+  font: normal normal normal 0.875rem tristicons;
+  line-height: 1rem;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.c3::after {
+  display: none;
 }
 
 .c4 {
@@ -328,28 +308,6 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   border-color: #354052;
 }
 
-.c3 {
-  display: block;
-  position: relative;
-}
-
-.c3::after {
-  content: '';
-  color: rgba(127,143,164,0.8);
-  font: normal normal normal 0.875rem tristicons;
-  line-height: 1rem;
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
-
-.c3::after {
-  display: none;
-}
-
 <form>
   <label
     className="c0"
@@ -383,10 +341,10 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   >
     Text Area
     <span
-      className="-sc-bZQynM c3"
+      className="-sc-bxivhb c3"
     >
       <textarea
-        className="-textarea-sc-EHOje c4"
+        className="-textarea-sc-ifAKCX c4"
         id="textarea"
         name="textarea"
         onBlur={[Function]}
@@ -419,46 +377,15 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
         value=""
       />
       <div
-        className="c8 c9"
+        className="c8 input-decorator c9"
       />
     </div>
     <label
-      className="-sc-bwzfXH c10"
+      className="-sc-bdVaJa c10"
       htmlFor="checkbox"
       placeholder="Checkbox"
     >
       Checkbox
-    </label>
-  </div>
-  <div
-    className="-sc-htpNat c11"
-  >
-    <div
-      className="c6"
-    >
-      <input
-        className="-sc-bxivhb c12"
-        id="padded-checkbox"
-        name="padded-checkbox"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onDragStart={[Function]}
-        onDrop={[Function]}
-        onFocus={[Function]}
-        placeholder="PaddedCheckbox"
-        type="checkbox"
-        value=""
-      />
-      <div
-        className="c8 c9"
-      />
-    </div>
-    <label
-      className="c0"
-      htmlFor="padded-checkbox"
-      placeholder="PaddedCheckbox"
-    >
-      PaddedCheckbox
     </label>
   </div>
   <label
@@ -468,10 +395,10 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
   >
     select
     <span
-      className="-sc-ifAKCX c13"
+      className="-sc-bwzfXH c11"
     >
       <select
-        className="c14"
+        className="-select-sc-htpNat c12"
         id="select"
         name="select"
         onBlur={[Function]}

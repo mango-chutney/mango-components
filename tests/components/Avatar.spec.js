@@ -4,11 +4,9 @@ import 'raf/polyfill';
 import 'jest-styled-components';
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { createComponent as createAvatarComponent } from '../../src/Avatar';
+import { Avatar } from '../../src';
 
-const Avatar = createAvatarComponent();
-
-function AvatarComponent() {
+function ExampleAvatar() {
   return (
     <div>
       <Avatar />
@@ -21,6 +19,6 @@ function AvatarComponent() {
 }
 
 it('Avatar component renders correctly', () => {
-  const tree = renderer.create(<AvatarComponent />).toJSON();
+  const tree = renderer.create(<ExampleAvatar />).toJSON();
   expect(tree).toMatchSnapshot();
 });

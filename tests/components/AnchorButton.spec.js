@@ -4,11 +4,9 @@ import 'raf/polyfill';
 import 'jest-styled-components';
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { createComponent as createAnchorButtonComponent } from '../../src/AnchorButton';
+import { AnchorButton } from '../../src/Button';
 
-const AnchorButton = createAnchorButtonComponent();
-
-function AnchorButtonComponent() {
+function ExampleAnchorButton() {
   return (
     <div>
       <AnchorButton href="">Anchor Button</AnchorButton>
@@ -20,6 +18,6 @@ function AnchorButtonComponent() {
 }
 
 it('AnchorButton component renders correctly', () => {
-  const tree = renderer.create(<AnchorButtonComponent />).toJSON();
+  const tree = renderer.create(<ExampleAnchorButton />).toJSON();
   expect(tree).toMatchSnapshot();
 });

@@ -4,26 +4,17 @@ import * as React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import matchSorter from 'match-sorter';
 import type { FormProps as $FormProps } from 'redux-form';
-import { createComponent as createTootlipComponent } from 'mango-components/es/Tootlip';
-import { createComponent as createButtonComponent } from 'mango-components/es/Button';
-import { createComponent as createInputComponent } from 'mango-components/es/Input';
-import { createComponent as createCheckboxComponent } from 'mango-components/es/Checkbox';
-import { createComponent as createPaddedCheckboxComponent } from 'mango-components/es/PaddedCheckbox';
-import { createComponent as createTextAreaComponent } from 'mango-components/es/TextArea';
-import { createComponent as createSelectComponent } from 'mango-components/es/Select';
-import { createComponent as createTypeaheadInputComponent } from 'mango-components/es/TypeaheadInput';
-import { createComponent as createDatePickerComponent } from 'mango-components/es/DatePicker';
+import {
+  Button,
+  Checkbox,
+  Tootlip,
+  Input,
+  TypeaheadInput,
+  TextArea,
+  Select,
+  DatePicker,
+} from 'mango-components';
 import Layout from '../../../containers/Layout';
-
-const Tootlip = createTootlipComponent();
-const Button = createButtonComponent();
-const Input = createInputComponent();
-const Checkbox = createCheckboxComponent();
-const PaddedCheckbox = createPaddedCheckboxComponent();
-const TextArea = createTextAreaComponent();
-const Select = createSelectComponent();
-const TypeaheadInput = createTypeaheadInputComponent();
-const DatePicker = createDatePickerComponent();
 
 const TextAreaWithTootlip = ({
   meta,
@@ -165,14 +156,6 @@ export class Form extends React.Component<Props, State> {
               placeholder="disabled checken"
               component={Checkbox}
               disabled
-            />
-          </div>
-          <div>
-            <Field
-              name="paddedchecken"
-              label="paddedchecken"
-              placeholder="paddedchecken"
-              component={PaddedCheckbox}
             />
           </div>
           <div>

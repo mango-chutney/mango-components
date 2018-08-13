@@ -32,48 +32,103 @@ $ yarn run build
 
 ## Usage
 
-#### Using default component
+#### Using default styles
 
 ```js
-import { createComponent as createInputComponent } from 'mango-components/es/Input';
+import { Input } from 'mango-components';
+import { Field } from 'redux-form';
 
-const Input = createInputComponent();
-
-export default props => <Input {...props} />;
+export default () => (
+  <Field
+    type="email"
+    name="email"
+    placeholder="Please enter your email"
+    label="Email address"
+    component={Input}
+  />
+);
 ```
 
 ## Composition of styles
 
-#### Example
+### Either replace individual components
 
 ```js
-import {
-  createComponent as createInputComponent,
-  createStyledComponents as createStyledInputComponents,
-  defaultStyleProps as defaultInputStyleProps,
-} from 'mango-components/es/Input';
+import { Input } from 'mango-components';
+import styled from 'styled-components';
+import { Field } from 'redux-form';
 
-const Input = createInputComponent();
-
-const { InputComponent, SpanComponent } = createStyledInputComponents(
-  defaultStyleProps,
-);
-
-const StyledInputComponent = styled(InputComponent)`
-  ...;
+const InputComponent = styled.input`
+  position: relative;
 `;
 
-const StyledSpanComponent = styled(SpanComponent)`
-  ...;
+const InputDecoratorComponent = styled.span`
+  &::after {
+    content: '🙅';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 `;
 
-export const StyledInput = (props: {}) => (
+const StyledInput = (props: $Props) => (
   <Input
-    InputComponent={StyledInputComponent}
-    SpanComponent={StyledSpanComponent}
-    {...props}
+    {...{
+      InputDecoratorComponent,
+      ...props,
+    }}
   />
 );
 
-export default StyledInput;
+export default () => (
+  <Field
+    type="email"
+    name="email"
+    placeholder="Please enter your email"
+    label="Email address"
+    component={StyledInput}
+  />
+);
+```
+
+### Or recompose the whole thing
+
+This way, the default styles don't need to end up in the bundle at all.
+
+```js
+import {
+  InputComposer,
+  createFormControlElementProps,
+  createInputDecoratorProps,
+  createLabelProps,
+} from 'mango-components';
+import { Field } from 'redux-form';
+
+const InputComponent = styled.input``;
+const InputDecoratorComponent = styled.span``;
+const InputLabelComponent = styled.label``;
+
+const StyledInput = (props: $Props) => (
+  <InputComposer
+    {...{
+      InputComponent,
+      InputDecoratorComponent,
+      InputLabelComponent,
+      createFormControlElementProps,
+      createInputDecoratorProps,
+      createLabelProps,
+      ...props,
+    }}
+  />
+);
+
+export default () => (
+  <Field
+    type="email"
+    name="email"
+    placeholder="Please enter your email"
+    label="Email address"
+    component={StyledInput}
+  />
+);
 ```

@@ -15,7 +15,8 @@ exports[`Panel components (Panel, PanelHeading, PanelSection) renders correctly 
 }
 
 .c1 {
-  background: linear-gradient( #fafbfc 0%, #edf1f4 100% );
+  background: #fafbfc;
+  background: linear-gradient( #fafbfc 0%,#edf1f4 100% );
   border-radius: 0.25rem 0.25rem 0 0;
   border-bottom: 0.0625rem solid #e2e7ee;
   margin: -2rem -2rem 2rem;

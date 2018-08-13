@@ -8,15 +8,38 @@ const { peerDependencies } = require('../package.json');
 
 exports.onCreateWebpackConfig = ({ actions } /* : any */) => {
   actions.setWebpackConfig({
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          include: systemPath.resolve(systemPath.join(__dirname, '..', 'src')),
+          use: [
+            {
+              loader: 'babel-loader',
+            },
+          ],
+        },
+      ],
+    },
+
     resolve: {
-      alias: Object.keys(peerDependencies)
-        .map(key => ({
-          [key]: systemPath.resolve(
-            __dirname,
-            systemPath.join('node_modules', key),
-          ),
-        }))
-        .reduce((prev, next) => ({ ...prev, ...next }), {}),
+      modules: [
+        systemPath.resolve(systemPath.join(__dirname, 'node_modules')),
+        systemPath.resolve(systemPath.join(__dirname, '..', 'node_modules')),
+      ],
+      alias: {
+        ...Object.keys(peerDependencies)
+          .map(key => ({
+            [key]: systemPath.resolve(
+              __dirname,
+              systemPath.join('node_modules', key),
+            ),
+          }))
+          .reduce((prev, next) => ({ ...prev, ...next }), {}),
+        'mango-components': systemPath.resolve(
+          systemPath.join(__dirname, '..', 'src'),
+        ),
+      },
     },
   });
 };
