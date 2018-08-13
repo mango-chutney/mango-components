@@ -36,4 +36,4 @@ jobs:
       - run: yarn run test
       - run: yarn run build
       - run: cd examples && yarn run build
-      - run: if [ "${CIRCLE_BRANCH}" == "master" ]; then yarn run deploy; fi
+      - run: if [ "${CIRCLE_BRANCH}" == "master" ]; then cd examples && yarn run deploy; fi
