@@ -5383,8 +5383,18 @@ mamacro@^0.0.3:
   resolved "https://registry.yarnpkg.com/mamacro/-/mamacro-0.0.3.tgz#ad2c9576197c9f1abf308d0787865bd975a3f3e4"
 
 "mango-components@link:./..":
-  version "0.0.0"
-  uid ""
+  version "1.1.0"
+  dependencies:
+    classnames "2.2.5"
+    downshift "^2.0.19"
+    invariant "^2.2.4"
+    isomorphic-base64 "^1.0.2"
+    lodash "^4.17.10"
+    match-sorter "^2.2.3"
+    popper.js "1.12.6"
+    react-day-picker "^7.1.10"
+    react-popper "0.7.4"
+    tristicons "https://github.com/mango-chutney/tristicons/archive/81ef6d51d8ea06fafe83a584e33b7b94183e8409.tar.gz"
 
 map-cache@^0.2.0, map-cache@^0.2.2:
   version "0.2.2"
@@ -6610,9 +6620,9 @@ preserve@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
 
-prettier@1.13.7:
-  version "1.13.7"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.13.7.tgz#850f3b8af784a49a6ea2d2eaa7ed1428a34b7281"
+prettier@1.14.2:
+  version "1.14.2"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.14.2.tgz#0ac1c6e1a90baa22a62925f41963c841983282f9"
 
 pretty-error@^2.1.1:
   version "2.1.1"
