@@ -13,6 +13,7 @@ const revision = execSync('git rev-parse HEAD', {
   .trim();
 
 module.exports = {
+  pathPrefix: `/${name}`,
   siteMetadata: {
     title: name,
     name,

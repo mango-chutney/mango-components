@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "UNLICENSED",
   "scripts": {
-    "build": "gatsby build",
+    "build": "gatsby build --prefix-paths",
     "clean": "rm -rf .cache public",
     "deploy": "gh-pages -d public",
     "lint": "cd ../ && yarn run lint",
