@@ -43,13 +43,7 @@ const Layout = ({ children }: { children: React.Node }) => (
       },
     }) => (
       <>
-        <Helmet
-          title={title}
-          meta={[
-            { name: 'description', content: 'Sample' },
-            { name: 'keywords', content: 'sample, something' },
-          ]}
-        />
+        <Helmet title={title} />
         <Wrapper>
           <Header />
           <Navigation />
