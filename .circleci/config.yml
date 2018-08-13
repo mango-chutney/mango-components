@@ -3,6 +3,10 @@ jobs:
   build:
     docker:
       - image: circleci/node:latest
+    environment:
+      EMAIL: "team@mangochutney.com.au"
+      GIT_COMMITTER_NAME: "Mango Chutney"
+      GIT_AUTHOR_NAME: "Mango Chutney"
     steps:
       - checkout
       - add_ssh_keys:
