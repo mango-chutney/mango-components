@@ -4,22 +4,13 @@ import * as React from 'react';
 // Explicitly import from index.js, not from the "main" property of package.json
 // in the directory.
 import {
-  createStyledComponents as createStyledToastComponents,
-  defaultStyleProps as defaultToastStyleProps,
-  createComponent as createToastComponent,
-  createToastPortalComponent,
+  Toast,
   ToastConsumer,
   ToastProvider,
   RainbowToastComponent,
-  PersistentToast as PersistentToastController,
-} from 'mango-components/es/Toast';
+  PersistentToast,
+} from 'mango-components';
 import Layout from '../../../containers/Layout';
-
-const Toast = createToastComponent();
-
-const ToastPortal = createToastPortalComponent();
-
-const { ToastComponent } = createStyledToastComponents(defaultToastStyleProps);
 
 const Unicorn = () => (
   <span role="img" aria-label="unicorn">
@@ -33,23 +24,21 @@ const TransientToast = props => (
   </Toast>
 );
 
-const PersistentToast = props => (
-  <PersistentToastController {...{ ToastComponent, ...props }}>
+const WholesomeToast = props => (
+  <PersistentToast {...props}>
     I&rsquo;ll stick around. <Unicorn />
-  </PersistentToastController>
+  </PersistentToast>
 );
 
 const CoolToast = props => (
-  <PersistentToastController
-    {...{ ToastComponent: RainbowToastComponent, ...props }}
-  >
+  <PersistentToast {...{ ToastComponent: RainbowToastComponent, ...props }}>
     See you space cowboy. <Unicorn />
-  </PersistentToastController>
+  </PersistentToast>
 );
 
 const ToastExample = () => (
   <Layout>
-    <ToastProvider {...{ PortalComponent: ToastPortal }}>
+    <ToastProvider>
       <h1>Toast</h1>
       <ToastConsumer>
         {({ createToast }) => (
@@ -66,11 +55,11 @@ const ToastExample = () => (
               </button>
             </section>
             <section>
-              <h2>Persistent toast</h2>
+              <h2>Wholesome toast</h2>
               <button
                 type="button"
                 onClick={() => {
-                  createToast(PersistentToast, { persistent: true });
+                  createToast(WholesomeToast, { persistent: true });
                 }}
               >
                 Click

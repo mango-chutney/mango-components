@@ -3,13 +3,8 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import keys from 'lodash/keys';
 import pick from 'lodash/pick';
 import { btoa } from 'isomorphic-base64';
-import RainbowGradient from './RainbowGradient';
-import {
-  createStyledComponents as createStyledToastComponents,
-  defaultStyleProps as defaultToastStyleProps,
-} from './Toast';
-
-const { ToastComponent } = createStyledToastComponents(defaultToastStyleProps);
+import ToastComponent from './ToastComponent';
+import AnimatedRainbowGradient from '../AnimatedRainbowGradient';
 
 const RainbowToastComponent = ToastComponent.extend`
   /* fallback for old browsers */
@@ -17,8 +12,8 @@ const RainbowToastComponent = ToastComponent.extend`
   background: url(data:image/svg+xml;base64,${props =>
     btoa(
       renderToStaticMarkup(
-        <RainbowGradient
-          {...pick(props, keys(RainbowGradient.defaultProps))}
+        <AnimatedRainbowGradient
+          {...pick(props, keys(AnimatedRainbowGradient.defaultProps))}
         />,
       ),
     )});
@@ -28,7 +23,7 @@ const RainbowToastComponent = ToastComponent.extend`
 `;
 
 RainbowToastComponent.defaultProps = {
-  ...RainbowGradient.defaultProps,
+  ...AnimatedRainbowGradient.defaultProps,
   ...ToastComponent.defaultProps,
 };
 

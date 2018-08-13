@@ -7,17 +7,7 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import { Field, reduxForm, reducer as formReducer } from 'redux-form';
 import renderer from 'react-test-renderer';
-import { createComponent as createCheckboxComponent } from '../../src/Checkbox';
-import { createComponent as createInputComponent } from '../../src/Input';
-import { createComponent as createPaddedCheckboxComponent } from '../../src/PaddedCheckbox';
-import { createComponent as createSelectComponent } from '../../src/Select';
-import { createComponent as createTextAreaComponent } from '../../src/TextArea';
-
-const Checkbox = createCheckboxComponent();
-const Input = createInputComponent();
-const PaddedCheckbox = createPaddedCheckboxComponent();
-const Select = createSelectComponent();
-const TextArea = createTextAreaComponent();
+import { Input, TextArea, Checkbox, Select } from '../../src';
 
 const store = createStore(combineReducers({ form: formReducer }));
 
@@ -42,12 +32,6 @@ function FormComponents() {
         label="Checkbox"
         placeholder="Checkbox"
         component={Checkbox}
-      />
-      <Field
-        name="padded-checkbox"
-        label="PaddedCheckbox"
-        placeholder="PaddedCheckbox"
-        component={PaddedCheckbox}
       />
       <Field
         name="select"

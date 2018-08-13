@@ -1,37 +1,17 @@
 // @flow
 
+export { default as Toast } from './Toast';
+export { default as PersistentToast } from './PersistentToast';
+export { default as ToastPortal } from './ToastPortal';
 export {
   ToastConsumer,
-  default as ToastProvider,
+  default as ToastProviderComposer,
   transitionStates,
-} from './ToastProvider';
-
-export type {
-  $TransitionState,
-  $ToastOptions,
-  $Props as $ToastProviderProps,
-  $ToastContext,
-} from './ToastProvider';
-
-export type { $Props as $ToastPortalProps } from './ToastPortal';
-
-export {
-  ToastPortal,
-  createComponent as createToastPortalComponent,
-  createStyledComponents as createStyledToastPortalComponents,
-  defaultStyleProps as defaultToastPortalStyleProps,
-} from './ToastPortal';
-
-export type { $Props } from './Toast';
-
+} from './ToastProviderComposer';
+export { default as PersistentToastComposer } from './PersistentToastComposer';
 export { default as RainbowToastComponent } from './RainbowToastComponent';
-export { default as PersistentToast } from './PersistentToast';
-
-export {
-  Toast,
-  animations,
-  createComponent,
-  createStyledComponents,
-  default,
-  defaultStyleProps,
-} from './Toast';
+export { default as ToastComponent } from './ToastComponent';
+export { default as ToastComposer } from './ToastComposer';
+export { default as ToastContainerComponent } from './ToastContainerComponent';
+export { default as ToastPortalComposer } from './ToastPortalComposer';
+export { default as ToastProvider } from './ToastProvider';

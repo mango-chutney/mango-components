@@ -4,15 +4,13 @@ import 'raf/polyfill';
 import 'jest-styled-components';
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { createComponent as createTristiconComponent } from '../../src/Tristicon';
+import { Tristicon } from '../../src';
 
-const Tristicon = createTristiconComponent();
-
-function TristiconComponent() {
+function ExampleTristicon() {
   return <Tristicon icon="star" />;
 }
 
 it('Tristicon component renders correctly', () => {
-  const tree = renderer.create(<TristiconComponent />).toJSON();
+  const tree = renderer.create(<ExampleTristicon />).toJSON();
   expect(tree).toMatchSnapshot();
 });

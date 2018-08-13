@@ -3,13 +3,8 @@
 import * as React from 'react';
 import { injectGlobal } from 'styled-components';
 import stripIndent from 'strip-indent';
-import {
-  createComponent as createTristiconComponent,
-  createFontFace as createTristiconFontFace,
-} from 'mango-components/es/Tristicon';
+import { Tristicon, createTristiconFontFace } from 'mango-components';
 import Layout from '../../../containers/Layout';
-
-const Tristicon = createTristiconComponent();
 
 type Props = {};
 
@@ -34,15 +29,14 @@ export class TristiconExample extends React.Component<Props, State> {
         <p>
           Another option is to use the Base 64 encoded WOFF file inline, so you
           don&rsquo;t have to copy font files. You can use the{' '}
-          <code>createFontFace</code> export from the <code>Tristicon</code>{' '}
-          component for this:
+          <code>createTristiconFontFace</code> export for this:
         </p>
         <pre>
           <code>
             {// prettier-ignore
             stripIndent(`
               injectGlobal\`
-                \${MC.Tristicon.createFontFace()}
+                \${createTristiconFontFace()}
               \`;
             `)}
           </code>

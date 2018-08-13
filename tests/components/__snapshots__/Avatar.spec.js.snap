@@ -2,7 +2,7 @@
 
 exports[`Avatar component renders correctly 1`] = `
 .c0 {
-  background-color: #00b4ff;
+  background-color: '#00b4ff';
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -18,7 +18,7 @@ exports[`Avatar component renders correctly 1`] = `
 }
 
 .c1 {
-  background-color: #00b4ff;
+  background-color: '#00b4ff';
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -34,7 +34,7 @@ exports[`Avatar component renders correctly 1`] = `
 }
 
 .c2 {
-  background-color: #00b4ff;
+  background-color: '#00b4ff';
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

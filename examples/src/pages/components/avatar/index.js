@@ -1,10 +1,8 @@
 // @flow
 
 import * as React from 'react';
-import { createComponent as createAvatarComponent } from 'mango-components/es/Avatar';
+import { Avatar } from 'mango-components';
 import Layout from '../../../containers/Layout';
-
-const Avatar = createAvatarComponent();
 
 type Props = {};
 

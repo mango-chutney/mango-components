@@ -4,15 +4,9 @@ import 'raf/polyfill';
 import 'jest-styled-components';
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { createComponent as createMadeWithMangoChutneyComponent } from '../../src/MadeWithMangoChutney';
-
-const MadeWithMangoChutney = createMadeWithMangoChutneyComponent();
-
-function MadeWithMangoChutneyComponent() {
-  return <MadeWithMangoChutney />;
-}
+import { MadeWithMangoChutney } from '../../src';
 
 it('MadeWithMangoChutney component renders correctly', () => {
-  const tree = renderer.create(<MadeWithMangoChutneyComponent />).toJSON();
+  const tree = renderer.create(<MadeWithMangoChutney />).toJSON();
   expect(tree).toMatchSnapshot();
 });
