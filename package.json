@@ -19,7 +19,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "classnames": "2.2.5",
+    "classnames": "2.2.6",
     "downshift": "^2.0.19",
     "invariant": "^2.2.4",
     "isomorphic-base64": "^1.0.2",
