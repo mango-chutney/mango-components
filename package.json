@@ -25,7 +25,7 @@
     "isomorphic-base64": "^1.0.2",
     "lodash": "^4.17.10",
     "match-sorter": "^2.2.3",
-    "popper.js": "1.12.6",
+    "popper.js": "1.14.4",
     "react-day-picker": "^7.1.10",
     "react-popper": "0.7.4",
     "tristicons": "https://github.com/mango-chutney/tristicons/archive/81ef6d51d8ea06fafe83a584e33b7b94183e8409.tar.gz"
