@@ -3,3 +3,5 @@ node_modules
 examples/dist
 .cache
 public
+cjs/
+es/
