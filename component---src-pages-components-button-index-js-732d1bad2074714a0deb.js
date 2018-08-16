@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{231:function(e,t,n){"use strict";var o=n(10),u=n(37);Object.defineProperty(t,"__esModule",{value:!0}),t.default=void 0;var l=u(n(1)),c=n(248),r=o(n(246));t.default=function(){return l.createElement(r.default,null,l.createElement("h2",null,"Button"),l.createElement(c.Button,{onClick:function(){}},"Button"),l.createElement("h2",null,"AnchorButton"),l.createElement(c.AnchorButton,{href:"/"},"AnchorButton"))}}}]);
+//# sourceMappingURL=component---src-pages-components-button-index-js-732d1bad2074714a0deb.js.map
