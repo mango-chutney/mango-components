@@ -5,5 +5,6 @@ module.exports = api => {
 
   return {
     extends: '../babel.config.js',
+    plugins: ['@babel/plugin-syntax-dynamic-import'],
   };
 };
