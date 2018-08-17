@@ -24,12 +24,6 @@ $ cd examples
 $ yarn && yarn run start
 ```
 
-Finally, run the build script and commit the changes:
-
-```
-$ yarn run build
-```
-
 ## Usage
 
 The files in this repo need transpiling. Make sure you have the following packages:
