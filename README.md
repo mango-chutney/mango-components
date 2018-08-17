@@ -32,6 +32,54 @@ $ yarn run build
 
 ## Usage
 
+The files in this repo need transpiling. Make sure you have the following packages:
+
+```
+yarn add --dev "@babel/core" "@babel/preset-env" "@babel/preset-flow" "@babel/preset-react" "@babel/plugin-proposal-class-properties" "babel-plugin-styled-components"
+```
+
+Sample `babel.config.js`:
+
+```js
+module.exports = api => {
+  api.cache(true);
+
+  return {
+    presets: ['@babel/preset-react', '@babel/preset-env', '@babel/preset-flow'],
+    plugins: [
+      '@babel/plugin-proposal-class-properties',
+      ['styled-components', { displayName: false }],
+    ],
+  };
+};
+```
+
+Make sure you whitelist this module in `babel-loader`'s `include` key, for example:
+
+```js
+const path = require('path');
+
+module.exports = () => ({
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        include: [
+          path.resolve(
+            path.join(__dirname, 'node_modules', 'mango-components'),
+          ),
+        ],
+        use: [
+          {
+            loader: 'babel-loader',
+          },
+        ],
+      },
+    ],
+  },
+});
+```
+
 #### Using default styles
 
 ```js
