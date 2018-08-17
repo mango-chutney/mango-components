@@ -2,28 +2,6 @@
 
 A repository of re-useable styled components
 
-## Hacking
-
-Install dependencies and peer dependencies:
-
-```
-# You need to run this install-peers command again each time you run `yarn`.
-$ yarn && yarn run install-peers
-```
-
-Make changes and run tests:
-
-```
-$ yarn run tests
-```
-
-Run the examples:
-
-```
-$ cd examples
-$ yarn && yarn run start
-```
-
 ## Usage
 
 The files in this repo need transpiling. Make sure you have the following packages:
@@ -173,4 +151,26 @@ export default () => (
     component={StyledInput}
   />
 );
+```
+
+## Hacking
+
+Install dependencies and peer dependencies:
+
+```
+# You need to run this install-peers command again each time you run `yarn`.
+$ yarn && yarn run install-peers
+```
+
+Make changes and run tests:
+
+```
+$ yarn run tests
+```
+
+Run the examples:
+
+```
+$ cd examples
+$ yarn && yarn run start
 ```
