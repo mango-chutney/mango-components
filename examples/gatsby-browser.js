@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import configureStore from './src/store/configureStore';
 
 // eslint-disable-next-line import/prefer-default-export
-export const wrapRootComponent = ({ Root }: any) => {
+export const wrapRootElement = ({ Root }: any) => {
   const store = configureStore();
 
   return () => (
