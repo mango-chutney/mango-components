@@ -14,6 +14,10 @@ export const StyledCoolChild = styled.button.attrs({ type: 'button' })`
   padding: 1rem;
   text-align: center;
 
+  &:focus {
+    z-index: 1;
+  }
+
   &:first-child {
     border-radius: 4px 0 0 4px;
   }
