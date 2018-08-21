@@ -1,6 +1,7 @@
 // @flow
 
 import styled, { css } from 'styled-components';
+import get from 'lodash/get';
 
 const TiptextWrapperComponent = styled.div`
   position: relative;
@@ -8,7 +9,7 @@ const TiptextWrapperComponent = styled.div`
 
   ${({ theme }) =>
     css`
-      @media (max-width: ${theme.breakpointForTinyMode}) {
+      @media (max-width: ${get(theme, 'breakpointForTinyMode')}) {
         padding: 1rem 1rem 0;
       }
     `};

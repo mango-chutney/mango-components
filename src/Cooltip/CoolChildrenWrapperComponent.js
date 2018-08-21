@@ -8,12 +8,11 @@ const CoolChildrenWrapperComponent = styled.div`
   display: flex;
   flex-flow: row nowrap;
 
-  ${({ theme }) =>
-    css`
-      @media (max-width: ${get(theme, 'breakpointForTinyMode')}) {
-        display: none;
-      }
-    `};
+  ${({ theme }) => css`
+    @media (max-width: ${get(theme, 'breakpointForTinyMode')}) {
+      display: none;
+    }
+  `};
 `;
 
 export default CoolChildrenWrapperComponent;

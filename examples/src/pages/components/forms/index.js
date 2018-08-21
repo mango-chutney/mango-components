@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import matchSorter from 'match-sorter';
+import identity from 'lodash/identity';
 import type { FormProps as $FormProps } from 'redux-form';
 import {
   Button,
@@ -265,7 +266,6 @@ export class Form extends React.Component<Props, State> {
             component={Cooltip}
             coolChildren={coolChildren}
             otherChild={otherChild}
-            initialValue="251"
             label="Other Amount Label"
             placeholder="Other Amount Placeholder"
           />
@@ -274,10 +274,11 @@ export class Form extends React.Component<Props, State> {
             component={Cooltip}
             coolChildren={coolChildren}
             otherChild={otherChild}
-            initialValue="500"
             label="Other Amount Label"
             placeholder="Other Amount Placeholder"
             theme={{ coolChild: { activeBackgroundColor: '#000' } }}
+            formatOtherChild={identity}
+            seformatOtherChild={identity}
           />
           <Button onClick={handleSubmit(this.submit)}>
             Go
@@ -338,4 +339,8 @@ export default reduxForm({
   validate,
   asyncValidate,
   asyncBlurFields: ['async-validating-text'],
+  initialValues: {
+    cooltip: '250',
+    'themed-cooltip': '500',
+  },
 })(Form);
