@@ -23,6 +23,18 @@ export {
 } from './Checkbox';
 
 export {
+  CoolChild,
+  CoolChildrenWrapperComponent,
+  Cooltip,
+  CooltipComposer,
+  CooltipWrapperComponent,
+  OtherChild,
+  PipComponent,
+  TiptextComponent,
+  TiptextWrapperComponent,
+} from './Cooltip';
+
+export {
   DatePicker,
   DatePickerComposedInputComponent,
   DatePickerComposer,

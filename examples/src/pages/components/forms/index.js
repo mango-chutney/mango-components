@@ -7,6 +7,9 @@ import type { FormProps as $FormProps } from 'redux-form';
 import {
   Button,
   Checkbox,
+  Cooltip,
+  CoolChild,
+  OtherChild,
   Tootlip,
   Input,
   TypeaheadInput,
@@ -39,6 +42,32 @@ const fruits = [
   { name: 'pear', color: 'green' },
   { name: 'banana', color: 'yellow' },
 ];
+
+const coolChildren = [
+  <CoolChild value="100" label="$100">
+    1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas non mi
+    in felis ornare tincidunt vitae sit amet enim.
+  </CoolChild>,
+  <CoolChild value="250" label="$250">
+    2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas non mi
+    in felis ornare tincidunt vitae sit amet enim.
+  </CoolChild>,
+  <CoolChild value="500" label="$500">
+    3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas non mi
+    in felis ornare tincidunt vitae sit amet enim.
+  </CoolChild>,
+  <CoolChild value="1000" label="$1,000">
+    4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas non mi
+    in felis ornare tincidunt vitae sit amet enim.
+  </CoolChild>,
+];
+
+const otherChild = (
+  <OtherChild label="Other">
+    Other Tiptext: 4. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    Maecenas non mi in felis ornare tincidunt vitae sit amet enim.
+  </OtherChild>
+);
 
 export class Form extends React.Component<Props, State> {
   submit = (): Promise<void> =>
@@ -231,6 +260,25 @@ export class Form extends React.Component<Props, State> {
             component={DatePicker}
             placeholder="DD/MM/YYYY"
           />
+          <Field
+            name="cooltip"
+            component={Cooltip}
+            coolChildren={coolChildren}
+            otherChild={otherChild}
+            initialValue="251"
+            label="Other Amount Label"
+            placeholder="Other Amount Placeholder"
+          />
+          <Field
+            name="themed-cooltip"
+            component={Cooltip}
+            coolChildren={coolChildren}
+            otherChild={otherChild}
+            initialValue="500"
+            label="Other Amount Label"
+            placeholder="Other Amount Placeholder"
+            theme={{ coolChild: { activeBackgroundColor: '#000' } }}
+          />
           <Button onClick={handleSubmit(this.submit)}>
             Go
             <Tootlip visible={submitting}>OK, please wait a moment…</Tootlip>
@@ -260,6 +308,10 @@ const validate = values => {
 
   if (!values.fruit) {
     errors.fruit = 'Please enter your fruit!';
+  }
+
+  if (!values.cooltip) {
+    errors.cooltip = 'Please enter your cooltip!';
   }
 
   if (!fruits.some(({ name }) => name === values.fruit)) {
