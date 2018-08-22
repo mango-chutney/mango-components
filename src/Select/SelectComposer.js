@@ -2,25 +2,30 @@
 
 import * as React from 'react';
 import type { FieldProps as $FieldProps } from 'redux-form';
+import { ThemeProvider } from 'styled-components';
+import defaultsDeep from 'lodash/defaultsDeep';
+import defaultTheme from './styles';
 
 export type $Props = {
-  SelectComponent: React.ElementType,
   InputDecoratorComponent: React.ElementType,
-  LabelComponent: React.ElementType,
   label: string | React.ElementConfig<'label'>,
+  LabelComponent: React.ElementType,
+  SelectComponent: React.ElementType,
+  theme?: any,
 } & React.ElementConfig<'select'> &
   $FieldProps;
 
 const SelectComposer = (props: $Props) => {
   const {
-    SelectComponent,
-    InputDecoratorComponent,
-    LabelComponent,
-    label,
+    children: selectChildren,
     createFormControlElementProps,
     createInputDecoratorProps,
     createLabelProps,
-    children: selectChildren,
+    InputDecoratorComponent,
+    label,
+    LabelComponent,
+    SelectComponent,
+    theme,
     ...rest
   } = props;
 
@@ -30,14 +35,16 @@ const SelectComposer = (props: $Props) => {
   );
 
   return (
-    <LabelComponent {...labelProps}>
-      {labelChildren}
-      <InputDecoratorComponent {...createInputDecoratorProps(rest)}>
-        <SelectComponent {...createFormControlElementProps(rest)}>
-          {selectChildren}
-        </SelectComponent>
-      </InputDecoratorComponent>
-    </LabelComponent>
+    <ThemeProvider theme={defaultsDeep({ ...theme }, defaultTheme)}>
+      <LabelComponent {...labelProps}>
+        {labelChildren}
+        <InputDecoratorComponent {...createInputDecoratorProps(rest)}>
+          <SelectComponent {...createFormControlElementProps(rest)}>
+            {selectChildren}
+          </SelectComponent>
+        </InputDecoratorComponent>
+      </LabelComponent>
+    </ThemeProvider>
   );
 };
 

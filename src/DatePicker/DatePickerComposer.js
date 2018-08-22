@@ -4,7 +4,10 @@ import * as React from 'react';
 import type { FieldProps as $FieldProps } from 'redux-form';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { DateTime } from 'luxon';
+import { ThemeProvider } from 'styled-components';
+import defaultsDeep from 'lodash/defaultsDeep';
 import type { $ReactDayPickerInputProps } from './types';
+import defaultTheme from './styles';
 
 export type $Props = {
   ComposedInputComponent: React.ElementType,
@@ -79,6 +82,7 @@ class DatePickerComposer extends React.Component<$Props, void> {
       value, // This will always be undefined if used as a Field child.
       input, // Passed down by redux-form when used as a Field child
       meta, // Passed down by redux-form when used as a Field child
+      theme,
       ...rest // these will be applied to ComposedInputComponent.
     } = this.props;
 
@@ -88,9 +92,11 @@ class DatePickerComposer extends React.Component<$Props, void> {
     }: {
       children: React.Node,
     }) => (
-      <OverlayWrapperComponent {...overlayProps}>
-        <OverlayComponent>{children}</OverlayComponent>
-      </OverlayWrapperComponent>
+      <ThemeProvider theme={defaultsDeep({ ...theme }, defaultTheme)}>
+        <OverlayWrapperComponent {...overlayProps}>
+          <OverlayComponent>{children}</OverlayComponent>
+        </OverlayWrapperComponent>
+      </ThemeProvider>
     );
 
     const fieldProps = {

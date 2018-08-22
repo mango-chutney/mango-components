@@ -1,5 +1,6 @@
 // @flow
 
+export { default as defaultTheme } from './styles';
 export { default as Radio } from './Radio';
 export { default as RadioComposer } from './RadioComposer';
 export { default as RadioInputComponent } from './InputComponent';

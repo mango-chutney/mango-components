@@ -2,57 +2,63 @@
 
 import styled, { css } from 'styled-components';
 import { darken } from 'polished';
-import { palette } from '../constants';
-import * as styles from './styles';
+import get from 'lodash/get';
+import defaultTheme from './styles';
 
 const InputComponent = styled.input`
   appearance: none;
-  background-color: ${styles.backgroundColor};
-  border-color: ${styles.borderColor};
-  border-radius: ${styles.borderRadius};
-  border-style: ${styles.borderStyle};
-  border-width: ${styles.borderWidth};
-  color: ${styles.color};
+  background-color: ${({ theme }) => theme.input.backgroundColor};
+  border-color: ${({ theme }) => theme.input.borderColor};
+  border-radius: ${({ theme }) => theme.input.borderRadius};
+  border-style: ${({ theme }) => theme.input.borderStyle};
+  border-width: ${({ theme }) => theme.input.borderWidth};
+  color: ${({ theme }) => theme.input.color};
   display: block;
-  font-family: ${styles.fontFamily};
-  height: ${styles.height};
+  font-family: ${({ theme }) => theme.input.fontFamily};
+  height: ${({ theme }) => theme.input.height};
   margin-bottom: 1rem;
   outline: 0;
-  padding: ${styles.padding};
+  padding: ${({ theme }) => theme.input.padding};
   transition: border-color 300ms ease;
   width: 100%;
 
   ::placeholder {
-    color: ${styles.placeholderColor};
+    color: ${({ theme }) => get(theme, 'input.placeholderColor')};
   }
 
   :active,
   :focus {
-    border-color: ${styles.activeBorderColor};
+    border-color: ${({ theme }) => theme.input.activeBorderColor};
   }
 
   ${({ meta: { error, touched } }) =>
     error &&
     touched &&
     css`
-      border-color: ${palette.alert};
+      border-color: ${({ theme }) => theme.input.alertColor};
 
       ::placeholder {
-        color: ${palette.alert};
+        color: ${({ theme }) => theme.input.alertColor};
       }
     `};
 
   ${({ disabled }) =>
     disabled &&
     css`
-      background-color: ${darken(0.05, styles.backgroundColor)};
-      color: ${darken(0.05, styles.color)};
+      background-color: ${({ theme }) =>
+        darken(0.05, theme.input.backgroundColor)};
+      color: ${({ theme }) => darken(0.05, theme.input.color)};
       cursor: not-allowed;
 
       ::placeholder {
-        color: ${darken(0.05, styles.placeholderColor)};
+        color: ${({ theme }) =>
+          darken(0.05, get(theme, 'input.placeholderColor'))};
       }
     `};
 `;
+
+InputComponent.defaultProps = {
+  theme: defaultTheme,
+};
 
 export default InputComponent;

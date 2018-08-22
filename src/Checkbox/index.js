@@ -11,3 +11,4 @@ export {
 } from './InputDecoratorComponent';
 export { default as CheckboxLabelComponent } from './LabelComponent';
 export { default as CheckboxWrapperComponent } from './WrapperComponent';
+export { default as defaultTheme } from './styles';

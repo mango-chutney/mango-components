@@ -11,3 +11,4 @@ export { default as TiptextWrapperComponent } from './TiptextWrapperComponent';
 export {
   default as CoolChildrenWrapperComponent,
 } from './CoolChildrenWrapperComponent';
+export { default as defaultTheme } from './styles';

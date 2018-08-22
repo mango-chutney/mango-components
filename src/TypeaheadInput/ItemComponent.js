@@ -2,31 +2,42 @@
 
 import styled from 'styled-components';
 import { darken } from 'polished';
-
-// TODO: use themes for this instead of reaching into Input's styles.js :(
-import * as inputStyles from '../Input/styles';
+import get from 'lodash/get';
+import defaultTheme from './styles';
 
 const ItemComponent = styled.span`
   display: block;
-
-  color: ${inputStyles.color};
-  border-left: ${inputStyles.borderWidth} ${inputStyles.borderStyle}
-    ${inputStyles.activeBorderColor};
-  border-right: ${inputStyles.borderWidth} ${inputStyles.borderStyle}
-    ${inputStyles.activeBorderColor};
+  color: ${({ theme }) => get(theme, 'input.color')};
+  border-left: ${({ theme }) => get(theme, 'input.borderWidth')}
+    ${({ theme }) => get(theme, 'input.borderStyle')}
+    ${({ theme }) => get(theme, 'input.activeBorderColor')};
+  border-right: ${({ theme }) =>
+    `${get(theme, 'input.borderWidth')} ${get(
+      theme,
+      'input.borderStyle',
+    )} ${get(theme, 'input.activeBorderColor')}`};
   padding: 0.5rem 1rem;
 
-  background-color: ${({ highlightedIndex, index }) =>
+  background-color: ${({ highlightedIndex, index, theme }) =>
     highlightedIndex === index
-      ? darken(0.05, inputStyles.backgroundColor)
-      : inputStyles.backgroundColor};
+      ? darken(0.05, get(theme, 'input.backgroundColor'))
+      : get(theme, 'input.backgroundColor')};
 
   &:last-child {
-    border-bottom: ${inputStyles.borderWidth} ${inputStyles.borderStyle}
-      ${inputStyles.activeBorderColor};
-    border-bottom-right-radius: ${inputStyles.borderRadius};
-    border-bottom-left-radius: ${inputStyles.borderRadius};
+    border-bottom: ${({ theme }) =>
+      `${get(theme, 'input.borderWidth')} ${get(
+        theme,
+        'input.borderStyle',
+      )} ${get(theme, 'input.activeBorderColor')}`};
+    border-bottom-right-radius: ${({ theme }) =>
+      get(theme, 'input.borderRadius')};
+    border-bottom-left-radius: ${({ theme }) =>
+      get(theme, 'input.borderRadius')};
   }
 `;
+
+ItemComponent.defaultProps = {
+  theme: defaultTheme,
+};
 
 export default ItemComponent;

@@ -4,7 +4,7 @@ import * as React from 'react';
 import type { FieldProps as $FieldProps } from 'redux-form';
 import { ThemeProvider } from 'styled-components';
 import defaultsDeep from 'lodash/defaultsDeep';
-import * as constants from '../constants';
+import defaultTheme from './styles';
 
 export type $Props = {
   InputComponent: React.ElementType,
@@ -16,16 +16,6 @@ export type $Props = {
   WrapperComponent: React.ElementType,
 } & React.ElementConfig<'input'> &
   $FieldProps;
-
-const defaultTheme = {
-  checkbox: {
-    activeBackgroundColor: constants.palette.primary,
-    alertColor: constants.palette.alert,
-    backgroundColor: constants.palette.lightGray,
-    borderColor: constants.palette.border,
-    size: '20px',
-  },
-};
 
 const RadioComposer = (props: $Props) => {
   const {

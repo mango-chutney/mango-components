@@ -2,14 +2,13 @@
 
 import styled from 'styled-components';
 import { rem } from 'polished';
-// TODO: make this use themes :(
-import * as overlayStyles from './styles';
+import defaultTheme from './styles';
 
 const OverlayComponent = styled.div`
   left: 0;
   z-index: 1;
   position: absolute;
-  background: ${overlayStyles.overlayBackgroundColor};
+  background: ${({ theme }) => theme.datePicker.overlayBackgroundColor};
   box-shadow: 0 ${rem(2)} ${rem(5)} rgba(0, 0, 0, 0.15);
 
   .DayPicker {
@@ -44,7 +43,7 @@ const OverlayComponent = styled.div`
     top: 1rem;
     right: 1.5rem;
     margin-top: 2px;
-    color: ${overlayStyles.navButtonColor};
+    color: ${({ theme }) => theme.datePicker.navButtonColor};
     width: 1.25rem;
     height: 1.25rem;
     display: inline-block;
@@ -78,8 +77,8 @@ const OverlayComponent = styled.div`
   }
 
   .DayPicker-Caption > div {
-    font-size: ${overlayStyles.captionFontSize};
-    font-weight: ${overlayStyles.fontWeight};
+    font-size: ${({ theme }) => theme.datePicker.captionFontSize};
+    font-weight: ${({ theme }) => theme.datePicker.fontWeight};
   }
 
   .DayPicker-Weekdays {
@@ -94,9 +93,9 @@ const OverlayComponent = styled.div`
   .DayPicker-Weekday {
     display: table-cell;
     padding: 0.5rem;
-    font-size: ${overlayStyles.weekDayFontSize};
+    font-size: ${({ theme }) => theme.datePicker.weekDayFontSize};
     text-align: center;
-    color: ${overlayStyles.weekDayColor};
+    color: ${({ theme }) => theme.datePicker.weekDayColor};
   }
 
   .DayPicker-Weekday abbr[title] {
@@ -127,10 +126,11 @@ const OverlayComponent = styled.div`
     text-align: right;
     vertical-align: middle;
     min-width: 1rem;
-    font-size: ${overlayStyles.weekNumberFontSize};
+    font-size: ${({ theme }) => theme.datePicker.weekNumberFontSize};
     cursor: pointer;
-    color: ${overlayStyles.weekNumberColor};
-    border-right: ${rem(1)} solid ${overlayStyles.weekNumberBorderColor};
+    color: ${({ theme }) => theme.datePicker.weekNumberColor};
+    border-right: ${rem(1)} solid
+      ${({ theme }) => theme.datePicker.weekNumberBorderColor};
   }
 
   .DayPicker--interactionDisabled .DayPicker-Day {
@@ -147,24 +147,28 @@ const OverlayComponent = styled.div`
     background-color: transparent;
     box-shadow: none;
     cursor: pointer;
-    color: ${overlayStyles.color};
-    font-size: ${overlayStyles.todayButtonFontSize};
+    color: ${({ theme }) => theme.datePicker.color};
+    font-size: ${({ theme }) => theme.datePicker.todayButtonFontSize};
   }
 
   .DayPicker-Day--today {
-    color: ${overlayStyles.todayColor};
-    font-weight: ${overlayStyles.todayFontWeight};
+    color: ${({ theme }) => theme.datePicker.todayColor};
+    font-weight: ${({ theme }) => theme.datePicker.todayFontWeight};
   }
 
   .DayPicker-Day--outside {
     cursor: default;
-    color: ${overlayStyles.outsideColor};
+    color: ${({ theme }) => theme.datePicker.outsideColor};
   }
 
   .DayPicker-Day--disabled {
-    color: ${overlayStyles.disabledColor};
+    color: ${({ theme }) => theme.datePicker.disabledColor};
     cursor: default;
   }
 `;
+
+OverlayComponent.defaultProps = {
+  theme: defaultTheme,
+};
 
 export default OverlayComponent;

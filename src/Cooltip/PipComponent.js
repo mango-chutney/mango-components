@@ -2,8 +2,7 @@
 
 import styled, { css } from 'styled-components';
 import get from 'lodash/get';
-
-export const defaultPipSize = '8px';
+import defaultTheme from './styles';
 
 const PipComponent = styled.div`
   border: ${({ theme }) => get(theme, 'pipSize')} inset;
@@ -30,5 +29,9 @@ const PipComponent = styled.div`
       }
     `};
 `;
+
+PipComponent.defaultProps = {
+  theme: defaultTheme,
+};
 
 export default PipComponent;

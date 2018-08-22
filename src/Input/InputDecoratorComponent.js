@@ -3,8 +3,8 @@
 import styled, { keyframes, css } from 'styled-components';
 import { rem } from 'polished';
 import tristicons from 'tristicons';
-import * as styles from './styles';
-import { palette } from '../constants';
+import get from 'lodash/get';
+import defaultTheme from './styles';
 
 const transforms = 'translateY(-50%)';
 
@@ -23,8 +23,8 @@ const InputDecoratorComponent = styled.span`
   position: relative;
 
   &::after {
+    color: ${({ theme }) => get(theme, 'input.placeholderColor')};
     content: '';
-    color: ${styles.placeholderColor};
     font: normal normal normal ${rem(14)} tristicons;
     line-height: 1rem;
     position: absolute;
@@ -47,10 +47,13 @@ const InputDecoratorComponent = styled.span`
     touched &&
     css`
       ::after {
-        color: ${palette.alert};
+        color: ${({ theme }) => theme.input.alertColor};
         content: ${`"${tristicons['cross-circle']}"`};
       }
     `};
 `;
 
+InputDecoratorComponent.defaultProps = {
+  theme: defaultTheme,
+};
 export default InputDecoratorComponent;

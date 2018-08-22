@@ -1,20 +1,26 @@
 // @flow
 
 import styled from 'styled-components';
-import { palette, fontWeights } from '../constants';
+import defaultTheme from './styles';
 
-export default styled.button`
-  background-color: #f0f3f8;
+const ButtonComponent = styled.button`
+  background-color: ${({ theme }) => theme.button.backgroundColor};
   border-radius: 0.25rem;
   border: 0;
-  color: ${palette.darkGray};
+  color: ${({ theme }) => theme.button.color};
   cursor: pointer;
   display: ${({ expanded }) => (expanded ? 'block' : 'inline-block')};
   font-family: inherit;
-  font-weight: ${fontWeights.semibold};
+  font-weight: ${({ theme }) => theme.button.fontWeight};
   margin-bottom: 1rem;
-  padding: 0.65rem 1.25rem;
+  padding: ${({ theme }) => theme.button.padding};
   text-align: center;
   text-decoration: none;
   width: ${({ expanded }) => (expanded ? '100%' : 'auto')};
 `;
+
+ButtonComponent.defaultProps = {
+  theme: defaultTheme,
+};
+
+export default ButtonComponent;

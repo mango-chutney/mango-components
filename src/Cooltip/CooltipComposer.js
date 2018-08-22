@@ -9,8 +9,7 @@ import { ThemeProvider } from 'styled-components';
 import type { FieldProps as $FieldProps } from 'redux-form';
 import CoolChild from './CoolChild';
 import OtherChild from './OtherChild';
-import { defaultPipSize } from './PipComponent';
-import * as constants from '../constants';
+import defaultTheme from './styles';
 
 const defaultOtherChildInputFormatter = (input: string) => {
   if (/^\$[^$]/.test(input)) {
@@ -71,18 +70,6 @@ export type $Props = {
 
 type $State = {
   activeIndex: number,
-};
-
-const defaultTheme = {
-  pipSize: defaultPipSize,
-  breakpointForTinyMode: '600px',
-  coolChild: {
-    color: constants.palette.darkGray,
-    backgroundColor: constants.palette.lightGray,
-    border: constants.palette.border,
-    activeBackgroundColor: constants.palette.primary,
-    activeColor: constants.palette.white,
-  },
 };
 
 class Cooltip extends React.Component<$Props, $State> {

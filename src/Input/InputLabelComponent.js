@@ -1,21 +1,25 @@
 // @flow
 
 import styled, { css } from 'styled-components';
-import { palette } from '../constants';
-import * as styles from './styles';
+import get from 'lodash/get';
+import defaultTheme from './styles';
 
 const InputLabelComponent = styled.label`
-  font-size: ${styles.fontSize};
-  font-weight: ${styles.fontWeight};
   display: block;
+  font-size: ${({ theme }) => get(theme, 'label.fontSize')};
+  font-weight: ${({ theme }) => get(theme, 'label.fontWeight')};
 
   ${({ meta }) =>
     meta &&
     meta.error &&
     meta.touched &&
     css`
-      color: ${palette.alert};
+      color: ${({ theme }) => get(theme, 'input.alertColor')};
     `};
 `;
+
+InputLabelComponent.defaultProps = {
+  theme: defaultTheme,
+};
 
 export default InputLabelComponent;

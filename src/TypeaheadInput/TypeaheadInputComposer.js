@@ -4,6 +4,9 @@ import * as React from 'react';
 import Downshift from 'downshift';
 import matchSorter from 'match-sorter';
 import type { FieldProps as $FieldProps } from 'redux-form';
+import { ThemeProvider } from 'styled-components';
+import defaultsDeep from 'lodash/defaultsDeep';
+import defaultTheme from './styles';
 import type { $FormControlElementConfig } from '../Input/types';
 
 export type $Props = {
@@ -22,6 +25,7 @@ export type $Props = {
     label: string | React.ElementConfig<'label'> | void,
     props: $FormControlElementConfig & $FieldProps,
   ) => React.ElementConfig<'label'>,
+  theme: any,
 } & $FieldProps;
 
 type $InputWithoutChildren = {
@@ -42,6 +46,8 @@ class TypeaheadInputComposer extends React.Component<$Props> {
     mapItemToString: (item: any): string => item || '',
 
     WrapperComponent: 'div', // Downshift wants to be wrapped in a div.
+
+    theme: defaultTheme,
   };
 
   handleSelect = (selectedItem: any) => {
@@ -165,6 +171,7 @@ class TypeaheadInputComposer extends React.Component<$Props> {
       label,
       mapItemToString,
       renderItem,
+      theme,
       ...rest
     } = this.props;
 
@@ -196,24 +203,26 @@ class TypeaheadInputComposer extends React.Component<$Props> {
 
     return (
       <WrapperComponent>
-        <ComposedInputComponent
-          {...{ ...inputProps, styleProps, InputComponent }}
-        >
-          {isOpen &&
-            !!filteredItems.length && (
-              <MenuComponent {...{ styleProps }}>
-                {filteredItems.map((item, index) => (
-                  <ItemComponent
-                    {...{ ...createItemProps(item, index), styleProps }}
-                  >
-                    {typeof renderItem === 'function'
-                      ? renderItem(item)
-                      : mapItemToString(item)}
-                  </ItemComponent>
-                ))}
-              </MenuComponent>
-            )}
-        </ComposedInputComponent>
+        <ThemeProvider theme={defaultsDeep({ ...theme }, defaultTheme)}>
+          <ComposedInputComponent
+            {...{ ...inputProps, styleProps, InputComponent }}
+          >
+            {isOpen &&
+              !!filteredItems.length && (
+                <MenuComponent {...{ styleProps }}>
+                  {filteredItems.map((item, index) => (
+                    <ItemComponent
+                      {...{ ...createItemProps(item, index), styleProps }}
+                    >
+                      {typeof renderItem === 'function'
+                        ? renderItem(item)
+                        : mapItemToString(item)}
+                    </ItemComponent>
+                  ))}
+                </MenuComponent>
+              )}
+          </ComposedInputComponent>
+        </ThemeProvider>
       </WrapperComponent>
     );
   };

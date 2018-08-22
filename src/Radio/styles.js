@@ -6,7 +6,7 @@ import { defaultTheme as inputDefaultTheme } from '../Input';
 
 export default {
   ...inputDefaultTheme,
-  checkbox: {
+  radio: {
     activeBackgroundColor: constants.palette.primary,
     alertColor: constants.palette.alert,
     backgroundColor: constants.palette.lightGray,
@@ -14,7 +14,7 @@ export default {
     size: rem(20),
   },
   label: {
-    fontWeight: 'normal',
     fontSize: rem(16),
+    fontWeight: 'normal',
   },
 };

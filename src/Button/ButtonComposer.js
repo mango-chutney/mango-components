@@ -1,15 +1,23 @@
 // @flow
 
 import * as React from 'react';
+import { ThemeProvider } from 'styled-components';
+import defaultsDeep from 'lodash/defaultsDeep';
+import defaultTheme from './styles';
 
 export type $Props = {
   ButtonComponent: React.ElementType,
+  theme?: any,
 };
 
 const ButtonComposer = (props: $Props) => {
-  const { ButtonComponent, ...rest } = props;
+  const { ButtonComponent, theme, ...rest } = props;
 
-  return <ButtonComponent {...rest} />;
+  return (
+    <ThemeProvider theme={defaultsDeep({ ...theme }, defaultTheme)}>
+      <ButtonComponent {...rest} />
+    </ThemeProvider>
+  );
 };
 
 export default ButtonComposer;
