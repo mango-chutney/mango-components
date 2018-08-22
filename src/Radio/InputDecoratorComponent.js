@@ -17,6 +17,7 @@ const InputDecoratorComponent = styled.div.attrs({
 
   &::before {
     border-radius: 50%;
+    box-sizing: border-box;
     content: '';
     cursor: pointer;
     display: inline-block;
