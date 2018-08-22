@@ -11,6 +11,7 @@ import {
   Cooltip,
   CoolChild,
   OtherChild,
+  Radio,
   Tootlip,
   Input,
   TypeaheadInput,
@@ -190,6 +191,41 @@ export class Form extends React.Component<Props, State> {
           </div>
           <div>
             <Field
+              name="radio"
+              value="radio-option-1"
+              label="radio option 1"
+              component={Radio}
+            />
+            <Field
+              name="radio"
+              value="radio-option-2"
+              label="radio option 2"
+              component={Radio}
+            />
+          </div>
+          <div>
+            <Field
+              name="disabled-radio"
+              value="disabled-radio-option-"
+              label="disabled radio option"
+              component={Radio}
+              disabled
+            />
+            <Field
+              name="invalid-radio"
+              value="invalid-radio-option 1"
+              label="invalid radio option 1"
+              component={Radio}
+            />
+            <Field
+              name="invalid-radio"
+              value="invalid-radio-option 2"
+              label="invalid radio option 2"
+              component={Radio}
+            />
+          </div>
+          <div>
+            <Field
               name="select"
               label="select"
               placeholder="select"
@@ -325,6 +361,7 @@ const validate = values => {
   errors['invalid-text'] = true;
   errors['invalid-textarea'] = true;
   errors['invalid-checken'] = true;
+  errors['invalid-radio'] = true;
 
   return errors;
 };
