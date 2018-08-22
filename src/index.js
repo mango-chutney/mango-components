@@ -66,6 +66,15 @@ export {
 export { Panel, PanelHeading, PanelSection } from './Panel';
 
 export {
+  Radio,
+  RadioComposer,
+  RadioInputComponent,
+  RadioInputDecoratorComponent,
+  RadioLabelComponent,
+  RadioWrapperComponent,
+} from './Radio';
+
+export {
   Select,
   SelectComponent,
   SelectComposer,
