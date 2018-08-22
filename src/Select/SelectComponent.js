@@ -1,8 +1,10 @@
 // @flow
 
+import styled from 'styled-components';
 import { InputComponent } from '../Input';
+import defaultTheme from './styles';
 
-const SelectComponent = InputComponent.withComponent('select').extend`
+const SelectComponent = styled(InputComponent.withComponent('select'))`
   ::-ms-expand {
     display: none;
   }
@@ -11,5 +13,9 @@ const SelectComponent = InputComponent.withComponent('select').extend`
     width: 100%;
   }
 `;
+
+SelectComponent.defaultProps = {
+  theme: defaultTheme,
+};
 
 export default SelectComponent;

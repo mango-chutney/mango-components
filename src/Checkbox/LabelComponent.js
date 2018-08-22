@@ -1,11 +1,16 @@
 // @flow
 
+import styled from 'styled-components';
 import { InputLabelComponent as BaseInputLabelComponent } from '../Input';
+import defaultTheme from './styles';
 
-const InputLabelComponent = BaseInputLabelComponent.extend`
+const InputLabelComponent = styled(BaseInputLabelComponent)`
   display: inline-block;
   margin-left: 1rem;
-  font-weight: normal;
 `;
+
+InputLabelComponent.defaultProps = {
+  theme: defaultTheme,
+};
 
 export default InputLabelComponent;

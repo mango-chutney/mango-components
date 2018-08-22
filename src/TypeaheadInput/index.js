@@ -1,5 +1,6 @@
 // @flow
 
+export { default as defaultTheme } from './styles';
 export { default as TypeaheadInput } from './TypeaheadInput';
 export { default as TypeaheadInputComponent } from './InputComponent';
 export { default as TypeaheadInputComposer } from './TypeaheadInputComposer';

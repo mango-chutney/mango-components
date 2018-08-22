@@ -1,18 +1,27 @@
 // @flow
 
 import { rem, transparentize } from 'polished';
-import { palette, fontWeights, fontStack } from '../constants';
+import * as constants from '../constants';
 
-export const activeBorderColor = palette.black;
-export const backgroundColor = palette.lightGray;
-export const borderColor = palette.border;
-export const borderRadius = '4px';
-export const borderStyle = 'solid';
-export const borderWidth = '1px';
-export const color = palette.black;
-export const fontFamily = fontStack;
-export const fontSize = rem(14);
-export const fontWeight = fontWeights.semibold;
-export const height = '2.6rem';
-export const padding = '0.5rem 1rem';
-export const placeholderColor = String(transparentize(0.2, palette.darkGray));
+export default {
+  input: {
+    activeBorderColor: constants.palette.black,
+    alertColor: constants.palette.alert,
+    backgroundColor: constants.palette.lightGray,
+    borderColor: constants.palette.border,
+    borderRadius: '4px',
+    borderStyle: 'solid',
+    borderWidth: '1px',
+    color: constants.palette.black,
+    fontFamily: constants.fontStack,
+    fontSize: rem(14),
+    fontWeight: constants.fontWeights.semibold,
+    height: '2.6rem',
+    padding: '0.5rem 1rem',
+    placeholderColor: String(transparentize(0.2, constants.palette.darkGray)),
+  },
+  label: {
+    fontSize: rem(14),
+    fontWeight: constants.fontWeights.semibold,
+  },
+};

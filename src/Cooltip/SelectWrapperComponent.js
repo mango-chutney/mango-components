@@ -2,6 +2,7 @@
 
 import styled, { css } from 'styled-components';
 import get from 'lodash/get';
+import defaultTheme from './styles';
 
 const SelectWrapperComponent = styled.div`
   display: none;
@@ -13,5 +14,9 @@ const SelectWrapperComponent = styled.div`
       }
     `};
 `;
+
+SelectWrapperComponent.defaultProps = {
+  theme: defaultTheme,
+};
 
 export default SelectWrapperComponent;

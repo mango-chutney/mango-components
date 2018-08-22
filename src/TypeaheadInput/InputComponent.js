@@ -1,9 +1,10 @@
 // @flow
 
-import { css } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { InputComponent as BaseInputComponent } from '../Input';
+import defaultTheme from './styles';
 
-const InputComponent = BaseInputComponent.extend`
+const InputComponent = styled(BaseInputComponent)`
   ${({ styleProps: inputComponentStyleProps }) =>
     inputComponentStyleProps &&
     inputComponentStyleProps.isOpen &&
@@ -18,5 +19,9 @@ const InputComponent = BaseInputComponent.extend`
       }
     `};
 `;
+
+InputComponent.defaultProps = {
+  theme: defaultTheme,
+};
 
 export default InputComponent;

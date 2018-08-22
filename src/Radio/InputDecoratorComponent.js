@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import classNames from 'classnames';
 import get from 'lodash/get';
 import { darken } from 'polished';
+import defaultTheme from './styles';
 
 const InputDecoratorComponent = styled.div.attrs({
   className: ({ className }) => classNames('input-decorator', className),
@@ -11,8 +12,8 @@ const InputDecoratorComponent = styled.div.attrs({
   border: 1px solid transparent;
   cursor: pointer;
   display: inline-block;
-  line-height: ${({ theme }) => get(theme, 'checkbox.size')};
-  min-height: ${({ theme }) => get(theme, 'checkbox.size')};
+  line-height: ${({ theme }) => get(theme, 'radio.size')};
+  min-height: ${({ theme }) => get(theme, 'radio.size')};
   position: relative;
 
   &::before {
@@ -21,31 +22,35 @@ const InputDecoratorComponent = styled.div.attrs({
     content: '';
     cursor: pointer;
     display: inline-block;
-    height: ${({ theme }) => get(theme, 'checkbox.size')};
+    height: ${({ theme }) => get(theme, 'radio.size')};
     vertical-align: middle;
-    width: ${({ theme }) => get(theme, 'checkbox.size')};
+    width: ${({ theme }) => get(theme, 'radio.size')};
   }
 
   &::before {
-    border: 1px solid ${({ theme }) => get(theme, 'checkbox.borderColor')};
-    background: ${({ theme }) => get(theme, 'checkbox.backgroundColor')};
+    border: 1px solid ${({ theme }) => get(theme, 'radio.borderColor')};
+    background: ${({ theme }) => get(theme, 'radio.backgroundColor')};
 
     ${({ meta }) =>
       meta &&
       meta.error &&
       meta.touched &&
       css`
-        border-color: ${({ theme }) => get(theme, 'checkbox.alertColor')};
+        border-color: ${({ theme }) => get(theme, 'radio.alertColor')};
       `};
 
     ${({ disabled }) =>
       disabled &&
       css`
         background-color: ${({ theme }) =>
-          darken(0.05, get(theme, 'checkbox.backgroundColor'))};
+          darken(0.05, get(theme, 'radio.backgroundColor'))};
         cursor: not-allowed;
       `};
   }
 `;
+
+InputDecoratorComponent.defaultProps = {
+  theme: defaultTheme,
+};
 
 export default InputDecoratorComponent;

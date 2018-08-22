@@ -2,37 +2,36 @@
 
 import styled, { css } from 'styled-components';
 import classNames from 'classnames';
-import { darken, rem } from 'polished';
-// TODO: use themes for this :(
-import * as checkboxStyles from './styles';
+import get from 'lodash/get';
+import { darken } from 'polished';
 import { palette } from '../constants';
+import defaultTheme from './styles';
 
 const InputDecoratorComponent = styled.div.attrs({
   className: ({ className }) => classNames('input-decorator', className),
 })`
-  cursor: pointer;
-  display: inline-block;
-
-  min-height: ${rem(checkboxStyles.checkboxSize)};
-  line-height: ${rem(checkboxStyles.checkboxSize)};
-  position: relative;
   border: 1px solid transparent;
+  cursor: pointer;
   display: block;
+  display: inline-block;
+  line-height: ${({ theme }) => get(theme, 'checkbox.size')};
+  min-height: ${({ theme }) => get(theme, 'checkbox.size')};
+  position: relative;
 
   &::before,
   &::after {
-    width: ${rem(checkboxStyles.checkboxSize)};
-    height: ${rem(checkboxStyles.checkboxSize)};
-    cursor: pointer;
-    content: '';
-    display: inline-block;
     border-radius: 4px;
+    content: '';
+    cursor: pointer;
+    display: inline-block;
+    height: ${({ theme }) => get(theme, 'checkbox.size')};
     vertical-align: middle;
+    width: ${({ theme }) => get(theme, 'checkbox.size')};
   }
 
   &::before {
-    border: 1px solid ${palette.border};
-    background: ${palette.lightGray};
+    background: ${({ theme }) => get(theme, 'checkbox.backgroundColor')};
+    border: 1px solid ${({ theme }) => get(theme, 'checkbox.borderColor')};
     margin-right: 1rem;
 
     ${({ meta: { error, touched } }) =>
@@ -45,20 +44,25 @@ const InputDecoratorComponent = styled.div.attrs({
     ${({ disabled }) =>
       disabled &&
       css`
-        background-color: ${darken(0.05, palette.lightGray)};
+        background-color: ${({ theme }) =>
+          darken(0.05, get(theme, 'checkbox.backgroundColor'))};
         cursor: not-allowed;
       `};
   }
 
   &::after {
-    position: absolute;
-    left: 0;
     border: 1px solid transparent;
-    line-height: ${rem(checkboxStyles.checkboxSize)};
-    margin-top: ${rem(checkboxStyles.checkboxSize * 0.1)};
+    left: 0;
+    line-height: ${({ theme }) => get(theme, 'checkbox.size')};
+    margin-top: 5%;
+    position: absolute;
     text-align: center;
     transform: scale(0);
   }
 `;
+
+InputDecoratorComponent.defaultProps = {
+  theme: defaultTheme,
+};
 
 export default InputDecoratorComponent;

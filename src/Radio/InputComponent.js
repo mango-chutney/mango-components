@@ -1,8 +1,8 @@
 // @flow
 
 import styled from 'styled-components';
-// import { darken } from 'polished';
 import get from 'lodash/get';
+import defaultTheme from './styles';
 
 const InputComponent = styled.input`
   height: 100%;
@@ -27,9 +27,13 @@ const InputComponent = styled.input`
 
     &::before {
       border: 6px solid
-        ${({ theme }) => get(theme, 'checkbox.activeBackgroundColor')};
+        ${({ theme }) => get(theme, 'radio.activeBackgroundColor')};
     }
   }
 `;
+
+InputComponent.defaultProps = {
+  theme: defaultTheme,
+};
 
 export default InputComponent;

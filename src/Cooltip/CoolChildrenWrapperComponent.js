@@ -2,6 +2,7 @@
 
 import styled, { css } from 'styled-components';
 import get from 'lodash/get';
+import defaultTheme from './styles';
 
 const CoolChildrenWrapperComponent = styled.div`
   border-radius: 4px;
@@ -15,5 +16,9 @@ const CoolChildrenWrapperComponent = styled.div`
     }
   `};
 `;
+
+CoolChildrenWrapperComponent.defaultProps = {
+  theme: defaultTheme,
+};
 
 export default CoolChildrenWrapperComponent;

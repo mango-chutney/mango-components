@@ -1,14 +1,18 @@
+// @flow
 import styled from 'styled-components';
-import { rem } from 'polished';
-// TODO: use themes for this :(
-import * as checkboxStyles from './styles';
+import get from 'lodash/get';
+import defaultTheme from './styles';
 
 const CheckboxContainerComponent = styled.div`
-  position: relative;
-  margin: 0;
-  height: ${rem(checkboxStyles.checkboxSize)};
-  width: ${rem(checkboxStyles.checkboxSize)};
   display: inline-block;
+  height: ${({ theme }) => get(theme, 'checkbox.size')};
+  margin: 0;
+  position: relative;
+  width: ${({ theme }) => get(theme, 'checkbox.size')};
 `;
+
+CheckboxContainerComponent.defaultProps = {
+  theme: defaultTheme,
+};
 
 export default CheckboxContainerComponent;

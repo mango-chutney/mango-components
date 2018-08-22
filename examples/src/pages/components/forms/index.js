@@ -192,12 +192,14 @@ export class Form extends React.Component<Props, State> {
           <div>
             <Field
               name="radio"
+              id="radio-option-1"
               value="radio-option-1"
               label="radio option 1"
               component={Radio}
             />
             <Field
               name="radio"
+              id="radio-option-2"
               value="radio-option-2"
               label="radio option 2"
               component={Radio}
@@ -206,20 +208,22 @@ export class Form extends React.Component<Props, State> {
           <div>
             <Field
               name="disabled-radio"
-              value="disabled-radio-option-"
+              value="disabled-radio-option-1"
               label="disabled radio option"
               component={Radio}
               disabled
             />
             <Field
               name="invalid-radio"
-              value="invalid-radio-option 1"
+              id="invalid-radio-option-1"
+              value="invalid-radio-option-1"
               label="invalid radio option 1"
               component={Radio}
             />
             <Field
               name="invalid-radio"
-              value="invalid-radio-option 2"
+              id="invalid-radio-option-2"
+              value="invalid-radio-option-2"
               label="invalid radio option 2"
               component={Radio}
             />

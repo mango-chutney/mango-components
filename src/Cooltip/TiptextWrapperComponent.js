@@ -2,6 +2,7 @@
 
 import styled, { css } from 'styled-components';
 import get from 'lodash/get';
+import defaultTheme from './styles';
 
 const TiptextWrapperComponent = styled.div`
   position: relative;
@@ -14,5 +15,9 @@ const TiptextWrapperComponent = styled.div`
       }
     `};
 `;
+
+TiptextWrapperComponent.defaultProps = {
+  theme: defaultTheme,
+};
 
 export default TiptextWrapperComponent;
