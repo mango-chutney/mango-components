@@ -50,12 +50,14 @@ export type $Props = {
   coolChildren: Array<typeof CoolChild>,
   CoolChildrenWrapperComponent: React.ElementType,
   CoolChildrenWrapperComponent: React.ElementType,
+  cooltipLabel?: string => string,
   CooltipWrapperComponent: React.ElementType,
   deformatOtherChild: string => string,
   formatOtherChild: string => string,
   handleChange: (value: any) => any,
   initialize: () => any,
   initialValue: any,
+  LabelComponent: React.ElementType,
   mapItemToString: (item: any) => string,
   meta: $PropertyType<$FieldProps, 'meta'>,
   otherChild?: typeof OtherChild,
@@ -237,11 +239,13 @@ class Cooltip extends React.Component<$Props, $State> {
       ComposedSelectComponent,
       coolChildren,
       CoolChildrenWrapperComponent,
+      cooltipLabel,
       CooltipWrapperComponent,
       deformatOtherChild,
       formatOtherChild,
       handleChange,
       input,
+      LabelComponent,
       meta,
       otherChild,
       PipComponent,
@@ -272,7 +276,14 @@ class Cooltip extends React.Component<$Props, $State> {
     return (
       mergedCoolChildren && (
         <ThemeProvider theme={defaultsDeep({ ...theme }, defaultTheme)}>
-          <CooltipWrapperComponent>
+          <CooltipWrapperComponent
+            aria-labelledby={cooltipLabel && `${input.name}-outer-label`}
+          >
+            {cooltipLabel && (
+              <LabelComponent id={`${input.name}-outer-label`}>
+                {cooltipLabel}
+              </LabelComponent>
+            )}
             {this.renderNormalMode()}
             {this.renderTinyMode()}
             {activeCoolChild && (

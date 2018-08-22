@@ -7,6 +7,7 @@ const CoolChildrenWrapperComponent = styled.div`
   border-radius: 4px;
   display: flex;
   flex-flow: row nowrap;
+  padding: 1px;
 
   ${({ theme }) => css`
     @media (max-width: ${get(theme, 'breakpointForTinyMode')}) {

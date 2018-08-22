@@ -274,6 +274,7 @@ export class Form extends React.Component<Props, State> {
             component={Cooltip}
             coolChildren={coolChildren}
             otherChild={otherChild}
+            cooltipLabel="Cooltip Label"
             label="Other Amount Label"
             placeholder="Other Amount Placeholder"
             theme={{ coolChild: { activeBackgroundColor: '#000' } }}

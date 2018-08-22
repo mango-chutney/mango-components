@@ -9,9 +9,10 @@ const InputLabelComponent = styled.label`
   font-weight: ${styles.fontWeight};
   display: block;
 
-  ${({ meta: { error, touched } }) =>
-    error &&
-    touched &&
+  ${({ meta }) =>
+    meta &&
+    meta.error &&
+    meta.touched &&
     css`
       color: ${palette.alert};
     `};
