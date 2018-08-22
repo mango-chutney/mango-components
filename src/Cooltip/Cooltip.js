@@ -6,6 +6,7 @@ import { Select as ComposedSelectComponent } from '../Select';
 import CoolChildrenWrapperComponent from './CoolChildrenWrapperComponent';
 import CooltipComposer from './CooltipComposer';
 import CooltipWrapperComponent from './CooltipWrapperComponent';
+import LabelComponent from '../Input/InputLabelComponent';
 import PipComponent from './PipComponent';
 import SelectWrapperComponent from './SelectWrapperComponent';
 import TiptextComponent from './TiptextComponent';
@@ -27,6 +28,7 @@ type $Props = {
     $ChildProps,
     'CooltipWrapperComponent',
   >,
+  LabelComponent?: $PropertyType<$ChildProps, 'LabelComponent'>,
   PipComponent?: $PropertyType<$ChildProps, 'PipComponent'>,
   SelectWrapperComponent?: $PropertyType<$ChildProps, 'SelectWrapperComponent'>,
   TiptextComponent?: $PropertyType<$ChildProps, 'TiptextComponent'>,
@@ -43,6 +45,7 @@ const Cooltip = (props: $Props) => (
       ComposedSelectComponent,
       CoolChildrenWrapperComponent,
       CooltipWrapperComponent,
+      LabelComponent,
       PipComponent,
       SelectWrapperComponent,
       TiptextComponent,
