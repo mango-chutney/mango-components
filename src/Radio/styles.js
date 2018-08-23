@@ -2,10 +2,8 @@
 
 import { rem } from 'polished';
 import * as constants from '../constants';
-import { defaultTheme as inputDefaultTheme } from '../Input';
 
 export default {
-  ...inputDefaultTheme,
   radio: {
     activeBackgroundColor: constants.palette.primary,
     alertColor: constants.palette.alert,

@@ -27,7 +27,6 @@ const RadioComposer = (props: $Props) => {
     label,
     LabelComponent,
     theme,
-    value,
     WrapperComponent,
     ...rest
   } = props;
