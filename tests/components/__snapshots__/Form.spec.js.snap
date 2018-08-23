@@ -62,6 +62,7 @@ exports[`Form components (Input, TextArea, Checkbox, PaddedCheckbox) renders cor
 }
 
 .c0 {
+  color: inherit;
   display: block;
   font-size: 0.875rem;
   font-weight: 600;
