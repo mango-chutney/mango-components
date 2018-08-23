@@ -21,6 +21,8 @@ export default {
     placeholderColor: String(transparentize(0.2, constants.palette.darkGray)),
   },
   label: {
+    alertColor: constants.palette.alert,
+    color: 'inherit',
     fontSize: rem(14),
     fontWeight: constants.fontWeights.semibold,
   },
