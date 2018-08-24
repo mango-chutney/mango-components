@@ -118,6 +118,24 @@ export class Form extends React.Component<Props, State> {
           />
           <Field
             type="text"
+            name="themed-text"
+            placeholder="themed field"
+            label="themed field"
+            component={Input}
+            theme={{
+              input: {
+                color: '#002fff',
+                borderColor: '#002fff',
+                activeBorderColor: '#ff7e00',
+                placeholderColor: '#002fff',
+              },
+              label: {
+                color: '#002fff',
+              },
+            }}
+          />
+          <Field
+            type="text"
             name="async-validating-text"
             placeholder="async-validating-text"
             label="async validating field"
@@ -141,6 +159,23 @@ export class Form extends React.Component<Props, State> {
             placeholder="Disabled TextArea"
             component={TextArea}
             disabled
+          />
+          <Field
+            name="themed-textarea"
+            label="Themed TextArea"
+            placeholder="Themed TextArea"
+            component={TextArea}
+            theme={{
+              input: {
+                color: '#002fff',
+                borderColor: '#002fff',
+                activeBorderColor: '#ff7e00',
+                placeholderColor: '#002fff',
+              },
+              label: {
+                color: '#002fff',
+              },
+            }}
           />
           <div>
             <Field
@@ -191,6 +226,24 @@ export class Form extends React.Component<Props, State> {
           </div>
           <div>
             <Field
+              name="themed-checken"
+              label="This guy is themed."
+              placeholder="themed checken"
+              component={Checkbox}
+              theme={{
+                checkbox: {
+                  color: '#002fff',
+                  borderColor: '#002fff',
+                  activeBackgroundColor: '#ff7e00',
+                },
+                label: {
+                  color: '#002fff',
+                },
+              }}
+            />
+          </div>
+          <div>
+            <Field
               name="radio"
               id="radio-option-1"
               value="radio-option-1"
@@ -232,6 +285,42 @@ export class Form extends React.Component<Props, State> {
               type="radio"
               component={Radio}
             />
+            <Field
+              name="themed-radio"
+              id="themed-radio-option-1"
+              value="themed-radio-option-1"
+              label="themed radio option 1"
+              type="radio"
+              component={Radio}
+              theme={{
+                radio: {
+                  color: '#002fff',
+                  borderColor: '#002fff',
+                  activeBackgroundColor: '#ff7e00',
+                },
+                label: {
+                  color: '#002fff',
+                },
+              }}
+            />
+            <Field
+              name="themed-radio"
+              id="themed-radio-option-2"
+              value="themed-radio-option-2"
+              label="themed radio option 2"
+              type="radio"
+              component={Radio}
+              theme={{
+                radio: {
+                  color: '#002fff',
+                  borderColor: '#002fff',
+                  activeBackgroundColor: '#ff7e00',
+                },
+                label: {
+                  color: '#002fff',
+                },
+              }}
+            />
           </div>
           <div>
             <Field
@@ -262,6 +351,27 @@ export class Form extends React.Component<Props, State> {
               label="invalid select"
               placeholder="invalid select"
               component={Select}
+            >
+              <option value="option-1">Option 1</option>
+              <option value="option-2">Option 2</option>
+            </Field>
+          </div>
+          <div>
+            <Field
+              name="themed-select"
+              label="themed select"
+              placeholder="themed select"
+              component={Select}
+              theme={{
+                input: {
+                  color: '#002fff',
+                  borderColor: '#002fff',
+                  placeholderColor: '#002fff',
+                },
+                label: {
+                  color: '#002fff',
+                },
+              }}
             >
               <option value="option-1">Option 1</option>
               <option value="option-2">Option 2</option>

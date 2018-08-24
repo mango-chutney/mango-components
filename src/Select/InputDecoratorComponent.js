@@ -1,7 +1,7 @@
 // @flow
 
 import tristicons from 'tristicons';
-import styled from 'styled-components';
+import styled, { withTheme } from 'styled-components';
 import { InputDecoratorComponent as BaseInputDecoratorComponent } from '../Input';
 import defaultTheme from './styles';
 
@@ -15,4 +15,5 @@ InputDecoratorComponent.defaultProps = {
   theme: defaultTheme,
 };
 
-export default InputDecoratorComponent;
+// $FlowFixMe
+export default withTheme(InputDecoratorComponent);
