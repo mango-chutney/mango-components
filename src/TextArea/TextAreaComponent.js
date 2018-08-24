@@ -1,6 +1,6 @@
 // @flow
 
-import styled from 'styled-components';
+import styled, { withTheme } from 'styled-components';
 import { InputComponent } from '../Input';
 import defaultTheme from './styles';
 
@@ -14,4 +14,4 @@ TextAreaComponent.defaultProps = {
   theme: defaultTheme,
 };
 
-export default TextAreaComponent;
+export default withTheme(TextAreaComponent);

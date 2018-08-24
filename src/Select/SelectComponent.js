@@ -1,6 +1,6 @@
 // @flow
 
-import styled from 'styled-components';
+import styled, { withTheme } from 'styled-components';
 import { InputComponent } from '../Input';
 import defaultTheme from './styles';
 
@@ -18,4 +18,4 @@ SelectComponent.defaultProps = {
   theme: defaultTheme,
 };
 
-export default SelectComponent;
+export default withTheme(SelectComponent);

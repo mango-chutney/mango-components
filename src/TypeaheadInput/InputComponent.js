@@ -1,6 +1,6 @@
 // @flow
 
-import styled, { css } from 'styled-components';
+import styled, { css, withTheme } from 'styled-components';
 import { InputComponent as BaseInputComponent } from '../Input';
 import defaultTheme from './styles';
 
@@ -24,4 +24,5 @@ InputComponent.defaultProps = {
   theme: defaultTheme,
 };
 
-export default InputComponent;
+// $FlowFixMe
+export default withTheme(InputComponent);
