@@ -26,7 +26,7 @@
     "popper.js": "1.14.4",
     "react-day-picker": "^7.1.10",
     "react-popper": "0.10.4",
-    "tristicons": "https://github.com/mango-chutney/tristicons/archive/81ef6d51d8ea06fafe83a584e33b7b94183e8409.tar.gz"
+    "tristicons": "https://github.com/mango-chutney/tristicons/archive/6a753fbfd193fae82e800a80a0f8cd998541e4ee.tar.gz"
   },
   "devDependencies": {
     "@babel/cli": "7.0.0-rc.1",
