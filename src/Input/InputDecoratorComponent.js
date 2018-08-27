@@ -10,11 +10,11 @@ const transforms = 'translateY(-50%)';
 
 const tristiconsSpin = keyframes`
   0% {
-    transform: rotate(0deg) ${transforms};
+    transform: ${transforms} rotate(0deg);
   }
 
   100% {
-    transform: rotate(359deg) ${transforms};
+    transform: ${transforms} rotate(359deg);
   }
 `;
 
