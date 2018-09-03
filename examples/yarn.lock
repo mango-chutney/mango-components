@@ -5968,18 +5968,8 @@ mamacro@^0.0.3:
   resolved "https://registry.yarnpkg.com/mamacro/-/mamacro-0.0.3.tgz#ad2c9576197c9f1abf308d0787865bd975a3f3e4"
 
 "mango-components@link:./..":
-  version "1.1.0"
-  dependencies:
-    classnames "2.2.6"
-    downshift "^2.0.19"
-    invariant "^2.2.4"
-    isomorphic-base64 "^1.0.2"
-    lodash "^4.17.10"
-    match-sorter "^2.2.3"
-    popper.js "1.14.4"
-    react-day-picker "^7.1.10"
-    react-popper "0.10.4"
-    tristicons "https://github.com/mango-chutney/tristicons/archive/6a753fbfd193fae82e800a80a0f8cd998541e4ee.tar.gz"
+  version "0.0.0"
+  uid ""
 
 map-cache@^0.2.0, map-cache@^0.2.2:
   version "0.2.2"
@@ -8739,10 +8729,9 @@ trim-right@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
 
-"tristicons@https://github.com/mango-chutney/tristicons/archive/6a753fbfd193fae82e800a80a0f8cd998541e4ee.tar.gz":
+"tristicons@https://github.com/mango-chutney/tristicons/archive/78691e110a4abbd782ed42fcb8cb87a4c572e5ae.tar.gz":
   version "1.0.0"
-  uid "26a8facae80691f411be1d0beb6b6beed2e4ac52"
-  resolved "https://github.com/mango-chutney/tristicons/archive/6a753fbfd193fae82e800a80a0f8cd998541e4ee.tar.gz#26a8facae80691f411be1d0beb6b6beed2e4ac52"
+  resolved "https://github.com/mango-chutney/tristicons/archive/78691e110a4abbd782ed42fcb8cb87a4c572e5ae.tar.gz#b5b8bb34f0d0d71b6aee14074446bcdf7ef58944"
 
 tslib@^1.6.0, tslib@^1.9.0:
   version "1.9.3"

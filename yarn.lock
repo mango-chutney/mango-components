@@ -5605,9 +5605,9 @@ trim-right@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
 
-"tristicons@https://github.com/mango-chutney/tristicons/archive/6a753fbfd193fae82e800a80a0f8cd998541e4ee.tar.gz":
+"tristicons@https://github.com/mango-chutney/tristicons/archive/78691e110a4abbd782ed42fcb8cb87a4c572e5ae.tar.gz":
   version "1.0.0"
-  resolved "https://github.com/mango-chutney/tristicons/archive/6a753fbfd193fae82e800a80a0f8cd998541e4ee.tar.gz#26a8facae80691f411be1d0beb6b6beed2e4ac52"
+  resolved "https://github.com/mango-chutney/tristicons/archive/78691e110a4abbd782ed42fcb8cb87a4c572e5ae.tar.gz#b5b8bb34f0d0d71b6aee14074446bcdf7ef58944"
 
 tunnel-agent@^0.6.0:
   version "0.6.0"
