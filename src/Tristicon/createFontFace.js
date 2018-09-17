@@ -8,7 +8,9 @@ const createFontFace = () => css`
     font-family: tristicons;
     font-style: normal;
     font-weight: normal;
-    src: url(data:application/x-font-woff;charset=utf-8;base64,${woff});
+    src: url(data:application/x-font-woff;charset=utf-8;base64,${encodeURIComponent(
+      woff,
+    )});
   }
 `;
 
