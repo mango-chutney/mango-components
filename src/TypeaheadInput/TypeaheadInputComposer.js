@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import Downshift from 'downshift';
+import type { DownshiftProps } from 'downshift';
 import matchSorter from 'match-sorter';
 import type { FieldProps as $FieldProps } from 'redux-form';
 import { ThemeProvider } from 'styled-components';
@@ -26,6 +27,7 @@ export type $Props = {
     props: $FormControlElementConfig & $FieldProps,
   ) => React.ElementConfig<'label'>,
   theme: any,
+  downshiftProps?: DownshiftProps,
 } & $FieldProps;
 
 type $InputWithoutChildren = {
@@ -228,13 +230,14 @@ class TypeaheadInputComposer extends React.Component<$Props> {
   };
 
   render() {
-    const { input, mapItemToString } = this.props;
+    const { input, mapItemToString, downshiftProps } = this.props;
 
     return (
       <Downshift
         inputValue={input.value}
         onStateChange={this.handleStateChange}
         itemToString={mapItemToString}
+        {...downshiftProps}
       >
         {this.renderCallback}
       </Downshift>
