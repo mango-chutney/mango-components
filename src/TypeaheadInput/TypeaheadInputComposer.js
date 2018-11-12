@@ -20,7 +20,7 @@ export type $Props = {
   items: Array<any>,
   label: string | React.ElementConfig<'label'>,
   mapItemToString: (item: any) => string,
-  renderItem?: (item: any) => React.Node, // defaults to mapItemToString
+  renderItem?: (item: any, index?: number) => React.Node, // defaults to mapItemToString
   createLabelProps: (
     label: string | React.ElementConfig<'label'> | void,
     props: $FormControlElementConfig & $FieldProps,
@@ -215,7 +215,7 @@ class TypeaheadInputComposer extends React.Component<$Props> {
                       {...{ ...createItemProps(item, index), styleProps }}
                     >
                       {typeof renderItem === 'function'
-                        ? renderItem(item)
+                        ? renderItem(item, index)
                         : mapItemToString(item)}
                     </ItemComponent>
                   ))}
