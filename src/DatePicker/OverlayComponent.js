@@ -165,6 +165,11 @@ const OverlayComponent = styled.div`
     color: ${({ theme }) => theme.datePicker.disabledColor};
     cursor: default;
   }
+
+  .DayPicker-Day--selected {
+    color: ${({ theme }) => theme.datePicker.selectedColor};
+    font-weight: ${({ theme }) => theme.datePicker.selectedFontWeight};
+  }
 `;
 
 OverlayComponent.defaultProps = {
