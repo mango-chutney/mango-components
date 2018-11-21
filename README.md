@@ -165,7 +165,7 @@ $ yarn && yarn run install-peers
 Make changes and run tests:
 
 ```
-$ yarn run tests
+$ yarn run test
 ```
 
 Run the examples:
