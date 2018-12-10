@@ -31,10 +31,10 @@ const InputDecoratorComponent = styled.div.attrs({
     border: 1px solid ${({ theme }) => get(theme, 'radio.borderColor')};
     background: ${({ theme }) => get(theme, 'radio.backgroundColor')};
 
-    ${({ meta }) =>
-      meta &&
-      meta.error &&
-      meta.touched &&
+    ${({ name, form }) =>
+      form &&
+      form.errors[name] &&
+      form.touched[name] &&
       css`
         border-color: ${({ theme }) => get(theme, 'radio.alertColor')};
       `};

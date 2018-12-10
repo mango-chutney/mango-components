@@ -1,6 +1,6 @@
 // @flow
 
-import type { FieldProps as $FieldProps } from 'redux-form';
+import type { FieldProps as $FieldProps } from 'formik';
 import type { $FormControlElementConfig } from './types';
 import createInputIdAttribute from './createInputIdAttribute';
 

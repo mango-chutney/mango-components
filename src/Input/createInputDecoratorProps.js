@@ -1,15 +1,15 @@
 // @flow
 
-import type { FieldProps as $FieldProps } from 'redux-form';
+import type { FieldProps as $FieldProps } from 'formik';
 import type { $FormControlElementConfig } from './types';
 
 export default ({
-  disabled,
-  meta,
+  field,
+  form,
 }: $FormControlElementConfig & $FieldProps): {
-  disabled: boolean,
-  meta: $PropertyType<$FieldProps, 'meta'>,
-} => ({
-  disabled,
-  meta,
+  field: $PropertyType<$FieldProps, 'field'>,
+  form: $PropertyType<$FieldProps, 'form'>,
+ } => ({
+  field,
+  form,
 });

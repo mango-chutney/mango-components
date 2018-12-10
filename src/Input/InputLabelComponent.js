@@ -10,10 +10,10 @@ const InputLabelComponent = styled.label`
   font-size: ${({ theme }) => get(theme, 'label.fontSize')};
   font-weight: ${({ theme }) => get(theme, 'label.fontWeight')};
 
-  ${({ meta }) =>
-    meta &&
-    meta.error &&
-    meta.touched &&
+  ${({ form, field: { name } }) =>
+    form &&
+    form.errors[name] &&
+    form.touched[name] &&
     css`
       color: ${({ theme }) => get(theme, 'label.alertColor')};
     `};

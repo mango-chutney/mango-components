@@ -31,9 +31,9 @@ const InputComponent = styled.input`
     border-color: ${({ theme }) => theme.input.activeBorderColor};
   }
 
-  ${({ meta: { error, touched } }) =>
-    error &&
-    touched &&
+  ${({ name, form: { errors, touched } }) =>
+    errors[name] &&
+    touched[name] &&
     css`
       border-color: ${({ theme }) => theme.input.alertColor};
 

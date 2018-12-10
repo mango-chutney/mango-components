@@ -33,18 +33,9 @@ const InputDecoratorComponent = styled.span`
     transform: ${transforms};
   }
 
-  ${({ meta: { asyncValidating } }) =>
-    asyncValidating &&
-    css`
-      ::after {
-        animation: ${tristiconsSpin} 2s infinite linear;
-        content: ${`"${tristicons.loading}"`};
-      }
-    `};
-
-  ${({ meta: { error, touched } }) =>
-    error &&
-    touched &&
+  ${({ field: { name }, form: { touched, errors } }) =>
+    errors[name] &&
+    touched[name] &&
     css`
       ::after {
         color: ${({ theme }) => theme.input.alertColor};

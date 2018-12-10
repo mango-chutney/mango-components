@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react';
-import type { FieldProps as $FieldProps } from 'redux-form';
+import type { FieldProps as $FieldProps } from 'formik';
 import { ThemeProvider } from 'styled-components';
 import defaultsDeep from 'lodash/defaultsDeep';
 import defaultTheme from './styles';

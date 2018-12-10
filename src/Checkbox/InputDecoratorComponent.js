@@ -34,9 +34,9 @@ const InputDecoratorComponent = styled.div.attrs({
     border: 1px solid ${({ theme }) => get(theme, 'checkbox.borderColor')};
     margin-right: 1rem;
 
-    ${({ meta: { error, touched } }) =>
-      error &&
-      touched &&
+    ${({ name, form: { errors, touched } }) =>
+      errors[name] &&
+      touched[name] &&
       css`
         border-color: ${palette.alert};
       `};

@@ -1,6 +1,6 @@
 // @flow
 
-import type { FieldProps as $FieldProps } from 'redux-form';
+import type { FieldProps as $FieldProps } from 'formik';
 import type { $FormControlElementConfig } from './types';
 import createInputIdAttribute from './createInputIdAttribute';
 
@@ -11,16 +11,14 @@ export default (
   const {
     children, // don't apply label's children to input
     label,
-    meta,
-    input,
+    field,
     ...rest
   } = props;
 
   return {
-    ...input,
+    ...field,
     ...rest,
     ...extraProps,
-    meta,
     id: createInputIdAttribute(props),
   };
 };

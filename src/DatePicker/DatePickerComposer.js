@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react';
-import type { FieldProps as $FieldProps } from 'redux-form';
+import type { FieldProps as $FieldProps } from 'formik';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { DateTime } from 'luxon';
 import { ThemeProvider } from 'styled-components';
@@ -36,10 +36,10 @@ class DatePickerComposer extends React.Component<$Props, void> {
   };
 
   handleOnDayChange = (day: Date): void => {
-    const { dateFormat, formatDate, input, onDayChange } = this.props;
+    const { dateFormat, formatDate, form, field, onDayChange } = this.props;
 
     if (day) {
-      input.onChange(formatDate(day, dateFormat));
+      form.setFieldValue(field.name, formatDate(day, dateFormat));
 
       if (this.datePickerRef.current) {
         this.datePickerRef.current.hideDayPicker();
@@ -80,8 +80,8 @@ class DatePickerComposer extends React.Component<$Props, void> {
       placeholder,
       showOverlay,
       value, // This will always be undefined if used as a Field child.
-      input, // Passed down by redux-form when used as a Field child
-      meta, // Passed down by redux-form when used as a Field child
+      field,
+      form,
       theme,
       ...rest // these will be applied to ComposedInputComponent.
     } = this.props;
@@ -100,10 +100,9 @@ class DatePickerComposer extends React.Component<$Props, void> {
     );
 
     const fieldProps = {
-      ...inputProps,
       ...rest,
-      input,
-      meta,
+      field,
+      form,
       // Currently this component doesn't provide a good experience if you try
       // to edit the value yourself.  Just make it read only for now, so the
       // only way to manipulate it is by using the picker.

@@ -1,19 +1,19 @@
 // @flow
 
 import invariant from 'invariant';
-import type { FieldProps as $FieldProps } from 'redux-form';
+import type { FieldProps as $FieldProps } from 'formik';
 import type { $FormControlElementConfig } from './types';
 
 export default ({
   id,
-  input,
+  field,
 }: $FormControlElementConfig & $FieldProps): string => {
   if (id) {
     return id;
   }
 
-  if (input && typeof input === 'object' && typeof input.name === 'string') {
-    return input.name;
+  if (field && typeof field === 'object' && typeof field.name === 'string') {
+    return field.name;
   }
 
   return invariant(

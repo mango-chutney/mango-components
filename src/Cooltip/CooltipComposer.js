@@ -1,12 +1,10 @@
 // @flow
 
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { change } from 'redux-form';
 import defaultsDeep from 'lodash/defaultsDeep';
 import omit from 'lodash/omit';
 import { ThemeProvider } from 'styled-components';
-import type { FieldProps as $FieldProps } from 'redux-form';
+import type { FieldProps as $FieldProps } from 'formik';
 import CoolChild from './CoolChild';
 import OtherChild from './OtherChild';
 import defaultTheme from './styles';
@@ -53,12 +51,9 @@ export type $Props = {
   CooltipWrapperComponent: React.ElementType,
   deformatOtherChild: string => string,
   formatOtherChild: string => string,
-  handleChange: (value: any) => any,
-  initialize: () => any,
   initialValue: any,
   LabelComponent: React.ElementType,
   mapItemToString: (item: any) => string,
-  meta: $PropertyType<$FieldProps, 'meta'>,
   otherChild?: typeof OtherChild,
   PipComponent: React.ElementType,
   selectLabel?: string,
@@ -73,7 +68,7 @@ type $State = {
 };
 
 class Cooltip extends React.Component<$Props, $State> {
-  static findActiveIndex(value, nextProps) {
+  static findActiveIndex(value: any, nextProps: $Props) {
     const { otherChild, coolChildren } = nextProps;
 
     const mergedCoolChildren = mergeCoolChildren(coolChildren, otherChild);
@@ -105,14 +100,14 @@ class Cooltip extends React.Component<$Props, $State> {
 
   state = { activeIndex: -1 };
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { input } = nextProps;
+  static getDerivedStateFromProps(nextProps: $Props, prevState: $State) {
+    const { field } = nextProps;
 
     const { activeIndex: oldActiveIndex } = prevState;
 
     if (oldActiveIndex === -1) {
       return {
-        activeIndex: Cooltip.findActiveIndex(input.value, nextProps),
+        activeIndex: Cooltip.findActiveIndex(field.value, nextProps),
       };
     }
 
@@ -123,9 +118,9 @@ class Cooltip extends React.Component<$Props, $State> {
     const {
       coolChildren,
       CoolChildrenWrapperComponent,
-      handleChange,
-      meta,
       otherChild,
+      field,
+      form,
     } = this.props;
 
     const { activeIndex } = this.state;
@@ -139,7 +134,7 @@ class Cooltip extends React.Component<$Props, $State> {
             onClick: e => {
               e.persist();
 
-              handleChange(ChildComponent.props.value)();
+              form.setFieldValue(field.name, ChildComponent.props.value);
 
               this.setState({
                 activeIndex: Cooltip.findActiveIndex(
@@ -148,9 +143,10 @@ class Cooltip extends React.Component<$Props, $State> {
                 ),
               });
             },
-            meta,
             key: String(ChildComponent.props.value || index),
             active: index === activeIndex,
+            field,
+            form,
           }),
         )}
       </CoolChildrenWrapperComponent>
@@ -162,11 +158,11 @@ class Cooltip extends React.Component<$Props, $State> {
       ComposedSelectComponent,
       SelectWrapperComponent,
       coolChildren,
-      input,
-      meta,
       otherChild,
       selectLabel,
       theme, // remove theme to not clobber parent theme
+      field,
+      form,
       ...rest
     } = this.props;
 
@@ -176,27 +172,27 @@ class Cooltip extends React.Component<$Props, $State> {
 
     const inputProps = {
       ...rest,
-      input: {
-        ...input,
+      field: {
+        ...field,
         value:
           activeIndex === mergedCoolChildren.length - 1
             ? ''
             : mergedCoolChildren[activeIndex].props.value,
       },
-      meta,
+      form,
     };
 
     return (
       <SelectWrapperComponent>
         <ComposedSelectComponent
-          {...{ ...omit(inputProps, ['input.onChange', 'input.onBlur']) }}
-          name={`${input.name}-select`}
-          id={`${input.name}-select`}
+          {...{ ...omit(inputProps, ['field.onChange', 'field.onBlur']) }}
+          name={`${field.name}-select`}
+          id={`${field.name}-select`}
           label={selectLabel}
           onChange={e => {
             e.persist();
 
-            inputProps.input.onChange(e.target.value || '');
+            form.setFieldValue(e.target.value || '');
 
             this.setState({
               activeIndex: Cooltip.findActiveIndex(
@@ -230,15 +226,14 @@ class Cooltip extends React.Component<$Props, $State> {
       CooltipWrapperComponent,
       deformatOtherChild,
       formatOtherChild,
-      handleChange,
-      input,
       LabelComponent,
-      meta,
       otherChild,
       PipComponent,
       theme,
       TiptextComponent,
       TiptextWrapperComponent,
+      field,
+      form,
       ...rest
     } = this.props;
 
@@ -247,13 +242,13 @@ class Cooltip extends React.Component<$Props, $State> {
     const inputProps = omit(
       {
         ...rest,
-        input: {
-          ...input,
-          value: formatOtherChild(input.value),
+        field: {
+          ...field,
+          value: formatOtherChild(field.value),
         },
-        meta,
+        form,
       },
-      ['input.onChange', 'input.onBlur'],
+      ['field.onChange', 'field.onBlur'],
     );
 
     const mergedCoolChildren = mergeCoolChildren(coolChildren, otherChild);
@@ -264,10 +259,13 @@ class Cooltip extends React.Component<$Props, $State> {
       mergedCoolChildren && (
         <ThemeProvider theme={defaultsDeep({ ...theme }, defaultTheme)}>
           <CooltipWrapperComponent
-            aria-labelledby={cooltipLabel && `${input.name}-outer-label`}
+            aria-labelledby={cooltipLabel && `${field.name}-outer-label`}
           >
             {cooltipLabel && (
-              <LabelComponent id={`${input.name}-outer-label`}>
+              <LabelComponent
+                id={`${field.name}-outer-label`}
+                {...{ form, field }}
+              >
                 {cooltipLabel}
               </LabelComponent>
             )}
@@ -289,10 +287,13 @@ class Cooltip extends React.Component<$Props, $State> {
                 {isOtherChild(activeCoolChild) && (
                   <ComposedInputComponent
                     {...{ ...inputProps }}
-                    name={`${input.name}-input`}
-                    id={`${input.name}-input`}
+                    name={`${field.name}-input`}
+                    id={`${field.name}-input`}
                     onChange={e => {
-                      input.onChange(deformatOtherChild(e.target.value) || '');
+                      form.setFieldValue(
+                        field.name,
+                        deformatOtherChild(e.target.value) || '',
+                      );
                     }}
                   />
                 )}
@@ -306,24 +307,4 @@ class Cooltip extends React.Component<$Props, $State> {
   }
 }
 
-const mapDispatchToProps = (
-  dispatch: (actionCreator: any) => void,
-  ownProps: $Props,
-) => ({
-  handleChange(value) {
-    return () => {
-      dispatch(change(ownProps.meta.form, ownProps.input.name, value));
-    };
-  },
-  initialize() {
-    return dispatch(
-      change(ownProps.meta.form, ownProps.input.name, ownProps.initialValue),
-    );
-  },
-});
-
-export default connect(
-  undefined,
-  // $FlowFixMe
-  mapDispatchToProps,
-)(Cooltip);
+export default Cooltip;

@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { ThemeProvider } from 'styled-components';
 import defaultsDeep from 'lodash/defaultsDeep';
-import type { FieldProps as $FieldProps } from 'redux-form';
+import type { FieldProps as $FieldProps } from 'formik';
 import defaultTheme from './styles';
 
 export type $Props = {
