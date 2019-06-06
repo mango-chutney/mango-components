@@ -8,7 +8,7 @@ const PipComponent = styled.div`
   border: ${({ theme }) => get(theme, 'pipSize')} inset;
   border-bottom-style: solid;
   border-color: transparent transparent
-    ${({ theme }) => get(theme, 'coolChild.activeBackgroundColor')};
+    ${({ theme }) => get(theme, 'tiptext.backgroundColor')};
   border-top-width: 0;
   position: absolute;
   top: calc(1rem + 1px - ${({ theme }) => get(theme, 'pipSize')});
