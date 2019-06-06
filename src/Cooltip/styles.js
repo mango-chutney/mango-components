@@ -21,5 +21,6 @@ export default {
   tipText: {
     fontSize: rem(14),
     fontWeight: '500',
+    backgroundColor: constants.palette.primary,
   },
 };
