@@ -179,7 +179,7 @@ class Cooltip extends React.Component<$Props, $State> {
       input: {
         ...input,
         value:
-          activeIndex === mergedCoolChildren.length - 1
+          activeIndex === mergedCoolChildren.length - 1 && otherChild
             ? ''
             : mergedCoolChildren[activeIndex].props.value,
       },
@@ -190,11 +190,7 @@ class Cooltip extends React.Component<$Props, $State> {
       <SelectWrapperComponent>
         <ComposedSelectComponent
           {...{
-            ...omit(inputProps, [
-              'input.onChange',
-              'input.onBlur',
-              'input.value',
-            ]),
+            ...omit(inputProps, ['input.onChange', 'input.onBlur']),
           }}
           name={`${input.name}-select`}
           id={`${input.name}-select`}
