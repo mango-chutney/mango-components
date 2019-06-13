@@ -189,7 +189,13 @@ class Cooltip extends React.Component<$Props, $State> {
     return (
       <SelectWrapperComponent>
         <ComposedSelectComponent
-          {...{ ...omit(inputProps, ['input.onChange', 'input.onBlur']) }}
+          {...{
+            ...omit(inputProps, [
+              'input.onChange',
+              'input.onBlur',
+              'input.value',
+            ]),
+          }}
           name={`${input.name}-select`}
           id={`${input.name}-select`}
           label={selectLabel}
