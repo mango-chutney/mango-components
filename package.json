@@ -82,7 +82,7 @@
     "react-redux": "^5.0.0",
     "react-transition-group": "^2.4.0",
     "redux": "^4.0.0",
-    "redux-form": "^7.4.2",
+    "redux-form": "^7.4.2 || ^8.0.0",
     "styled-components": "^3.3.3"
   },
   "renovate": {
