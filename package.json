@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "classnames": "2.2.6",
-    "downshift": "^2.0.19",
+    "downshift": "^3.0.0",
     "invariant": "^2.2.4",
     "isomorphic-base64": "^1.0.2",
     "lodash": "^4.17.10",
