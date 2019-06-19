@@ -23,7 +23,7 @@
     "invariant": "^2.2.4",
     "isomorphic-base64": "^1.0.2",
     "lodash": "^4.17.10",
-    "match-sorter": "^2.2.3",
+    "match-sorter": "^3.0.0",
     "popper.js": "1.14.4",
     "react-day-picker": "^7.1.10",
     "react-popper": "0.10.4",
