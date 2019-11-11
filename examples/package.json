@@ -23,7 +23,7 @@
     "gatsby-plugin-react-helmet": "3.0.0-beta.4",
     "gatsby-plugin-styled-components": "3.0.0-beta.4",
     "gh-pages": "1.2.0",
-    "prettier": "1.14.2"
+    "prettier": "1.19.1"
   },
   "dependencies": {
     "fs-extra": "^7.0.0",
