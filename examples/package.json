@@ -22,7 +22,7 @@
     "gatsby-cli": "2.0.0-beta.14",
     "gatsby-plugin-react-helmet": "3.0.0-beta.4",
     "gatsby-plugin-styled-components": "3.0.0-beta.4",
-    "gh-pages": "1.2.0",
+    "gh-pages": "2.2.0",
     "prettier": "1.14.2"
   },
   "dependencies": {
