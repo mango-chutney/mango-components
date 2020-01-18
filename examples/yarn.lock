@@ -297,6 +297,10 @@
   version "7.0.0-rc.1"
   resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.0.0-rc.1.tgz#3e277eae59818e7d4caf4174f58a7a00d441336e"
 
+"@babel/helper-plugin-utils@^7.8.0":
+  version "7.8.3"
+  resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.8.3.tgz#9ea293be19babc0f52ff8ca88b34c3611b208670"
+
 "@babel/helper-regex@7.0.0-beta.52":
   version "7.0.0-beta.52"
   resolved "https://registry.yarnpkg.com/@babel/helper-regex/-/helper-regex-7.0.0-beta.52.tgz#4ad8c7720497afbcd8f897c8a1b2ad03ebcd3061"
@@ -559,11 +563,11 @@
   dependencies:
     "@babel/helper-plugin-utils" "7.0.0-beta.52"
 
-"@babel/plugin-syntax-dynamic-import@7.0.0-rc.1":
-  version "7.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-dynamic-import/-/plugin-syntax-dynamic-import-7.0.0-rc.1.tgz#9bf26d934b968c327e262ecf3a39729bcdec7419"
+"@babel/plugin-syntax-dynamic-import@7.8.3":
+  version "7.8.3"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-dynamic-import/-/plugin-syntax-dynamic-import-7.8.3.tgz#62bf98b2da3cd21d626154fc96ee5b3cb68eacb3"
   dependencies:
-    "@babel/helper-plugin-utils" "7.0.0-rc.1"
+    "@babel/helper-plugin-utils" "^7.8.0"
 
 "@babel/plugin-syntax-flow@7.0.0-beta.52":
   version "7.0.0-beta.52"
@@ -5968,8 +5972,18 @@ mamacro@^0.0.3:
   resolved "https://registry.yarnpkg.com/mamacro/-/mamacro-0.0.3.tgz#ad2c9576197c9f1abf308d0787865bd975a3f3e4"
 
 "mango-components@link:./..":
-  version "0.0.0"
-  uid ""
+  version "1.1.0"
+  dependencies:
+    classnames "2.2.6"
+    downshift "^2.0.19"
+    invariant "^2.2.4"
+    isomorphic-base64 "^1.0.2"
+    lodash "^4.17.10"
+    match-sorter "^2.2.3"
+    popper.js "1.14.4"
+    react-day-picker "^7.1.10"
+    react-popper "0.10.4"
+    tristicons "https://github.com/mango-chutney/tristicons/archive/7439a425b85f18f30b9cc447bbb91b7ddb23bc60.tar.gz"
 
 map-cache@^0.2.0, map-cache@^0.2.2:
   version "0.2.2"
