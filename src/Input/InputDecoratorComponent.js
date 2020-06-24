@@ -27,6 +27,7 @@ const InputDecoratorComponent = styled.span`
     content: '';
     font: normal normal normal ${rem(14)} tristicons;
     line-height: 1rem;
+    pointer-events: none;
     position: absolute;
     right: 1rem;
     top: 50%;
