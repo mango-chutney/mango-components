@@ -5968,8 +5968,18 @@ mamacro@^0.0.3:
   resolved "https://registry.yarnpkg.com/mamacro/-/mamacro-0.0.3.tgz#ad2c9576197c9f1abf308d0787865bd975a3f3e4"
 
 "mango-components@link:./..":
-  version "0.0.0"
-  uid ""
+  version "1.1.0"
+  dependencies:
+    classnames "2.2.6"
+    downshift "^2.0.19"
+    invariant "^2.2.4"
+    isomorphic-base64 "^1.0.2"
+    lodash "^4.17.10"
+    match-sorter "^2.2.3"
+    popper.js "1.14.4"
+    react-day-picker "^7.1.10"
+    react-popper "0.10.4"
+    tristicons "https://github.com/mango-chutney/tristicons/archive/7439a425b85f18f30b9cc447bbb91b7ddb23bc60.tar.gz"
 
 map-cache@^0.2.0, map-cache@^0.2.2:
   version "0.2.2"
@@ -6140,6 +6150,10 @@ min-document@^2.19.0:
   resolved "https://registry.yarnpkg.com/min-document/-/min-document-2.19.0.tgz#7bd282e3f5842ed295bb748cdd9f1ffa2c824685"
   dependencies:
     dom-walk "^0.1.0"
+
+min-indent@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/min-indent/-/min-indent-1.0.0.tgz#cfc45c37e9ec0d8f0a0ec3dd4ef7f7c3abe39256"
 
 mini-css-extract-plugin@^0.4.0:
   version "0.4.1"
@@ -8482,9 +8496,11 @@ strip-indent@^1.0.1:
   dependencies:
     get-stdin "^4.0.1"
 
-strip-indent@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/strip-indent/-/strip-indent-2.0.0.tgz#5ef8db295d01e6ed6cbf7aab96998d7822527b68"
+strip-indent@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/strip-indent/-/strip-indent-3.0.0.tgz#c32e1cee940b6b3432c771bc2c54bcce73cd3001"
+  dependencies:
+    min-indent "^1.0.0"
 
 strip-json-comments@~2.0.1:
   version "2.0.1"
