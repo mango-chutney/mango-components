@@ -40,7 +40,7 @@
     "babel-eslint": "8.2.6",
     "babel-jest": "23.4.0",
     "babel-plugin-styled-components": "1.5.1",
-    "eslint": "5.3.0",
+    "eslint": "5.16.0",
     "eslint-config-mango": "https://github.com/mango-chutney/eslint-config-mango/archive/39a863115a150617cdaaf470295c5795e131932f.tar.gz",
     "flow-bin": "0.79.0",
     "flow-language-server": "0.6.0",
