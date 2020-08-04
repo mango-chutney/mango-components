@@ -11,7 +11,7 @@
     "start": "gatsby develop"
   },
   "devDependencies": {
-    "@babel/core": "7.0.0-rc.1",
+    "@babel/core": "7.11.1",
     "@babel/plugin-proposal-class-properties": "7.0.0-rc.1",
     "@babel/plugin-syntax-dynamic-import": "7.0.0-rc.1",
     "@babel/preset-env": "7.0.0-rc.1",
