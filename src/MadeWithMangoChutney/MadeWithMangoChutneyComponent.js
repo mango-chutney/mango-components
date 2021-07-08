@@ -1,13 +1,10 @@
 // @flow
 
 import * as React from 'react';
-import {
-  mango_chutney as MangoChutney,
-  made_with as MadeWith,
-} from './MangoChutneyLogoPaths.json';
+import MangoChutneyLogoPaths from './MangoChutneyLogoPaths.json';
 
-const MangoChutneyPath: string = MangoChutney.join(' ');
-const MadeWithPath: string = MadeWith.join(' ');
+const MangoChutneyPath: string = MangoChutneyLogoPaths.mango_chutney.join(' ');
+const MadeWithPath: string = MangoChutneyLogoPaths.made_with.join(' ');
 
 const MangoChutneyLogo = ({
   width,
